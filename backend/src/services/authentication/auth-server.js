@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const hpp = require('hpp');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -11,7 +12,6 @@ const port = process.env.PORT || 5400
 
 // Mount middleware
 if(process.env.NODE_ENV === 'development') { // If we are in development mode, use the morgan logger package
-
     app.use(morgan('dev'));
 }
 
@@ -24,6 +24,14 @@ app.use(cookieSession({
     keys: ["key1", 'key2']
 }))
 
+// Mount security middleware
+app.use(xss());
 app.use(hpp());
 app.use(helmet());
 app.use(mongoSanitize());
+
+// Mount the auth routes below
+
+const server = app.listen(port, (error) => {
+
+})
