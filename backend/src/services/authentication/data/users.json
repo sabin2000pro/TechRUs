@@ -6,7 +6,9 @@
         "email": "testuser00@gmail.com",
         "password": "testuser00",
         "role": "User",
-        "zipcode": "EH16 5BA"
+        "zipcode": "EH16 5BA",
+        "country": "United Kingdom",
+        "phone": "07881364571"
     },
 
     {
@@ -14,7 +16,10 @@
         "username": "testadmin",
         "email": "testadmin00@gmail.com",
         "password": "testadmin00",
-        "zipcode": "EH11 AGH"
+        "role": "Admin",
+        "zipcode": "EH11 AGH",
+        "country": "United Kingdom",
+        "phone": "07881365909"
     },
 
     {
@@ -28,11 +33,12 @@
 
     {
         "_id": "63e25f48d82eb035f7dc0655",
-        "username": "",
-        "email": "",
-        "password": "",
-        "role": "",
-        "zipcode": "AB99 1MA"
+        "username": "johnbrown02",
+        "email": "johnbrown02@gmail.com",
+        "password": "sportplayer832",
+        "role": "Admin",
+        "zipcode": "AB99 1MA",
+        "country": ""
     },
 
     {
