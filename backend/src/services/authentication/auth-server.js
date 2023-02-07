@@ -9,6 +9,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5400
+const {connectAuthDatabase} = require('./database/auth-db');
+
+connectAuthDatabase();
 
 // Mount middleware
 if(process.env.NODE_ENV === 'development') { // If we are in development mode, use the morgan logger package
