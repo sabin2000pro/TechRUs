@@ -28,7 +28,9 @@
         "email": "sabin2000@gmail.com",
         "password": "123mini123",
         "role": "User",
-        "zipcode": "AB19 2BC"
+        "zipcode": "AB19 2BC",
+        "country": "United Kingdom",
+        "phone": "07881365905"
     },
 
     {
