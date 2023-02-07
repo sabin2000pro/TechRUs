@@ -49,10 +49,25 @@ const UserSchema = new mongoose.Schema({ // User Data Model
 
 // Hash password before saving to database
 UserSchema.pre('save', async function(next) {
+    
+    if(!this.isModified("password")) {
+        return next();
+    }
 
+    const SALT_ROUNDS = 10;
+
+    const passwordSalt = await bcrypt.genSalt(SALT_ROUNDS);
+    this.password = await bcrypt.hash(this.password, passwordSalt);
+
+    return next();
 })
 
 // Compare login passwords using bcrypt
+UserSchema.methods.comparePasswords = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+} 
+
+// Fetch JWT Token
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
