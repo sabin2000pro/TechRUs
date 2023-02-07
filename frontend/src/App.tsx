@@ -5,7 +5,7 @@ const App: React.FC = () => {
   return (
 
      <>
-        <h1>TechRus</h1>
+        
      </>
 
 

@@ -6,6 +6,10 @@ const Register = () => { // Register Component
 
     <>
 
+        <div className = "register-container">
+            <h2>Register Page</h2>
+        </div>
+
     </>
 
 

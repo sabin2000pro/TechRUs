@@ -1,2 +1,2 @@
-backend/src/services/authentication/.gitignore
 config.env
+./services/node_modules

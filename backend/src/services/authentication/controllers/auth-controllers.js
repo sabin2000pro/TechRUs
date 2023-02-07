@@ -1,17 +1,21 @@
 const User = require('../models/user-model');
 const asyncHandler = require('express-async-handler');
+const {StatusCodes} = require('http-status-codes');
 
 module.exports.registerUser = asyncHandler(async (request, response, next) => {
 
     try {
-
+        return response.status(StatusCodes.CREATED);
     } 
     
     catch(error) {
 
+        if(error) {
+            return response.status()
+        }
     }
 
-    
+
 
 })
 
