@@ -5,7 +5,8 @@
         "username": "testuser00",
         "email": "testuser00@gmail.com",
         "password": "testuser00",
-        "role": "User"
+        "role": "User",
+        "zipcode": "EH16 5BA"
     },
 
     {
@@ -13,7 +14,7 @@
         "username": "testadmin",
         "email": "testadmin00@gmail.com",
         "password": "testadmin00",
-        "role": "Admin"
+        "zipcode": "EH11 AGH"
     },
 
     {
@@ -21,7 +22,8 @@
         "username": "sabin2000",
         "email": "sabin2000@gmail.com",
         "password": "123mini123",
-        "role": "User"
+        "role": "User",
+        "zipcode": "AB19 2BC"
     },
 
     {
@@ -29,15 +31,17 @@
         "username": "",
         "email": "",
         "password": "",
-        "role": ""
+        "role": "",
+        "zipcode": "AB99 1MA"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0656",
-        "username": "",
-        "email": "",
-        "password": "",
-        "role": ""
+        "username": "michaelmyers",
+        "email": "michaelmyers98@gmail.com",
+        "password": "michael09",
+        "role": "User",
+        "zipcode": "EH18 9PM"
     }
 
 

@@ -35,9 +35,20 @@ app.use(mongoSanitize());
 const server = app.listen(port, (error) => {
     try {
 
+        if(!error) {
+            return console.log(`Auth service is listening for requests on port ${port} in mode ${process.env.NODE_ENV}`)
+        }
+
     }
     
     catch(error) {
 
+        if(error) {
+            return console.error(error);
+        }
+
     }
+
 })
+
+module.exports = server;

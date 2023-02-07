@@ -11,6 +11,8 @@ module.exports.registerUser = asyncHandler(async (request, response, next) => {
 
     }
 
+    
+
 })
 
 module.exports.verifyEmailAddress = asyncHandler(async (request, response, next) => {
@@ -72,5 +74,5 @@ module.exports.fetchLoggedInUser = asyncHandler(async (request, response, next) 
 
     }
 
-    
+
 })
