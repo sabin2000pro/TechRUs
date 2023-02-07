@@ -3,10 +3,30 @@ const asyncHandler = require('express-async-handler');
 const {StatusCodes} = require('http-status-codes');
 const { isValidObjectId } = require('mongoose');
 
+const verifyUserExists = (username) => {
+    return User.findOne({username});
+}
+
 module.exports.registerUser = asyncHandler(async (request, response, next) => {
 
     try {
-        return response.status(StatusCodes.CREATED);
+
+        const {username, email, password, role, zipcode, country, phone} = request.body;
+
+        if(!username || !email || !password || !role || !zipcode || !country || !phone) {
+
+        }
+
+        if(verifyUserExists(username)) { // If the user already exists
+
+        }
+
+        const user = await User.create({username, email, password, role, zipcode, country, zipcode}).save();
+        const token = user.fetchAuthToken();
+
+        console.log(`Auth Token : `, token);
+
+        return response.status(StatusCodes.CREATED).json({success: true, user});
     } 
     
     catch(error) {
@@ -16,8 +36,6 @@ module.exports.registerUser = asyncHandler(async (request, response, next) => {
         }
         
     }
-
-
 
 })
 
