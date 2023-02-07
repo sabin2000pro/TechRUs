@@ -1,1 +1,2 @@
 backend/src/services/authentication/.gitignore
+config.env
