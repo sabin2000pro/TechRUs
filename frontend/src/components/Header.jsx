@@ -12,7 +12,11 @@ const Header = () => { // Header component
               <ul className = "main-nav-list">
 
                 <li>
+                    <a href = "#">Register</a>
+                </li>
 
+                <li>
+                    <a href = "#">Cart</a>
                 </li>
 
               </ul>
