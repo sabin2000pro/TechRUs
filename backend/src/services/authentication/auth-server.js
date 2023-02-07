@@ -33,5 +33,11 @@ app.use(mongoSanitize());
 // Mount the auth routes below
 
 const server = app.listen(port, (error) => {
+    try {
 
+    }
+    
+    catch(error) {
+
+    }
 })

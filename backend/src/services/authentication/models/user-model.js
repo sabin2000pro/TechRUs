@@ -3,6 +3,34 @@ const bcrypt = require('bcryptjs')
 const jwt = require('bcryptjs')
 
 const UserSchema = new mongoose.Schema({
+    username: {
+
+    },
+
+    email: {
+        
+    },
+
+    password: {
+
+    },
+
+    role: {
+
+    },
+
+    zipcode: {
+
+    },
+
+    country: {
+
+    },
+
+    phone: {
+
+    }
+
     
 });
 
