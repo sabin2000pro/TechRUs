@@ -2,9 +2,10 @@ const User = require('../models/user-model');
 const asyncHandler = require('express-async-handler');
 const {StatusCodes} = require('http-status-codes');
 const { isValidObjectId } = require('mongoose');
+const {ErrorResponse} = require('../utils/error-response');
 
-const verifyUserExists = (username) => {
-    return User.findOne({username});
+const verifyUserExists = (email) => {
+    return User.findOne({email});
 }
 
 module.exports.registerUser = asyncHandler(async (request, response, next) => {
@@ -17,22 +18,20 @@ module.exports.registerUser = asyncHandler(async (request, response, next) => {
 
         }
 
-        if(verifyUserExists(username)) { // If the user already exists
-
+        if(verifyUserExists(email)) { // If the user already exists
+            return next(new ErrorResponse('The user with the'))
         }
 
         const user = await User.create({username, email, password, role, zipcode, country, zipcode}).save();
-        const token = user.fetchAuthToken();
+        const token = user.fetchAuthToken(); // Get the signed JSON Web Token
 
-        console.log(`Auth Token : `, token);
-
-        return response.status(StatusCodes.CREATED).json({success: true, user});
+        return response.status(StatusCodes.CREATED).json({success: true, user, token});
     } 
     
     catch(error) {
 
         if(error) {
-            return response.status()
+            return next(error);
         }
         
     }
@@ -63,8 +62,19 @@ module.exports.verifyEmailAddress = asyncHandler(async (request, response, next)
 })
 
 module.exports.loginUser = asyncHandler(async (request, response, next) => {
+
     try {
 
+    } 
+    
+    catch(error) {
+
+    }
+})
+
+module.exports.logout = asyncHandler(async (request, response, next) => {
+    try {
+        // Clear the cookie from the user session
     } 
     
     catch(error) {
