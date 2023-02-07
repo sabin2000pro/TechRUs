@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Register = () => {
+const Register = () => { // Register Component
 
   return (
 
@@ -8,7 +8,7 @@ const Register = () => {
 
     </>
 
-    
+
   )
 
 }
