@@ -17,3 +17,19 @@ services:
     volumes:
        - /app/node_modules
        - ../backend/services/authentication:/app
+
+  products-service:
+    container_name: sabin2000/techrus-products-service
+
+    build:
+      context: ./backend/src/services/products
+      dockerfile: Dockerfile
+
+    restart: always
+
+    ports:
+      - "5401:5401"
+
+    volumes:
+      - /app/node_modules
+      - ../backend/services/products:/app
