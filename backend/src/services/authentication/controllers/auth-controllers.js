@@ -41,6 +41,7 @@ module.exports.registerUser = asyncHandler(async (request, response, next) => {
 module.exports.verifyEmailAddress = asyncHandler(async (request, response, next) => {
 
     try {
+
         const {userId, OTP} = request.body;
 
         if(!isValidObjectId(userId)) {
@@ -51,10 +52,13 @@ module.exports.verifyEmailAddress = asyncHandler(async (request, response, next)
             // Send back error response
         } 
 
-
     } 
     
     catch(error) {
+        
+        if(error) {
+
+        }
 
     }
 
