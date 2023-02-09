@@ -2,12 +2,14 @@ import React from 'react'
 
 export interface IModalProps { // Props for the modal (opening and closing the modal)
     closeModal: () => void
-    openModel: () => void
+    openModal: () => void
+    isModalOpen: boolean | null
 }
 
-const Modal: React.FC<IModalProps> = (props: IModalProps) => {
+export const Modal: React.FC<IModalProps> = ({closeModal, openModal, isModalOpen}) => {
 
   return (
+    
     <>
 
     </>
@@ -15,5 +17,3 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
 
   )
 }
-
-export default Modal
