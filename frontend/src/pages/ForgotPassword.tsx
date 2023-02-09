@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
+import axios from 'axios';
 
-const ForgotPassword = () => {
+export const ForgotPassword = () => {
+    const [email, setEmail] = useState<string | null>("");
+    const [error, setError] = useState<string | null>("");
+    const [isLoading, setIsLoading] = useState<boolean | null>(false);
 
   return (
 
