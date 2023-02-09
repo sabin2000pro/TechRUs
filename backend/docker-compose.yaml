@@ -63,3 +63,19 @@ services:
     volumes:
       - /app/node_modules
       - ./backend/src/services/coupons
+
+  database-service:
+    image: mongo
+
+    ports:
+      - "27017:27017"
+
+    restart: always
+
+    volumes:
+      - type: volume
+        source: mongodb_data_volume
+        target: /data/db
+        
+volumes:
+  mongodb_data_volume:
