@@ -6,11 +6,28 @@ export const ForgotPassword = () => {
     const [error, setError] = useState<string | null>("");
     const [isLoading, setIsLoading] = useState<boolean | null>(false);
 
+    const onForgotPasswordSubmit = (): any => {
+        try {
+
+        } 
+        
+        catch(error: any) {
+
+        } 
+
+
+    }
+ 
   return (
 
     <>
 
       <div className = "forgot-container">
+
+         <form method = 'POST' onSubmit = {onForgotPasswordSubmit}>
+
+         </form>
+
 
       </div>
 
