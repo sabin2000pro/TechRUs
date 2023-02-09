@@ -4,9 +4,9 @@
   "description": "",
   "main": "auth-server.js",
   "scripts": {
-    "start:auth-server": "NODE_ENV=development nodemon auth-server.js"
+    "start:auth-server": "NODE_ENV=development nodemon auth-server.js",
+    "start:auth-prod": "NODE_ENV=production node auth-server.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",

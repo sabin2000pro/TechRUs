@@ -5,4 +5,5 @@ COPY package-lock.json .
 RUN npm install 
 COPY . .
 EXPOSE 5400
+RUN npm run build
 CMD [ "npm", "run", "start:auth-server"]

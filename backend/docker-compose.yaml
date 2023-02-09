@@ -16,7 +16,7 @@ services:
       
     volumes:
        - /app/node_modules
-       - ../backend/services/authentication:/app
+       - ./backend/services/authentication:/app
 
   products-service:
     container_name: sabin2000/techrus-products-service
@@ -32,7 +32,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/products:/app
+      - ./backend/services/products:/app
 
   categories-service:
     container_name: sabin2000/techrus-categories-service
@@ -48,11 +48,18 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/categories:/app
+      - ./backend/services/categories:/app
 
   coupon-service:
-    container_name: sabin2000/techrus-coupon-service
+    container_name: sabin2000/techrus-coupons-service
 
     build:
-      context: ./backend/src/services/coupon
+      context: ./backend/src/services/coupons
       dockerfile: Dockerfile
+
+    ports:
+      - "5402:5402"
+
+    volumes:
+      - /app/node_modules
+      - ./backend/src/services/coupons
