@@ -4,9 +4,14 @@ const {StatusCodes} = require('http-status-codes');
 const { isValidObjectId } = require('mongoose');
 const {ErrorResponse} = require('../utils/error-response');
 const { generateOTPCode } = require('../utils/generate-otp-code');
+const {StatusCodes} = require('http-status-codes');
 
 const verifyUserExists = (email) => {
     return User.findOne({email});
+}
+
+module.exports.sendResetPasswordTokenStatus = async (request, response, next) => {
+    return response.status(StatusCodes.OK).json({isTokenValid: true})
 }
 
 module.exports.registerUser = asyncHandler(async (request, response, next) => {
@@ -16,7 +21,7 @@ module.exports.registerUser = asyncHandler(async (request, response, next) => {
         const {username, email, password, role, zipcode, country, phone} = request.body;
 
         if(!username || !email || !password || !role || !zipcode || !country || !phone) {
-            return next(new ErrorResponse(`Some of the fields are missing, please try again`, 400));
+            return next(new ErrorResponse(`Some of the fields are missing, please try again`, StatusCodes.BAD_REQUEST));
         }
 
         if(verifyUserExists(email)) { // If the user already exists
@@ -46,19 +51,16 @@ module.exports.verifyEmailAddress = asyncHandler(async (request, response, next)
         const {userId, OTP} = request.body; // Extract the user id and OTP from the request body
 
         if(!isValidObjectId(userId)) {
-            return next(new ErrorResponse("The User ID is invalid. Please verify it again", 400));
+            return next(new ErrorResponse("The User ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
         }
 
         if(OTP === null) { // If there is no OTP present
-           return next(new ErrorResponse("OTP is invalid, please check it again", 400));
+           return next(new ErrorResponse("OTP is invalid, please check it again", StatusCodes.BAD_REQUEST));
         } 
 
         // Get the generated e-mail verification code
         const otp = generateOTPCode();
-        console.log(otp);
-
-        // Instantiate a new object for email verification by storing the User ID
-
+        return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
     } 
     
     catch(error) {
@@ -75,10 +77,25 @@ module.exports.verifyEmailAddress = asyncHandler(async (request, response, next)
 module.exports.loginUser = asyncHandler(async (request, response, next) => {
 
     try {
+
         const {email, password} = request.body;
+
+        if(!email || !password) {
+            return next(new BadRequestError(`Missing e-mail address or password. Check entries`, StatusCodes.BAD_REQUEST));
+        }
+    
+        const user = await User.findOne({email});
+
+        if(!user) {
+            return next(new BadRequestError(`Could not find that user`, StatusCodes.BAD_REQUEST));
+        }
+
+        // Check if the passwords match
+        
     } 
     
     catch(error) {
+
         if(error) {
             return next(error);
         }
