@@ -1,13 +1,17 @@
 import React from 'react'
 
 const ForgotPassword = () => {
-    
+
   return (
 
-    <div>
+    <>
 
-    </div>
+      <div className = "forgot-container">
 
+      </div>
+
+
+    </>
 
   )
 }
