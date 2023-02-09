@@ -2,10 +2,11 @@
   "name": "authentication",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "auth-server.js",
   "scripts": {
     "start:auth-server": "NODE_ENV=development nodemon auth-server.js"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

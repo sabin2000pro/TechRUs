@@ -5,4 +5,4 @@ COPY package-lock.json .
 RUN npm install 
 COPY . .
 EXPOSE 5402
-CMD [ "npm", "run", "start:auth"]
+CMD [ "npm", "run", "start:coupon-server"]
