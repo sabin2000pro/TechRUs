@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   auth-service:
-    container_name: sabin2000/techrus-auth-service
+    container_name: techrus-auth-api
 
     build:
       context: ./backend/src/services/authentication
@@ -19,7 +19,7 @@ services:
        - ./backend/services/authentication:/app
 
   products-service:
-    container_name: sabin2000/techrus-products-service
+    container_name: techrus-products-api
 
     build:
       context: ./backend/src/services/products
@@ -35,7 +35,7 @@ services:
       - ./backend/services/products:/app
 
   categories-service:
-    container_name: sabin2000/techrus-categories-service
+    container_name: techrus-categories-api
 
     build:
       context: ./backend/src/services/categories
