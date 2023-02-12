@@ -2,29 +2,45 @@
     {
         "orderId": "5d713995b721c3bb38c1f9c0",
         "customerId": "",
-        "paymentMethod": "",
-        "methodOfShipping": "",
+        "paymentMethod": "Debit Card",
         "shippingCost": 10,
         "totalPrice": "",
         "paymentStatus": "Pending",
         "orderStatus": "Pending",
 
         "orderItems": {
+            "product_id": "",
+            "name": "",
+            "quantity": 1,
+            "price": 799.99
+        },
 
+        "billingAddress": {
+            "street_address": "100 Dinmont Drive",
+            "city": "Edinburgh",
+            "county": "Midlothian",
+            "postalCode": "EH16 5TN"
+        },
+
+        "orderDate": "",
+
+        "discounts": {
+            "coupon_code": "",
+            "description": "10% off your order",
+            "amount": 10.00
         },
 
         "shippingAddress": {
 
         },
 
-        "billingAddress": {
+        "shippingMethod": "Standard",
+        "customerNotes": "Please leave package at side door",
 
-        },
-
-        "orderDate": "",
-
-        "discounts": {
-            
+        "orderFulfilment": {
+            "shipped_date": "",
+            "trackingNumber": "",
+            "deliveryCourier": ""
         }
 
     },
