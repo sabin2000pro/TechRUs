@@ -4,6 +4,7 @@
         "customerId": "63e25f48d82eb035f7dc0654",
         "paymentMethod": "Debit Card",
         "shippingFee": 10,
+        "currency": "GBP",
         "totalPrice": 710.00,
         "orderStatus": "Pending",
         "paymentStatus": "Paid",
@@ -73,7 +74,7 @@
             "trackingNumber": "CSB997890019",
             "deliveryCourier": "Royal Mail"
         }
-        
+
     },
     
     {
