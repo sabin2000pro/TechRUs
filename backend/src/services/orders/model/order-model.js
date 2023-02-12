@@ -2,31 +2,16 @@ const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
 
-    orderId: {
-        type: String,
-        required: [true, "The Order must have a valid order ID"]
-    },
-
-    customerId: {
+    customerId: { // Customer Id that the order has been placed by
         type: mongoose.Schema.Types.ObjectId,
         ref: "Customer",
         required: [true, "Please specify the Customer ID for this order"]
     },
 
-    items: [ // Payment items stores the products that have been ordered. Including the Product Id, name
-
-        {
-            productId: "",
-            name: "",
-            price: 0,
-            countInStock: 0
-        }
-
-    ],
-
-    shippingFee: { // Shipping Fee incurred by this order
+    shippingFee: { // The Shipping Fee incurred by this order
         type: Number,
-        required: [true, "Please specify what the shipping fee is for this order"]
+        required: [true, "Please specify what the shipping fee is for this order"],
+        default: 0.0
     },
 
     currency: { // Currency used to pay for this order
@@ -45,18 +30,30 @@ const OrderSchema = new mongoose.Schema({
         required: true
     },
 
-    orderStatus: {
+    orderItems: [ // Payment items stores the products that have been ordered. Including the Product Id, name
+
+    {
+        productId: mongoose.Schema.Types.ObjectId,
+        name: String,
+        description: String,
+        price: Number,
+        countInStock: Number
+    }
+
+ ],
+
+    orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
         required: [true, "Please specify the status that the order is in"],
         enum: ['created', 'pending', 'shipped', 'processing', 'canceled', 'refunded']
     },
 
     payment: { // Payment object will hold the payment used for the payment, transaction ID, the status of the payment such as Pending, Failed or Canceled
+
         paymentMethod: String,
         transactionId: String,
 
-        paymentStatus: {
-            
+        paymentStatus: { // Status that the payment is in
             type: String,
             default: "pending",
             enum: ['pending', 'failed', 'canceled']
@@ -67,11 +64,11 @@ const OrderSchema = new mongoose.Schema({
     },
 
     shipping_address: { // Shipping Address object
-        address: String,
+        street_address: String,
         city: String,
-        state: String,
+        region: String,
+        postalCode: String,
         country: String,
-        postalCode: String
     },
 
     customerNotes: String

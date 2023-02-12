@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const UserSchema = new mongoose.Schema({ // User Data Model
+
     username: {
         type: String,
         required: [true, "Please provide a valid username for the user"],
@@ -29,7 +30,7 @@ const UserSchema = new mongoose.Schema({ // User Data Model
         enum: ["Admin", "User"]
     },
 
-    zipcode: {
+    postalCode: {
         type: String,
         required: [true, "Please provide a valid zipcode for the user"]
     },
@@ -39,9 +40,36 @@ const UserSchema = new mongoose.Schema({ // User Data Model
         required: [true, "Please provide a valid country of residence for the user"]
     },
 
-    phone: {
+    address: {
+        type: String,
+        required: [true, "Please specify the address of the customer"]
+    },
+
+    region: {
+
+    },
+
+    contactPhone: {
         type: String,
         required: [true, "Please provide a valid phone number for the user"]
+    },
+
+    isAccountActive: {
+        type: Boolean
+    },
+
+    isAccountLocked: {
+        type: Boolean
+    },
+
+    points: {
+        type: Number,
+        default: 0,
+        required: [true, "Please specify how many in-store points this customer has"]
+    },
+
+    shippingAddress: {
+
     }
 
 

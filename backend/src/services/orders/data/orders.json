@@ -30,7 +30,6 @@
                 "price": 3799.99
             }
 
-
         ],
 
         "orderHistory": {
@@ -49,23 +48,16 @@
 
         "payment": {
             "paymentMethod": "Debit Card",
-            "transactionId": "ORDR000000009",
+            "transactionId": "ORDR0000000090000009",
             "paymentStatus": "pending",
-            "paymentAmount": 710.00,
+            "paymentAmount": 4399.99,
             "paymentCurrency": "GBP"
         },
 
-        "coupons": {
+        "coupon": {
             "coupon_code": "5d713995b721c3bb38c1f5b1",
             "description": "10% off your order",
             "amount": 10.00
-        },
-
-        "shippingAddress": {
-            "street_address": "100 Dinmont Drive",
-            "city": "Edinburgh",
-            "county": "Midlothian",
-            "postalCode": "EH16 5TN"
         },
 
         "taxes": {
@@ -74,10 +66,14 @@
         },
 
         "shipping_address": {
-
+            "street_address": "100 Dinmont Drive",
+            "city": "Edinburgh",
+            "region": "Midlothian",
+            "postalCode": "EH16 5TN",
+            "country": "United Kingdom"
         },
 
-        "customerNotes": "Please leave package at side door",
+        "customerNotes": "Please leave the package at side door",
 
         "orderFulfilment": {
             "shipped_date": "2023-02-17T14:00:00Z",
