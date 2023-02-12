@@ -42,6 +42,12 @@ const OrderSchema = new mongoose.Schema({
 
  ],
 
+    orderHistory: [{ // Order history is an array of objects that stores data for the status of the order, timestamp and any notes
+        status: String,
+        timestamp: Date,
+        notes: String
+    }],
+
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
         required: [true, "Please specify the status that the order is in"],
