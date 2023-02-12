@@ -7,28 +7,25 @@
 
     {
         "_id": "5d713995b721c3bb38c1f5d1",
-        "name": "",
+        "name": "Electronics",
         "product": ""
     },
 
     {
         "_id": "5d713995b721c3bb38c1f5d2",
-        "name": ""
+        "name": "Clothing"
     },
 
     {
         "_id": "5d713995b721c3bb38c1f5d3",
-        "name": ""
+        "name": "Books",
+        "product": ""
     },
     
     {
         "_id": "5d713995b721c3bb38c1f5d4",
-        "name": ""
-    },
-
-    {
-        "_id": "5d713995b721c3bb38c1f5d5",
-        "name": ""
+        "name": "Electronics",
+        "product": ""
     }
 
 
