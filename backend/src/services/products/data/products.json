@@ -1,15 +1,55 @@
 
    [
+    
       {
         "id": "",
         "name": "iPhone X",
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
-        "image_url": "https://example.com/images/iphonex.jpg",
+
+        "images": [
+
+          {
+
+          }
+
+        ],
+
+        "attributes": [
+
+          {
+
+          },
+
+          {
+
+          }
+
+        ],
+
         "price": 999.99,
         "currency": "GBP",
         "countInStock": 10,
         "isFeatured": false,
         "isNew": true,
+
+        "reviews": [
+
+          {
+            "customer_id": "CUT123",
+            "rating": 4,
+            "review_text": "I love this product!"
+          },
+
+          { 
+
+            "customer_id": "",
+            "rating": 3,
+            "review_text": "It's good, but could be better"
+          }
+
+        ],
+
+
         "category": ""
       },
 
