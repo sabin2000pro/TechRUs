@@ -44,10 +44,10 @@
             "postalCode": "EH16 5TN"
         },
 
-        "orderDate": "",
+        "orderDate": "2023-02-14T13:22:00Z",
 
         "discounts": {
-            "coupon_code": "",
+            "coupon_code": "5d713995b721c3bb38c1f5b1",
             "description": "10% off your order",
             "amount": 10.00
         },

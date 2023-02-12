@@ -1,6 +1,6 @@
 [
     {
-        "couponId": "",
+        "couponId": "5d713995b721c3bb38c1f5b0",
         "description": "Get 20% off your next order",
         "expiryDate": "2023-11-20",
         "minPurchaseAmount": 50,
@@ -11,18 +11,18 @@
     },
     
     {
-        "couponId": "",
+        "couponId": "5d713995b721c3bb38c1f5b1",
         "description": "Get 10% off your next order",
         "expiryDate": "2023-07-03",
-        "minPurchaseAmount": 20,
+        "minPurchaseAmount": 20.00,
         "discountType": "fixed",
-        "discountAmount": 10,
+        "discountAmount": 10.00,
         "discountCode": "",
         "product": ""
     },
 
     {
-        "couponId": "",
+        "couponId": "5d713995b721c3bb38c1f5b2",
         "description": "",
         "expiration_date": "",
         "min_purchase_amount": 50,
