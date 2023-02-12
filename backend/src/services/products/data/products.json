@@ -1,15 +1,15 @@
 
    [
       {
-
         "id": "",
         "name": "iPhone X",
-        "price": 999.99,
-        "stock": 50,
-        "isFeatured": false,
-        "isNew": true,
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
         "image_url": "https://example.com/images/iphonex.jpg",
+        "price": 999.99,
+        "currency": "GBP",
+        "countInStock": 10,
+        "isFeatured": false,
+        "isNew": true,
         "category": ""
       },
 
