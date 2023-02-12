@@ -2,14 +2,13 @@
     {
         "orderId": "5d713995b721c3bb38c1f9c0",
         "customerId": "63e25f48d82eb035f7dc0654",
-        "paymentMethod": "Debit Card",
-        "shippingFee": 10,
+        "shippingFee": 10.00,
         "currency": "GBP",
         "totalPrice": 710.00,
         "orderStatus": "Pending",
-        "paymentStatus": "Paid",
 
         "orderItems": [
+
             {
                 "productId": "",
                 "name": "",
@@ -48,7 +47,15 @@
 
         "orderDate": "2023-02-14T13:22:00Z",
 
-        "discounts": {
+        "payment": {
+            "paymentMethod": "Debit Card",
+            "transactionId": "ORDR000000009",
+            "paymentStatus": "pending",
+            "paymentAmount": 710.00,
+            "paymentCurrency": "GBP"
+        },
+
+        "coupons": {
             "coupon_code": "5d713995b721c3bb38c1f5b1",
             "description": "10% off your order",
             "amount": 10.00
