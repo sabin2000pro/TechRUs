@@ -37,6 +37,12 @@ const OrderSchema = new mongoose.Schema({
     orderDate: {
         type: Date,
         required: true
+    },
+
+    orderStatus: {
+        type: String,
+        required: [true, "Please specify the status that the order is in"],
+        enum: ['created', 'pending', 'shipped', 'processing', 'canceled', 'refunded']
     }
 
 }, {timestamps: true});
