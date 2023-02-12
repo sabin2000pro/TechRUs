@@ -4,30 +4,30 @@
         "customerId": "63e25f48d82eb035f7dc0654",
         "shippingFee": 10.00,
         "currency": "GBP",
-        "totalPrice": 710.00,
+        "totalPrice": 4399.99,
         "orderStatus": "Pending",
 
         "orderItems": [
 
             {
-                "productId": "",
-                "name": "",
+                "productId": "63e25f48d82eb035f7da0980",
+                "name": "iPhone X",
                 "quantity": 1,
-                "price": 500
+                "price": 500.00
             },
 
             {
-                "productId": "",
-                "name": "",
+                "productId": "63e25f48d82eb035f7da0981",
+                "name": "Apple Watch Series 5",
                 "quantity": 1,
-                "price": 100
+                "price": 100.00
             },
 
             {
-                "productId": "",
-                "name": "",
+                "productId": "63e25f48d82eb035f7da0983",
+                "name": "Macbook Pro 16 Inch M2 Pro",
                 "quantity": 1,
-                "price": 100
+                "price": 3799.99
             }
 
 
@@ -73,7 +73,10 @@
             "amount": 5.00
         },
 
-        "shippingMethod": "Standard",
+        "shipping_address": {
+
+        },
+
         "customerNotes": "Please leave package at side door",
 
         "orderFulfilment": {
@@ -85,14 +88,7 @@
     },
     
     {
-        "orderId": "5d713995b721c3bb38c1f9c0",
-        "customerId": "",
-        "shippingAddress": "",
-        "billingAddress": "",
-        "products": [],
-        "paymentMethod": "",
-        "methodOfShipping": "",
-        "orderItems": []
+        "orderId": "5d713995b721c3bb38c1f9c0"
     },
 
     {
