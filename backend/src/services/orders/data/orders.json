@@ -1,17 +1,44 @@
 [
     {
-        "orderId": "",
+        "orderId": "5d713995b721c3bb38c1f9c0",
+        "customerId": "",
+        "paymentMethod": "",
+        "methodOfShipping": "",
+        "shippingCost": 10,
+        "totalPrice": "",
+        "paymentStatus": "Pending",
+        "orderStatus": "Pending",
+
+        "orderItems": {
+
+        },
+
+        "shippingAddress": {
+
+        },
+
+        "billingAddress": {
+
+        },
+
+        "orderDate": "",
+
+        "discounts": {
+            
+        }
+
+    },
+    
+    {
+        "orderId": "5d713995b721c3bb38c1f9c0",
         "customerId": "",
         "shippingAddress": "",
         "billingAddress": "",
         "products": [],
         "paymentMethod": "",
         "methodOfShipping": "",
-        "shippingCost": 3
-    },
-    
-    {
-
+        "shippingCost": 10,
+        "orderItems": []
     },
 
     {
