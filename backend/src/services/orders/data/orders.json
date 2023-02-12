@@ -1,18 +1,40 @@
 [
     {
         "orderId": "5d713995b721c3bb38c1f9c0",
-        "customerId": "",
         "paymentMethod": "Debit Card",
-        "shippingCost": 10,
-        "totalPrice": "",
-        "paymentStatus": "Pending",
+        "shippingFee": 10,
+        "totalPrice": 710.00,
         "orderStatus": "Pending",
+        "paymentStatus": "Paid",
 
-        "orderItems": {
-            "product_id": "",
-            "name": "",
-            "quantity": 1,
-            "price": 799.99
+        "orderItems": [
+            {
+                "productId": "",
+                "name": "",
+                "quantity": 1,
+                "price": 500
+            },
+
+            {
+                "productId": "",
+                "name": "",
+                "quantity": 1,
+                "price": 100
+            },
+
+            {
+                "productId": "",
+                "name": "",
+                "quantity": 1,
+                "price": 100
+            }
+
+
+        ],
+
+        "orderHistory": {
+            "status": "Received",
+            "updated_at": "2023-02-15T13:30:00Z"
         },
 
         "billingAddress": {
@@ -31,7 +53,15 @@
         },
 
         "shippingAddress": {
+            "street_address": "100 Dinmont Drive",
+            "city": "Edinburgh",
+            "county": "Midlothian",
+            "postalCode": "EH16 5TN"
+        },
 
+        "taxes": {
+            "taxType": "VAT",
+            "amount": 5.00
         },
 
         "shippingMethod": "Standard",
@@ -41,7 +71,9 @@
             "shipped_date": "",
             "trackingNumber": "",
             "deliveryCourier": ""
-        }
+        },
+
+        "customerId": ""
 
     },
     
@@ -53,7 +85,6 @@
         "products": [],
         "paymentMethod": "",
         "methodOfShipping": "",
-        "shippingCost": 10,
         "orderItems": []
     },
 
