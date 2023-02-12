@@ -1,17 +1,45 @@
-[
-    {
 
-    },
+   [
+      {
 
-    {
+        "id": "",
+        "name": "iPhone X",
+        "price": 999.99,
+        "stock": 50,
+        "isFeatured": false,
+        "isNew": true,
+        "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
+        "image_url": "https://example.com/images/iphonex.jpg",
+        "category": ""
+      },
 
-    },
+      {
+        "id": "",
+        "name": "Apple Watch Series 5",
+        "price": 399.99,
+        "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
+        "image_url": "https://example.com/images/applewatch5.jpg",
+        "category": "elctronics"
+      },
 
-    {
+      {
+        "id": "",
+        "name": "iPad Pro 12.9 Inch",
+        "price": 799.99,
+        "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
+        "image_url": "https://example.com/images/levis501.jpg",
+        "category": ""
+      },
 
-    },
 
-    {
-        
-    }
-]
+      {
+        "id": "",
+        "name": "Macbook Pro 16 Inch M2 Pro",
+        "price": 3799.99,
+        "description": "The latest and most performant MacBook Pro, its improved CPU delivers more performance when it comes to coding or video editing..",
+        "image_url": "https://example.com/images/ultraboost.jpg",
+        "category": ""
+      }
+
+    ]
+  

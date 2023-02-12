@@ -1,19 +1,58 @@
 [
     {
-
+        "couponId": "",
+        "description": "Get 20% off your next order",
+        "expiration_date": "2023-11-20",
+        "min_purchase_amount": 50,
+        "discount_type": "percentage",
+        "discount_amount": 10,
+        "discount_code": "KJNCCAB",
+        "product": ""
     },
     
     {
-
+        "couponId": "",
+        "description": "Get 10% off your next order",
+        "expiration_date": "2023-07-03",
+        "min_purchase_amount": 20,
+        "discount_type": "fixed",
+        "discount_amount": 10,
+        "discount_code": "",
+        "product": ""
     },
 
     {
-
+        "couponId": "",
+        "description": "",
+        "expiration_date": "",
+        "min_purchase_amount": 50,
+        "discount_type": "fixed",
+        "discount_amount": 10,
+        "discount_code": "",
+        "product": ""
     },
 
     {
+        "couponId": "",
+        "description": "",
+        "expiration_date": "",
+        "min_purchase_amount": 50,
+        "discount_type": "fixed",
+        "discount_amount": 10,
+        "discount_code": "",
+        "product": ""
+    },
 
+    {
+        "couponId": "",
+        "description": "",
+        "expiration_date": "",
+        "min_purchase_amount": 50,
+        "discount_type": "fixed",
+        "discount_amount": 10,
+        "discount_code": "",
+        "product": ""
     }
 
-    
+
 ]

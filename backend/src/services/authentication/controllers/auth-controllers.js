@@ -91,6 +91,15 @@ module.exports.loginUser = asyncHandler(async (request, response, next) => {
         }
 
         // Check if the passwords match
+        const passwordsMatch = await user.comparePasswords(password);
+
+        if(!passwordsMatch) {
+            return next(new ErrorResponse(`Passwords invalid, please try again`, StatusCodes.BAD_REQUEST));
+        }
+
+        const token = user.getAuthToken();
+        request.session = {token};
+        return response.status(StatusCodes.OK).json({success: true, user, token});
         
     } 
     

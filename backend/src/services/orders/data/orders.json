@@ -1,6 +1,13 @@
 [
     {
-
+        "orderId": "",
+        "customerId": "",
+        "shippingAddress": "",
+        "billingAddress": "",
+        "products": [],
+        "paymentMethod": "",
+        "methodOfShipping": "",
+        "shippingCost": 3
     },
     
     {
@@ -11,5 +18,5 @@
 
     }
 
-    
+
 ]
