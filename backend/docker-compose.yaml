@@ -51,7 +51,7 @@ services:
       - ./backend/services/categories:/app
 
   coupon-service:
-    container_name: sabin2000/techrus-coupons-service
+    container_name: techrus-coupons-api
 
     build:
       context: ../backend/src/services/coupons
@@ -65,7 +65,7 @@ services:
       - ../backend/src/services/coupons
 
   orders-service:
-    container_name: sabin2000/techrus-orders-service
+    container_name: techrus-orders-api
 
     build:
       context: ../backend/src/services/orders
@@ -77,6 +77,20 @@ services:
     volumes:
       - /app/node_modules
       - ../backend/src/services/orders
+
+  reviews-service:
+      container_name: techrus-reviews-api
+
+      build:
+        context: ../backend/src/services/reviews
+        dockerfile: Dockerfile
+
+      ports:
+       - "5407:5407"
+
+      volumes:
+       - /app/node_modules
+       - ../backend/src/services/reviews
 
   database-service:
     image: mongo
