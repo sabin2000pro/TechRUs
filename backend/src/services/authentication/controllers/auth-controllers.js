@@ -4,7 +4,6 @@ const {StatusCodes} = require('http-status-codes');
 const { isValidObjectId } = require('mongoose');
 const {ErrorResponse} = require('../utils/error-response');
 const { generateOTPCode } = require('../utils/generate-otp-code');
-const {StatusCodes} = require('http-status-codes');
 
 const verifyUserExists = (email) => {
     return User.findOne({email});
@@ -114,15 +113,19 @@ module.exports.loginUser = asyncHandler(async (request, response, next) => {
 })
 
 module.exports.logout = asyncHandler(async (request, response, next) => {
-    
+
     try {
 
         request.session = null;
     } 
     
     catch(error) {
-
+        if(error) {
+            return next(error);
+        }
     }  
+
+
 })
 
 module.exports.verifyLoginMFA = asyncHandler(async (request, response, next) => {

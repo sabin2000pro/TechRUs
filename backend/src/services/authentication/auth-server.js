@@ -13,6 +13,8 @@ const port = process.env.PORT || 5400
 const {connectAuthDatabase} = require('./database/auth-db');
 const {errorHandler} = require('./middleware/error-handler');
 const authRoutes = require('./routes/auth-routes');
+const {logInfo} = require('./logger');
+const logger = logInfo();
 
 connectAuthDatabase();
 
@@ -36,16 +38,16 @@ app.use(hpp());
 app.use(helmet());
 app.use(mongoSanitize());
 
-app.use('/api/auth', authRoutes);
-
 
 app.use(errorHandler);
 
 const server = app.listen(port, (error) => {
+
     try {
 
         if(!error) {
-            return console.log(`Auth service is listening for requests on port ${port} in mode ${process.env.NODE_ENV}`)
+            console.log(`Authentication service is listening for requests on port ${port} in mode : ${process.env.NODE_ENV}`)
+            return logger.info(`The authentication service is listening for requests on port ${port} in mode ${process.env.NODE_ENV}`);
         }
 
     }
@@ -53,7 +55,7 @@ const server = app.listen(port, (error) => {
     catch(error) {
 
         if(error) {
-            return console.error(error);
+            return logger.error(`Server could not listen for requests on port ${port} in mode ${process.env.NODE_ENV} - ${error.message}`);
         }
 
     }
