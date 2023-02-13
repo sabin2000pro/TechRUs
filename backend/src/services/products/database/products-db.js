@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/src/services/products/config.env'})
 const mongoose = require('mongoose');
-const PRODUCTS_DB_URI = process.env.PRODUCTS.PRODUCTS_DB_URI
+const PRODUCTS_DB_URI = process.env.PRODUCTS_DB_URI
 
 module.exports.connectProductsSchema = async () => {
 

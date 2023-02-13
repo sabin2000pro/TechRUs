@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 const productPort = process.env.PRODUCTS_PORT || 5404
 const {connectProductsSchema} = require('./database/products-db');
+const productRoutes = require('./routes/product-routes');
 
 connectProductsSchema();
 
@@ -19,6 +20,8 @@ app.use(cors({
     origin: '*',
     methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
 }))
+
+app.use('/api/products', productRoutes);
 
 const productServer = app.listen(productPort, (error) => { // Create the product server to handle GET, POST, DELETE, PUT request 
 
@@ -41,7 +44,6 @@ const productServer = app.listen(productPort, (error) => { // Create the product
         }
 
     }
-
 
 })
 
