@@ -114,8 +114,10 @@ module.exports.loginUser = asyncHandler(async (request, response, next) => {
 })
 
 module.exports.logout = asyncHandler(async (request, response, next) => {
+    
     try {
-        // Clear the cookie from the user session
+
+        request.session = null;
     } 
     
     catch(error) {

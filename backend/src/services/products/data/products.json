@@ -3,6 +3,7 @@
 
       {
         "id": "63e25f48d82eb035f7da0980",
+        "category": "",
         "name": "iPhone X",
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
 
@@ -29,7 +30,7 @@
           {
             "name": "",
             "value": ""
-            
+
           }
 
         ],
@@ -55,19 +56,17 @@
             "review_text": "It's good, but could be better"
           }
 
-        ],
+        ]
 
-
-        "category": ""
       },
 
       {
         "id": "63e25f48d82eb035f7da0981",
+        "category": "",
         "name": "Apple Watch Series 5",
         "price": 399.99,
         "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
-        "image_url": "https://example.com/images/applewatch5.jpg",
-        "category": "elctronics"
+        "image_url": "https://example.com/images/applewatch5.jpg"
       },
 
       {
@@ -82,11 +81,11 @@
 
       {
         "id": "63e25f48d82eb035f7da0983",
+        "category": "",
         "name": "Macbook Pro 16 Inch M2 Pro",
         "price": 3799.99,
         "description": "The latest and most performant MacBook Pro, its improved CPU delivers more performance when it comes to coding or video editing..",
-        "image_url": "https://example.com/images/ultraboost.jpg",
-        "category": ""
+        "image_url": "https://example.com/images/ultraboost.jpg"
       }
 
     ]

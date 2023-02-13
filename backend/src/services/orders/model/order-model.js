@@ -25,9 +25,8 @@ const OrderSchema = new mongoose.Schema({
         required: [true, "Please specify the total price for this order"]
     },
 
-    orderDate: {
-        type: Date,
-        required: true
+    orderDate: { // Date when the order was placed
+        type: Date
     },
 
     orderItems: [ // Payment items stores the products that have been ordered. Including the Product Id, name
@@ -44,7 +43,7 @@ const OrderSchema = new mongoose.Schema({
 
     orderHistory: [{ // Order history is an array of objects that stores data for the status of the order, timestamp and any notes
         status: String,
-        timestamp: Date,
+        orderReceivedAt: Date,
         notes: String
     }],
 
