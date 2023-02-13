@@ -32,9 +32,8 @@ const couponsServer = app.listen(couponPort, (error) => {
         if(error) {
             return console.error(error);
         }
-        
-    }
 
+    }
 
 })
 
