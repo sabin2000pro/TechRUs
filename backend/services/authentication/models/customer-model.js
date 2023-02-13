@@ -112,5 +112,5 @@ CustomerSchema.methods.fetchAuthToken = function() {
     return jwt.sign({id: this._id, email: this.email}, process.env.JWT_TOKEN, {expiresIn: process.env.JWT_EXPIRES_IN})
 }
 
-const CustomerSchema = mongoose.model("CustomerSchema", CustomerSchema);
-module.exports = CustomerSchema;
+const Customer = mongoose.model("Customer", CustomerSchema);
+module.exports = Customer;

@@ -4,9 +4,10 @@ services:
 
   auth-service:
     container_name: techrus-auth-api
+    image: sabin2000/techrus-auth-service
 
     build:
-      context: ../backend/src/services/authentication
+      context: ../backend/services/authentication
       dockerfile: Dockerfile
 
     restart: always
@@ -16,13 +17,14 @@ services:
       
     volumes:
        - /app/node_modules
-       - ./backend/services/authentication:/app
+       - ../backend/services/authentication:/app
 
   products-service:
     container_name: techrus-products-api
+    image: sabin2000/techrus-products-service
 
     build:
-      context: ../backend/src/services/products
+      context: ../backend/services/products
       dockerfile: Dockerfile
 
     restart: always
@@ -32,13 +34,14 @@ services:
 
     volumes:
       - /app/node_modules
-      - ./backend/services/products:/app
+      - ../backend/services/products:/app
 
   categories-service:
     container_name: techrus-categories-api
+    image: sabin2000/techrus-categories-service
 
     build:
-      context: ../backend/src/services/categories
+      context: ../backend/services/categories
       dockerfile: Dockerfile
     
     restart: always
@@ -48,13 +51,14 @@ services:
 
     volumes:
       - /app/node_modules
-      - ./backend/services/categories:/app
+      - ../backend/services/categories:/app
 
   coupon-service:
     container_name: techrus-coupons-api
+    image: sabin2000/techrus-coupons-service
 
     build:
-      context: ../backend/src/services/coupons
+      context: ../backend/services/coupons
       dockerfile: Dockerfile
 
     ports:
@@ -62,13 +66,14 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/src/services/coupons
+      - ../backend/services/coupons:/app
 
   orders-service:
     container_name: techrus-orders-api
+    image: sabin2000/techrus-orders-service
 
     build:
-      context: ../backend/src/services/orders
+      context: ../backend/services/orders
       dockerfile: Dockerfile
 
     ports:
@@ -76,13 +81,13 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/src/services/orders
+      - ../backend/services/orders:/app
 
   reviews-service:
       container_name: techrus-reviews-api
 
       build:
-        context: ../backend/src/services/reviews
+        context: ../backend/services/reviews
         dockerfile: Dockerfile
 
       ports:
@@ -90,7 +95,7 @@ services:
 
       volumes:
        - /app/node_modules
-       - ../backend/src/services/reviews
+       - ../backend/services/reviews:/app
 
   database-service:
     image: mongo

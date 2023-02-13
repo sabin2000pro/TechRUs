@@ -1,0 +1,14 @@
+{
+  "name": "coupons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "coupons-server.js",
+  "scripts": {
+    "start:coupons-service:dev": "NODE_ENV=development nodemon coupons-server.js",
+    "start:coupons-service:prod": "NODE_ENV=production node coupons-server.js"
+  },
+  
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

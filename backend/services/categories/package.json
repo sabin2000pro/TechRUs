@@ -1,10 +1,12 @@
 {
   "name": "categories",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "categories-server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:categories-service": "NODE_ENV=development nodemon categories-server.js",
+    "start:categories-service:prod": "NODE_ENV=production node categories-server.js"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
