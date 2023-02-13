@@ -24,7 +24,7 @@ module.exports.registerUser = asyncHandler(async (request, response, next) => {
         }
 
         if(verifyUserExists(email)) { // If the user already exists
-            return next(new ErrorResponse('The user with the'))
+            return next(new ErrorResponse('The user with that e-mail address already exists in our server', StatusCodes.BAD_REQUEST));
         }
 
         const user = await User.create({username, email, password, role, zipcode, country, zipcode}).save();

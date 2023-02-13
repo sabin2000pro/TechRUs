@@ -21,12 +21,13 @@ module.exports.fetchAllProducts = asyncHandler(async (request, response, next) =
 module.exports.fetchSingleProductByID = asyncHandler(async (request, response, next) => {
 
     try {
+
         const productId = request.params.productId;
         const product = await Product.findById(productId);
 
         // Validate the Product ID
         if(!isValidObjectId(productId)) {
-
+           
         }
 
         if(!product) {

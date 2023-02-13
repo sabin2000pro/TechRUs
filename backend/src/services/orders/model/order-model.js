@@ -22,11 +22,13 @@ const OrderSchema = new mongoose.Schema({
 
     totalPrice: { // Total price for this order
         type: Number,
-        required: [true, "Please specify the total price for this order"]
+        required: [true, "Please specify the total price for this order"],
+        default: 0.00
     },
 
     orderDate: { // Date when the order was placed
-        type: Date
+        type: Date,
+        default: Date.now
     },
 
     orderItems: [ // Payment items stores the products that have been ordered. Including the Product Id, name
@@ -42,9 +44,9 @@ const OrderSchema = new mongoose.Schema({
  ],
 
     orderHistory: [{ // Order history is an array of objects that stores data for the status of the order, timestamp and any notes
-        status: String,
-        orderReceivedAt: Date,
-        notes: String
+        status: String, // Order History Attribute: Status of the order in the past
+        orderReceivedAt: Date, // Order History: When the order was received by the customer
+        notes: String // Order History: Any notes left by the customer when the order was placed
     }],
 
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
@@ -68,8 +70,8 @@ const OrderSchema = new mongoose.Schema({
         paymentCurrency: String
     },
 
-    shipping_address: { // Shipping Address object
-        street_address: String,
+    shipping_address: { // Shipping Address object for the order
+        streetAddress: String,
         city: String,
         region: String,
         postalCode: String,

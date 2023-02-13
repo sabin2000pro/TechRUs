@@ -44,16 +44,27 @@
         "reviews": [
 
           {
-            "customer_id": "CUT123",
-            "rating": 4,
-            "review_text": "I love this product!"
+            "customerId": "",
+            "rating": 9,
+            "reviewText": "I love this product!"
           },
 
           { 
-
-            "customer_id": "",
+            "customerId": "",
             "rating": 3,
-            "review_text": "It's good, but could be better"
+            "reviewText": "It's good, but could be better"
+          },
+
+          { 
+            "customerId": "",
+            "rating": 10,
+            "reviewText": "Exceptional product, the quality is so good."
+          },
+
+          { 
+            "customerId": "",
+            "rating": 2,
+            "reviewText": "Awful product, the quality is so poor."
           }
 
         ]

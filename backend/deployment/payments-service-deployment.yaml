@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: payments-service
+
+  labels:
+    app: payments-service
+
+spec:
+  replicas: 1
+  
+  selector: 
+    matchLabels:
+      app: payments-service
+
+  template:
+    metadata:
+      labels:
+        app: payments-service
+
+    spec: 
+     containers:
+
+       - name: payments-service
+         image: sabin2000/techrus-payments-service
+
+         ports:
+           - containerPort: 5406

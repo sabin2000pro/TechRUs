@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const UserSchema = new mongoose.Schema({ // User Data Model
+const CustomerSchema = new mongoose.Schema({ // User Data Model
 
     username: {
         type: String,
@@ -54,7 +54,7 @@ const UserSchema = new mongoose.Schema({ // User Data Model
         required: [true, "Please provide a valid phone number for the user"]
     },
 
-    isAccountActive: {
+    isAccountActive: { // Is the customer's account active or not
         type: Boolean
     },
 
@@ -70,13 +70,25 @@ const UserSchema = new mongoose.Schema({ // User Data Model
 
     shippingAddress: {
 
-    }
+    },
+
+    rides: [{ // Used for later development of the application for the taxi-hauling feature for the e-commerce stores that handles delivery of products as a second option of delivery
+        rideId: String,
+        pickupLocation: String,
+        dropoffLocation: String,
+        rideType: String,
+        rideStatus: String,
+        driver_id: String,
+        fare: Number,
+        createdAt: Date,
+        updatedAt: Date
+    }]
 
 
 }, {timestamps: true});
 
 // Hash password before saving to database
-UserSchema.pre('save', async function(next) {
+CustomerSchema.pre('save', async function(next) {
 
     if(!this.isModified("password")) {
         return next();
@@ -91,14 +103,14 @@ UserSchema.pre('save', async function(next) {
 })
 
 // Compare login passwords using bcrypt
-UserSchema.methods.comparePasswords = async function(enteredPassword) {
+CustomerSchema.methods.comparePasswords = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 } 
 
 // Sign the JWT Token
-UserSchema.methods.fetchAuthToken = function() {
+CustomerSchema.methods.fetchAuthToken = function() {
     return jwt.sign({id: this._id, email: this.email}, process.env.JWT_TOKEN, {expiresIn: process.env.JWT_EXPIRES_IN})
 }
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+const CustomerSchema = mongoose.model("CustomerSchema", CustomerSchema);
+module.exports = CustomerSchema;
