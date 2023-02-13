@@ -6,7 +6,6 @@
     "start:categories-service": "NODE_ENV=development nodemon categories-server.js",
     "start:categories-service:prod": "NODE_ENV=production node categories-server.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,5 +19,8 @@
     "http-status-codes": "^2.2.0",
     "nodemon": "^2.0.20",
     "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
   }
 }

@@ -2,11 +2,18 @@
   "name": "payments",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "payments-server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:payments-service:dev": "NODE_ENV=development nodemon payments-server.js",
+    "start:payments-service:prod": "NODE_ENV=production node payments-server.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  }
 }

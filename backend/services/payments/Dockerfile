@@ -5,4 +5,4 @@ COPY package-lock.json .
 RUN npm install 
 COPY . .
 EXPOSE 5406
-CMD [ "npm", "run", "start:payments-service-dev"]
+CMD [ "npm", "run", "start:payments-service:dev"]
