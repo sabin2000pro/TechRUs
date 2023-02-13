@@ -62,7 +62,21 @@ services:
 
     volumes:
       - /app/node_modules
-      - ./backend/src/services/coupons
+      - ../backend/src/services/coupons
+
+  orders-service:
+    container_name: sabin2000/techrus-orders-service
+
+    build:
+      context: ../backend/src/services/orders
+      dockerfile: Dockerfile
+
+    ports:
+      - "5403:5403"
+
+    volumes:
+      - /app/node_modules
+      - ../backend/src/services/orders
 
   database-service:
     image: mongo
