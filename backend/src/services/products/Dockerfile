@@ -5,4 +5,4 @@ COPY package-lock.json .
 RUN npm install 
 COPY . .
 EXPOSE 5404
-CMD [ "npm", "run", "start:products-service"]
+CMD [ "npm", "run", "start:products-service-dev"]

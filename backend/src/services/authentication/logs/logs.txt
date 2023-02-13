@@ -27,3 +27,4 @@
 {"level":"info","message":"The authentication service is listening for requests on port 5400 in mode development","service":"authentication-service"}
 {"level":"info","message":"The authentication service is listening for requests on port 5400 in mode development","service":"authentication-service"}
 {"level":"info","message":"The authentication service is listening for requests on port 5400 in mode development","service":"authentication-service"}
+{"level":"info","message":"The authentication service is listening for requests on port 5400 in mode development","service":"authentication-service"}

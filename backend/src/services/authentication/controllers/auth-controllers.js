@@ -57,8 +57,7 @@ module.exports.verifyEmailAddress = asyncHandler(async (request, response, next)
            return next(new ErrorResponse("OTP is invalid, please check it again", StatusCodes.BAD_REQUEST));
         } 
 
-        // Get the generated e-mail verification code
-        const otp = generateOTPCode();
+        const otp = generateOTPCode(); // Get the generated e-mail verification code
         return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
     } 
     
@@ -120,22 +119,27 @@ module.exports.logout = asyncHandler(async (request, response, next) => {
     } 
     
     catch(error) {
+        
         if(error) {
             return next(error);
         }
+
     }  
 
 
 })
 
 module.exports.verifyLoginMFA = asyncHandler(async (request, response, next) => {
-    try {
 
+    try {
+        const {userId, mfaCode} = request.body;
     } 
     
     catch(error) {
 
     }
+
+
 })
 
 module.exports.forgotPassword = asyncHandler(async (request, response, next) => {
