@@ -11,6 +11,8 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5400
 const {connectAuthDatabase} = require('./database/auth-db');
+const {errorHandler} = require('./middleware/error-handler');
+const authRoutes = require('./routes/auth-routes');
 
 connectAuthDatabase();
 
@@ -34,7 +36,10 @@ app.use(hpp());
 app.use(helmet());
 app.use(mongoSanitize());
 
-// Mount the auth routes below
+app.use('/api/auth', authRoutes);
+
+
+app.use(errorHandler);
 
 const server = app.listen(port, (error) => {
     try {

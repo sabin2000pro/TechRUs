@@ -2,6 +2,7 @@ const {StatusCodes} = require('http-status-codes');
 const {ValidationError} = require('express-validation');
 
 module.exports.errorHandler = async (err, request, response, next) => {
+
     let error = {...err};
     error.message = err.message;
 
