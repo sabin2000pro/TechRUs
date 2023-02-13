@@ -1,9 +1,12 @@
-const Customer = require('../models/customer-model');
 const jwt = require('jsonwebtoken');
+const Customer = require('./services/authentication/models/customer-model')
 
 module.exports.verifyUserAuth = async (request, response, next) => {
+    
     try {
+        let token;
 
+        // Verify the header
     } 
     
     catch(error) {

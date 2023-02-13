@@ -20,11 +20,19 @@ app.use(cors({
 const couponsServer = app.listen(couponPort, (error) => {
     try {
 
-    } 
+        if(!error) {
+
+        }
+
+    }   
     
     catch(error) {
-
+        if(error) {
+            return console.error(error);
+        }
     }
+
+
 })
 
 module.exports = couponsServer;
