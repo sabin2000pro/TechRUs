@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const VerifyEmailAddressSchema = new mongoose.Schema({
+
     owner: {
 
     },
@@ -19,6 +20,8 @@ const VerifyEmailAddressSchema = new mongoose.Schema({
     createdAt: {
         
     }
+
+    
 });
 
 const VerifyEmailAddress = mongoose.model("VerifyEmailAddress", VerifyEmailAddressSchema);

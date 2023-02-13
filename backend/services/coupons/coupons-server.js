@@ -18,18 +18,21 @@ app.use(cors({
 // Mount the Coupon API Endpoints
 
 const couponsServer = app.listen(couponPort, (error) => {
+
     try {
 
         if(!error) {
-
+            return console.log(`Coupons Service Server listening for incoming requests on port ${couponPort} in mode: ${process.env.NODE_ENV}`)
         }
 
     }   
     
     catch(error) {
+
         if(error) {
             return console.error(error);
         }
+        
     }
 
 
