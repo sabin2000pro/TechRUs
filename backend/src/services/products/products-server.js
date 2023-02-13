@@ -4,7 +4,10 @@ const morgan = require('morgan');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const productPort = process.env.PRODUCT_PORT || 5404
+const productPort = process.env.PRODUCTS_PORT || 5404
+const {connectProductsSchema} = require('./database/products-db');
+
+connectProductsSchema();
 
 app.use(express.json());
 
@@ -29,17 +32,16 @@ const productServer = app.listen(productPort, (error) => { // Create the product
             return console.log(`Products server cannot listen for incoming requests`)
         }
 
-
     } 
     
     catch(error) {
+
         if(error) {
             return console.error(error);
         }
-    }
-})
 
-process.on('uncaughtException', (promise, err) => {
+    }
+
 
 })
 
