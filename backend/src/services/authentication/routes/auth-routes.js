@@ -9,4 +9,6 @@ authRouter.route('/reset-password/:resetToken').put(authController.resetPassword
 authRouter.route('/me').get(authController.fetchLoggedInUser); // Route to fetch the currently logged in user
 authRouter.route('/logout').get(authController.logout);
 
+authRouter.route('/update-password').put(authController.updatePassword);
+
 module.exports = authRouter;

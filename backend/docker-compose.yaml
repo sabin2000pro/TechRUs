@@ -6,7 +6,7 @@ services:
     container_name: techrus-auth-api
 
     build:
-      context: ./backend/src/services/authentication
+      context: ../backend/src/services/authentication
       dockerfile: Dockerfile
 
     restart: always
@@ -22,7 +22,7 @@ services:
     container_name: techrus-products-api
 
     build:
-      context: ./backend/src/services/products
+      context: ../backend/src/services/products
       dockerfile: Dockerfile
 
     restart: always
@@ -38,7 +38,7 @@ services:
     container_name: techrus-categories-api
 
     build:
-      context: ./backend/src/services/categories
+      context: ../backend/src/services/categories
       dockerfile: Dockerfile
     
     restart: always
@@ -54,7 +54,7 @@ services:
     container_name: sabin2000/techrus-coupons-service
 
     build:
-      context: ./backend/src/services/coupons
+      context: ../backend/src/services/coupons
       dockerfile: Dockerfile
 
     ports:

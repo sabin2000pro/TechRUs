@@ -1,4 +1,4 @@
-const User = require('../models/user-model');
+const User = require('../models/customer-model');
 const asyncHandler = require('express-async-handler');
 const {StatusCodes} = require('http-status-codes');
 const { isValidObjectId } = require('mongoose');
@@ -145,7 +145,29 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
     
     catch(error) {
 
+        if(error) {
+            return next(error);
+        }
+
     }
+
+})
+
+module.exports.updatePassword = asyncHandler(async (request, response, next) => {
+
+    try {
+        const {currentPassword, newPassword} = request.body;
+    } 
+    
+    catch(error) {
+
+        if(error) {
+            return next(error);
+        }
+
+    }
+
+
 })
 
 module.exports.resetPassword = asyncHandler(async (request, response, next) => {
@@ -155,17 +177,25 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
     
     catch(error) {
 
+        if(error) {
+            return next(error);
+        }
+
+
     }
+
 })
 
 module.exports.fetchLoggedInUser = asyncHandler(async (request, response, next) => {
-    try {
 
+    try {
+        const user = request.user; // Store the user in the user object
     } 
     
     catch(error) {
-
+        if(error) {
+            return next(error);
+        }
     }
-
 
 })
