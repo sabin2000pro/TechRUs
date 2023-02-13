@@ -9,7 +9,7 @@ metadata:
 
 spec:
   replicas: 1
-
+  
   selector: 
     matchLabels:
       app: auth-service
@@ -19,11 +19,11 @@ spec:
       labels:
         app: auth-service
 
-  spec: 
-  
-    containers:
+    spec: 
+     containers:
 
-      - name: auth-service
-        image: sabin2000/techrus-auth-service
-        ports:
-          containerPort: 5400
+       - name: auth-service
+         image: sabin2000/techrus-auth-service
+
+         ports:
+           - containerPort: 5400
