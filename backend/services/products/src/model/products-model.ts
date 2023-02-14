@@ -9,6 +9,10 @@ export interface IProductSchema {
     stockAvailable: number;
     price: number;
     currency: string;
+
+    lowStockAlert: number;
+    arrivingStockCount: number;
+    reorderLevel: number;
 }
 
 const ProductSchema = new mongoose.Schema<IProductSchema>({
@@ -51,7 +55,23 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
     },
 
     stockAvailable: {
-       
+        type: Number,
+        default: 0,
+        required: [true, "Please specify the stock available for this product"]
+    },
+
+    lowStockAlert: {
+        type: Number,
+        default: 3
+    },
+
+    arrivingStockCount: {
+
+    },
+
+    reorderLevel: {
+        type: Number,
+        default: 10
     }
 
 
