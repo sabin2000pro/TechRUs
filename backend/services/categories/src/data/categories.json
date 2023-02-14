@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "5d713995b721c3bb38c1f5d0",
+        "name": "Electronics",
+        "product": ""
+    },
+
+    {
+        "_id": "5d713995b721c3bb38c1f5d9",
+        "name": "Phones",
+        "product": ""
+    },
+
+    {
+        "_id": "5d713995b721c3bb38c1f5d1",
+        "name": "Electronics",
+        "product": ""
+    },
+
+    {
+        "_id": "5d713995b721c3bb38c1f5d2",
+        "name": "Clothing"
+    },
+
+    {
+        "_id": "5d713995b721c3bb38c1f5d3",
+        "name": "Books",
+        "product": ""
+    },
+    
+    {
+        "_id": "5d713995b721c3bb38c1f5d4",
+        "name": "Electronics",
+        "product": ""
+    }
+
+
+]

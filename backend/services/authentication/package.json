@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build:auth-service": "tsc",
-    "start:auth-service:dev": "NODE_ENV=development nodemon api-gateway-server.js",
-    "start:auth-service:prod": "NODE_ENV=production node api-gateway-server.js"
+    "start:auth-service:dev": "NODE_ENV=development nodemon dist/index.js",
+    "start:auth-service:prod": "NODE_ENV=production node dist/index.js"
   },
   "keywords": [],
   "author": "",

@@ -16,6 +16,7 @@ spec:
 
   template:
     metadata:
+    
       labels:
         app: api-gateway-service
 
