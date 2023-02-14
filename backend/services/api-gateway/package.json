@@ -2,11 +2,14 @@
   "name": "api-gateway",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start:api-gateway-service:dev": "NODE_ENV=development nodemon api-gateway-server.js",
+    "build:api-gateway": "tsc",
+    "dev": "nodemon dist/index.js",
+    "start:api-gateway-service:dev": "NODE_env=development npm run dev",
     "start:api-gateway-service:prod": "NODE_ENV=production node api-gateway-server.js"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

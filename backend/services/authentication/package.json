@@ -2,10 +2,11 @@
   "name": "authentication",
   "version": "1.0.0",
   "description": "",
-  "main": "auth-server.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start:auth-service": "NODE_ENV=development nodemon auth-server.js",
-    "start:auth-prod": "NODE_ENV=production node auth-server.js"
+    "build:auth-service": "tsc",
+    "start:auth-service:dev": "NODE_ENV=development nodemon api-gateway-server.js",
+    "start:auth-service:prod": "NODE_ENV=production node api-gateway-server.js"
   },
   "keywords": [],
   "author": "",
