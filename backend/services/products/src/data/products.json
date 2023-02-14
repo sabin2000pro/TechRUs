@@ -6,6 +6,11 @@
         "category": "5d713995b721c3bb38c1f5d0",
         "name": "iPhone X",
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
+        "price": 999.99,
+        "currency": "GBP",
+        "stockAvailable": 10,
+        "isFeatured": false,
+        "isNew": true,
 
         "images": [
 
@@ -45,11 +50,6 @@
 
         ],
 
-        "price": 999.99,
-        "currency": "GBP",
-        "countInStock": 10,
-        "isFeatured": false,
-        "isNew": true,
 
         "reviews": [
 
@@ -86,6 +86,11 @@
         "category": "5d713995b721c3bb38c1f5d0",
         "name": "Apple Watch Series 5",
         "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
+        "price": 299.99,
+        "currency": "GBP",
+        "stockAvailable": 5,
+        "isFeatured": false,
+        "isNew": false,
 
         "images": [
 
@@ -131,13 +136,6 @@
 
         ],
 
-
-        "price": 299.99,
-        "currency": "GBP",
-        "countInStock": 5,
-        "isFeatured": false,
-        "isNew": false,
-
         "reviews": [
 
           {
@@ -158,11 +156,10 @@
 
       {
         "id": "63e25f48d82eb035f7da0982",
+        "category": "",
         "name": "iPad Pro 12.9 Inch",
-        "price": 799.99,
         "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
-        "image_url": "https://example.com/images/levis501.jpg",
-        "category": ""
+        "price": 799.99
       },
 
 

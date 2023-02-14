@@ -5,10 +5,13 @@ export interface IProductSchema {
     name: string;
     description: string;
     images: any;
-    attributes: any
+    attributes: any;
+    stockAvailable: number;
+    price: number;
+    currency: string;
 }
 
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema<IProductSchema>({
 
     category : {
         type: mongoose.Schema.Types.ObjectId,
@@ -34,7 +37,22 @@ const ProductSchema = new mongoose.Schema({
     attributes: [{ // Attributes of this product such  as Small, Medium, Large
         type: String,
         required: [true, "Please specify the attributes of this product"]
-    }]
+    }],
+
+    price: {
+        type: Number,
+        required: [true, "Please specify the price of this product"],
+        default: 0.0
+    },
+
+    currency: {
+        type: String,
+        required: [true, "Please specify the currency that this product accepts"]
+    },
+
+    stockAvailable: {
+       
+    }
 
 
 }, {timestamps: true});
