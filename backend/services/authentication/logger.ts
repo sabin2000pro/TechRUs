@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from 'winston';
 
 export const logInfo = () => {
 
@@ -12,5 +12,3 @@ export const logInfo = () => {
 
     return logger;
 }
-
-module.exports = {logInfo};

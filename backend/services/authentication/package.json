@@ -11,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cookie-session": "^2.0.44",
+    "@types/hpp": "^0.2.2",
+    "@types/morgan": "^1.9.4",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
