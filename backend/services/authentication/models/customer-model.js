@@ -46,7 +46,8 @@ const CustomerSchema = new mongoose.Schema({ // User Data Model
     },
 
     region: {
-
+        type: String,
+        required: [true, "Please specify the region you are in"]
     },
 
     contactPhone: {
