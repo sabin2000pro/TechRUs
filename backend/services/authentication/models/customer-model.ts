@@ -21,7 +21,7 @@ interface ICustomerSchemaDocument {
     rides: any;
 
     fetchAuthToken: () => any;
-    comparePasswords: () => Promise<any>;
+    comparePasswords: (enteredPassword: string) => Promise<any>;
 }
 
 export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // User Data Model
@@ -127,7 +127,7 @@ CustomerSchema.pre('save', async function(next) {
 })
 
 // Compare login passwords using bcrypt
-CustomerSchema.methods.comparePasswords = async function(enteredPassword) {
+CustomerSchema.methods.comparePasswords = async function(enteredPassword: string): Promise<boolean> {
     return await bcrypt.compare(enteredPassword, this.password);
 } 
 

@@ -1,26 +1,16 @@
-// Mount the Categories API endpoints
+import { app } from "./app"
 import dotenv from 'dotenv';
-dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/services/categories/config.env'})
-import {app} from './app';
-const categoriesPort = process.env.CATEGORIES_PORT! || 5401
+dotenv.config({path: "backend/services/authentication/config.env"});
 
-export const startCategoriesServer = app.listen(categoriesPort, (error: any) => {
-    
-    try {
+const port = process.env.PORT || 5401;
 
-        if(!error) {
-            return console.log(`Categories Service Server listening for requests on port ${categoriesPort} in mode: ${process.env.NODE_ENV}`)
-        }
+// Start of authentication server
+export const startCategoriesServer = async () => {
 
-    }
-    
-    catch(error) {
+      return app.listen(port, () => {
+        console.log(`Categories Service Server is listening for requests on port ${port} in mode: ${process.env.NODE_ENV}`);
+      });
 
-        if(error) {
-            return console.error(error);
-        }
+}
 
-    }
-})
-
-startCategoriesServer();
+startCategoriesServer()

@@ -1,2 +1,3 @@
-const express = require('express');
-const categoriesRouter = express.Router({mergeParams: true});
+import express from 'express';
+
+export const categoriesRouter = express.Router({mergeParams: true});

@@ -1,10 +1,13 @@
 {
   "name": "categories",
   "version": "1.0.0",
-  "main": "categories-server.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start:categories-service": "NODE_ENV=development nodemon categories-server.js",
-    "start:categories-service:prod": "NODE_ENV=production node categories-server.js"
+    "build:categories": "tsc",
+    "watch:categories": "tsc -w",
+    "start:categories-service": "NODE_ENV=development nodemon dist/index.js",
+    "start:categories-service:prod": "NODE_ENV=production node dist/index.js"
+  
   },
   "keywords": [],
   "author": "",

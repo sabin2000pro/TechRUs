@@ -99,8 +99,7 @@
   },
 
   "include": [
-    "./index.ts",
-    "./app.ts"
+   "./index.ts"
   ]
 
   

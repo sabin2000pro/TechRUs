@@ -41,7 +41,7 @@ app.use(mongoSanitize());
 
 app.use(errorHandler);
 
-const server = app.listen(port, (error) => {
+const authServer = app.listen(port, (error) => {
 
     try {
 
@@ -62,4 +62,4 @@ const server = app.listen(port, (error) => {
 
 })
 
-module.exports = server;
+module.exports = authServer;

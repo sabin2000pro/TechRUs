@@ -7,6 +7,7 @@ import {isValidObjectId} from 'mongoose';
 import ErrorResponse from '../../orders/utils/error-response';
 import { BadRequestError } from '../middleware/error-handler';
 
+
 export const verifyCustomerExists = async (email: any): Promise<any> => {
     return await Customer.findOne({email});
 }
@@ -74,11 +75,12 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
 })
 
-export const loginUser = asyncHandler(async (request: Request, response: Response, next: NextFunction): Promise<any> => {
+export const loginUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
 
         const {email, password} = request.body;
+        let session = request.session;
 
         if(!email || !password) {
             return next(new BadRequestError(`Missing e-mail address or password. Check entries`, StatusCodes.BAD_REQUEST));
@@ -97,9 +99,9 @@ export const loginUser = asyncHandler(async (request: Request, response: Respons
             return next(new ErrorResponse(`Passwords invalid, please try again`, StatusCodes.BAD_REQUEST));
         }
 
-        const token = customer.getAuthToken();
-        request.session = {token};
-        return response.status(StatusCodes.OK).json({success: true, user, token});
+        const token = customer.fetchAuthToken();
+        session = {token};
+        return response.status(StatusCodes.OK).json({success: true, customer, token});
         
     } 
     
@@ -113,10 +115,9 @@ export const loginUser = asyncHandler(async (request: Request, response: Respons
 
 })
 
-module.exports.logout = asyncHandler(async (request, response, next) => {
+export const logoutUser = asyncHandler(async (request: any, response: Response, next): Promise<any> => {
 
     try {
-
         request.session = null;
     } 
     
@@ -131,7 +132,7 @@ module.exports.logout = asyncHandler(async (request, response, next) => {
 
 })
 
-module.exports.verifyLoginMFA = asyncHandler(async (request, response, next) => {
+export const verifyLoginMFA = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
         const {userId, mfaCode} = request.body;
@@ -139,14 +140,19 @@ module.exports.verifyLoginMFA = asyncHandler(async (request, response, next) => 
     
     catch(error) {
 
+        if(error) {
+            return next(error);
+        }
+
     }
 
 
 })
 
-module.exports.forgotPassword = asyncHandler(async (request, response, next) => {
-    try {
+export const forgotPassword = asyncHandler(async (request: any, respons: Response, next: NextFunction): Promise<any> => {
 
+    try {
+        const {currentEmail} = request.body;
     } 
     
     catch(error) {
