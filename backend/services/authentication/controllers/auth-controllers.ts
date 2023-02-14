@@ -165,7 +165,7 @@ export const forgotPassword = asyncHandler(async (request: any, respons: Respons
 
 })
 
-module.exports.updatePassword = asyncHandler(async (request, response, next) => {
+export const updatePassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
         const {currentPassword, newPassword} = request.body;
@@ -182,7 +182,7 @@ module.exports.updatePassword = asyncHandler(async (request, response, next) => 
 
 })
 
-module.exports.resetPassword = asyncHandler(async (request, response, next) => {
+export const resetPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     try {
 
     } 
@@ -198,7 +198,7 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
 
 })
 
-module.exports.fetchLoggedInUser = asyncHandler(async (request, response, next) => {
+export const fetchLoggedInUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
         const user = request.user; // Store the user in the user object

@@ -1,14 +1,13 @@
+import { registerUser, loginUser, forgotPassword, fetchLoggedInUser, logoutUser, updatePassword, resetPassword } from '../controllers/auth-controllers';
 import express from 'express';
-const authRouter = express.Router();
-const authController = require('../controllers/auth-controllers');
 
-authRouter.route('/register').post(authController.registerUser);
-authRouter.route('/login').post(authController.loginUser);
-authRouter.route('/forgot-password').post(authController.forgotPassword);
-authRouter.route('/reset-password/:resetToken').put(authController.resetPassword);
-authRouter.route('/me').get(authController.fetchLoggedInUser); // Route to fetch the currently logged in user
-authRouter.route('/logout').get(authController.logout);
+export const authRouter = express.Router();
 
-authRouter.route('/update-password').put(authController.updatePassword);
+authRouter.route('/register').post(registerUser as any);
+authRouter.route('/login').post(loginUser as any);
+authRouter.route('/forgot-password').post(forgotPassword as any);
+authRouter.route('/reset-password/:resetToken').put(resetPassword as any);
+authRouter.route('/me').get(fetchLoggedInUser as any); // Route to fetch the currently logged in user
+authRouter.route('/logout').get(logoutUser as any);
 
-module.exports = authRouter;
+authRouter.route('/update-password').put(updatePassword as any);
