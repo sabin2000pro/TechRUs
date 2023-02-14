@@ -1,9 +1,27 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+import dotenv from 'dotenv';
+dotenv.config({path: 'backend/services/authentication/config.env'})
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const CustomerSchema = new mongoose.Schema({ // User Data Model
+interface ICustomerSchemaDocument {
+    username: string;
+    email: string;
+    password: string;
+    role: string;
+    postalCode: string;
+    country: string;
+    address: string;
+    region: string;
+    contactPhone: string;
+    isAccountActive: boolean;
+    isAccountLocked: boolean;
+    points: number;
+    shippingAddress: any
+    rides: any
+}
+
+export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // User Data Model
 
     username: {
         type: String,
@@ -56,11 +74,13 @@ const CustomerSchema = new mongoose.Schema({ // User Data Model
     },
 
     isAccountActive: { // Is the customer's account active or not
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
     isAccountLocked: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
     points: {
@@ -110,7 +130,7 @@ CustomerSchema.methods.comparePasswords = async function(enteredPassword) {
 
 // Sign the JWT Token
 CustomerSchema.methods.fetchAuthToken = function() {
-    return jwt.sign({id: this._id, email: this.email}, process.env.JWT_TOKEN, {expiresIn: process.env.JWT_EXPIRES_IN})
+    return jwt.sign({id: this._id, email: this.email}, process.env.JWT_TOKEN!, {expiresIn: process.env.JWT_EXPIRES_IN!})
 }
 
 const Customer = mongoose.model("Customer", CustomerSchema);

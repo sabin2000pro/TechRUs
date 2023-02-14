@@ -1,9 +1,9 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/src/services/authentication/config.env'});
 const mongoose = require('mongoose');
 const AUTH_DB_URI = process.env.AUTH_DB_URI;
 
-module.exports.connectAuthDatabase = async () => {
+export const connectAuthDatabase = async () => {
 
     try {
 
