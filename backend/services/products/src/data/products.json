@@ -3,7 +3,7 @@
 
       {
         "id": "63e25f48d82eb035f7da0980",
-        "category": "5d713995b721c3bb38c1f5d9",
+        "category": "5d713995b721c3bb38c1f5d0",
         "name": "iPhone X",
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
 
@@ -83,11 +83,77 @@
 
       {
         "id": "63e25f48d82eb035f7da0981",
-        "category": "",
+        "category": "5d713995b721c3bb38c1f5d0",
         "name": "Apple Watch Series 5",
-        "price": 399.99,
         "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
-        "image_url": "https://example.com/images/applewatch5.jpg"
+
+        "images": [
+
+          {
+            "url": "https://example.com/image1.jpg",
+            "caption": "Front view"
+          },
+
+          {
+            "url": "https://example.com/image2.jpg",
+            "caption": "Back view"
+          },
+
+          {
+            "url": "https://example.com/image3.jpg",
+            "caption": "Side view"
+          }
+
+        ],
+
+        "attributes": [
+
+          {
+            "name": "Color",
+            "value": "Silver"
+          },
+
+          {
+            "name": "Color",
+            "value": "Space Gray"
+          },
+
+
+          {
+            "name": "Display Size",
+            "value": "44 inches"
+          },
+
+          {
+            "name": "Display Size",
+            "value": "42 Inches"
+          }
+
+        ],
+
+
+        "price": 299.99,
+        "currency": "GBP",
+        "countInStock": 5,
+        "isFeatured": false,
+        "isNew": false,
+
+        "reviews": [
+
+          {
+            "customerId": "",
+            "rating": 10,
+            "reviewText": "I freaking love this apple watch!"
+          },
+
+          { 
+            "customerId": "",
+            "rating": 9,
+            "reviewText": "It's so good, very nice and small for my workouts"
+          }
+
+        ]
+
       },
 
       {

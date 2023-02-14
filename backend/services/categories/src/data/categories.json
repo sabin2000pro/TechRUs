@@ -6,14 +6,8 @@
     },
 
     {
-        "_id": "5d713995b721c3bb38c1f5d9",
-        "name": "Phones",
-        "product": ""
-    },
-
-    {
         "_id": "5d713995b721c3bb38c1f5d1",
-        "name": "Electronics",
+        "name": "Kitchen",
         "product": ""
     },
 
@@ -30,7 +24,7 @@
     
     {
         "_id": "5d713995b721c3bb38c1f5d4",
-        "name": "Electronics",
+        "name": "Outdoors",
         "product": ""
     }
 
