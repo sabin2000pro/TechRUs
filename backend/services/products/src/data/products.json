@@ -8,6 +8,7 @@
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
         "price": 999.99,
         "currency": "GBP",
+        "stockKeepingUnit": "JKL3490",
         "stockAvailable": 10,
         "isFeatured": false,
         "isNew": true,
@@ -88,6 +89,7 @@
         "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
         "price": 299.99,
         "currency": "GBP",
+        "stockKeepingUnit": "JKL3490",
         "stockAvailable": 5,
         "isFeatured": false,
         "isNew": false,
@@ -159,7 +161,8 @@
         "category": "",
         "name": "iPad Pro 12.9 Inch",
         "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
-        "price": 799.99
+        "price": 799.99,
+        "stockKeepingUnit": "YZX7181"
       },
 
 
@@ -167,9 +170,9 @@
         "id": "63e25f48d82eb035f7da0983",
         "category": "",
         "name": "Macbook Pro 16 Inch M2 Pro",
-        "price": 3799.99,
         "description": "The latest and most performant MacBook Pro, its improved CPU delivers more performance when it comes to coding or video editing..",
-        "image_url": "https://example.com/images/ultraboost.jpg"
+        "price": 3799.99,
+        "stockKeepingUnit": "MZF9010"
       }
 
     ]
