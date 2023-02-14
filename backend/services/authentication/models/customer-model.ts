@@ -21,6 +21,7 @@ interface ICustomerSchemaDocument {
     rides: any;
 
     fetchAuthToken: () => any;
+    comparePasswords: () => Promise<any>;
 }
 
 export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // User Data Model

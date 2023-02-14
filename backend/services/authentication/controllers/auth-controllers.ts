@@ -1,10 +1,11 @@
+import { generateOTPCode } from './../utils/generate-otp-code';
 import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
-const {ErrorResponse} = require('../utils/error-response');
-const { generateOTPCode } = require('../utils/generate-otp-code');
+import ErrorResponse from '../../orders/utils/error-response';
+import { BadRequestError } from '../middleware/error-handler';
 
 export const verifyCustomerExists = async (email: any): Promise<any> => {
     return await Customer.findOne({email});
@@ -83,20 +84,20 @@ export const loginUser = asyncHandler(async (request: Request, response: Respons
             return next(new BadRequestError(`Missing e-mail address or password. Check entries`, StatusCodes.BAD_REQUEST));
         }
     
-        const user = await User.findOne({email});
+        const customer = await Customer.findOne({email});
 
-        if(!user) {
+        if(!customer) {
             return next(new BadRequestError(`Could not find that user`, StatusCodes.BAD_REQUEST));
         }
 
         // Check if the passwords match
-        const passwordsMatch = await user.comparePasswords(password);
+        const passwordsMatch = await customer.comparePasswords(password);
 
         if(!passwordsMatch) {
             return next(new ErrorResponse(`Passwords invalid, please try again`, StatusCodes.BAD_REQUEST));
         }
 
-        const token = user.getAuthToken();
+        const token = customer.getAuthToken();
         request.session = {token};
         return response.status(StatusCodes.OK).json({success: true, user, token});
         
