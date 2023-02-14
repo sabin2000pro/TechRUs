@@ -18,7 +18,9 @@ interface ICustomerSchemaDocument {
     isAccountLocked: boolean;
     points: number;
     shippingAddress: any
-    rides: any
+    rides: any;
+
+    fetchAuthToken: () => any;
 }
 
 export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // User Data Model
@@ -86,11 +88,11 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
     points: {
         type: Number,
         default: 0,
-        required: [true, "Please specify how many in-store points this customer has"]
+        required: [true, "Please specify how many in-store points this customer has by default"]
     },
 
     shippingAddress: {
-
+       
     },
 
     rides: [{ // Used for later development of the application for the taxi-hauling feature for the e-commerce stores that handles delivery of products as a second option of delivery
@@ -134,4 +136,4 @@ CustomerSchema.methods.fetchAuthToken = function() {
 }
 
 const Customer = mongoose.model("Customer", CustomerSchema);
-module.exports = Customer;
+export {Customer}

@@ -1,4 +1,4 @@
-import User from '../models/customer-model';
+import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
@@ -6,11 +6,11 @@ import {isValidObjectId} from 'mongoose';
 const {ErrorResponse} = require('../utils/error-response');
 const { generateOTPCode } = require('../utils/generate-otp-code');
 
-export const verifyUserExists = async (email: any): Promise<any> => {
-    return await User.findOne({email});
+export const verifyCustomerExists = async (email: any): Promise<any> => {
+    return await Customer.findOne({email});
 }
 
-module.exports.sendResetPasswordTokenStatus = async (request, response, next) => {
+export const sendResetPasswordTokenStatus = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
     return response.status(StatusCodes.OK).json({isTokenValid: true})
 }
 
@@ -24,14 +24,14 @@ export const registerUser = asyncHandler(async (request: Request, response: Resp
             return next(new ErrorResponse(`Some of the fields are missing, please try again`, StatusCodes.BAD_REQUEST));
         }
 
-        if(await verifyUserExists(email)) { // If the user already exists
+        if(await verifyCustomerExists(email)) { // If the user already exists
             return next(new ErrorResponse('The user with that e-mail address already exists in our server', StatusCodes.BAD_REQUEST));
         }
 
-        const user = await User.create({username, email, password, role, zipcode, country});
-        const token = user.fetchAuthToken(); // Get the signed JSON Web Token
+        const currentCustomer = await Customer.create({username, email, password, role, zipcode, country});
+        const token = currentCustomer.fetchAuthToken();
 
-        return response.status(StatusCodes.CREATED).json({success: true, user, token});
+        return response.status(StatusCodes.CREATED).json({success: true, currentCustomer, token});
     } 
     
     catch(error) {
