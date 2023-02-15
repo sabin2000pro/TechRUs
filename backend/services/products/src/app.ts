@@ -4,7 +4,6 @@ import express from 'express';
 const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
-const productPort = process.env.PRODUCTS_PORT || 5404
 const {connectProductsSchema} = require('./database/products-db');
 const productRoutes = require('./routes/product-routes');
 

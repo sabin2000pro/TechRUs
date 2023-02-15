@@ -57,25 +57,25 @@
         "reviews": [
 
           {
-            "customerId": "",
+            "customerId": "63e25f48d82eb035f7dc0654",
             "rating": 9,
             "reviewText": "I love this product!"
           },
 
           { 
-            "customerId": "",
+            "customerId": "63e25f48d82eb035f7dc0655",
             "rating": 3,
             "reviewText": "It's good, but could be better"
           },
 
           { 
-            "customerId": "",
+            "customerId": "63e25f48d82eb035f7dc0656",
             "rating": 10,
             "reviewText": "Exceptional product, the quality is so good."
           },
 
           { 
-            "customerId": "",
+            "customerId": "63e25f48d82eb035f7dc0652",
             "rating": 2,
             "reviewText": "Awful product, the quality is so poor."
           }

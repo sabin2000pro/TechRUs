@@ -18,6 +18,6 @@
   },
 
   
-  "include": ["src"],
+  "include": ["public/src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -112,6 +112,20 @@ services:
        - /app/node_modules
        - ../backend/services/reviews:/app
 
+  frontend-service:
+    container_name: techrus-frontend-service
+
+    build:  
+      context: ../frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - /app/node_modules
+      - ../frontend:/app
+
   database-service:
     image: mongo
 
