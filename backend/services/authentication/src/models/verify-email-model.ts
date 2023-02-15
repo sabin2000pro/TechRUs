@@ -24,7 +24,7 @@ export const VerifyEmailAddressSchema = new mongoose.Schema<IVerifyEmailAddressS
        default: ''
     },
 
-    expiresAt: {
+    expiresAt: { // Expiration of the token
         type: Date,
         default: Date.now
     },
@@ -47,8 +47,8 @@ VerifyEmailAddressSchema.pre('save', async function(next) {
 
     const SALT_ROUNDS = 10;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
-    this.otpToken = await bcrypt.hash(this.otpToken, salt);
 
+    this.otpToken = await bcrypt.hash(this.otpToken, salt);
     return next();
 
 })

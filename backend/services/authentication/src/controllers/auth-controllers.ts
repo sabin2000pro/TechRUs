@@ -7,7 +7,6 @@ import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
 import { BadRequestError } from '../middleware/error-handler';
 
-
 export const verifyCustomerExists = async (email: any): Promise<any> => {
     return await Customer.findOne({email});
 }
@@ -16,13 +15,13 @@ export const sendResetPasswordTokenStatus = async (request: Request, response: R
     return response.status(StatusCodes.OK).json({isTokenValid: true})
 }
 
-export const registerUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+export const registerUser = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
 
     try {
 
-        const {username, email, password, role, zipcode, country, phone} = request.body;
+        const {username, email, password, role, postalCode, country, contactPhone, address, region, points} = request.body;
 
-        if(!username || !email || !password || !role || !zipcode || !country || !phone) {
+        if(!username || !email || !password || !role || !postalCode || !country || !contactPhone) {
             return next(new ErrorResponse(`Some of the fields are missing, please try again`, StatusCodes.BAD_REQUEST));
         }
 
@@ -30,7 +29,7 @@ export const registerUser = asyncHandler(async (request: any, response: Response
             return next(new ErrorResponse('The user with that e-mail address already exists in our server', StatusCodes.BAD_REQUEST));
         }
 
-        const currentCustomer = await Customer.create({username, email, password, role, zipcode, country});
+        const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
         const token = currentCustomer.fetchAuthToken();
 
         return response.status(StatusCodes.CREATED).json({success: true, currentCustomer, token});
@@ -39,7 +38,7 @@ export const registerUser = asyncHandler(async (request: any, response: Response
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
         
     }
@@ -61,6 +60,7 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
         } 
 
         const otp = generateOTPCode(); // Get the generated e-mail verification code
+        
         return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
     } 
     

@@ -6,17 +6,12 @@ import xss from 'xss-clean'
 import hpp from 'hpp';
 import helmet from 'helmet';
 import cors from 'cors';
-import {errorHandler} from './middleware/error-handler';
 import {authRouter} from './routes/auth-routes';
-import { logInfo } from '../logger';
 
 const app: Application = express();
-app.use(express.json());
 
-// Mount middleware
-if(process.env.NODE_ENV === 'development') { // If we are in development mode, use the morgan logger package
-    app.use(morgan('dev'));
-}
+app.use(express.json());
+app.use(morgan('dev'));
 
 app.use(cors({
     origin: "*",

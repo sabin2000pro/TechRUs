@@ -13,7 +13,7 @@ interface ICustomerSchemaDocument {
     country: string;
     address: string;
     region: string;
-    contactPhone: string;
+    contactPhone: String;
     isAccountActive: boolean;
     isAccountLocked: boolean;
     points: number;
