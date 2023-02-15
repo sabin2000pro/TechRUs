@@ -34,6 +34,12 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
        required: true
     },
 
+    warranty: {
+        type: String,
+        default: '',
+        required: [true, 'Please specify the warranty for this product']
+    },
+
     images: [{
         type: String,
         required: [true, "Please specify the images that belongs to this product"]
@@ -52,7 +58,8 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
 
     currency: {
         type: String,
-        required: [true, "Please specify the currency that this product accepts"]
+        required: [true, "Please specify the currency that this product accepts"],
+        default: "GBP"
     },
 
     stockAvailable: {
@@ -63,11 +70,13 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
 
     lowStockAlert: {
         type: Number,
+        required: [true, "Please specify the low stock alert for this product"],
         default: 3
     },
 
-    arrivingStockCount: {
-
+    arrivingStockCount: { // Stores how much stock the inventory is expecting
+        type: Number,
+        default: 0
     },
 
     reorderLevel: {
