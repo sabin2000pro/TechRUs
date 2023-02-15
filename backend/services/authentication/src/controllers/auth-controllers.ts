@@ -31,13 +31,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         }
 
         if(await verifyCustomerExists(email)) { // If the user already exists
-            return next(new ErrorResponse('The user with that e-mail address already exists in our server', StatusCodes.BAD_REQUEST));
-        }
-
-        const existingCustomer = await Customer.findOne({email});
-
-        if(existingCustomer) {
-           return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Customer already exists with that e-mail address"})
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Customer Already exists with that e-mail address"});
         }
 
         const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
@@ -99,16 +93,15 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
     try {
 
         const {email, password} = request.body;
-        let session = request.session;
 
         if(!email || !password) {
             return next(new BadRequestError(`Missing e-mail address or password. Check entries`, StatusCodes.BAD_REQUEST));
         }
     
-        const customer = await Customer.findOne({email}); // Retrieve the customer by e-mail
+        const customer = await Customer.findOne({email}).select("+password");
 
         if(!customer) {
-            return next(new BadRequestError(`Could not find that user`, StatusCodes.BAD_REQUEST));
+            return next(new BadRequestError(`Could not find that customer`, StatusCodes.BAD_REQUEST));
         }
 
         // Check if the passwords match
@@ -121,13 +114,18 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         }
 
         const token = customer.fetchAuthToken();
-        session = {token};
+        const loginToken = generateOTPCode();
+
+        console.log(`Login MFA token : `, loginToken);
+        
+        request.session = {token};
         return response.status(StatusCodes.OK).json({success: true, customer, token});
     } 
     
     catch(error) {
 
         if(error) {
+            console.error(error);
             return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
