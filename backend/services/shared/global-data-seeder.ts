@@ -1,0 +1,1 @@
+import {Customer} from '../authentication/src/models/customer-model';
