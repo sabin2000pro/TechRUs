@@ -1,6 +1,7 @@
 import { generateOTPCode } from './../utils/generate-otp-code';
 import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
+import {TwoFactor} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
@@ -40,7 +41,15 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         }
 
         const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
-        const token = currentCustomer.fetchAuthToken();
+        const token = currentCustomer.fetchAuthToken(); // Get the JWT Token
+        await currentCustomer.save();
+
+        // Generate the OTP
+        const customerOTP = generateOTPCode();
+        const customerVerification = new TwoFactor({owner: currentCustomer._id, mfaToken: customerOTP});
+        await customerVerification.save();
+
+        // Create the e-mail transporter to send the MFA token to the user's e-mail address
 
         return response.status(StatusCodes.CREATED).json({success: true, currentCustomer, token});
     } 
