@@ -12,7 +12,7 @@ export const startAuthServer = async () => {
     try {
 
         return app.listen(AUTH_PORT, () => {
-            console.log(`The Authentication Service Live On Port ${AUTH_PORT} in mode: ${process.env.NODE_ENV}`);
+            console.log(`The Authentication Service Live On Port ${AUTH_PORT} in mode: ${AUTH_DEV_MODE}`);
           });
     } 
     
