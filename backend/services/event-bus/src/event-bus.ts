@@ -1,11 +1,11 @@
 class EventBus {
-    events: {};
+    public events: {};
 
     constructor() {
         this.events = {}
     }
 
-    onEventReceived(event, callback) {
+    public onEventReceived(event, callback) {
 
         if(!this.events[event]) {
             this.events[event] = []
@@ -18,7 +18,7 @@ class EventBus {
 
     }
 
-    emitEvent(event, currentData) { // Function to emit an event once an action has occurred
+    public emitEvent(event, currentData) { // Function to emit an event once an action has occurred
         const currentEvents = this.events[event];
 
         if (currentEvents) {
