@@ -1,16 +1,18 @@
-import dotenv from 'dotenv';
+require('dotenv').config();
 import {app} from './app'
-dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/services/api-gateway/config.env'})
+import {connectAuthDatabase} from './database/auth-db';
+
+connectAuthDatabase();
 
 const AUTH_PORT = process.env.AUTH_PORT || 5400;
 const AUTH_DEV_MODE = process.env.AUTH_DEV_MODE || 'development'
 
-export const startAuthServer = () => {
+export const startAuthServer = async () => {
 
     try {
 
         return app.listen(AUTH_PORT, () => {
-            console.log(`Authentication Service Live On Port 5299 in mode: ${process.env.NODE_ENV}`);
+            console.log(`The Authentication Service Live On Port ${AUTH_PORT} in mode: ${process.env.NODE_ENV}`);
           });
     } 
     

@@ -1,9 +1,9 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const VerifyLoginMFASchema = new mongoose.Schema({
+    
     owner: {
 
     },

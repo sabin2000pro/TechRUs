@@ -16,7 +16,7 @@ export const sendResetPasswordTokenStatus = async (request: Request, response: R
     return response.status(StatusCodes.OK).json({isTokenValid: true})
 }
 
-export const registerUser = asyncHandler(async (request: Request, response: Response, next: NextFunction): Promise<any> => {
+export const registerUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
 
