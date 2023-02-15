@@ -16,6 +16,13 @@ export const rootRoute = asyncHandler(async (request: any, response: any, next: 
     return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
 })
 
+export const sendTokenResponse = (request: Express.Request, customer: any, statusCode: number, response: any): Promise<any> => {
+    const token = customer.fetchAuthToken();
+    request.session = {token}; // Store the token in the session
+ 
+    return response.status(statusCode).json({customer, token});
+}
+
 export const sendResetPasswordTokenStatus = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
     return response.status(StatusCodes.OK).json({isTokenValid: true})
 }
@@ -35,7 +42,6 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         }
 
         const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
-        const token = currentCustomer.fetchAuthToken(); // Get the JWT Token
         await currentCustomer.save();
 
         // Generate the OTP
@@ -45,7 +51,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
         // Create the e-mail transporter to send the MFA token to the user's e-mail address
 
-        return response.status(StatusCodes.CREATED).json({success: true, currentCustomer, token});
+        return sendTokenResponse(request, currentCustomer, StatusCodes.CREATED, response);
     } 
     
     catch(error) {
@@ -95,13 +101,13 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         const {email, password} = request.body;
 
         if(!email || !password) {
-            return next(new BadRequestError(`Missing e-mail address or password. Check entries`, StatusCodes.BAD_REQUEST));
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Missing e-mail address or password"});
         }
     
         const customer = await Customer.findOne({email}).select("+password");
 
         if(!customer) {
-            return next(new BadRequestError(`Could not find that customer`, StatusCodes.BAD_REQUEST));
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No customer found with that e-mail address"});
         }
 
         // Check if the passwords match
@@ -113,13 +119,9 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
             return response.status(StatusCodes.OK).json({success: false, message: "Passwords do not match. Try again"});
         }
 
-        const token = customer.fetchAuthToken();
         const loginToken = generateOTPCode();
-
-        console.log(`Login MFA token : `, loginToken);
-        
         request.session = {token};
-        return response.status(StatusCodes.OK).json({success: true, customer, token});
+        return sendTokenResponse(request, customer, StatusCodes.CREATED, response);
     } 
     
     catch(error) {
@@ -201,8 +203,9 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
 })
 
 export const resetPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    try {
 
+    try {
+       const {currentPassword, newPassword} = request.body;
     } 
     
     catch(error) {
@@ -220,6 +223,7 @@ export const fetchLoggedInUser = asyncHandler(async (request: any, response: Res
 
     try {
         const user = request.user; // Store the user in the user object
+        return response.status(StatusCodes.OK).json({success: true, user});
     } 
     
     catch(error) {
