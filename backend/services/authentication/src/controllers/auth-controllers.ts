@@ -11,6 +11,10 @@ export const verifyCustomerExists = async (email: any): Promise<any> => {
     return await Customer.findOne({email});
 }
 
+export const rootRoute = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
+    return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
+})
+
 export const sendResetPasswordTokenStatus = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
     return response.status(StatusCodes.OK).json({isTokenValid: true})
 }
@@ -27,6 +31,12 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
         if(await verifyCustomerExists(email)) { // If the user already exists
             return next(new ErrorResponse('The user with that e-mail address already exists in our server', StatusCodes.BAD_REQUEST));
+        }
+
+        const existingCustomer = await Customer.findOne({email});
+
+        if(existingCustomer) {
+           return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Customer already exists with that e-mail address"})
         }
 
         const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
@@ -60,7 +70,7 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
         } 
 
         const otp = generateOTPCode(); // Get the generated e-mail verification code
-        
+
         return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
     } 
     
