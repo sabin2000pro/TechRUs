@@ -120,7 +120,6 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         }
 
         const loginToken = generateOTPCode();
-        request.session = {token};
         return sendTokenResponse(request, customer, StatusCodes.CREATED, response);
     } 
     
