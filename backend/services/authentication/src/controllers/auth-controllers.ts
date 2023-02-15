@@ -86,7 +86,7 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
     catch(error) {
         
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
     }
@@ -105,7 +105,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
             return next(new BadRequestError(`Missing e-mail address or password. Check entries`, StatusCodes.BAD_REQUEST));
         }
     
-        const customer = await Customer.findOne({email});
+        const customer = await Customer.findOne({email}); // Retrieve the customer by e-mail
 
         if(!customer) {
             return next(new BadRequestError(`Could not find that user`, StatusCodes.BAD_REQUEST));
@@ -114,20 +114,21 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         // Check if the passwords match
         const passwordsMatch = await customer.comparePasswords(password);
 
+        console.log(`Passwords match : `, passwordsMatch);
+
         if(!passwordsMatch) {
-            return next(new ErrorResponse(`Passwords invalid, please try again`, StatusCodes.BAD_REQUEST));
+            return response.status(StatusCodes.OK).json({success: false, message: "Passwords do not match. Try again"});
         }
 
         const token = customer.fetchAuthToken();
         session = {token};
         return response.status(StatusCodes.OK).json({success: true, customer, token});
-        
     } 
     
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
     }
@@ -143,7 +144,7 @@ export const logoutUser = asyncHandler(async (request: any, response: Response, 
     catch(error) {
         
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
     }  
@@ -160,7 +161,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
     }
@@ -168,7 +169,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
 
 })
 
-export const forgotPassword = asyncHandler(async (request: any, respons: Response, next: NextFunction): Promise<any> => {
+export const forgotPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
         const {currentEmail} = request.body;
@@ -177,7 +178,7 @@ export const forgotPassword = asyncHandler(async (request: any, respons: Respons
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
     }
@@ -193,7 +194,7 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
     }
@@ -209,7 +210,7 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
 
