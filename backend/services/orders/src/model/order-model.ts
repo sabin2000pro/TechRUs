@@ -10,7 +10,7 @@ export interface IOrderDocument {
     orderStatus: string;
     payment: object;
     shippingAddress: object;
-    shippingFee: number;
+    shippingCharge: number;
     customerNotes: string;
 }
 
@@ -86,7 +86,7 @@ const OrderSchema = new mongoose.Schema<IOrderDocument>({
         country: String,
     },
 
-    shippingFee: { // The Shipping Fee incurred by this order
+    shippingCharge: { // The Shipping Fee incurred by this order
         type: Number,
         required: [true, "Please specify what the shipping fee is for this order"],
         default: 0.0

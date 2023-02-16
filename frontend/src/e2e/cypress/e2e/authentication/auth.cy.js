@@ -1,7 +1,6 @@
-describe("Test Register UI", () => {
+describe("Register E2E UI Tests", () => {
 
-      it('DISPLAYS Register UI Components', () => {
+      it('Display Register UI Components', () => {
         cy.get('.todo-list li').should('have.length', 2)
-      })
-    
+      })    
 })

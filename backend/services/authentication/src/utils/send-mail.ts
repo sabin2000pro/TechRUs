@@ -4,7 +4,7 @@ require('dotenv').config()
 
 // Configure environment variables for the e-mail tansporter
 
-export const emailTransporter = (): any => { // Create the e-mail transporter
+export const createEmailTransporter = (): any => { // Create the e-mail transporter
 
 return nodemailer.createTransport({
 

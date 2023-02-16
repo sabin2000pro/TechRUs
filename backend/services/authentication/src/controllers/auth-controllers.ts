@@ -1,5 +1,6 @@
+import { createEmailTransporter } from './../utils/send-mail';
 import { generateOTPCode } from './../utils/generate-otp-code';
-import {Customer} from '../models/customer-model';
+import {Customer} from '../models/user-model';
 import {Request, Response, NextFunction} from 'express';
 import {TwoFactor} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';
@@ -50,6 +51,8 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         await customerVerification.save();
 
         // Create the e-mail transporter to send the MFA token to the user's e-mail address
+        const emailTransporter = createEmailTransporter();
+        console.log(`E-mail Transporter`);
 
         return sendTokenResponse(request, currentCustomer, StatusCodes.CREATED, response);
     } 
