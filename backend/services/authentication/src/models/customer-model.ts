@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config({path: 'backend/services/authentication/config.env'})
+require('dotenv').config();
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -53,7 +52,7 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
 
     postalCode: {
         type: String,
-        required: [true, "Please provide a valid zipcode for the user"]
+        required: [true, "Please provide a valid postal code for the user"]
     },
 
     country: {
@@ -91,7 +90,6 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         default: 0,
         required: [true, "Please specify how many in-store points this customer has by default"]
     },
-
 
     rides: [{ // Used for later development of the application for the taxi-hauling feature for the e-commerce stores that handles delivery of products as a second option of delivery
         rideId: String,

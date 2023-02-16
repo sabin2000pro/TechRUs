@@ -116,8 +116,6 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         // Check if the passwords match
         const passwordsMatch = await customer.comparePasswords(password);
 
-        console.log(`Passwords match : `, passwordsMatch);
-
         if(!passwordsMatch) {
             return response.status(StatusCodes.OK).json({success: false, message: "Passwords do not match. Try again"});
         }
@@ -129,7 +127,6 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
     catch(error) {
 
         if(error) {
-            console.error(error);
             return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
         }
 
