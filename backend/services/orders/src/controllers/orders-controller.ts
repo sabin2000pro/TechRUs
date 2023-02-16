@@ -31,6 +31,13 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
     try {
 
         const orderId = request.params.orderId;
+        let order = await Order.findById(orderId);
+
+        if(!order) {
+
+        }
+
+        
     }  
     
     catch(error) {
@@ -45,15 +52,34 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
 
 
 export const editOrderStatus = asyncHandler(async (request, response, next) => {
+    try {
+
+      const {orderStatus} = request.body;
+    }
+    
+    catch(error) {
+
+    }
 
 })
 
 
 export const deleteOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    try {
 
+    }
+    
+    catch(error) {
+
+    }
 })
 
+export const deleteSingleOrderByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    try {
 
-module.exports.deleteSingleOrderByID = asyncHandler(async (request, response, next) => {
+    }
+    
+    catch(error) {
 
+    }
 })

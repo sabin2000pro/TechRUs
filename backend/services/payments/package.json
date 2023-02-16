@@ -1,9 +1,11 @@
 {
   "name": "payments",
   "version": "1.0.0",
-  "description": "",
-  "main": "payments-server.js",
+  "description": "Payments Service Dependency File",
+  "main": "dist index/js",
   "scripts": {
+    "build": "tsc",
+    "dev": "nodemon dist/index.js",
     "start:payments-service:dev": "NODE_ENV=development nodemon payments-server.js",
     "start:payments-service:prod": "NODE_ENV=production node payments-server.js"
   },
@@ -11,9 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.4",
+    "@types/nodemon": "^1.19.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
