@@ -40,7 +40,8 @@
         "password": "sportplayer832",
         "role": "admin",
         "zipcode": "AB99 1MA",
-        "country": ""
+        "country": "United Kingdom",
+        "phone": "07881365901"
     },
 
     {
@@ -49,7 +50,9 @@
         "email": "michaelmyers98@gmail.com",
         "password": "michael09",
         "role": "user",
-        "zipcode": "EH18 9PM"
+        "zipcode": "EH18 9PM",
+        "country": "United Kingdom",
+        "phone": "07881365009"
     }
 
 
