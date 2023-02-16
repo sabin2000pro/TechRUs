@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 const PAYMENTS_DB_URI = process.env.PAYMENTS_DB_URI || "";
 
 export const connectPaymentsSchema = async (): Promise<any> => {
+    
     try {
 
        return await mongoose.connect(PAYMENTS_DB_URI).then(conn => {
@@ -21,7 +22,7 @@ export const connectPaymentsSchema = async (): Promise<any> => {
     } 
     
     catch(error) {
-        
+
        if(error) {
         return console.error(error);
        }
