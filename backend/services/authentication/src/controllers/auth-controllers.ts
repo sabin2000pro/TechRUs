@@ -1,3 +1,4 @@
+import { EmailVerification } from './../models/verify-email-model';
 import { createEmailTransporter } from './../utils/send-mail';
 import { generateOTPCode } from './../utils/generate-otp-code';
 import {Customer} from '../models/customer-model';
@@ -11,6 +12,27 @@ import { BadRequestError } from '../middleware/error-handler';
 
 export const verifyCustomerExists = async (email: any): Promise<any> => {
     return await Customer.findOne({email});
+}
+
+  // @description: Sends the verify confirmation e-mail to the user after registering an account
+  // @parameters: Transporter Object, User Object, Randomly Generated User OTP
+  // @returns: void
+  // @public: True (No Authorization Required)
+
+  export const sendEmailConfirmationEmail = (transporter: any, newCustomer: any, customerOTP: number) => {
+
+    return transporter.sendMail({
+
+        from: 'verification@techrus.com',
+        to: newCustomer.email,
+        subject: 'E-mail Verification',
+        html: `
+        
+        <p>Your verification OTP</p>
+        <h1> ${customerOTP}</h1>
+
+        `
+    })
 }
 
 export const rootRoute = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
@@ -45,14 +67,17 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
         await currentCustomer.save();
 
-        // Generate the OTP
-        const customerOTP = generateOTPCode();
+        const customerOTP = generateOTPCode();  // Generate the OTP
+
         const customerVerification = new TwoFactor({owner: currentCustomer._id, mfaToken: customerOTP});
         await customerVerification.save();
 
         // Create the e-mail transporter to send the MFA token to the user's e-mail address
         const emailTransporter = createEmailTransporter();
-        console.log(`E-mail Transporter`);
+        sendEmailConfirmationEmail(emailTransporter, currentCustomer, customerOTP as unknown as any);
+
+        const userOTPVerification = new EmailVerification({owner: currentCustomer._id, token: customerOTP});
+        await userOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
         return sendTokenResponse(request, currentCustomer, StatusCodes.CREATED, response);
     } 

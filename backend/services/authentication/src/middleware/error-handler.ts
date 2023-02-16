@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from "http-status-codes";
-
 export interface IErrorResponse { // Error Response interface
     message: string;
     statusCode: number | undefined;
@@ -70,6 +69,7 @@ export class JwtTokenError extends Error {
 }
 
 export class ValidationError extends Error {
+    
     statusCode = StatusCodes.UNPROCESSABLE_ENTITY;
 
     constructor(message: string, statusCode: number) {

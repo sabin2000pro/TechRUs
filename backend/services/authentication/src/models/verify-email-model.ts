@@ -3,14 +3,14 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-interface IVerifyEmailAddressSchemaDoc {
+interface IEmailVerificationSchema {
     owner: mongoose.Schema.Types.ObjectId,
     otpToken: string;
     expiresAt: Date;
     createdAt: Date;
 }
 
-export const VerifyEmailAddressSchema = new mongoose.Schema<IVerifyEmailAddressSchemaDoc>({
+export const EmailVerificationSchema = new mongoose.Schema<IEmailVerificationSchema>({
 
     owner: {
        type: mongoose.Schema.Types.ObjectId,
@@ -39,7 +39,7 @@ export const VerifyEmailAddressSchema = new mongoose.Schema<IVerifyEmailAddressS
 
 // hash the OTP token before saving to database
 
-VerifyEmailAddressSchema.pre('save', async function(next) {
+EmailVerificationSchema.pre('save', async function(next) {
 
     if(!this.isModified("otpToken")) {
         return next();
@@ -53,5 +53,5 @@ VerifyEmailAddressSchema.pre('save', async function(next) {
 
 })
 
-const VerifyEmailAddress = mongoose.model("VerifyEmailAddress", VerifyEmailAddressSchema);
-export {VerifyEmailAddress};
+const EmailVerification = mongoose.model("EmailVerification", EmailVerificationSchema);
+export {EmailVerification};

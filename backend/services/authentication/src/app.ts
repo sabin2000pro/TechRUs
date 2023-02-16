@@ -6,7 +6,8 @@ import xss from 'xss-clean'
 import hpp from 'hpp';
 import helmet from 'helmet';
 import cors from 'cors';
-import {authRouter} from './routes/auth-routes';
+import {errorHandler} from './middleware/error-handler'
+import {authRouter} from './routes/auth-routes'
 
 const app: Application = express();
 
@@ -29,5 +30,6 @@ app.use(helmet());
 app.use(mongoSanitize());
 
 app.use('/api/auth', authRouter);
+app.use(errorHandler);
 
 export {app};
