@@ -2,10 +2,13 @@
     {
         "orderId": "5d713995b721c3bb38c1f9c0",
         "customerId": "63e25f48d82eb035f7dc0654",
-        "shippingFee": 10.00,
+        "couponId": "5d713995b721c3bb38c1f5b0",
+        "shippingFee": 5.00,
         "currency": "GBP",
         "totalPrice": 4399.99,
         "orderStatus": "Pending",
+        "orderDate": "2023-02-14T13:22:00Z",
+        "customerNotes": "Please leave the package at side door",
 
         "orderItems": [
 
@@ -13,21 +16,24 @@
                 "productId": "63e25f48d82eb035f7da0980",
                 "name": "iPhone X",
                 "quantity": 1,
-                "price": 500.00
+                "price": 500.00,
+                "currency": "GBP"
             },
 
             {
                 "productId": "63e25f48d82eb035f7da0981",
                 "name": "Apple Watch Series 5",
                 "quantity": 1,
-                "price": 100.00
+                "price": 100.00,
+                "currency": "GBP"
             },
 
             {
                 "productId": "63e25f48d82eb035f7da0983",
                 "name": "Macbook Pro 16 Inch M2 Pro",
                 "quantity": 1,
-                "price": 3799.99
+                "price": 3799.99,
+                "currency": "GBP"
             }
 
         ],
@@ -45,20 +51,12 @@
             "postalCode": "EH16 5TN"
         },
 
-        "orderDate": "2023-02-14T13:22:00Z",
-
         "payment": {
             "paymentMethod": "Debit Card",
             "transactionId": "ORDR0000000090000009",
             "paymentStatus": "pending",
             "paymentAmount": 4399.99,
             "paymentCurrency": "GBP"
-        },
-
-        "coupon": {
-            "coupon_code": "5d713995b721c3bb38c1f5b1",
-            "description": "10% off your order",
-            "amount": 10.00
         },
 
         "taxes": {
@@ -74,8 +72,6 @@
             "country": "United Kingdom"
         },
 
-        "customerNotes": "Please leave the package at side door",
-
         "orderFulfilment": {
             "shipped_date": "2023-02-17T14:00:00Z",
             "trackingNumber": "CSB997890019",
@@ -83,9 +79,13 @@
         }
 
     },
+
+
     
     {
-        "orderId": "5d713995b721c3bb38c1f9c0"
+        "orderId": "5d713995b721c3bb38c1f9c1",
+        "customerId": "63e25f48d82eb035f7dc0654",
+        "couponId": ""
     },
 
     {

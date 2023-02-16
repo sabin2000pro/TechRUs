@@ -1,6 +1,6 @@
 import { createEmailTransporter } from './../utils/send-mail';
 import { generateOTPCode } from './../utils/generate-otp-code';
-import {Customer} from '../models/user-model';
+import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
 import {TwoFactor} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';
@@ -121,6 +121,8 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         }
 
         const loginToken = generateOTPCode();
+        console.log(`Your Login MFA token : `, loginToken);
+
         return sendTokenResponse(request, customer, StatusCodes.CREATED, response);
     } 
     
@@ -138,6 +140,8 @@ export const logoutUser = asyncHandler(async (request: any, response: Response, 
 
     try {
         request.session = null;
+
+        return response.status(StatusCodes.OK).json({success: true, message: "You have logged out successfully"})
     } 
     
     catch(error) {
@@ -155,6 +159,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
 
     try {
         const {userId, mfaCode} = request.body;
+        const customerLoginMfa = await TwoFactor.findById({owner: userId});
     } 
     
     catch(error) {

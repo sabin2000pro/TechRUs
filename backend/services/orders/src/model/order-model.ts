@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 export interface IOrderDocument {
     customerId: mongoose.Schema.Types.ObjectId;
+    couponId: mongoose.Schema.Types.ObjectId;
+
     currency: string;
     totalPrice: number;
     orderDate: Date;
@@ -14,12 +16,18 @@ export interface IOrderDocument {
     customerNotes: string;
 }
 
-const OrderSchema = new mongoose.Schema<IOrderDocument>({
+export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
     customerId: { // Customer Id that the order has been placed by
         type: mongoose.Schema.Types.ObjectId,
         ref: "Customer",
         required: [true, "Please specify the Customer ID for this order"]
+    },
+
+    couponId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Coupon",
+        required: [true, "Please specify the Coupon ID that belongs to this single order"]
     },
 
     currency: { // Currency used to pay for this order
@@ -81,7 +89,7 @@ const OrderSchema = new mongoose.Schema<IOrderDocument>({
     shippingAddress: { // Shipping Address object for the order
         streetAddress: String, // 1. Attribute: Street Address for the Shipping Address (Orders Service)
         city: String, // City for the shipping address
-        region: String,
+        region: String, // Region for the shipping 
         postalCode: String, // Postcode for the shipping address
         country: String,
     },

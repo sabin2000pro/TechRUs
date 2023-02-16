@@ -33,6 +33,10 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
 
         const productId = request.params.productId;
         const product = await Product.findById(productId);
+
+        if(!isValidObjectId(productId)) {
+            
+        }
         
         if(product === null) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: `No product with ID : ${productId} found`});
@@ -44,7 +48,7 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
     catch(error) {
 
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error.message})
         }
 
 
@@ -53,14 +57,15 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
 
 })
 
-module.exports.createNewProduct = asyncHandler(async (request, response, next) => {
+export const createNewProduct = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
-
+       const productBody = request.body;
     }
     
     catch(error) {
 
+        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error.message})
     }
 
 })

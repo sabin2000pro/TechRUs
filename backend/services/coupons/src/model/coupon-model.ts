@@ -1,6 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const CouponSchema = new mongoose.Schema({
+export interface ICouponDocument {
+    description: string;
+    expiryDate: Date;
+    minPurchaseAmount: Number;
+}
+
+export const CouponSchema = new mongoose.Schema<ICouponDocument>({
 
     description: {
         type: String,
@@ -21,4 +27,4 @@ const CouponSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 const Coupon = mongoose.model("Coupon", CouponSchema);
-module.exports = Coupon;
+export {Coupon}
