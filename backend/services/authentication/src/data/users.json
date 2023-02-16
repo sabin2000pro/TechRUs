@@ -5,7 +5,7 @@
         "username": "testmanager00",
         "email": "testmanager00@gmail.com",
         "password": "testuser00",
-        "role": "Manager",
+        "role": "manager",
         "zipcode": "EH16 5BA",
         "country": "United Kingdom",
         "phone": "07881364571"
@@ -13,10 +13,10 @@
 
     {
         "_id": "63e25f48d82eb035f7dc0653",
-        "username": "manageraccount09",
-        "email": "manageraccount09@gmail.com",
+        "username": "useraccount00",
+        "email": "useraccount00@gmail.com",
         "password": "123mini123",
-        "role": "User",
+        "role": "user",
         "zipcode": "EH11 AGH",
         "country": "United Kingdom",
         "phone": "07881365909"
@@ -27,7 +27,7 @@
         "username": "sabin2000",
         "email": "sabin2000@gmail.com",
         "password": "123mini123",
-        "role": "User",
+        "role": "user",
         "zipcode": "AB19 2BC",
         "country": "United Kingdom",
         "phone": "07881365905"
@@ -38,7 +38,7 @@
         "username": "johnbrown02",
         "email": "johnbrown02@gmail.com",
         "password": "sportplayer832",
-        "role": "Admin",
+        "role": "admin",
         "zipcode": "AB99 1MA",
         "country": ""
     },
@@ -48,7 +48,7 @@
         "username": "michaelmyers",
         "email": "michaelmyers98@gmail.com",
         "password": "michael09",
-        "role": "User",
+        "role": "user",
         "zipcode": "EH18 9PM"
     }
 

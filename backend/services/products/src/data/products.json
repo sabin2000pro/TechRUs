@@ -9,8 +9,9 @@
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
         "price": 999.99,
         "currency": "GBP",
-        "saleOffer": "",
-        "stockKeepingUnit": "JKL3490",
+        "saleOffer": "Free Shipping",
+        "weight": "174g",
+        "stockUnitNumber": "JKL3490",
         "modelNumber": "ME188LL/A",
         "stockAvailable": 10,
         "isFeatured": false,
@@ -26,11 +27,6 @@
           {
             "url": "https://example.com/image2.jpg",
             "caption": "Back view"
-          },
-
-          {
-            "url": "https://example.com/image3.jpg",
-            "caption": "Side view"
           }
 
         ],
@@ -93,10 +89,10 @@
         "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
         "price": 299.99,
         "currency": "GBP",
-        "saleOffer": "",
-        "stockKeepingUnit": "JKL3490",
-        "modelNumber": "",
-        "stockAvailable": 5,
+        "saleOffer": "Free Shipping",
+        "stockUnitNumber": "JKL3490",
+        "modelNumber": "APW900LA/B",
+        "stockAvailable": 10,
         "isFeatured": false,
         "isNew": false,
 
@@ -110,11 +106,6 @@
           {
             "url": "https://example.com/image2.jpg",
             "caption": "Back view"
-          },
-
-          {
-            "url": "https://example.com/image3.jpg",
-            "caption": "Side view"
           }
 
         ],
@@ -147,13 +138,13 @@
         "reviews": [
 
           {
-            "customerId": "",
+            "customerId": "63e25f48d82eb035f7dc0654",
             "rating": 10,
             "reviewText": "I freaking love this apple watch!"
           },
 
           { 
-            "customerId": "",
+            "customerId": "63e25f48d82eb035f7dc0653",
             "rating": 9,
             "reviewText": "It's so good, very nice and small for my workouts"
           }
@@ -164,21 +155,74 @@
 
       {
         "id": "63e25f48d82eb035f7da0982",
-        "category": "",
+        "category": "5d713995b721c3bb38c1f5d0",
         "name": "iPad Pro 12.9 Inch",
         "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
-        "price": 799.99,
-        "stockKeepingUnit": "YZX7181"
+        "price": 899.99,
+        "currency": "GBP",
+        "saleOffer": "Free Shipping",
+        "weight": "300g",
+        "stockUnitNumber": "YZX7181",
+        "modelNumber": "IPA10000/A",
+        "stockAvailable": 15,
+        "isFeatured": false,
+        "isNew": true,
+        "isTrending": true,
+
+        "images": [
+
+          {
+            "url": "https://example.com/image1.jpg",
+            "caption": "Front view"
+          },
+
+          {
+            "url": "https://example.com/image2.jpg",
+            "caption": "Back view"
+          },
+
+          {
+            "url": "https://example.com/image3.jpg",
+            "caption": "Side view"
+          }
+
+        ],
+
+        "attributes": [
+
+          {
+            "name": "Color",
+            "value": "Silver"
+          },
+
+          {
+            "name": "Color",
+            "value": "Space Gray"
+          },
+
+          {
+            "name": "Display Size",
+            "value": "12.9 Inches"
+          }
+
+        ]
+
       },
 
 
       {
         "id": "63e25f48d82eb035f7da0983",
-        "category": "",
+        "category": "5d713995b721c3bb38c1f5d0",
         "name": "Macbook Pro 16 Inch M2 Pro",
         "description": "The latest and most performant MacBook Pro, its improved CPU delivers more performance when it comes to coding or video editing..",
         "price": 3799.99,
-        "stockKeepingUnit": "MZF9010"
+        "currency": "GBP",
+        "saleOffer": "Free Shipping",
+        "stockUnitNumber": "JKL3490",
+        "modelNumber": "APW900LA/B",
+        "stockAvailable": 10,
+        "isFeatured": false,
+        "isNew": false
       }
 
     ]
