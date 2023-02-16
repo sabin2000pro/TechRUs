@@ -41,7 +41,7 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
        required: [true, "Please specify the description of this product"]
     },
 
-    warranty: {
+    warranty: { // Warranty for this product
         type: String,
         default: '',
         required: [true, 'Please specify the warranty for this product']

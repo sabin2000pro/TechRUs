@@ -9,6 +9,7 @@
     "start:auth-service:dev": "NODE_env=development npm run dev",
     "start:auth-service:prod": "NODE_ENV=production node api-gateway-server.js"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

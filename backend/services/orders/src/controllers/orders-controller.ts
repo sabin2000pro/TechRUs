@@ -3,7 +3,7 @@ import {StatusCodes} from 'http-status-codes';
 import {Request, Response, NextFunction} from 'express';
 import asyncHandler from 'express-async-handler';
 
-export const fetchAllOrders = asyncHandler(async (request: Request, response: Response, next: NextFunction): Promise<any> => {
+export const fetchAllOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     try {
 
        const orders = await Order.find();
@@ -26,25 +26,30 @@ export const fetchAllOrders = asyncHandler(async (request: Request, response: Re
 
 })
 
-module.exports.fetchSingleOrderByID = asyncHandler(async (request, response, next) => {
+export const fetchSingleOrderByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
+
         const orderId = request.params.orderId;
     }  
     
     catch(error) {
+
+      if(error) {
+
+      }
 
     }
 
 })
 
 
-module.exports.editOrderStatus = asyncHandler(async (request, response, next) => {
+export const editOrderStatus = asyncHandler(async (request, response, next) => {
 
 })
 
 
-module.exports.deleteOrders = asyncHandler(async (request, response, next) => {
+export const deleteOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
 })
 
