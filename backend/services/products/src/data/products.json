@@ -4,6 +4,7 @@
       {
         "id": "63e25f48d82eb035f7da0980",
         "category": "5d713995b721c3bb38c1f5d0",
+        "coupon": "5d713995b721c3bb38c1f5b0",
         "name": "iPhone X",
         "warranty": "1 year limited warranty",
         "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
@@ -84,6 +85,7 @@
       {
         "id": "63e25f48d82eb035f7da0981",
         "category": "5d713995b721c3bb38c1f5d0",
+        "coupon": "",
         "name": "Apple Watch Series 5",
         "warranty": "90-day money-back guarantee",
         "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
@@ -156,6 +158,7 @@
       {
         "id": "63e25f48d82eb035f7da0982",
         "category": "5d713995b721c3bb38c1f5d0",
+        "coupon": "",
         "name": "iPad Pro 12.9 Inch",
         "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
         "price": 899.99,
@@ -179,11 +182,6 @@
           {
             "url": "https://example.com/image2.jpg",
             "caption": "Back view"
-          },
-
-          {
-            "url": "https://example.com/image3.jpg",
-            "caption": "Side view"
           }
 
         ],
@@ -213,16 +211,18 @@
       {
         "id": "63e25f48d82eb035f7da0983",
         "category": "5d713995b721c3bb38c1f5d0",
+        "coupon": "",
         "name": "Macbook Pro 16 Inch M2 Pro",
         "description": "The latest and most performant MacBook Pro, its improved CPU delivers more performance when it comes to coding or video editing..",
         "price": 3799.99,
         "currency": "GBP",
-        "saleOffer": "Free Shipping",
+        "saleOffer": "New Product",
         "stockUnitNumber": "JKL3490",
         "modelNumber": "APW900LA/B",
         "stockAvailable": 10,
         "isFeatured": false,
-        "isNew": false
+        "isNew": false,
+        "isTrending": true
       }
 
     ]

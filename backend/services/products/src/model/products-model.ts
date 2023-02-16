@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 export interface IProductSchema {
     category: mongoose.Schema.Types.ObjectId;
+    coupon: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
     images: any;
@@ -22,6 +23,11 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category",
         required: [true, "Please specify the Category ID that this product belongs to"]
+    },
+
+    coupon: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Coupon"
     },
 
     name: {
