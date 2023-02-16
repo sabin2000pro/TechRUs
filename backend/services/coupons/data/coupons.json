@@ -41,12 +41,12 @@
 
     {
         "couponId": "5d713995b721c3bb38c1f5b3",
-        "description": "",
-        "expiration_date": "",
-        "min_purchase_amount": 50,
+        "description": "Buy one get one free",
+        "expiration_date": "2023-09-11",
+        "min_purchase_amount": 1000.00,
         "discount_type": "fixed",
-        "discount_amount": 10,
-        "discount_code": ""
+        "discount_amount": null,
+        "discount_code": "BUYONEFREE100"
     }
 
 
