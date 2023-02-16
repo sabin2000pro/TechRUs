@@ -1,6 +1,7 @@
-const Category = require('../model/categories-model');
+import { Category } from "../model/categories-model"
+import asyncHandler from 'express-async-handler'
 
-module.exports.fetchAllCategories = async (request, response, next) => {
+export const fetchAllCategories = asyncHandler(async(request, response, next) => {
     try {
 
     } 
@@ -8,9 +9,9 @@ module.exports.fetchAllCategories = async (request, response, next) => {
     catch(error) {
 
     }
-}
+})
 
-module.exports.fetchCategoryByID = async (request, response, next) => {
+export const fetchCategoryByID = asyncHandler(async (request, response, next) => {
     try {
 
     } 
@@ -20,7 +21,7 @@ module.exports.fetchCategoryByID = async (request, response, next) => {
     }
 
 
-}
+})
 
 module.exports.createNewCategory = async (request, response, next) => {
     try {
