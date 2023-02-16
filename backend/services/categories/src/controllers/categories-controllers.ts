@@ -23,7 +23,7 @@ export const fetchCategoryByID = asyncHandler(async (request, response, next) =>
 
 })
 
-module.exports.createNewCategory = async (request, response, next) => {
+module.exports.createNewCategory = asyncHandler(async (request, response, next) => {
     try {
 
     } 
@@ -31,7 +31,8 @@ module.exports.createNewCategory = async (request, response, next) => {
     catch(error) {
 
     }
-}
+    
+})
 
 module.exports.editCategoryByID = async (request, response, next) => {
     try {

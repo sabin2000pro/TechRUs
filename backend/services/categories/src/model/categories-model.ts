@@ -10,18 +10,19 @@ export interface ICategoryDoc {
 }
 
 export const CategoriesSchema = new mongoose.Schema({
-    
+
     name: {
        type: String,
        required: [true, "Please provide the name of the category to create"]
     },
 
     description: {
-
+        type: String,
+        required: [true, "Please provide the name of the category to create"]
     },
 
     slug: {
-
+        type: String
     },
 
     status: {
