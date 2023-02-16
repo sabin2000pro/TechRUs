@@ -10,11 +10,11 @@ export const connectAuthDatabase = async () => {
         return await mongoose.connect(AUTH_DB_URI).then(authConnection => {
 
             if(authConnection.connection) {
-                return console.log(`Connected to the auth database succesfully`)
+                return console.log(`Connected to the Authentication Database Schema success`)
             }
 
             else {
-                return console.log(`Could not connect to auth database successfully`);
+                return console.log(`Could not connect to auth schema successfully`);
             }
 
         })

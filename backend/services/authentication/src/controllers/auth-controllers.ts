@@ -76,7 +76,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         const emailTransporter = createEmailTransporter();
         sendEmailConfirmationEmail(emailTransporter, currentCustomer, customerOTP as unknown as any);
 
-        const userOTPVerification = new EmailVerification({owner: currentCustomer._id, token: customerOTP});
+        const userOTPVerification = new EmailVerification({owner: currentCustomer._id, otpToken: customerOTP});
         await userOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
         return sendTokenResponse(request, currentCustomer, StatusCodes.CREATED, response);
@@ -102,7 +102,7 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
             return next(new ErrorResponse("The User ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
         }
 
-        if(OTP === null) { // If there is no OTP present
+        if(!OTP) { // If there is no OTP present
            return next(new ErrorResponse("OTP is invalid, please check it again", StatusCodes.BAD_REQUEST));
         } 
 
