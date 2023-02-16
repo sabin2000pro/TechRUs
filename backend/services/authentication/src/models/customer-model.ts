@@ -48,7 +48,7 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
     role: { // User Role Field
         type: String,
         required: [true, "Please provide a valid role for the user"],
-        enum: ["Admin", "User"]
+        enum: ["admin", "manager", "user"]
     },
 
     postalCode: {
