@@ -7,6 +7,7 @@
     "start:products-service-dev": "NODE_ENV=development nodemon products-server.js",
     "start:products-service-prod": "NODE_ENV=production node products-server.js"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

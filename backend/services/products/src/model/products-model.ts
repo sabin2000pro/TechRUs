@@ -27,7 +27,8 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
 
     coupon: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Coupon"
+        ref: "Coupon",
+        required: [true, "Please specify the Coupon ID that this product has"]
     },
 
     name: {
@@ -37,7 +38,7 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
 
     description: {
        type: String,
-       required: true
+       required: [true, "Please specify the description of this product"]
     },
 
     warranty: {
@@ -76,7 +77,7 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
 
     lowStockAlert: {
         type: Number,
-        required: [true, "Please specify the low stock alert for this product"],
+        required: [true, "Please specify when a stock alert should be placed for this product"],
         default: 3
     },
 
