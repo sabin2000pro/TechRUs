@@ -18,7 +18,7 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
     catch(error) {
 
        if(error) {
-
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error.message});
        }
 
 
