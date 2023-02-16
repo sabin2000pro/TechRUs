@@ -79,10 +79,10 @@ const OrderSchema = new mongoose.Schema<IOrderDocument>({
     },
 
     shippingAddress: { // Shipping Address object for the order
-        streetAddress: String,
-        city: String,
+        streetAddress: String, // 1. Attribute: Street Address for the Shipping Address (Orders Service)
+        city: String, // City for the shipping address
         region: String,
-        postalCode: String,
+        postalCode: String, // Postcode for the shipping address
         country: String,
     },
 
