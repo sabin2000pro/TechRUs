@@ -1,41 +1,44 @@
-const Product = require('../model/products-model');
-const asyncHandler = require('express-async-handler');
-const {StatusCodes} = require('http-status-codes');
-const { isValidObjectId } = require('mongoose');
+import {Product} from '../model/products-model';
+import {Response, NextFunction} from 'express'
+import asyncHandler from 'express-async-handler';
+import {StatusCodes} from 'http-status-codes';
+import {isValidObjectId} from 'mongoose';
 
-module.exports.fetchAllProducts = asyncHandler(async (request, response, next) => {
+export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
+
         const products = await Product.find();
+
+        if(!products) {
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
+        }
+
         return response.status(StatusCodes.OK).json({success: true, products})
     }
     
     catch(error)  {
+
         if(error) {
-            return next(error);
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error.message})
         }
+
     }
 
 })
 
-module.exports.fetchSingleProductByID = asyncHandler(async (request, response, next) => {
+export const fetchSingleProductByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
 
         const productId = request.params.productId;
         const product = await Product.findById(productId);
-
-        // Validate the Product ID
-        if(!isValidObjectId(productId)) {
-           
+        
+        if(product === null) {
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: `No product with ID : ${productId} found`});
         }
 
-        if(!product) {
-
-        }
-
-
-
+        return response.status(StatusCodes.OK).json({success: true, product});
     }
     
     catch(error) {
