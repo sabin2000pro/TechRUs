@@ -1,13 +1,13 @@
 {
   "name": "coupons",
   "version": "1.0.0",
-  "description": "",
+  "description": "Coupons Service Dependency File",
   "main": "dist/index.js",
   "scripts": {
-    "build:coupons": "tsc",
-    "watch:coupons": "tsc -w",
-    "start:coupons-service:dev": "NODE_ENV=development nodemon coupons-server.js",
-    "start:coupons-service:prod": "NODE_ENV=production node coupons-server.js"
+    "build": "tsc",
+    "dev": "nodemon dist/index.js",
+    "start:coupons-service:dev": "NODE_ENV=development npm run dev",
+    "start:coupons-service:prod": "NODE_ENV=production node dist/index.js"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config({path: './config.env'});
+require('dotenv').config();
 import express from 'express';
 const morgan = require('morgan');
 const cors = require('cors');

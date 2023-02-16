@@ -1,3 +1,4 @@
+require('dotenv').config();
 import {app} from './app';
 
 const PRODUCT_SERVICE_PORT = process.env.PRODUCT_SERVICE_PORT || 5404;
