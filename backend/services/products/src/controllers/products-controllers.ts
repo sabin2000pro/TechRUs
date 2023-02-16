@@ -35,7 +35,7 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
         const product = await Product.findById(productId);
 
         if(!isValidObjectId(productId)) {
-            
+
         }
         
         if(product === null) {
@@ -61,6 +61,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
     try {
        const productBody = request.body;
+       const product = await Product.create(productBody);
     }
     
     catch(error) {

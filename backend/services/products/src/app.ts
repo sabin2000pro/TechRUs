@@ -21,5 +21,4 @@ app.use(cors({
 
 app.use('/api/products', productRoutes);
 
-
 export {app}
