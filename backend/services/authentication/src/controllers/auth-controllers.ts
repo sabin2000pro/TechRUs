@@ -96,17 +96,20 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
     try {
 
-        const {userId, OTP} = request.body; // Extract the user id and OTP from the request body
+        const {customerId, OTP} = request.body; // Extract the user id and OTP from the request body
+        const currentCustomer = await Customer.findById(customerId);
 
-        if(!isValidObjectId(userId)) {
-            return next(new ErrorResponse("The User ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
+        if(!isValidObjectId(customerId)) {
+            return next(new ErrorResponse("The Customer ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
         }
 
         if(!OTP) { // If there is no OTP present
            return next(new ErrorResponse("OTP is invalid, please check it again", StatusCodes.BAD_REQUEST));
         } 
 
-        const otp = generateOTPCode(); // Get the generated e-mail verification code
+        if(!currentCustomer) {
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: `Customer that ID ${customerId} does not exist`});
+        }
 
         return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
     } 
@@ -121,6 +124,67 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
 
 })
+
+export const resendEmailVerificationCode = asyncHandler (async (request: any, response: Response, next: NextFunction): Promise<any> => {
+
+    try {
+
+        const {customerId, OTP} = request.body;
+        const currentCustomer = await Customer.findById(customerId);
+
+        if(!currentCustomer) { // If we have no current user
+            return next(new BadRequestError("Current user does not exist. Check user again", StatusCodes.BAD_REQUEST));
+        }
+
+        if(!isValidObjectId(customerId)) {
+            return next(new BadRequestError("Owner ID invalid. Check again", StatusCodes.BAD_REQUEST));
+        }
+
+        if(!OTP) {
+            
+        }
+
+        const token = await EmailVerification.findOne({owner: customerId});
+
+        if(!token) {
+            return next(new BadRequestError("User verification token not found", StatusCodes.BAD_REQUEST));
+        }
+
+        // Fetch the generated token
+        const otpToken = generateOTPCode(); 
+
+        if(!otpToken) {
+            return next(new BadRequestError("OTP Token generated is invalid.", StatusCodes.BAD_REQUEST));
+        }
+
+        const newToken = await EmailVerification.create({owner: currentCustomer, token: otpToken}); // Create a new instance of the token
+        await newToken.save(); // Save the new token
+    
+        return response.status(StatusCodes.OK).json({success: true, message: "E-mail Verification Re-sent"});
+    } 
+    
+    catch(error) {
+      
+    }
+
+
+})
+
+export const sendLoginMfa = (transporter: any, customer: any, customerMfa: any) => {
+
+    return transporter.sendMail({
+        from: 'mfa@techrus.com',
+        to: customer.email,
+        subject: 'Login MFA Verification',
+        html: `
+        
+        <p>Your MFA code</p>
+        <h1> ${customerMfa}</h1>
+        `
+    })
+
+
+}
 
 export const loginUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
@@ -145,8 +209,14 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
             return response.status(StatusCodes.OK).json({success: false, message: "Passwords do not match. Try again"});
         }
 
-        const loginToken = generateOTPCode();
-        console.log(`Your Login MFA token : `, loginToken);
+        const customerMfaToken = generateOTPCode();
+        console.log(`Your Login MFA token : `, customerMfaToken);
+
+        const transporter = createEmailTransporter();
+        sendLoginMfa(transporter as any, customer as any, customerMfaToken as any);
+
+        const loginMfa = await TwoFactor.create({owner: customer, mfaToken: customerMfaToken});
+        await loginMfa.save();
 
         return sendTokenResponse(request, customer, StatusCodes.CREATED, response);
     } 
@@ -248,11 +318,12 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 
 })
 
-export const fetchLoggedInUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+export const fetchLoggedInCustomer = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
-        const user = request.user; // Store the user in the user object
-        return response.status(StatusCodes.OK).json({success: true, user});
+
+        const customer = request.customer; // Store the user in the user object
+        return response.status(StatusCodes.OK).json({success: true, customer});
     } 
     
     catch(error) {
