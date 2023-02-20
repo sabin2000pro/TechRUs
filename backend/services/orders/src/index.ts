@@ -1,15 +1,25 @@
 require('dotenv').config();
 import { app } from "./app"
 
-const port = process.env.PORT || 5402;
+const ORDERS_SERVICE_PORT = process.env.ORDERS_SERVICE_PORT || 5402;
 
 // Start of authentication server
-export const startCouponsServer = async () => {
+export const startOrdersServer = async () => {
 
-      return app.listen(port, () => {
-        console.log(`Coupons Service Server is listening for requests on port ${port} in mode: ${process.env.NODE_ENV}`);
-      });
+     try {
+        return app.listen(ORDERS_SERVICE_PORT, () => {
+            console.log(`Orders Service Service Server is listening for requests on port ${ORDERS_SERVICE_PORT} in mode: ${process.env.ORDERS_SERVICE_DEV_MODE}`);
+         });
+     }
+     
+     catch(error) {
+
+       if(error) {
+          return console.error(error);
+       }
+
+     }
 
 }
 
-startCouponsServer();
+startOrdersServer();

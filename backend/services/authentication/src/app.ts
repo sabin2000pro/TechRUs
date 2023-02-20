@@ -1,3 +1,5 @@
+import { StatusCodes } from 'http-status-codes';
+import { verifyUserAuthentication } from '../src/middleware/verify-user-auth';
 import express, {Application} from 'express';
 import morgan from 'morgan';
 import cookieSession from 'cookie-session';
@@ -11,6 +13,7 @@ import {authRouter} from './routes/auth-routes'
 
 const app: Application = express();
 
+
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -22,6 +25,10 @@ app.use(cors({
 app.use(cookieSession({
     keys: ["key1", 'key2']
 }))
+
+app.get('/', verifyUserAuthentication, (request, response, next) => {
+    return response.status(StatusCodes.OK).json({success: true, message: "Auth Root Route"})
+})
 
 // Mount security middleware
 app.use(xss());

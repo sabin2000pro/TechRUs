@@ -9,6 +9,7 @@
     "start:coupons-service:dev": "NODE_ENV=development npm run dev",
     "start:coupons-service:prod": "NODE_ENV=production node dist/index.js"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

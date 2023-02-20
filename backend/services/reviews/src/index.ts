@@ -7,7 +7,7 @@ export const listenReviewsServer = () => { // Create the product server to handl
     try {    
 
         return app.listen(REVIEWS_SERVICE_PORT, () => {
-            console.log(`The Reviews Service server listening for requests on port ${REVIEWS_SERVICE_PORT} in mode: ${process.env.PRODUCT_SERVICE_NODE_ENV}`);
+            console.log(`Reviews Service server listening for requests on port ${REVIEWS_SERVICE_PORT} in mode: ${process.env.REVIEWS_SERVICE_NODE_ENV}`);
         })
 
     } 
