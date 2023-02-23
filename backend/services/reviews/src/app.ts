@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express, {Application, Response, NextFunction} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -19,7 +20,7 @@ app.use(cors({
 app.get('/', async (request: any, response: Response, next: NextFunction): Promise<any> => {
     
     try {
-        return response.status(StatusCodes.OK).json({success: true, message: "Reviews Service Root"});
+        return response.status(StatusCodes.OK).json({success: true, message: "Reviews Service Root Route"});
     } 
     
     catch(error) {

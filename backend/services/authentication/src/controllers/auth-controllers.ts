@@ -272,6 +272,7 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
 
     try {
         const {currentEmail} = request.body;
+        
     } 
     
     catch(error) {

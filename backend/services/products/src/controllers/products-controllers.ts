@@ -34,10 +34,6 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
         const productId = request.params.productId;
         const product = await Product.findById(productId);
 
-        if(!isValidObjectId(productId)) {
-
-        }
-        
         if(product === null) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: `No product with ID : ${productId} found`});
         }

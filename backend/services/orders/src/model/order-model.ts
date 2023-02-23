@@ -12,6 +12,7 @@ export interface IOrderDocument {
     shippingAddress: object;
     shippingCharge: number;
     customerNotes: string;
+    createdAt: Date;
 }
 
 export const OrderSchema = new mongoose.Schema<IOrderDocument>({
@@ -34,10 +35,6 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         default: 0.00
     },
 
-    orderDate: { // Date when the order was placed
-        type: Date,
-        default: Date.now
-    },
 
     orderItems: [ // Payment items stores the products that have been ordered. Including the Product Id, name
 
@@ -90,6 +87,16 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         type: Number,
         required: [true, "Please specify what the shipping fee is for this order"],
         default: 0.0
+    },
+
+    orderDate: { // Date when the order was placed
+        type: Date,
+        default: Date.now
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now
     },
 
     customerNotes: String

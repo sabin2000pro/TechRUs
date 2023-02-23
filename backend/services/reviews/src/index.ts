@@ -1,8 +1,11 @@
+import { connectReviewSchema } from './database/reviews-schema';
 import {app} from './app';
+
+connectReviewSchema();
 
 const REVIEWS_SERVICE_PORT = process.env.REVIEWS_SERVICE_PORT || 5407;
 
-export const listenReviewsServer = () => { // Create the product server to handle GET, POST, DELETE, PUT request 
+export const startReviewsServer = () => { // Create the product server to handle GET, POST, DELETE, PUT request 
     
     try {    
 
@@ -22,4 +25,4 @@ export const listenReviewsServer = () => { // Create the product server to handl
 
 }
 
-listenReviewsServer();
+startReviewsServer();
