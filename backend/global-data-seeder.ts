@@ -1,4 +1,7 @@
+require('dotenv').config();
+
 import { connectAuthDatabase } from './services/authentication/src/database/auth-db';
+import {connectCategoriesSchema} from './services/categories/src/database/categories-schema';
 import {Customer} from './services/authentication/src/models/customer-model';
 import {Category} from './services/categories/src/model/categories-model';
 import {Product} from './services/products/src/model/products-model';
@@ -6,7 +9,7 @@ import { Order } from './services/orders/src/model/order-model';
 import {Review} from './services/reviews/src/model/review-model';
 import {Coupon} from './services/coupons/src/model/coupon-model';
 
-import customers from './services/authentication/src/data/users.json';
+import customers from './services/authentication/src/data/customers.json';
 import categories from './services/categories/src/data/categories.json';
 import products from './services/products/src/data/products.json';
 import orders from './services/orders/src/data/orders.json';
@@ -65,6 +68,7 @@ const importServiceData = async () => {
 // Function to remove all the service data from their schema
 const removeServiceData = async () => {
     try {
+
         await Customer.deleteMany();
         await Category.deleteMany();
    
