@@ -34,6 +34,23 @@ services:
        - /app/node_modules
        - ../backend/services/authentication:/app
 
+  customers-service:
+    container_name: techrus-customers-api
+    image: sabin2000/techrus-customers-service
+
+    build:
+      context: ../backend/services/customers
+      dockerfile: Dockerfile
+
+    restart: always
+
+    ports:
+      - "5420:5420"
+      
+    volumes:
+       - /app/node_modules
+       - ../backend/services/customers:/app
+
   products-service:
     container_name: techrus-products-api
     image: sabin2000/techrus-products-service
