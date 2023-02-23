@@ -31,11 +31,15 @@ app.get('/', async (request, response, next) => {// Route to test the authentica
     catch(error) {
 
       if(error) {
-        console.error(error);
+         console.error(error);
          return response.status(401).json({success: false, message: "Unauthorized to access the root route of auth"})
       }
 
     }
+})
+
+app.get('/api/orders/list', async (request, response, next) => {
+    return response.status(200).json({success: true, message: "List of orders here"});
 })
 
 

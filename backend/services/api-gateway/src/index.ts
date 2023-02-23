@@ -1,7 +1,6 @@
 import {app} from './app'
 import dotenv from 'dotenv';
 dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/services/api-gateway/config.env'})
-import proxy from 'express-http-proxy';
 import axios from 'axios';
 import {logInfo} from './api-gateway-logger';
 

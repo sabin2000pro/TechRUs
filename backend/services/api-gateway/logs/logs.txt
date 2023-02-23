@@ -16,3 +16,10 @@
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
 >>>>>>> c5fc8f6 (Working on the API gsteway functionality to make use of the authentication middleware function to verify if a user is logged in)
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}

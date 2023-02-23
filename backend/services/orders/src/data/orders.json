@@ -2,7 +2,6 @@
     {
         "orderId": "5d713995b721c3bb38c1f9c0",
         "customerId": "63e25f48d82eb035f7dc0654",
-        "couponId": "5d713995b721c3bb38c1f5b0",
         "shippingFee": 5.00,
         "currency": "GBP",
         "totalPrice": 4399.99,
@@ -41,7 +40,7 @@
         "orderHistory": {
             "status": "Received",
             "orderReceivedAt": "2023-02-15T13:30:00Z",
-            "notes": "Order received by the store"
+            "notes": "Order received by the store and will be processed shortly"
         },
 
         "billingAddress": {
@@ -80,12 +79,9 @@
 
     },
 
-
-    
     {
         "orderId": "5d713995b721c3bb38c1f9c1",
-        "customerId": "63e25f48d82eb035f7dc0654",
-        "couponId": ""
+        "customerId": "63e25f48d82eb035f7dc0656"
     },
 
     {

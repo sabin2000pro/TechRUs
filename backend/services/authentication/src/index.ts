@@ -1,12 +1,11 @@
 require('dotenv').config();
 import {app} from './app'
 import {connectAuthDatabase} from './database/auth-db';
-
+const AUTH_PORT = process.env.AUTH_PORT || 5400;
+const AUTH_DEV_MODE = process.env.AUTH_DEV_MODE || 'development'
 
 connectAuthDatabase();
 
-const AUTH_PORT = process.env.AUTH_PORT || 5400;
-const AUTH_DEV_MODE = process.env.AUTH_DEV_MODE || 'development'
 
 export const startAuthServer = async () => {
 

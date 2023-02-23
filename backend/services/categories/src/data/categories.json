@@ -11,23 +11,20 @@
         "name": "Kitchen",
         "description": "Kitchen products such as kettles, microwaves, and fridges",
         "slug": "kitchen"
-
     },
 
     {
         "_id": "5d713995b721c3bb38c1f5d2",
-        "name": "Clothing"
+        "name": "Clothing",
+        "description": "Clothing products such as jeans, t-shirts and hoodies",
+        "slug": "clothing"
     },
 
     {
         "_id": "5d713995b721c3bb38c1f5d3",
-        "name": "Books"
-    },
-    
-    {
-        "_id": "5d713995b721c3bb38c1f5d4",
-        "name": "Outdoors"
+        "name": "Books",
+        "description": "A variety of tech related O'reilly books such as Building Microservices",
+        "slug": "books"
     }
-
 
 ]
