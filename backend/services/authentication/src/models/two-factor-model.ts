@@ -33,5 +33,5 @@ const TwoFactorSchema = new mongoose.Schema<ITwoFactorVerification>({
     }
 }, {timestamps: true});
 
-const TwoFactor = mongoose.model("TwoFactor", TwoFactorSchema);
-export {TwoFactor}
+const TwoFactorVerification = mongoose.model("TwoFactorVerification", TwoFactorSchema);
+export {TwoFactorVerification}

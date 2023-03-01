@@ -254,31 +254,40 @@ export const logoutUser = asyncHandler(async (request: any, response: Response, 
 })
 
 export const verifyLoginMFA = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    const {customerId, multiFactorToken} = request.body;
+    const customer = await Customer.findById(customerId);
 
-    try {
-        const {customerId, mfaCode} = request.body;
-        const customerLoginMfa = await TwoFactor.findById({owner: customerId});
-
-        if(!isValidObjectId(customerId)) {
-            
-        }
-
-        if(!mfaCode) {
-
-        }
-
-
-    } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-
+    if(!isValidObjectId(customerId)) {
+        return next(new ErrorResponse(`This user ID is not valid. Please try again`, StatusCodes.UNAUTHORIZED));
     }
 
+    if(!multiFactorToken) {
+        customer.isActive = false; // User is not active yet
+        return next(new ErrorResponse("Please provide your MFA token", StatusCodes.BAD_REQUEST));
+    }
 
+    // const factorToken = await TwoFactorVerification.findOne({owner: userId});
+
+    if(!factorToken) {
+        return next(new ErrorResponse(`The 2FA token associated to the user is invalid `, StatusCodes.UNAUTHORIZED));
+    }
+
+    // Check to see if the tokens match
+    const mfaTokensMatch = await factorToken.compareVerificationTokens(multiFactorToken as any);
+
+    if(!mfaTokensMatch) { // If tokens don't match
+        customer.isActive = (!customer.isActive)
+        customer.isVerified = (!customerRouter.isVerified)
+        return next(new ErrorResponse("The MFA token you entered is invalid. Try again", StatusCodes.BAD_REQUEST));
+    }
+
+    const newToken = new TwoFactorVerification({owner: customer, mfaToken: multiFactorToken}); // Create a new instance of the token
+    await newToken.save(); // Save the new token
+
+    customer.isVerified = true; // User account is now verified
+    customer.isActive = true; // And user account is active
+
+    return response.status(StatusCodes.OK).json({customer, message: "Your account is now active"});
 })
 
 export const forgotPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {

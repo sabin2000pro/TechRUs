@@ -9,7 +9,7 @@ interface ICustomerSchemaDocument {
     password: string;
     role: string;
     country: string;
-    isAccountActive: boolean;
+    isActive: boolean;
     isAccountLocked: boolean;
     points: number;
     shippingAddress: any
@@ -46,7 +46,7 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         enum: ['manager', 'admin', 'customer']
     },
 
-    isAccountActive: { // Is the customer's account active or not
+    isActive: { // Is the customer's account active or not
         type: Boolean,
         default: false
     },
