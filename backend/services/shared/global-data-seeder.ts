@@ -1,20 +1,20 @@
 require('dotenv').config();
 
-import { connectAuthDatabase } from './services/authentication/src/database/auth-db';
-import {connectCategoriesSchema} from './services/categories/src/database/categories-schema';
-import {Customer} from './services/authentication/src/models/customer-model';
-import {Category} from './services/categories/src/model/categories-model';
-import {Product} from './services/products/src/model/products-model';
-import { Order } from './services/orders/src/model/order-model';
-import {Review} from './services/reviews/src/model/review-model';
-import {Coupon} from './services/coupons/src/model/coupon-model';
+import { connectAuthDatabase } from '../authentication/src/database/auth-db';
+import {connectCategoriesSchema} from '../categories/src/database/categories-schema';
+import {Customer} from '../authentication/src/models/customer-model';
+import {Category} from '../categories/src/model/categories-model';
+import {Product} from '../products/src/model/products-model';
+import { Order } from '../orders/src/model/order-model';
+import {Review} from '../reviews/src/model/review-model';
+import {Coupon} from '../coupons/src/model/coupon-model';
 
-import customers from './services/authentication/src/data/customers.json';
-import categories from './services/categories/src/data/categories.json';
-import products from './services/products/src/data/products.json';
-import orders from './services/orders/src/data/orders.json';
-import reviews from './services/reviews/src/data/reviews.json';
-import coupons from './services/coupons/src/data/coupons.json';
+import customers from '../authentication/src/data/customers.json';
+import categories from '../categories/src/data/categories.json';
+import products from '../products/src/data/products.json';
+import orders from '../orders/src/data/orders.json';
+import reviews from '../reviews/src/data/reviews.json';
+import coupons from '../coupons/src/data/coupons.json';
 
 // Import the load schemas functions
 
