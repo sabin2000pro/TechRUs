@@ -2,6 +2,7 @@
    [
 
       {
+
         "id": "63e25f48d82eb035f7da0980",
         "category": "5d713995b721c3bb38c1f5d0",
         "coupon": "5d713995b721c3bb38c1f5b2",
@@ -16,21 +17,8 @@
         "modelNumber": "ME188LL/A",
         "stockAvailable": 10,
         "isFeatured": false,
+        "image": "",
         "isNew": true,
-
-        "images": [
-
-          {
-            "url": "https://example.com/image1.jpg",
-            "caption": "Front view"
-          },
-
-          {
-            "url": "https://example.com/image2.jpg",
-            "caption": "Back view"
-          }
-
-        ],
 
         "attributes": [
 
@@ -50,8 +38,7 @@
           }
 
         ],
-
-
+        
         "reviews": [
 
           {
@@ -97,20 +84,6 @@
         "stockAvailable": 10,
         "isFeatured": false,
         "isNew": false,
-
-        "images": [
-
-          {
-            "url": "https://example.com/image1.jpg",
-            "caption": "Front view"
-          },
-
-          {
-            "url": "https://example.com/image2.jpg",
-            "caption": "Back view"
-          }
-
-        ],
 
         "attributes": [
 
@@ -172,20 +145,6 @@
         "isNew": true,
         "isTrending": true,
 
-        "images": [
-
-          {
-            "url": "https://example.com/image1.jpg",
-            "caption": "Front view"
-          },
-
-          {
-            "url": "https://example.com/image2.jpg",
-            "caption": "Back view"
-          }
-
-        ],
-
         "attributes": [
 
           {
@@ -223,21 +182,7 @@
         "isFeatured": false,
         "isNew": false,
         "isTrending": true,
-        
-        "images": [
-
-          {
-            "url": "https://example.com/image1.jpg",
-            "caption": "Front view"
-          },
-
-          {
-            "url": "https://example.com/image2.jpg",
-            "caption": "Back view"
-          }
-
-        ],
-
+  
         "attributes": [
 
           {

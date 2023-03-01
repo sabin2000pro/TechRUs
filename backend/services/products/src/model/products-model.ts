@@ -5,7 +5,7 @@ export interface IProductSchema {
     coupon: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
-    images: any;
+    image: string
     attributes: any;
     warranty: string;
     stockAvailable: number;
@@ -47,10 +47,10 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
         required: [true, 'Please specify the warranty for this product']
     },
 
-    images: [{
+    image: {
         type: String,
-        required: [true, "Please specify the images that belongs to this product"]
-    }],
+        default: ''
+    },
 
     attributes: [{ // Attributes of this product such  as Small, Medium, Large
         type: String,
