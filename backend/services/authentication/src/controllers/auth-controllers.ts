@@ -8,7 +8,7 @@ import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
-import 
+import {PasswordReset} from '../models/password-reset-model';
 import { BadRequestError } from '../middleware/error-handler';
 
 export const verifyCustomerExists = async (email: any): Promise<any> => {
@@ -84,7 +84,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
         await currentCustomer.save();
 
-        const customerOTP = generateOTPCode();  // Generate the OTP
+        const customerOTP = generateCode();  // Generate the OTP
 
         const customerVerification = new TwoFactor({owner: currentCustomer._id, mfaToken: customerOTP});
         await customerVerification.save();
@@ -168,7 +168,7 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
         }
 
         // Fetch the generated token
-        const otpToken = generateOTPCode(); 
+        const otpToken = generateCode(); 
 
         if(!otpToken) {
             return next(new BadRequestError("OTP Token generated is invalid.", StatusCodes.BAD_REQUEST));
@@ -212,7 +212,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
             return response.status(StatusCodes.OK).json({success: false, message: "Passwords do not match. Try again"});
         }
 
-        const customerMfaToken = generateOTPCode();
+        const customerMfaToken = generateCode();
         console.log(`Your Login MFA token : `, customerMfaToken);
 
         const transporter = createEmailTransporter();
@@ -256,8 +256,18 @@ export const logoutUser = asyncHandler(async (request: any, response: Response, 
 export const verifyLoginMFA = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
-        const {userId, mfaCode} = request.body;
-        const customerLoginMfa = await TwoFactor.findById({owner: userId});
+        const {customerId, mfaCode} = request.body;
+        const customerLoginMfa = await TwoFactor.findById({owner: customerId});
+
+        if(!isValidObjectId(customerId)) {
+            
+        }
+
+        if(!mfaCode) {
+
+        }
+
+
     } 
     
     catch(error) {
@@ -276,14 +286,14 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
     try {
 
         const {email} = request.body;
-        const user = await Customer.findOne({email});
+        const customer = await Customer.findOne({email});
 
         // // Check if we have an e-mail in the body of the request
         if(!email) {
             return next(new ErrorResponse(`User with that e-mail not found`, StatusCodes.BAD_REQUEST))
         }
     
-        if(!user) {
+        if(!customer) {
             return next(new ErrorResponse("No user found with that e-mail address", StatusCodes.NOT_FOUND));
         }
     
@@ -299,11 +309,11 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse("Reset Password Token is invalid", StatusCodes.BAD_REQUEST));
         }
     
-        const resetPasswordToken = await PasswordReset.create({owner: user._id, resetToken: token}); // Create an instance of the Password Reset model
+        const resetPasswordToken = await PasswordReset.create({owner: customer._id, resetToken: token}); // Create an instance of the Password Reset model
         await resetPasswordToken.save();
     
-        const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${user._id}` // Create the reset password URL
-        sendPasswordResetEmail(user, resetPasswordURL);
+        const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${customer._id}` // Create the reset password URL
+        // sendPasswordResetEmail(customer, resetPasswordURL); // Send the reset password e-mail to the customer
     
         return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent", email });
         
