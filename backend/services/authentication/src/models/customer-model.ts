@@ -46,7 +46,6 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         enum: ['manager', 'admin', 'customer']
     },
 
-
     isAccountActive: { // Is the customer's account active or not
         type: Boolean,
         default: false

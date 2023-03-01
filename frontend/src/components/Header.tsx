@@ -5,25 +5,21 @@ const Header = () => {
   return (
     <>
 
-      <header>
-          <nav>
+        <header className = "header-top">
 
-             <ul>
-
-                <li>
-                    <a href = "/register">Register</a>
-                </li>
-
-                <li>
-                    <a href = "/cart">Cart</a>
-                </li>
-
-             </ul>
+        </header>
 
 
-          </nav>
+        <header className = "header-mid">
 
-      </header>
+        </header>
+
+        <header className = "header-bottom">
+
+        </header>
+
+        
+
     </>
 
 
