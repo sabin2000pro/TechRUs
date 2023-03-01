@@ -349,7 +349,35 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
 export const resetPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
-       const {currentPassword, newPassword} = request.body;
+
+        const currentPassword = request.body.currentPassword;
+        const newPassword = request.body.newPassword;
+        const resetToken = request.params.resetToken;
+
+        if(!currentPassword) {
+            return next(new ErrorResponse("Current password missing. Please try again", StatusCodes.BAD_REQUEST))
+        }
+    
+        if(!newPassword) {
+            return next(new ErrorResponse("Please specify the new password", StatusCodes.BAD_REQUEST))
+        }
+    
+        const customer = await Customer.findOne({owner: request.customer._id, token: resetToken});
+    
+        if(!customer) {
+            return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
+        }
+    
+        const customerPasswordsMatch = await customer.comparePasswords(currentPassword); // Check if passwords match before resetting password
+    
+        if(!customerPasswordsMatch) {
+           return next(new ErrorResponse("Current Password Invalid", StatusCodes.BAD_REQUEST))
+        }
+    
+        customer.password = newPassword;    
+        await customer.save(); // Save new user after reset the password
+    
+        return response.status(StatusCodes.OK).json({success: true, message: "Customer Password Reset Successfully"});
     } 
     
     catch(error) {
