@@ -12,7 +12,7 @@ import { Order } from '../orders/src/model/order-model';
 import {Review} from '../reviews/src/model/review-model';
 import {Coupon} from '../coupons/src/model/coupon-model';
 
-import customers from '../authentication/src/data/customers.json';
+import customers from '.././authentication/src/data/customers.json';
 import categories from '../categories/src/data/categories.json';
 import products from '../products/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
@@ -33,6 +33,7 @@ connectServiceSchemas();
 // Functions to import and remove data
 
 const importServiceData = async () => {
+
     try {
      // First delete the existing data
 
@@ -49,6 +50,7 @@ const importServiceData = async () => {
 
      await Customer.insertMany(customers);
      await Category.insertMany(customers);
+     
      await Product.insertMany(products);
      await Review.insertMany(reviews)
 
