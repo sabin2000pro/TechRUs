@@ -1,7 +1,6 @@
+require('dotenv').config();
 import { connectCategoriesSchema } from './database/categories-schema';
 import { app } from "./app"
-import dotenv from 'dotenv';
-dotenv.config({path: "backend/services/authentication/config.env"});
 
 const CATEGORIES_PORT = process.env.CATEGORIES_PORT || 5401;
 

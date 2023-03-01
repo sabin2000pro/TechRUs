@@ -20,6 +20,7 @@ import coupons from '../coupons/src/data/coupons.json';
 
 const connectServiceSchemas = () => {
     connectAuthDatabase();
+    connectCategoriesSchema();
 }
 
 connectServiceSchemas();

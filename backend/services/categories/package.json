@@ -8,6 +8,7 @@
     "start:categories-service": "NODE_ENV=development nodemon dist/index.js",
     "start:categories-service:prod": "NODE_ENV=production node dist/index.js"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

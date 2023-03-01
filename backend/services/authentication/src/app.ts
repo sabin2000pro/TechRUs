@@ -1,3 +1,4 @@
+require('dotenv').config();
 import { StatusCodes } from 'http-status-codes';
 import { verifyUserAuthentication } from '../src/middleware/verify-user-auth';
 import express, {Application} from 'express';
