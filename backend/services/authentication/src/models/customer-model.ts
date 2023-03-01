@@ -44,37 +44,6 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         select: false
     },
 
-    role: { // User Role Field
-        type: String,
-        required: [true, "Please provide a valid role for this user"],
-        enum: ["admin", "manager", "user"]
-    },
-
-    postalCode: {
-        type: String,
-        required: [true, "Please provide a valid postal code for the user"]
-    },
-
-    country: {
-        type: String,
-        required: [true, "Please provide a valid country of residence for the user"]
-    },
-
-    address: {
-        type: String,
-        required: [true, "Please specify the address of the customer"]
-    },
-
-    region: {
-        type: String,
-        required: [true, "Please specify the region you are in"]
-    },
-
-    contactPhone: {
-        type: String,
-        required: [true, "Please provide a valid phone number for the user"]
-    },
-
     isAccountActive: { // Is the customer's account active or not
         type: Boolean,
         default: false
