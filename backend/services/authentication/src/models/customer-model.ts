@@ -8,11 +8,7 @@ interface ICustomerSchemaDocument {
     email: string;
     password: string;
     role: string;
-    postalCode: string;
     country: string;
-    address: string;
-    region: string;
-    contactPhone: String;
     isAccountActive: boolean;
     isAccountLocked: boolean;
     points: number;
@@ -43,6 +39,13 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         required: [true, "Please provide a valid password"],
         select: false
     },
+
+    role: {
+        type: String,
+        default: 'customer',
+        enum: ['manager', 'admin', 'customer']
+    },
+
 
     isAccountActive: { // Is the customer's account active or not
         type: Boolean,
