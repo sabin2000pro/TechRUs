@@ -4,55 +4,35 @@
         "_id": "63e25f48d82eb035f7dc0652",
         "username": "adminaccount123",
         "email": "adminaccount123@gmail.com",
-        "password": "adminaccount123",
-        "role": "admin",
-        "postalCode": "EH16 5BA",
-        "country": "United Kingdom",
-        "phone": "07881364571"
+        "password": "adminaccount123"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0653",
         "username": "adminaccount1234",
         "email": "adminaccount1234@gmail.com",
-        "password": "adminaccount1234",
-        "role": "admin",
-        "zipcode": "EH11 AGH",
-        "country": "United Kingdom",
-        "phone": "07881365909"
+        "password": "adminaccount1234"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0654",
         "username": "storemanager838",
         "email": "storemanager838@gmail.com",
-        "password": "storemanager838",
-        "role": "manager",
-        "zipcode": "AB19 2BC",
-        "country": "United Kingdom",
-        "phone": "07881365905"
+        "password": "storemanager838"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0655",
         "username": "storemanager00",
         "email": "storemanager00@gmail.com",
-        "password": "storemanager00",
-        "role": "manager",
-        "zipcode": "EH7 AKL",
-        "country": "United Kingdom",
-        "phone": "07881365901"
+        "password": "storemanager00"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0656",
         "username": "regularcustomer09",
         "email": "regularcustomer09@gmail.com",
-        "password": "1234mini1234",
-        "role": "customer",
-        "zipcode": "EH10 9PM",
-        "country": "United Kingdom",
-        "phone": "0788190919"
+        "password": "1234mini1234"
     }
 
 
