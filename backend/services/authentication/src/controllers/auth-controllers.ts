@@ -1,6 +1,6 @@
 import { EmailVerification } from './../models/verify-email-model';
 import { createEmailTransporter } from './../utils/send-mail';
-import { generateOTPCode } from './../utils/generate-otp-code';
+import {generateCode } from './../utils/generate-otp-code';
 import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
 import {TwoFactor} from '../models/two-factor-model';
@@ -8,6 +8,7 @@ import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
+import 
 import { BadRequestError } from '../middleware/error-handler';
 
 export const verifyCustomerExists = async (email: any): Promise<any> => {
@@ -38,6 +39,22 @@ export const verifyCustomerExists = async (email: any): Promise<any> => {
 export const rootRoute = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
     return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
 })
+
+export const sendLoginMfa = (transporter: any, customer: any, customerMfa: any) => {
+
+    return transporter.sendMail({
+        from: 'mfa@techrus.com',
+        to: customer.email,
+        subject: 'Login MFA Verification',
+        html: `
+        
+        <p>Your MFA code</p>
+        <h1> ${customerMfa}</h1>
+        `
+    })
+
+
+}
 
 export const sendTokenResponse = (request: Express.Request, customer: any, statusCode: number, response: any): Promise<any> => {
     const token = customer.fetchAuthToken();
@@ -164,27 +181,13 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
     } 
     
     catch(error) {
-      
+          if(error) {
+            return next(error);
+          }
     }
 
 
 })
-
-export const sendLoginMfa = (transporter: any, customer: any, customerMfa: any) => {
-
-    return transporter.sendMail({
-        from: 'mfa@techrus.com',
-        to: customer.email,
-        subject: 'Login MFA Verification',
-        html: `
-        
-        <p>Your MFA code</p>
-        <h1> ${customerMfa}</h1>
-        `
-    })
-
-
-}
 
 export const loginUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
@@ -271,7 +274,38 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
 export const forgotPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
-        const {currentEmail} = request.body;
+
+        const {email} = request.body;
+        const user = await Customer.findOne({email});
+
+        // // Check if we have an e-mail in the body of the request
+        if(!email) {
+            return next(new ErrorResponse(`User with that e-mail not found`, StatusCodes.BAD_REQUEST))
+        }
+    
+        if(!user) {
+            return next(new ErrorResponse("No user found with that e-mail address", StatusCodes.NOT_FOUND));
+        }
+    
+        const userHasResetToken = await PasswordReset.findOne({owner: customer._id});
+    
+        if(userHasResetToken) {
+            return next(new ErrorResponse("User already has the password reset token", StatusCodes.BAD_REQUEST));
+        }
+    
+        const token = generateCode();
+    
+        if(token === undefined) { // If no token exists
+            return next(new ErrorResponse("Reset Password Token is invalid", StatusCodes.BAD_REQUEST));
+        }
+    
+        const resetPasswordToken = await PasswordReset.create({owner: user._id, resetToken: token}); // Create an instance of the Password Reset model
+        await resetPasswordToken.save();
+    
+        const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${user._id}` // Create the reset password URL
+        sendPasswordResetEmail(user, resetPasswordURL);
+    
+        return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent", email });
         
     } 
     
