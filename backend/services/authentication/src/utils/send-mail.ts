@@ -11,10 +11,9 @@ return nodemailer.createTransport({
   port: process.env.SMTP_PORT,
 
   auth: {
-    user: "4b0c595feba978",
-    pass: "5d6876f0646672"
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
   }
-  
 
 
 });
