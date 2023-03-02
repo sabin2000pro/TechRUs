@@ -4,6 +4,7 @@ import {Request, Response, NextFunction} from 'express';
 import asyncHandler from 'express-async-handler';
 
 export const fetchAllOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    
     try {
 
        const orders = await Order.find();
