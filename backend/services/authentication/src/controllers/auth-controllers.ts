@@ -55,9 +55,10 @@ export const sendLoginMfa = (transporter: any, customer: any, customerMfa: any) 
     })
 }
 
-export const sendForgotPasswordResetLink = (customer: any, resetPasswordURL: string, transporter: any) => {
-     
+export const sendForgotPasswordResetLink = (customer: any, resetPasswordURL: string) => {
 
+    const transporter = createEmailTransporter();
+     
    return transporter.sendMail({
         from: 'resetpassword@ethertix.com',
         to: customer.email,
@@ -335,10 +336,8 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
         const resetPasswordToken = await PasswordReset.create({owner: customer._id, resetToken: token}); // Create an instance of the Password Reset model
         await resetPasswordToken.save();
 
-        const transporter = createEmailTransporter();
-    
         const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${customer._id}` // Create the reset password URL
-        sendForgotPasswordResetLink(customer, transporter, resetPasswordURL); // Send the reset password e-mail to the customer
+        sendForgotPasswordResetLink(customer, resetPasswordURL); // Send the reset password e-mail to the customer
     
         return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent", email });
         
