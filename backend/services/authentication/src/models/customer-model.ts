@@ -10,6 +10,7 @@ interface ICustomerSchemaDocument {
     role: string;
     country: string;
     isActive: boolean;
+    isVerified: boolean;
     isAccountLocked: boolean;
     points: number;
     shippingAddress: any
@@ -52,6 +53,11 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
     },
 
     isAccountLocked: {
+        type: Boolean,
+        default: false
+    },
+
+    isVerified: {
         type: Boolean,
         default: false
     },

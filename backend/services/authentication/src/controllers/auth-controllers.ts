@@ -3,13 +3,14 @@ import { createEmailTransporter } from './../utils/send-mail';
 import {generateCode } from './../utils/generate-otp-code';
 import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
-import {TwoFactor} from '../models/two-factor-model';
+import {TwoFactorVerification} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
 import {PasswordReset} from '../models/password-reset-model';
-import { BadRequestError } from '../middleware/error-handler';
+// import { BadRequestError } from '../middleware/error-handler';
+
 
 export const verifyCustomerExists = async (email: any): Promise<any> => {
     return await Customer.findOne({email});
@@ -86,7 +87,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
         const customerOTP = generateCode();  // Generate the OTP
 
-        const customerVerification = new TwoFactor({owner: currentCustomer._id, mfaToken: customerOTP});
+        const customerVerification = new TwoFactorVerification({owner: currentCustomer._id, mfaToken: customerOTP});
         await customerVerification.save();
 
         // Create the e-mail transporter to send the MFA token to the user's e-mail address
@@ -150,28 +151,28 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
         const currentCustomer = await Customer.findById(customerId);
 
         if(!currentCustomer) { // If we have no current user
-            return next(new BadRequestError("Current user does not exist. Check user again", StatusCodes.BAD_REQUEST));
+            return next(new ErrorResponse("Current user does not exist. Check user again", StatusCodes.BAD_REQUEST));
         }
 
         if(!isValidObjectId(customerId)) {
-            return next(new BadRequestError("Owner ID invalid. Check again", StatusCodes.BAD_REQUEST));
+            return next(new ErrorResponse("Owner ID invalid. Check again", StatusCodes.BAD_REQUEST));
         }
 
         if(!OTP) {
-            
+            return next(new ErrorResponse(`No OTP found. Please try again`, StatusCodes.BAD_REQUEST))
         }
 
         const token = await EmailVerification.findOne({owner: customerId});
 
         if(!token) {
-            return next(new BadRequestError("User verification token not found", StatusCodes.BAD_REQUEST));
+            return next(new ErrorResponse("User verification token not found", StatusCodes.BAD_REQUEST));
         }
 
         // Fetch the generated token
         const otpToken = generateCode(); 
 
         if(!otpToken) {
-            return next(new BadRequestError("OTP Token generated is invalid.", StatusCodes.BAD_REQUEST));
+            return next(new ErrorResponse("OTP Token generated is invalid.", StatusCodes.BAD_REQUEST));
         }
 
         const newToken = await EmailVerification.create({owner: currentCustomer, token: otpToken}); // Create a new instance of the token
@@ -181,6 +182,7 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
     } 
     
     catch(error) {
+        
           if(error) {
             return next(error);
           }
@@ -218,7 +220,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         const transporter = createEmailTransporter();
         sendLoginMfa(transporter as any, customer as any, customerMfaToken as any);
 
-        const loginMfa = await TwoFactor.create({owner: customer, mfaToken: customerMfaToken});
+        const loginMfa = await TwoFactorVerification.create({owner: customer, mfaToken: customerMfaToken});
         await loginMfa.save();
 
         return sendTokenResponse(request, customer, StatusCodes.CREATED, response);
@@ -266,7 +268,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
         return next(new ErrorResponse("Please provide your MFA token", StatusCodes.BAD_REQUEST));
     }
 
-    // const factorToken = await TwoFactorVerification.findOne({owner: userId});
+    const factorToken = await TwoFactorVerification.findOne({owner: customerId});
 
     if(!factorToken) {
         return next(new ErrorResponse(`The 2FA token associated to the user is invalid `, StatusCodes.UNAUTHORIZED));
@@ -277,7 +279,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
 
     if(!mfaTokensMatch) { // If tokens don't match
         customer.isActive = (!customer.isActive)
-        customer.isVerified = (!customerRouter.isVerified)
+        customer.isVerified = (!customer.isVerified)
         return next(new ErrorResponse("The MFA token you entered is invalid. Try again", StatusCodes.BAD_REQUEST));
     }
 

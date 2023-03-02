@@ -40,6 +40,18 @@ export const CustomerSchema = new mongoose.Schema({
     role: {
         type: String,
         required: [true, "Please specify the role of the customer"]
+    },
+
+    startShift: {
+       type: Date,
+       default: Date.now,
+       required: [true, "Please provide the start shift time for the customer"]
+    },
+
+    endShift: {
+        type: Date,
+        default: Date.now,
+        required: [true, "Please provide the end shift time for the customer"]
     }
 
 
