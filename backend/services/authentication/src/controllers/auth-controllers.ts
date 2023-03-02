@@ -53,8 +53,20 @@ export const sendLoginMfa = (transporter: any, customer: any, customerMfa: any) 
         <h1> ${customerMfa}</h1>
         `
     })
+}
 
+export const sendForgotPasswordResetLink = (customer: any, resetPasswordURL: string, transporter: any) => {
+     
 
+   return transporter.sendMail({
+        from: 'resetpassword@ethertix.com',
+        to: customer.email,
+        subject: 'Reset Password',
+        html: `
+        
+        <h1> ${resetPasswordURL}</h1>
+        `
+    })
 }
 
 export const sendTokenResponse = (request: Express.Request, customer: any, statusCode: number, response: any): Promise<any> => {
@@ -216,7 +228,6 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         }
 
         const customerMfaToken = generateCode();
-        console.log(`Your Login MFA token : `, customerMfaToken);
 
         const transporter = createEmailTransporter();
         sendLoginMfa(transporter as any, customer as any, customerMfaToken as any);
@@ -309,9 +320,9 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse("No user found with that e-mail address", StatusCodes.NOT_FOUND));
         }
     
-        const userHasResetToken = await PasswordReset.findOne({owner: customer._id});
+        const customerHasResetToken = await PasswordReset.findOne({owner: customer._id});
     
-        if(userHasResetToken) {
+        if(customerHasResetToken) {
             return next(new ErrorResponse("User already has the password reset token", StatusCodes.BAD_REQUEST));
         }
     
@@ -323,9 +334,11 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
     
         const resetPasswordToken = await PasswordReset.create({owner: customer._id, resetToken: token}); // Create an instance of the Password Reset model
         await resetPasswordToken.save();
+
+        const transporter = createEmailTransporter();
     
         const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${customer._id}` // Create the reset password URL
-        // sendPasswordResetEmail(customer, resetPasswordURL); // Send the reset password e-mail to the customer
+        sendForgotPasswordResetLink(customer, transporter, resetPasswordURL); // Send the reset password e-mail to the customer
     
         return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent", email });
         

@@ -1,4 +1,4 @@
-require('dotenv.config');
+require('dotenv').config();
 import nodemailer from "nodemailer"
 
 // Configure environment variables for the e-mail tansporter
@@ -8,7 +8,7 @@ export const createEmailTransporter = (): any => { // Create the e-mail transpor
 return nodemailer.createTransport({
 
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  port: 2525,
 
   auth: {
     user: process.env.SMTP_USER,
