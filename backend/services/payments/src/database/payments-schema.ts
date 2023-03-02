@@ -24,7 +24,7 @@ export const connectPaymentsSchema = async (): Promise<any> => {
     catch(error) {
 
        if(error) {
-        return console.error(error);
+          return console.error(error);
        }
 
 
