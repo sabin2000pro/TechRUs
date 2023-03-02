@@ -62,12 +62,6 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         default: false
     },
 
-    points: {
-        type: Number,
-        default: 0,
-        required: [true, "Please specify how many in-store points this customer has by default"]
-    },
-
     rides: [{ // Used for later development of the application for the taxi-hauling feature for the e-commerce stores that handles delivery of products as a second option of delivery
         rideId: String,
         pickupLocation: String,
@@ -79,7 +73,6 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
         createdAt: Date,
         updatedAt: Date
     }]
-
 
 }, {timestamps: true});
 

@@ -72,9 +72,9 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
     try {
 
-        const {username, email, password, role, postalCode, country, contactPhone, address, region, points} = request.body;
+        const {username, email, password} = request.body;
 
-        if(!username || !email || !password || !role || !postalCode || !country || !contactPhone) {
+        if(!username || !email || !password) {
             return next(new ErrorResponse(`Some of the fields are missing, please try again`, StatusCodes.BAD_REQUEST));
         }
 
@@ -82,7 +82,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Customer Already exists with that e-mail address"});
         }
 
-        const currentCustomer = await Customer.create({username, email, password, role, contactPhone, postalCode, country, address, region, points});
+        const currentCustomer = await Customer.create({username, email, password});
         await currentCustomer.save();
 
         const customerOTP = generateCode();  // Generate the OTP
@@ -94,8 +94,9 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         const emailTransporter = createEmailTransporter();
         sendEmailConfirmationEmail(emailTransporter, currentCustomer, customerOTP as unknown as any);
 
-        const userOTPVerification = new EmailVerification({owner: currentCustomer._id, otpToken: customerOTP});
-        await userOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
+        const customerOTPVerification = new EmailVerification({owner: currentCustomer._id, otpToken: customerOTP});
+        console.log(`Your Customer OTP Verification`)
+        await customerOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
         return sendTokenResponse(request, currentCustomer, StatusCodes.CREATED, response);
     } 
@@ -182,7 +183,7 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
     } 
     
     catch(error) {
-        
+
           if(error) {
             return next(error);
           }

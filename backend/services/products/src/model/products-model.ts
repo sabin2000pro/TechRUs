@@ -19,7 +19,7 @@ export interface IProductSchema {
 
 const ProductSchema = new mongoose.Schema<IProductSchema>({
 
-    category : {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category",
         required: [true, "Please specify the Category ID that this product belongs to"]

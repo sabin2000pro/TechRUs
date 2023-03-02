@@ -11,16 +11,6 @@ export interface ICustomerModelDoc {
 
 export const CustomerSchema = new mongoose.Schema({
 
-    forename: {
-        type: String,
-        required: [true, "Please specify the forename of the customer"]
-    },
-
-    surname: {
-        type: String,
-        required: [true, "Please specify the forename of the customer"]
-    },
-
     username: {
         type: String,
         required: [true, "Please specify the forename of the customer"]
@@ -39,7 +29,8 @@ export const CustomerSchema = new mongoose.Schema({
 
     role: {
         type: String,
-        required: [true, "Please specify the role of the customer"]
+        enum: ['admin', 'manager', 'customer'],
+        default: 'customer'
     },
 
     startShift: {
@@ -52,6 +43,21 @@ export const CustomerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
         required: [true, "Please provide the end shift time for the customer"]
+    },
+
+    isActive: { // Is the customer's account active or not
+        type: Boolean,
+        default: false
+    },
+
+    isAccountLocked: {
+        type: Boolean,
+        default: false
+    },
+
+    isVerified: {
+        type: Boolean,
+        default: false
     }
 
 
