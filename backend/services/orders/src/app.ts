@@ -21,17 +21,13 @@ if(process.env.NODE_ENV === 'development') {
 app.get('/', async (request, response, next) => {// Route to test the authenticationmiddleware
     try {
         
-        const responsePromise = await axios.get(`http://localhost:5400`, {headers: {Authorization: request.headers.authorization}}); // Route that requires authentication for fetching a list of orders
-        console.log(`Fetch the root auth route`, responsePromise);
-        console.log(request.headers.authorization);
-    
+        const responsePromise = await axios.get(`http://localhost:5400`, {headers: {Authorization: request.headers.authorization}}); // Route that requires authentication for fetching a list of orders    
         return response.status(StatusCodes.OK).json({success: true, responsePromise, message: "You are AUTHORIZED to access this route"});
     } 
     
     catch(error) {
 
       if(error) {
-         console.error(error);
          return response.status(401).json({success: false, message: "Unauthorized to access the root route of auth"})
       }
 

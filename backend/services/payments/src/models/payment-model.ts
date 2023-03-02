@@ -10,19 +10,25 @@ export interface IPaymentSchemaDoc {
 export const PaymentSchema = new mongoose.Schema({
 
     orderId: {
-
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+        required: [true, "Please specify the order ID when creating a new payment"]
     },
 
     customerId: {
-
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Customer",
+        required: [true, "Please specify the Customer ID when creating a new payment"]
     },
 
     currency: {
-
+        type: String,
+        default: "GBP"
     },
 
     paymentStatus: {
-        type: String
+        type: String,
+        enum: ['pending', 'canceled', 'refunded']
     }
 
 }, {timestamps: true});
