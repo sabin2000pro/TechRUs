@@ -1,6 +1,5 @@
-
+require('dotenv.config');
 import nodemailer from "nodemailer"
-require('dotenv').config()
 
 // Configure environment variables for the e-mail tansporter
 
@@ -8,13 +7,16 @@ export const createEmailTransporter = (): any => { // Create the e-mail transpor
 
 return nodemailer.createTransport({
 
-  host: "smtp.mailtrap.io",
-  port: 2525,
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
 
   auth: {
-    user: "31c4555f29ccbb",
-    pass: "66af38be36d489"
+    user: "4b0c595feba978",
+    pass: "5d6876f0646672"
   }
+  
+
+
 });
 
 
