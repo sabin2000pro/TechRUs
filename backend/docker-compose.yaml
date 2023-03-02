@@ -6,6 +6,9 @@ services:
     container_name: techrus-api-gateway-api
     image: sabin2000/techrus-api-gateway-service
 
+    networks:
+      - my-service-network
+
     build:
       context: ../backend/services/api-gateway
       dockerfile: Dockerfile
@@ -128,6 +131,20 @@ services:
       volumes:
        - /app/node_modules
        - ../backend/services/reviews:/app
+
+  payments-service:
+    container_name: techrus-payments-api
+
+    build:
+      context: ../backend/services/payments
+      dockerfile: Dockerfile
+
+    ports:
+      - "5406:5406"
+
+    volumes:
+      - /app/node_modules
+      - ../backend/services/payments:/app
 
   frontend-service:
     container_name: techrus-frontend-service
