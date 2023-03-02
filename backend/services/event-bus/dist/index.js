@@ -8,15 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startEventBusServer = void 0;
+require('dotenv').config();
 const app_1 = require("./app");
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config({ path: "/Users/sabin2000/Documents/TechRUs/backend/services/event-bus/config.env" });
-const EVENT_BUS_PORT = process.env.EVENT_BUS_PORT || 6969;
+const EVENT_BUS_PORT = process.env.EVENT_BUS_PORT || 6500;
 const EVENT_BUS_DEV_MODE = process.env.EVENT_BUS_DEV_MODE || 'development';
 // Start of authentication server
 const startEventBusServer = () => __awaiter(void 0, void 0, void 0, function* () {

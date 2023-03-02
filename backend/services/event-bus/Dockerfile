@@ -6,6 +6,6 @@ COPY tsconfig.json .
 RUN npm install
 COPY . .
 ENV NODE_ENV = development
-EXPOSE 6969
+EXPOSE 6500
 RUN npm run build:event-bus
 CMD [ "npm", "run", "start:event-bus-service:dev" ]

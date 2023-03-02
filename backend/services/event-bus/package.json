@@ -8,6 +8,7 @@
     "start:event-bus-service:dev": "NODE_ENV=development nodemon dist/index.js",
     "start:event-bus-service:prod": "NODE_ENV=production node dist/index.js"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

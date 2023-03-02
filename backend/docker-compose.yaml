@@ -146,6 +146,21 @@ services:
       - /app/node_modules
       - ../backend/services/payments:/app
 
+  eventbus-service:
+    container_name: eventbus-api
+
+    build:
+      context: ../backend/services/event-bus
+      dockerfile: Dockerfile
+
+    ports:
+      - "6500:6500"
+
+    volumes:
+      - /app/node_modules
+      - ../backend/services/event-bus:/app
+    
+
   frontend-service:
     container_name: techrus-frontend-service
 
