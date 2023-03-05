@@ -56,8 +56,11 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
 export const createNewProduct = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
+       request.body.customer = request.customer._id;
        const productBody = request.body;
        const product = await Product.create(productBody);
+
+       await product.save();
     }
     
     catch(error) {
@@ -67,7 +70,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
 })
 
-module.exports.fetchPopularProducts = asyncHandler(async (request, response, next) => {
+export const fetchNewProducts = asyncHandler(async (request, response, next) => {
 
     try {
 
