@@ -8,8 +8,6 @@ export const fetchCustomerOrders = async (request, response: Response, next: Nex
     try {
 
       const ordersResponse = await axios.get(`http://localhost:5403/api/orders/list`);
-      console.log(`Orders RESPONSE DATA : `, ordersResponse);
-
 
       return response.status(200).json({success: true, ordersResponse});
     } 

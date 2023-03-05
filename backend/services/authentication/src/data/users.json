@@ -2,10 +2,10 @@
 
     {
         "_id": "63e25f48d82eb035f7dc0652",
-        "username": "adminaccount123",
-        "email": "adminaccount123@gmail.com",
-        "password": "adminaccount123",
-        "role": "admin"
+        "username": "customer123",
+        "email": "customer123@gmail.com",
+        "password": "customer123",
+        "role": "customer"
     },
 
     {
@@ -13,6 +13,14 @@
         "username": "adminaccount1234",
         "email": "adminaccount1234@gmail.com",
         "password": "adminaccount1234",
+        "role": "customer"
+    },
+
+    {
+        "_id": "63e25f48d82eb035f7dc0654",
+        "username": "storemanager838",
+        "email": "storemanager838@gmail.com",
+        "password": "storemanager838",
         "role": "admin"
     },
 
@@ -21,7 +29,7 @@
         "username": "storemanager838",
         "email": "storemanager838@gmail.com",
         "password": "storemanager838",
-        "role": "manager"
+        "role": "admin"
     },
 
     {
@@ -37,7 +45,7 @@
         "username": "regularcustomer09",
         "email": "regularcustomer09@gmail.com",
         "password": "1234mini1234",
-        "role": "customer"
+        "role": "manager"
     }
 
 

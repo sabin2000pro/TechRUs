@@ -1,14 +1,12 @@
 import mongoose from 'mongoose';
 
 export interface IProductSchema {
-    category: mongoose.Schema.Types.ObjectId;
-    coupon: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
     image: string
     attributes: any;
     warranty: string;
-    stockAvailable: number;
+    stockCount: Number;
     price: number;
     currency: string;
 
@@ -19,17 +17,6 @@ export interface IProductSchema {
 
 const ProductSchema = new mongoose.Schema<IProductSchema>({
 
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
-        required: [true, "Please specify the Category ID that this product belongs to"]
-    },
-
-    coupon: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Coupon",
-        required: [true, "Please specify the Coupon ID that this product has"]
-    },
 
     name: {
         type: String,
@@ -69,7 +56,7 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
         default: "GBP"
     },
 
-    stockAvailable: {
+    stockCount: {
         type: Number,
         default: 0,
         required: [true, "Please specify the stock available for this product"]
@@ -78,7 +65,7 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
     lowStockAlert: {
         type: Number,
         required: [true, "Please specify when a stock alert should be placed for this product"],
-        default: 3
+        default: 2
     },
 
     arrivingStockCount: { // Stores how much stock the inventory is expecting

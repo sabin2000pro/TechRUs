@@ -1,105 +1,121 @@
 import mongoose from 'mongoose';
 
 export interface IOrderDocument {
-    customerId: mongoose.Schema.Types.ObjectId;
-    currency: string;
-    totalPrice: number;
-    orderDate: Date;
-    orderItems: any;
-    orderHistory: any
-    orderStatus: string;
-    payment: object;
-    shippingAddress: object;
-    shippingCharge: number;
-    customerNotes: string;
-    createdAt: Date;
+    orderItems: mongoose.Schema.Types.ObjectId;
+    shippingInformation: Object
+    orderStatus: String
+    paymentInformation: Object
+    itemPrice: Number;
+    taxPrice: Number;
+    totalPrice: Number;
+    shippingPrice: Number;
+    paidAt: Date
 }
 
 export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
-    customerId: { // Customer Id that the order has been placed by
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Customer",
-        required: [true, "Please specify the Customer ID for this order"]
-    },
+    orderItems: [{ // Array of all the order items being ordered
+        
+        name: {
+            type: String,
+            required: true
+        },
 
-    currency: { // Currency used to pay for this order
-        type: String,
-        required: [true, "Please specify the currency used for this payment method"],
-        default: "GBP"
-    },
+        quantity: { // Quantity of the product being ordered
+            type: Number,
+            required: true
+        },
 
-    totalPrice: { // Total price for this order
-        type: Number,
-        required: [true, "Please specify the total price for this order"],
-        default: 0.00
-    },
+        price: { // Price of the product
+            type: Number,
+            required: true
+        },
 
+        product: { // Product itself part of the order items
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product",
+            required: true
+        }
 
-    orderItems: [ // Payment items stores the products that have been ordered. Including the Product Id, name
-
-    {
-        productId: mongoose.Schema.Types.ObjectId,
-        name: String,
-        description: String,
-        price: Number,
-        countInStock: Number
-    }
-
- ],
-
-    orderHistory: [{ // Order history is an array of objects that stores data for the status of the order, timestamp and any notes
-        status: String, // Order History Attribute: Status of the order in the past
-        orderReceivedAt: Date, // Order History: When the order was received by the customer
-        notes: String // Order History: Any notes left by the customer when the order was placed
     }],
+
+    shippingInformation: {
+
+        address: {
+            type: String,
+            required: [true, "Please specify the shipping address"]
+        },
+
+        city: {
+            type: String,
+            required: [true, "Please specify the shipping city"]
+        },
+
+        phoneNo: {
+            type: String,
+            required: [true, "Please specify the shipping phone number"]
+        },
+
+        postalCode: {
+            type: String,
+            required: [true, "Please specify the shipping postal code"]
+        },
+
+        country: { // Country of the shipping
+            type: String,
+            required: [true, "Please specify the shipping country"]
+        }
+
+    },
 
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
         required: [true, "Please specify the status that the order is in"],
-        enum: ['created', 'pending', 'shipped', 'processing', 'canceled', 'refunded']
+        enum: ['created', 'pending', 'shipped', 'processing', 'canceled', 'refunded'],
+        default: 'processing'
     },
 
-    payment: { // Payment object will hold the payment used for the payment, transaction ID, the status of the payment such as Pending, Failed or Canceled
+    paymentInformation: { // Payment object will hold the payment used for the payment, transaction ID, the status of the payment such as Pending, Failed or Canceled
 
-        paymentMethod: String,
-        transactionId: String,
-
-        paymentStatus: { // Status that the payment is in
-            type: String,
-            default: "pending",
-            enum: ['pending', 'failed', 'canceled']
+        id: { // ID of the payment
+            type: String
         },
 
-        paymentAmount: Number,
-        paymentCurrency: String
+        status: { // Status of the transaction
+            type: String
+        }
+
     },
 
-    shippingAddress: { // Shipping Address object for the order
-        streetAddress: String, // 1. Attribute: Street Address for the Shipping Address (Orders Service)
-        city: String, // City for the shipping address
-        region: String, // Region for the shipping 
-        postalCode: String, // Postcode for the shipping address
-        country: String,
-    },
-
-    shippingCharge: { // The Shipping Fee incurred by this order
+    itemPrice: { // Items price being ordered
         type: Number,
-        required: [true, "Please specify what the shipping fee is for this order"],
+        required: true,
         default: 0.0
     },
 
-    orderDate: { // Date when the order was placed
-        type: Date,
-        default: Date.now
+    taxPrice: { // The tax price incurred
+        type: Number,
+        required: true,
+        default: 0.0
     },
 
-    createdAt: {
-        type: Date,
-        default: Date.now
+    shippingPrice: { // Shipping price of the order
+        type: Number,
+        required: true,
+        default: 0.00
     },
 
-    customerNotes: String
+    totalPrice: { // Total price for the order
+        type: Number,
+        required: true,
+        default: 0.00
+    },
+
+    paidAt: { // Date at which the order has been paid at
+        type: Date,
+        default: Date.now
+    }
+
 
 }, {timestamps: true});
 
