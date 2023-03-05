@@ -1,22 +1,21 @@
+import { model, Model } from 'mongoose';
 import mongoose from 'mongoose';
 
-export interface IProductSchema {
+interface ProductDocument extends Document {
     name: string;
     description: string;
     image: string
-    attributes: any;
     warranty: string;
     stockCount: Number;
     price: number;
     currency: string;
-
     lowStockAlert: number;
     arrivingStockCount: number;
     reorderLevel: number;
+    isNew: boolean
 }
 
-const ProductSchema = new mongoose.Schema<IProductSchema>({
-
+const ProductSchema = new mongoose.Schema<ProductDocument>({
 
     name: {
         type: String,
@@ -38,11 +37,6 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
         type: String,
         default: ''
     },
-
-    attributes: [{ // Attributes of this product such  as Small, Medium, Large
-        type: String,
-        required: [true, "Please specify the attributes of this product"]
-    }],
 
     price: {
         type: Number,
@@ -76,10 +70,17 @@ const ProductSchema = new mongoose.Schema<IProductSchema>({
     reorderLevel: {
         type: Number,
         default: 10
+    },
+
+    isNew: {
+        type: Boolean,
+        required: [true, 'Please specify if the product is new or not'],
+        default: false
     }
 
 
 }, {timestamps: true});
 
-const Product = mongoose.model("Product", ProductSchema);
-export {Product}
+
+const Product: Model<ProductDocument> = mongoose.model("Product", ProductSchema);
+export {Product, ProductDocument}

@@ -1,8 +1,9 @@
-const express = require('express');
-const productRouter = express.Router({mergeParams: true});
-const productController = require('../controllers/products-controllers');
+import express from 'express';
+import { fetchAllProducts, createNewProduct, fetchSingleProductByID, editProductByID } from '../controllers/products-controllers';
 
-productRouter.route('/').get(productController.fetchAllProducts).post(productController.createNewProduct).delete(productController.deleteAllProducts)
-productRouter.route('/:productId').get(productController.fetchSingleProductByID).put(productController.editProductByID).delete(productController.deleteProductByID);
+export const productRouter = express.Router();
+
+productRouter.route('/').get(fetchAllProducts).post(createNewProduct).delete(deleteAllProducts)
+productRouter.route('/:productId').get(fetchSingleProductByID).put(editProductByID).delete(productController.deleteProductByID);
 
 module.exports = productRouter;

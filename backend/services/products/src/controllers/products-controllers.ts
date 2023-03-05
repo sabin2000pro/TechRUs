@@ -1,14 +1,21 @@
-import {Product} from '../model/products-model';
+import {Product, ProductDocument} from '../model/products-model';
 import {Response, NextFunction} from 'express'
+import { Model } from 'mongoose';
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
+import { ProductsAPIFeatures } from '../utils/api-features';
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     try {
+        const query = request.query
+        const productsPerPage = 4;
 
-        const products = await Product.find();
+        const apiFeatures = new ProductsAPIFeatures(Product.find(), query).search().paginate(productsPerPage)
+        const products = await apiFeatures!.query
+
+        console.log(`Products : `, products)
 
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
@@ -71,36 +78,20 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 })
 
 export const fetchNewProducts = asyncHandler(async (request, response, next) => {
+    const newProducts = await Product.find({isNew: true});
 
-    try {
-
-    }
-    
-    catch(error) {
+    if(!newProducts) {
 
     }
+})
 
+
+export const editProductByID = asyncHandler(async (request, response, next) => {
 
 })
 
 
-module.exports.editProductByID = asyncHandler(async (request, response, next) => {
-
-    try {
-
-        const productId = request.params.productId || undefined
-        const product = await Product.findById(productId);
-    }
-    
-    catch(error) {
-
-    }
-
-
-})
-
-
-module.exports.deleteProductByID = asyncHandler(async (request, response, next) => {
+export const deleteProductByID = asyncHandler(async (request, response, next) => {
     try {
 
     }
