@@ -1,10 +1,11 @@
 require('dotenv').config();
 import express from 'express';
-const morgan = require('morgan');
-const cors = require('cors');
+import morgan from 'morgan';
+import cors from 'cors';
+import {connectProductsSchema} from './database/products-db';
+import {productRouter} from './routes/product-routes';
+
 const app = express();
-const {connectProductsSchema} = require('./database/products-db');
-const productRoutes = require('./routes/product-routes');
 
 connectProductsSchema();
 
@@ -19,6 +20,6 @@ app.use(cors({
     methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
 }))
 
-app.use('/api/products', productRoutes);
+app.use('/api/products', productRouter);
 
 export {app}

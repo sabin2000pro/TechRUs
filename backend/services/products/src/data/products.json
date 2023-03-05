@@ -9,7 +9,7 @@
         "stockCount": 10,
         "lowStockAlert": 2,
         "isFeatured": false,
-        "image": "",
+        "image": "iphone-x.jpg",
         "isNew": true,
         "reviews": []
       },
@@ -23,7 +23,7 @@
         "stockCount": 10,
         "lowStockAlert": 3,
         "isFeatured": false,
-        "image": "",
+        "image": "appleseries5.jpg",
         "isNew": false,
         "reviews": []
       },
@@ -37,7 +37,7 @@
         "stockCount": 15,
         "lowStockAlert": 2,
         "isFeatured": false,
-        "image": "",
+        "image": "ipad129.jpg",
         "isNew": true,
         "reviews": []
       },
@@ -51,7 +51,7 @@
         "stockCount": 10,
         "lowStockAlert": 1,
         "isFeatured": false,
-        "image": "",
+        "image": "mbpro16.jpg",
         "isNew": false,
         "reviews": []
       }

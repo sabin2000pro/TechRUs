@@ -312,7 +312,7 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
         const {email} = request.body;
         const customer = await Customer.findOne({email});
 
-        // // Check if we have an e-mail in the body of the request
+       // Check if we have an e-mail in the body of the request
         if(!email) {
             return next(new ErrorResponse(`User with that e-mail not found`, StatusCodes.BAD_REQUEST))
         }
@@ -407,8 +407,7 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
         }
     
         const customer = await Customer.findOne({owner: request.customer.id, token: resetToken});
-        console.log(`The customer to reset password `, customer);
-    
+
         if(!customer) {
             return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
         }
@@ -438,19 +437,8 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 })
 
 export const fetchLoggedInCustomer = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
-    try {
-
         const customer = request.customer; // Store the user in the user object
         return response.status(StatusCodes.OK).json({success: true, customer});
     } 
-    
-    catch(error) {
 
-        if(error) {
-            return next(error);
-        }
-        
-    }
-
-})
+)

@@ -82,7 +82,9 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         },
 
         status: { // Status of the transaction
-            type: String
+            type: String,
+            default: "pending",
+            enum: ['pending', 'received', 'canceled', 'refund']
         }
 
     },

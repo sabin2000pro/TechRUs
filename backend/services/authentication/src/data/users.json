@@ -26,7 +26,7 @@
 
     {
         "_id": "63e25f48d82eb035f7dc0654",
-        "username": "storemanager838",
+        "username": "storeadmin01",
         "email": "storemanager838@gmail.com",
         "password": "storemanager838",
         "role": "admin"
@@ -34,16 +34,16 @@
 
     {
         "_id": "63e25f48d82eb035f7dc0655",
-        "username": "storemanager00",
-        "email": "storemanager00@gmail.com",
-        "password": "storemanager00",
+        "username": "storemanager01",
+        "email": "storemanager01@gmail.com",
+        "password": "storemanager01",
         "role": "manager"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0656",
-        "username": "regularcustomer09",
-        "email": "regularcustomer09@gmail.com",
+        "username": "storemanager02",
+        "email": "storemanager02@gmail.com",
         "password": "1234mini1234",
         "role": "manager"
     }

@@ -1,4 +1,4 @@
-import { Model, Document } from "mongoose"
+
 interface SearchParams {
     keyword?: any;
     filter?: any
@@ -30,7 +30,7 @@ class ProductsAPIFeatures {
 
     paginate(productsPerPage) {
         // By default we are on page 1 and limit 4 products per page
-        const {page = 1, limit = 4} = this.paginationParams;
+        const {page = 1, limit = productsPerPage} = this.paginationParams;
 
         if(page && limit) {
             const pagesToSkip = (page - 1) * limit

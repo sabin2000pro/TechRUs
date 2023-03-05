@@ -1,6 +1,5 @@
-import {Product, ProductDocument} from '../model/products-model';
+import {Product} from '../model/products-model';
 import {Response, NextFunction} from 'express'
-import { Model } from 'mongoose';
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
@@ -77,7 +76,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
 })
 
-export const fetchNewProducts = asyncHandler(async (request, response, next) => {
+export const fetchNewProducts = asyncHandler(async (request: any, response: Response, next: NextFunction) => {
     const newProducts = await Product.find({isNew: true});
 
     if(!newProducts) {
@@ -85,43 +84,20 @@ export const fetchNewProducts = asyncHandler(async (request, response, next) => 
     }
 })
 
-
-export const editProductByID = asyncHandler(async (request, response, next) => {
+export const editProductByID = asyncHandler(async (request: any, response: Response, next: NextFunction) => {
 
 })
-
 
 export const deleteProductByID = asyncHandler(async (request, response, next) => {
-    try {
-
-    }
-    
-    catch(error) {
-
-    }
 
 })
 
 
-module.exports.deleteAllProducts = asyncHandler(async (request, response, next) => {
-    try {
+export const deleteAllProducts = asyncHandler(async (request, response, next) => {
 
-    }
-    
-    catch(error) {
-
-    }
 
 })
 
-module.exports.uploadProductPhoto = asyncHandler(async (request, response, next) => {
-
-    try {
-
-    }
-    
-    catch(error) {
-
-    }
+export const uploadProductPhoto = asyncHandler(async (request, response, next) => {
 
 })

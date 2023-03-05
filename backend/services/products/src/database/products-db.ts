@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/src/services/products/config.env'})
+require('dotenv').config();
 import mongoose from 'mongoose';
 
 const PRODUCTS_DB_URI = process.env.PRODUCTS_DB_URI
