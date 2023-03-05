@@ -71,23 +71,6 @@ services:
       - /app/node_modules
       - ../backend/services/products:/app
 
-  categories-service:
-    container_name: techrus-categories-api
-    image: sabin2000/techrus-categories-service
-
-    build:
-      context: ../backend/services/categories
-      dockerfile: Dockerfile
-    
-    restart: always
-
-    ports:
-      - "5401:5401"
-
-    volumes:
-      - /app/node_modules
-      - ../backend/services/categories:/app
-
   coupon-service:
     container_name: techrus-coupons-api
     image: sabin2000/techrus-coupons-service
