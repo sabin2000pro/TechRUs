@@ -1,13 +1,13 @@
 {
-  "name": "customers",
+  "name": "users",
   "version": "1.0.0",
-  "description": "Customers Service Dependencies",
-  "main": "index.js",
+  "description": "Users Service Dependencies",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon dist/index.js",
-    "start:customers-service:dev": "NODE_ENV=development npm run dev",
-    "start:customers-service:prod": "NODE_ENV=production node dist/index.js"
+    "start:users-service:dev": "NODE_ENV=development npm run dev",
+    "start:users-service:prod": "NODE_ENV=production node dist/index.js"
   },
   "keywords": [],
   "author": "",

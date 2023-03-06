@@ -34,6 +34,18 @@ export const register = (username: string, email: string, password: string) => a
 
 } 
 
+export const logout = () => async (dispatch) => {
+    try {
+      
+    } 
+    
+    catch(error) {
+
+    }
+
+
+}
+
 export const verifyCustomerEmail = (customerId: string, OTP: string) => async (dispatch) => {
     try {
       dispatch({type: VERIFY_CUSTOMER_EMAIL_REQUEST})
@@ -127,5 +139,5 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 }
 
 export const updateCustomerWorkShfits = (currentStartShift, newStartShift, currentEndShift, newEndShift) => async (dispatch) => {
-    
+
 }

@@ -52,7 +52,7 @@ services:
       
     volumes:
        - /app/node_modules
-       - ../backend/services/users:/app
+       - ../backend/services/users-service:/app
 
   products-service:
     container_name: techrus-products-api

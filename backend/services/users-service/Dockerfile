@@ -8,4 +8,4 @@ RUN npm install
 COPY . .
 EXPOSE 5420
 RUN npm run build
-CMD [ "npm", "run", "start:customers-service:dev"]
+CMD [ "npm", "run", "start:users-service:dev"]
