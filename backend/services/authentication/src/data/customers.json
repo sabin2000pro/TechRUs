@@ -10,25 +10,25 @@
 
     {
         "_id": "63e25f48d82eb035f7dc0653",
-        "username": "adminaccount1234",
-        "email": "adminaccount1234@gmail.com",
-        "password": "adminaccount1234",
+        "username": "customeraccount123",
+        "email": "customeraccount123@gmail.com",
+        "password": "123mini123",
         "role": "customer"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0654",
-        "username": "storemanager838",
-        "email": "storemanager838@gmail.com",
-        "password": "storemanager838",
+        "username": "adminaccount123",
+        "email": "adminaccount123@gmail.com",
+        "password": "123mini123",
         "role": "admin"
     },
 
     {
         "_id": "63e25f48d82eb035f7dc0654",
-        "username": "storeadmin01",
-        "email": "storemanager838@gmail.com",
-        "password": "storemanager838",
+        "username": "adminaccount88",
+        "email": "adminaccount88@gmail.com",
+        "password": "123mini123",
         "role": "admin"
     },
 

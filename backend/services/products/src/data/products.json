@@ -9,7 +9,7 @@
         "stockCount": 10,
         "lowStockAlert": 2,
         "isFeatured": false,
-        "image": "iphone-x.jpg",
+        "image": "/images/iphone-x.jpg",
         "isNew": true,
         "reviews": []
       },
@@ -23,21 +23,21 @@
         "stockCount": 10,
         "lowStockAlert": 3,
         "isFeatured": false,
-        "image": "appleseries5.jpg",
+        "image": "/image/appleseries5.jpg",
         "isNew": false,
         "reviews": []
       },
 
       {
         "id": "63e25f48d82eb035f7da0982",
-        "name": "iPad Pro 12.9 Inch",
+        "name": "iPad Pro 12.9",
         "warranty": "1 Year",
         "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
         "price": 899.99,
         "stockCount": 15,
         "lowStockAlert": 2,
         "isFeatured": false,
-        "image": "ipad129.jpg",
+        "image": "/images/ipad129.jpg",
         "isNew": true,
         "reviews": []
       },
@@ -51,7 +51,7 @@
         "stockCount": 10,
         "lowStockAlert": 1,
         "isFeatured": false,
-        "image": "mbpro16.jpg",
+        "image": "/images/mbpro16.jpg",
         "isNew": false,
         "reviews": []
       }

@@ -14,7 +14,41 @@
         "orderItems": [{
             "name": "iPad Pro 12.9",
             "quantity": 1,
-            "image": "iPad Pro Image Here",
+            "image": "",
+            "price": 3999.99,
+            "product": "63e25f48d82eb035f7da0982",
+            "_id": "63f388bf2b02ac6637b871bc"
+        }],
+
+        "orderStatus": "processing",
+
+        "paymentInformation": {
+            "id": "5d713995b721c3bb38c1f9c9",
+            "status": "received"
+        },
+
+        "itemPrice": 3999.99,
+        "taxPrice": 4.99,
+        "shippingPrice": 2.99,
+        "totalPrice": 4006.99
+    },
+
+    {
+        "_id": "5d713995b721c3bb38c1f9c0",
+        "customer": "63e25f48d82eb035f7dc0654",
+
+        "shippingInformation": {
+            "address": "144 High Road",
+            "city": "Edinburgh",
+            "phoneNo": "07881391091",
+            "postalCode": "EH16 7AB",
+            "country": "United Kingdom"
+        },
+
+        "orderItems": [{
+            "name": "iPhone X",
+            "quantity": 1,
+            "image": "",
             "price": 3999.99,
             "product": "63e25f48d82eb035f7da0982",
             "_id": "63f388bf2b02ac6637b871bc"
