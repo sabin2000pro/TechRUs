@@ -12,6 +12,15 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
+.main-header {
+  background-color: #042658;
+}
+
+.home-container .heading-primary {
+  font-size: 38px;
+  margin-top: 25px;
+}
+
 .header-container input {
     margin-right: 50px;
     height: 35px;
@@ -27,13 +36,12 @@ body {
 .logo-img {
   height: 100px;
   width: 150px;
-  font-size: 24px;
   margin-left: 25px;
 }
 
 .header-container-right {
   color: white;
-  margin-right: 250px;
+  margin-right: 220px;
   font-size: 24px;
 }
 
@@ -41,12 +49,23 @@ body {
   background-color: #5B90E0;
   color: white;
   margin-right: 80px;
+  cursor: pointer;
   font-weight: bold;
   width: 120px;
   padding: 4px 8px;
   font-size: 21px;
   border-radius: 5px;
   text-align: center;
+}
+
+.login-link:hover {
+  transition: all 0.3s;
+  background-color: #5B90E0;
+}
+
+.basket-link {
+  font-weight: 700;
+  margin-right: 8px;
 }
 
 .basket-link:hover {
@@ -59,21 +78,70 @@ body {
   bottom: 0;
   left: 0;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 22px;
   color: white;
+  background-color: #042658;
   text-align: center;
-  padding: 10px 12px;
   padding: 24px;
   right: 0;
-  height: 80px;
+  height: 7%;
 }
 
 .basket-count {
-  background-color: rgba(255, 0, 0, 0.672);
+  background-color: #B62323;
   margin-left: 20px;
   padding: 8px 20px;
   font-size: 24px;
   width: 50%;
   height: 50px;
   border-radius: 5px;
+}
+
+.h-login {
+  font-size: 38px;
+  color: #042658;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.login-btn-container button {
+  background-color: #042658;
+  margin-top: 30px;
+  width: 200px;
+  margin-bottom: 45px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.login-btn-container button:hover {
+  transition: all 0.2s;
+  background-color: #042658ed;
+}
+
+.login-username-label {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.login-password-label {
+  font-size: 22px;
+  margin-top: 50px;
+}
+
+.login-password-container input {
+  margin-bottom: 10px;
+  margin-top: 25px
+}
+
+.login-form-container {
+  bottom: 100;
+  width: 20%;
+  margin-bottom: 450px;
+  height: 38%;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+.login-inputs-container {
+  margin: 0 auto;
 }
