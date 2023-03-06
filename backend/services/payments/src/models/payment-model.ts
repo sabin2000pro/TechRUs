@@ -58,7 +58,8 @@ export const PaymentSchema = new mongoose.Schema<IPaymentDocument>({
       },
 
       updatedAt: {
-
+         type: Date,
+         default: Date.now
       }
 
 }, {timestamps: true});
