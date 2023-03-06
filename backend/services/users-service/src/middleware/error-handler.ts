@@ -27,10 +27,7 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
 
     }
 
-    // Handle production errors
-    if(process.env.AUTH_SERVICE_DEV_MODE === 'production') {
-        
-    }
+    // TODO - HANDLE PRODUCTION LEVEL ERRORS
 
     return response.status(err.statusCode).json({success: false, message: err.message, stack: err.stack});
 }

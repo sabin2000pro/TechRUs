@@ -11,7 +11,6 @@ interface IUserSchemaDocument {
     isVerified: boolean;
     isAccountLocked: boolean;
     points: number;
-    shippingAddress: any
     rides: any;
 
     fetchAuthToken: () => any;
@@ -20,20 +19,20 @@ interface IUserSchemaDocument {
 
 export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Data Model
 
-    username: {
+    username: { // username of the member of staff
         type: String,
         required: [true, "Please provide a valid username for the user"],
         min: [4, "Username must have at least 4 characters"],
         max: [12, "Username cannot exceed 12 characters"]
     },
 
-    email: {
+    email: { // E-mail address of the user
         type: String,
         required: [true, "Please provide a valid e-mail address for the user"],
         unique: true
     },
 
-    password: { // user password
+    password: { // User password
         type: String,
         required: [true, "Please provide a valid password"],
         select: false

@@ -19,12 +19,13 @@ export const createNewUser = asyncHandler(async (request: any, response: Respons
        const customer = await User.create();
 })
 
-export const editCustomerByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+export const editUserByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
 })
 
 export const deleteAllUsers = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     await User.deleteMany();
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Users deleted"})
 })
 
 export const deleteUserByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
