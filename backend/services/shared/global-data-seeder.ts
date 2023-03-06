@@ -1,3 +1,4 @@
+import { connectPaymentsSchema } from './../payments/src/database/payments-schema';
 require('dotenv').config();
 
 import { connectAuthDatabase } from '../authentication/src/database/auth-db';
@@ -11,11 +12,12 @@ import { Order } from '../orders/src/model/order-model';
 import {Review} from '../reviews/src/model/review-model';
 import {Coupon} from '../coupons/src/model/coupon-model';
 
-import users from '.././authentication/src/data/users.json';
+import customers from '.././authentication/src/data/customers.json';
 import products from '../products/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
 import reviews from '../reviews/src/data/reviews.json';
 import coupons from '../coupons/src/data/coupons.json';
+import payments from '../payments/src/data/payments.json';
 
 // Import the load schemas functions
 
@@ -24,6 +26,7 @@ const connectServiceSchemas = () => {
     connectProductsSchema();
     connectCustomersSchema();
     connectOrdersSchema();
+    connectPaymentsSchema();
 }
 
 connectServiceSchemas();
@@ -36,22 +39,18 @@ const importServiceData = async () => {
      // First delete the existing data
 
      await Customer.deleteMany();
-     await Category.deleteMany();
-
      await Product.deleteMany();
      await Order.deleteMany();
+
      await Review.deleteMany();
      await Coupon.deleteMany();
 
 
      // Import the data
-
-     await Customer.insertMany(customers);
-     await Category.insertMany(customers);
-     
+     await Customer.insertMany(customers);     
      await Product.insertMany(products);
      await Review.insertMany(reviews)
-
+     await Order.insertMany(orders)
      await Coupon.insertMany(coupons);
 
      console.log(`All data inserted to each service schema successfully`);
@@ -75,14 +74,12 @@ const importServiceData = async () => {
 const removeServiceData = async () => {
     try {
 
-        await Customer.deleteMany();
-        await Category.deleteMany();
-   
+        await Customer.deleteMany();   
         await Product.deleteMany();
+
         await Order.deleteMany();
         await Review.deleteMany();
         await Coupon.deleteMany();
-
 
          console.log(`All data removed from each service schema successfully`);
          return process.exit(1);
