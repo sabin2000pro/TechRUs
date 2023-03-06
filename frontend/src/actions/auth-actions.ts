@@ -1,3 +1,4 @@
+import { VERIFY_CUSTOMER_EMAIL_REQUEST } from './../constants/auth-constants';
 import axios from 'axios';
 import { REGISTER_CUSTOMER_REQUEST, REGISTER_CUSTOMER_SUCCESS, REGISTER_CUSTOMER_FAIL, LOGIN_CUSTOMER_REQUEST, LOGIN_CUSTOMER_SUCCESS, LOGIN_CUSTOMER_FAIL } from '../constants/auth-constants';
 
@@ -27,7 +28,7 @@ export const register = (username: string, email: string, password: string) => a
 
         if(error) {
             console.error(`Register Error : `, error);
-            dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
+            dispatch({type: REGISTER_CUSTOMER_FAIL, payload: error.data.response.message});
         }
     }
 
@@ -35,12 +36,18 @@ export const register = (username: string, email: string, password: string) => a
 
 export const verifyCustomerEmail = (customerId: string, OTP: string) => async (dispatch) => {
     try {
+      dispatch({type: VERIFY_CUSTOMER_EMAIL_REQUEST})
+
 
     } 
     
     catch(error) {
 
+      if(error) {
+    
+      }
     }
+
 }
     
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login
@@ -49,7 +56,7 @@ export const verifyCustomerEmail = (customerId: string, OTP: string) => async (d
 export const login = (email: string, password: string) => async (dispatch) => {
 
     try {
-        dispatch({type: LOGIN_USER_REQUEST});
+        dispatch({type: LOGIN_CUSTOMER_REQUEST});
 
         const config = processConfigHeader();
 
@@ -64,7 +71,7 @@ export const login = (email: string, password: string) => async (dispatch) => {
       if(error) {
 
         console.error(`Login Error : `, error);
-        dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
+        dispatch({type: REGISTER_CUSTOMER_FAIL, payload: error.data.response.message});
       }
 
     }
