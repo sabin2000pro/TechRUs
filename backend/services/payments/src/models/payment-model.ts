@@ -31,12 +31,12 @@ export const PaymentSchema = new mongoose.Schema({
         required: true
       },
 
-      stripePaymentId: {
+      stripePaymentId: { // The Stripe Payment ID generated from the payment
         type: String,
         required: true
       },
 
-      stripeChargeId: {
+      stripeChargeId: { // Stripe Charge ID 
         type: String,
         required: true
       },
