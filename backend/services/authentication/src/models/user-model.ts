@@ -43,8 +43,8 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDoc>({ // User Data Mod
 
     role: {
         type: String,
-        default: 'customer',
-        enum: ['manager', 'admin', 'customer']
+        default: 'staff',
+        enum: ['manager', 'admin', 'staff']
     },
 
     isActive: { // Is the customer's account active or not

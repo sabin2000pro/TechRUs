@@ -42,14 +42,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 var auth_db_1 = require("../authentication/src/database/auth-db");
 var products_db_1 = require("./../products/src/database/products-db");
-var customers_schema_1 = require("../customers/src/database/customers-schema");
+var users_schema_1 = require("../users-service/src/database/users-schema");
 var orders_schema_1 = require("./../orders/src/database/orders-schema");
 var payments_schema_1 = require("./../payments/src/database/payments-schema");
-var customer_model_1 = require("../authentication/src/models/customer-model");
+var user_model_1 = require("../users-service/src/model/user-model");
 var products_model_1 = require("../products/src/model/products-model");
 var order_model_1 = require("../orders/src/model/order-model");
 var payment_model_1 = require("../payments/src/models/payment-model");
-var customers_json_1 = __importDefault(require(".././authentication/src/data/customers.json"));
+var users_json_1 = __importDefault(require(".././authentication/src/data/users.json"));
 var products_json_1 = __importDefault(require("../products/src/data/products.json"));
 var orders_json_1 = __importDefault(require("../orders/src/data/orders.json"));
 var payments_json_1 = __importDefault(require("../payments/src/data/payments.json"));
@@ -57,7 +57,7 @@ var payments_json_1 = __importDefault(require("../payments/src/data/payments.jso
 var connectServiceSchemas = function () {
     (0, auth_db_1.connectAuthDatabase)();
     (0, products_db_1.connectProductsSchema)();
-    (0, customers_schema_1.connectCustomersSchema)();
+    (0, users_schema_1.connectUsersSchema)();
     (0, orders_schema_1.connectOrdersSchema)();
     (0, payments_schema_1.connectPaymentsSchema)();
 };
@@ -70,7 +70,7 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
             case 0:
                 _a.trys.push([0, 8, , 9]);
                 // First delete the existing data
-                return [4 /*yield*/, customer_model_1.Customer.deleteMany()];
+                return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
                 // First delete the existing data
                 _a.sent();
@@ -80,7 +80,7 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, order_model_1.Order.deleteMany()];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, customer_model_1.Customer.insertMany(customers_json_1.default)];
+                return [4 /*yield*/, user_model_1.User.insertMany(users_json_1.default)];
             case 4:
                 _a.sent();
                 return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
@@ -112,7 +112,7 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, customer_model_1.Customer.deleteMany()];
+                return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
                 _a.sent();
                 return [4 /*yield*/, products_model_1.Product.deleteMany()];
