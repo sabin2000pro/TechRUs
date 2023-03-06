@@ -46,7 +46,10 @@ export const authReducer = (state = initialAuthState as any, action: any) => {
             return {loading: true}
 
         case LOAD_USER_SUCCESS:
-            return {loading: false, isAuthenticated: true, }
+            return {...state, loading: false, isAuthenticated: true, user: action.payload}
+
+        case LOAD_USER_FAIL:
+            return {loading: false, error: action.payload}
 
         default:
             return state
@@ -59,6 +62,6 @@ export const userReducer = (state = initialAuthState as any, action: any) => {
 
         default:
             return state
-            
+
     }
 }

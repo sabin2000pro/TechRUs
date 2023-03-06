@@ -6,6 +6,7 @@ import Login from './components/authentication/Login';
 import React from 'react';
 import Home from './pages/Home';
 import ForgotPassword from './components/authentication/ForgotPassword';
+import Footer from './layout/Footer';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -25,15 +26,17 @@ const App: React.FC = () => {
 
      <>
 
-      <Header />
-
-        <Home />
+      <Header />       
 
         <Routes>
+           <Route path = '/' element = {<Home />} />
            <Route path = '/customer-register' element = {<Register />} />
            <Route path = '/customer-login' element = {<Login />} />
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
         </Routes>
+
+
+        <Footer />
      </>
 
 
