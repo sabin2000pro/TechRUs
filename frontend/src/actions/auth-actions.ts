@@ -27,6 +27,18 @@ export const login = (email: string, password: string) => async (dispatch) => {
 export const fetchLoggedInCustomer = () => async (dispatch) => {
 
     try {
+    
+    } 
+    
+    catch(error) {
+
+    }
+
+
+} 
+
+export const forgotPassword = (email: string) => async (dispatch) => {
+    try {
 
     } 
     
@@ -34,5 +46,15 @@ export const fetchLoggedInCustomer = () => async (dispatch) => {
 
     }
 
+
+}
+
+export const resetPassword = (email: string) => async (dispatch) => {
+    try {
+
+    } 
     
-} 
+    catch(error) {
+
+    }
+}

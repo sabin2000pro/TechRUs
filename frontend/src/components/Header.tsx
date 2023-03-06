@@ -5,13 +5,17 @@ const Header = () => {
   return (
 
     <>
-       <div className = "header-container">
-        
-          <header>
+        <header>
 
-          </header>
+           <div className = "header-container">
+            
+               <div className = "header-container-left">
 
-       </div>
+               </div>
+
+           </div>
+
+        </header>
     </>
 
 
