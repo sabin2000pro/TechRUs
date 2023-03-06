@@ -1,6 +1,6 @@
 require('dotenv').config();
 import {app} from './app'
-import {connectAuthDatabase} from './database/auth-db';
+import {connectAuthDatabase} from './database/auth-schema';
 
 const AUTH_PORT = process.env.AUTH_PORT || 5400;
 const AUTH_DEV_MODE = process.env.AUTH_DEV_MODE || 'development'
