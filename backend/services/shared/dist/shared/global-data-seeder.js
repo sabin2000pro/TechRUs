@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 var auth_db_1 = require("../authentication/src/database/auth-db");
 var products_db_1 = require("./../products/src/database/products-db");
-var customers_schema_1 = require("./../customers/src/database/customers.schema");
+var customers_schema_1 = require("../customers/src/database/customers-schema");
 var orders_schema_1 = require("./../orders/src/database/orders-schema");
 var payments_schema_1 = require("./../payments/src/database/payments-schema");
 var customer_model_1 = require("../authentication/src/models/customer-model");

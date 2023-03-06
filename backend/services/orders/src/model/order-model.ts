@@ -7,7 +7,7 @@ export interface IOrderDocument {
     paymentInformation: Object
     itemPrice: Number;
     taxPrice: Number;
-    totalPrice: Number;
+    totalPrice: number;
     shippingPrice: Number;
     paidAt: Date
 }

@@ -36,7 +36,8 @@ exports.PaymentSchema = new mongoose_1.default.Schema({
     },
     status: {
         type: String,
-        enum: ['succeeded', 'failed', 'refunded'],
+        enum: ['succeeded', 'failed', 'refunded', 'received'],
+        default: "received",
         required: true
     },
     createdAt: {
