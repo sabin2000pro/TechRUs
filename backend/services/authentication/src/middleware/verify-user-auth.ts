@@ -9,22 +9,18 @@ export const verifyUserAuthentication = async (request: any, response: Response,
 
         let token;
 
-        if(!token) {
-            return response.status(StatusCodes.UNAUTHORIZED).json({sucess: false, message: "You are unauthorized to access this resource"});
-        }
-
         // Verify authorization header
         if(request.headers.authorization && request.headers.authorization.includes("Bearer")) {
             token = request.headers.authorization.split(" ")[1]; // Split by a space to take out the bearer token from the authorization header
         }
 
+        if(!token) {
+          return response.status(StatusCodes.UNAUTHORIZED).json({sucess: false, message: "You are unauthorized to access this resource"});
+      }
+
+
         const decoded: any = jwt.verify(token, process.env.JWT_TOKEN!);
-        request.user = await User.findById(decoded._id);
-
-        console.log(`Verified user : `, request.user);
-
-        console.log(`Request user : `, request.user); // Log the currently logged in user
-
+        request.user = await User.findById(decoded.id);
         return next();
     } 
     
