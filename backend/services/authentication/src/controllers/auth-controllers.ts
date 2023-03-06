@@ -68,11 +68,11 @@ export const sendForgotPasswordResetLink = (user: any, resetPasswordURL: string)
     })
 }
 
-export const sendTokenResponse = (request: Express.Request, customer: any, statusCode: number, response: any): Promise<any> => {
-    const token = customer.fetchAuthToken();
+export const sendTokenResponse = (request: Express.Request, user: any, statusCode: number, response: any): Promise<any> => {
+    const token = user.fetchAuthToken();
     request.session = {token}; // Store the token in the session
  
-    return response.status(statusCode).json({customer, token});
+    return response.status(statusCode).json({token, user}); // Send back the user object with the JWT which will be used in the frontend in a ProtectedRoutes Component used to verify if the user is currently logged in or not
 }
 
 export const sendResetPasswordTokenStatus = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
@@ -80,8 +80,6 @@ export const sendResetPasswordTokenStatus = async (request: Request, response: R
 }
 
 export const registerUser = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
-
-    try {
 
         const {username, email, password} = request.body;
 
@@ -98,7 +96,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
         const userOTP = generateCode();  // Generate the OTP
 
-        const customerVerification = new TwoFactorVerification({owner: user._id, mfaToken: customerOTP});
+        const customerVerification = new TwoFactorVerification({owner: user._id, mfaToken: userOTP});
         await customerVerification.save();
 
         // Create the e-mail transporter to send the MFA token to the user's e-mail address
@@ -111,16 +109,8 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
     } 
-    
-    catch(error) {
 
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-        
-    }
-
-})
+)
 
 export const verifyEmailAddress = asyncHandler(async (request: Request, response: Response, next: NextFunction): Promise<any> => {
 
@@ -157,8 +147,6 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
 export const resendEmailVerificationCode = asyncHandler (async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
-    try {
-
         const {userId, OTP} = request.body;
         const currentCustomer = await User.findById(userId);
 
@@ -192,20 +180,10 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
     
         return response.status(StatusCodes.OK).json({success: true, message: "E-mail Verification Re-sent"});
     } 
-    
-    catch(error) {
-
-          if(error) {
-            return next(error);
-          }
-    }
-
-
-})
+ 
+)
 
 export const loginUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
-    try {
 
         const {email, password} = request.body;
 
@@ -213,39 +191,30 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Missing e-mail address or password"});
         }
     
-        const customer = await Customer.findOne({email}).select("+password");
+        const user = await User.findOne({email}).select("+password"); // Find the user before logging in
 
-        if(!customer) {
+        if(!user) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No customer found with that e-mail address"});
         }
 
         // Check if the passwords match
-        const passwordsMatch = await customer.comparePasswords(password);
+        const userPasswordsMatch = await user.comparePasswords(password);
 
-        if(!passwordsMatch) {
-            return response.status(StatusCodes.OK).json({success: false, message: "Passwords do not match. Try again"});
+        if(!userPasswordsMatch) {
+            return response.status(StatusCodes.OK).json({success: false, message: "Your passwords do not match. Try again"});
         }
 
         const customerMfaToken = generateCode();
 
         const transporter = createEmailTransporter();
-        sendLoginMfa(transporter as any, customer as any, customerMfaToken as any);
+        sendLoginMfa(transporter as any, user as any, customerMfaToken as any);
 
-        const loginMfa = await TwoFactorVerification.create({owner: customer, mfaToken: customerMfaToken});
+        const loginMfa = await TwoFactorVerification.create({owner: user, mfaToken: customerMfaToken});
         await loginMfa.save();
 
-        return sendTokenResponse(request, customer, StatusCodes.CREATED, response);
+        return sendTokenResponse(request, user, StatusCodes.CREATED, response);
     } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-
-    }
-
-})
+)
 
 export const logoutUser = asyncHandler(async (request: any, response: Response, next): Promise<any> => {
 
