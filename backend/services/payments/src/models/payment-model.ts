@@ -1,12 +1,17 @@
 import mongoose from 'mongoose';
 
-export interface IPaymentSchemaDoc {
+export interface IPaymentDocument extends Document {
     orderId: mongoose.Schema.Types.ObjectId,
-    currency: String;
-    paymentStatus: String;
+    amount: number;
+    currency: string;
+    paymentMethod: string
+    stripePaymentId: string;
+    stripeChargeId: string;
+    status: string
+    createdAt: Date
 }
 
-export const PaymentSchema = new mongoose.Schema({
+export const PaymentSchema = new mongoose.Schema<IPaymentDocument>({
 
     orderId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -14,18 +19,18 @@ export const PaymentSchema = new mongoose.Schema({
         required: [true, "Please specify the order ID when creating a new payment"]
     },
 
-    amount: {
+    amount: { // Amount incurred from the payment
         type: Number,
         default: 0.0,
         required: [true, "Please specify the amount of the order"]
     },
 
-    currency: {
+    currency: { // Currency used for the payment
         type: String,
         required: [true, "Please specify the currency used for the payment"]
     },
 
-    paymentMethod: {
+    paymentMethod: { // The payment method used for the order
         type: String,
         enum: ['stripe'],
         required: true
@@ -49,8 +54,11 @@ export const PaymentSchema = new mongoose.Schema({
 
       createdAt: {
         type: Date,
-        default: Date.now,
-        required: true
+        default: Date.now
+      },
+
+      updatedAt: {
+
       }
 
 }, {timestamps: true});
