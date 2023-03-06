@@ -18,7 +18,6 @@ export const register = (username: string, email: string, password: string) => a
     try {
 
         dispatch({type: REGISTER_USER_REQUEST})
-
         const config = processConfigHeader();
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
@@ -61,6 +60,7 @@ export const logout = () => async (dispatch) => {
 }
 
 export const verifyCustomerEmail = (userId: string, userOTP: string) => async (dispatch) => {
+
     try {
 
     } 
@@ -70,6 +70,7 @@ export const verifyCustomerEmail = (userId: string, userOTP: string) => async (d
       if(error) {
     
       }
+
     }
 
 }

@@ -5,8 +5,7 @@ const Home = () => {
   return (
 
    <>
-    
-    <h1>Tech R Us Home</h1>
+   
    
    </>
 

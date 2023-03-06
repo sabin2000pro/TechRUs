@@ -71,12 +71,12 @@ services:
       - /app/node_modules
       - ../backend/services/products:/app
 
-  coupon-service:
+  coupons-service:
     container_name: techrus-coupons-api
     image: sabin2000/techrus-coupons-service
 
     build:
-      context: ../backend/services/coupons
+      context: ../backend/services/coupons-service
       dockerfile: Dockerfile
 
     ports:
@@ -84,7 +84,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/coupons:/app
+      - ../backend/services/coupons-service:/app
 
   orders-service:
     container_name: techrus-orders-api
@@ -142,7 +142,7 @@ services:
     container_name: eventbus-api
 
     build:
-      context: ../backend/services/event-bus
+      context: ../backend/services/event-bus-service
       dockerfile: Dockerfile
 
     ports:
@@ -150,7 +150,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/event-bus:/app
+      - ../backend/services/event-bus-service:/app
     
   frontend-service:
     container_name: techrus-frontend-service
