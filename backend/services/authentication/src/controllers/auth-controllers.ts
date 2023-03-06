@@ -1,7 +1,7 @@
 import { EmailVerification } from './../models/verify-email-model';
 import { createEmailTransporter } from './../utils/send-mail';
 import {generateCode } from './../utils/generate-otp-code';
-import {Customer} from '../models/user-model';
+import {Customer} from '../models/customer-model';
 import {Request, Response, NextFunction} from 'express';
 import {TwoFactorVerification} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';

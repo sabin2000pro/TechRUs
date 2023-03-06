@@ -1,19 +1,17 @@
 require('dotenv').config();
 
 import { connectAuthDatabase } from '../authentication/src/database/auth-db';
-import {connectCategoriesSchema} from '../categories/src/database/categories-schema';
 import { connectProductsSchema } from './../products/src/database/products-db';
 import { connectCustomersSchema } from './../customers/src/database/customers.schema';
+import {connectOrdersSchema} from './../orders/src/database/orders-schema';
 
-import {Customer} from '../authentication/src/models/customer-model';
-import {Category} from '../categories/src/model/categories-model';
+import {Customer} from '../authentication/src/models/customer-model'
 import {Product} from '../products/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
 import {Review} from '../reviews/src/model/review-model';
 import {Coupon} from '../coupons/src/model/coupon-model';
 
-import customers from '.././authentication/src/data/customers.json';
-import categories from '../categories/src/data/categories.json';
+import users from '.././authentication/src/data/users.json';
 import products from '../products/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
 import reviews from '../reviews/src/data/reviews.json';
@@ -23,9 +21,9 @@ import coupons from '../coupons/src/data/coupons.json';
 
 const connectServiceSchemas = () => {
     connectAuthDatabase();
-    connectCategoriesSchema();
     connectProductsSchema();
     connectCustomersSchema();
+    connectOrdersSchema();
 }
 
 connectServiceSchemas();
