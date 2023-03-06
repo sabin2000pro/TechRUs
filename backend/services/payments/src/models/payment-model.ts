@@ -50,7 +50,8 @@ export const PaymentSchema = new mongoose.Schema<IPaymentDocument>({
 
       status: {
         type: String,
-        enum: ['succeeded', 'failed', 'refunded'],
+        enum: ['succeeded', 'failed', 'refunded', 'received'],
+        default: "received",
         required: true
       },
 

@@ -1,0 +1,54 @@
+[
+    {
+        "id": "63e25f48d82eb035f7da0980",
+        "name": "iPhone X",
+        "warranty": "1 Year",
+        "description": "The latest iPhone model from Apple, featuring a 5.8-inch Super Retina display, dual 12-megapixel cameras, and Face ID technology.",
+        "price": 999.99,
+        "stockCount": 10,
+        "lowStockAlert": 2,
+        "isFeatured": false,
+        "image": "/images/iphone-x.jpg",
+        "isNew": true,
+        "reviews": []
+    },
+    {
+        "id": "63e25f48d82eb035f7da0981",
+        "name": "Apple Watch Series 5",
+        "warranty": "1 Year",
+        "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
+        "price": 299.99,
+        "stockCount": 10,
+        "lowStockAlert": 3,
+        "isFeatured": false,
+        "image": "/image/appleseries5.jpg",
+        "isNew": false,
+        "reviews": []
+    },
+    {
+        "id": "63e25f48d82eb035f7da0982",
+        "name": "iPad Pro 12.9",
+        "warranty": "1 Year",
+        "description": "The latest and most advanced Apple iPad tablet. Perfect for productivity with high quality Face ID technology",
+        "price": 899.99,
+        "stockCount": 15,
+        "lowStockAlert": 2,
+        "isFeatured": false,
+        "image": "/images/ipad129.jpg",
+        "isNew": true,
+        "reviews": []
+    },
+    {
+        "id": "63e25f48d82eb035f7da0983",
+        "name": "Macbook Pro 16 Inch M2 Pro",
+        "warranty": "1 Year",
+        "description": "The latest and most performant MacBook Pro, its improved CPU delivers more performance when it comes to coding or video editing..",
+        "price": 3799.99,
+        "stockCount": 10,
+        "lowStockAlert": 1,
+        "isFeatured": false,
+        "image": "/images/mbpro16.jpg",
+        "isNew": false,
+        "reviews": []
+    }
+]
