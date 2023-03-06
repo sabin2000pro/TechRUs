@@ -179,7 +179,7 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
 
 export const loginUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
-        const {email, password} = request.body;
+        const {email, password} = request.body; // Extract the user e-mail and password from the request body
 
         if(!email || !password) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Missing e-mail address or password"});
@@ -198,12 +198,12 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
             return response.status(StatusCodes.OK).json({success: false, message: "Your passwords do not match. Try again"});
         }
 
-        const customerMfaToken = generateCode();
+        const userMfaToken = generateCode();
 
         const transporter = createEmailTransporter();
-        sendLoginMfa(transporter as any, user as any, customerMfaToken as any);
+        sendLoginMfa(transporter as any, user as any, userMfaToken as any);
 
-        const loginMfa = await TwoFactorVerification.create({owner: user, mfaToken: customerMfaToken});
+        const loginMfa = await TwoFactorVerification.create({owner: user, mfaToken: userMfaToken});
         await loginMfa.save();
 
         return sendTokenResponse(request, user, StatusCodes.OK, response);
