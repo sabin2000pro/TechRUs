@@ -1,4 +1,4 @@
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOAD_USER_REQUEST } from "../constants/auth-constants";
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOAD_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, LOGOUT_USER_FAIL } from "../constants/auth-constants";
 
 const initialAuthState = {
    user: {}
@@ -33,6 +33,15 @@ export const authReducer = (state = initialAuthState as any, action: any) => {
         case LOGIN_USER_FAIL:
             return {loading: false, error: action.payload}
 
+        case LOGOUT_USER_REQUEST:
+            return {loading: true}
+
+        case LOGOUT_USER_SUCCESS:
+            return {...state, loading: false, isAuthenticated: false, user: null}
+
+        case LOGOUT_USER_FAIL:
+            return {loading: false, error: action.payload}
+
         case LOAD_USER_REQUEST:
             return {loading: true}
 
@@ -45,9 +54,11 @@ export const authReducer = (state = initialAuthState as any, action: any) => {
 }
 
 export const userReducer = (state = initialAuthState as any, action: any) => {
+
     switch(action.type) {
 
         default:
             return state
+            
     }
 }
