@@ -5,6 +5,7 @@ import { User } from '../models/user-model'
 import {Response, NextFunction} from 'express';
 
 export const verifyUserAuthentication = async (request: any, response: Response, next:NextFunction) => {
+  
     try {
 
         let token;

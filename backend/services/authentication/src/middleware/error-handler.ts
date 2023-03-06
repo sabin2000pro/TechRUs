@@ -25,6 +25,8 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
             error = new ErrorResponse(message, StatusCodes.BAD_REQUEST);
         }
 
+        // Handle Invalid JWT Errors (Malformed and Expiration)
+
     }
 
     console.log(`An error occurred on the authentication side : `, error);
