@@ -1,7 +1,7 @@
 require('dotenv').config();
 import { connectAuthDatabase } from '../authentication/src/database/auth-db';
 import { connectProductsSchema } from './../products/src/database/products-db';
-import { connectCustomersSchema } from './../customers/src/database/customers.schema';
+import { connectCustomersSchema } from '../customers/src/database/customers-schema'
 import {connectOrdersSchema} from './../orders/src/database/orders-schema';
 import { connectPaymentsSchema } from './../payments/src/database/payments-schema';
 import {Customer} from '../authentication/src/models/customer-model'
