@@ -20,6 +20,6 @@ app.use(cors({
     methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
 }))
 
-app.use('/api/products', productRouter);
+app.use('/api/v1/products', productRouter); // Mount the products router
 
 export {app}

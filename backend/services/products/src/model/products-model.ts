@@ -8,7 +8,6 @@ interface ProductDocument extends Document {
     warranty: string;
     stockCount: Number;
     price: number;
-    currency: string;
     lowStockAlert: number;
     arrivingStockCount: number;
     reorderLevel: number;
@@ -44,12 +43,6 @@ const ProductSchema = new mongoose.Schema<ProductDocument>({
         default: 0.0
     },
 
-    currency: {
-        type: String,
-        required: [true, "Please specify the currency that this product accepts"],
-        default: "GBP"
-    },
-
     stockCount: {
         type: Number,
         default: 0,
@@ -67,9 +60,9 @@ const ProductSchema = new mongoose.Schema<ProductDocument>({
         default: 0
     },
 
-    reorderLevel: {
+    reorderLevel: { // When a product hits 5, the inventory system automatically re-orders a product
         type: Number,
-        default: 10
+        default: 5
     },
 
     isNew: {
