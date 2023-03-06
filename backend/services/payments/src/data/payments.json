@@ -1,23 +1,30 @@
 [
     {
-        "customerId": "",
-        "orderId": ""
-    },
+        "_id": "6093c23a1a2a36483cf462b2",
+        "orderId": "5d713995b721c3bb38c1f9c0",
+        "amount": 3999.99,
+        "currency": "USD",
+        "paymentMethod": "stripe",
+        "stripePaymentId": "ch_1IeVaMABCDEF12345",
+        "stripeChargeId": "ch_1IeVaMABCDEF12345",
+        "status": "received",
+        "createdAt": "2023-03-06T10:35:56.789Z",
+        "updatedAt": "2023-03-06T10:35:56.789Z",
+        "__v": 0
+      },
 
-    {
-        "customerId": "",
-        "orderId": ""
-    },
-
-    {
-        "customerId": "",
-        "orderId": ""
-    },
-
-    {
-        "customerId": "",
-        "orderId": "" 
-    }
-
+      {
+        "_id": "6093c23a1a2a36483cf462b3",
+        "orderId": "5d713995b721c3bb38c1f9c2",
+        "amount": 999.99,
+        "currency": "USD",
+        "paymentMethod": "stripe",
+        "stripePaymentId": "ch_1IeVaMABCDEF12346",
+        "stripeChargeId": "ch_1IeVaMABCDEF12346",
+        "status": "received",
+        "createdAt": "2023-03-06T10:35:56.789Z",
+        "updatedAt": "2023-03-06T10:35:56.789Z",
+        "__v": 0
+      }
     
 ]
