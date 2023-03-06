@@ -10,6 +10,9 @@ import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
 import {PasswordReset} from '../models/password-reset-model';
 
+export const rootRoute = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
+    return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
+})
 
 export const verifyUserExists = async (email: any): Promise<any> => {
     return await User.findOne({email}); // Returns true or false if the user with that e-mail address already exists in the database
@@ -36,31 +39,27 @@ export const verifyUserExists = async (email: any): Promise<any> => {
     })
 }
 
-export const rootRoute = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
-    return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
-})
-
-export const sendLoginMfa = (transporter: any, customer: any, customerMfa: any) => {
+export const sendLoginMfa = (transporter: any, user: any, userMfa: any) => {
 
     return transporter.sendMail({
         from: 'mfa@techrus.com',
-        to: customer.email,
+        to: user.email,
         subject: 'Login MFA Verification',
         html: `
         
         <p>Your MFA code</p>
-        <h1> ${customerMfa}</h1>
+        <h1> ${userMfa}</h1>
         `
     })
 }
 
-export const sendForgotPasswordResetLink = (customer: any, resetPasswordURL: string) => {
+export const sendForgotPasswordResetLink = (user: any, resetPasswordURL: string) => {
 
     const transporter = createEmailTransporter();
      
    return transporter.sendMail({
-        from: 'resetpassword@ethertix.com',
-        to: customer.email,
+        from: 'resetpassword@techrus.dev',
+        to: user.email,
         subject: 'Reset Password',
         html: `
         
@@ -90,27 +89,27 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
             return next(new ErrorResponse(`Some of the fields are missing, please try again`, StatusCodes.BAD_REQUEST));
         }
 
-        if(await verifyCustomerExists(email)) { // If the user already exists
-            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Customer Already exists with that e-mail address"});
+        if(await verifyUserExists(email)) { // If the user already exists
+            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Staff Already exists with that e-mail address"});
         }
 
-        const currentCustomer = await User.create({username, email, password});
-        await currentCustomer.save();
+        const user = await User.create({username, email, password});
+        await user.save();
 
-        const customerOTP = generateCode();  // Generate the OTP
+        const userOTP = generateCode();  // Generate the OTP
 
-        const customerVerification = new TwoFactorVerification({owner: currentCustomer._id, mfaToken: customerOTP});
+        const customerVerification = new TwoFactorVerification({owner: user._id, mfaToken: customerOTP});
         await customerVerification.save();
 
         // Create the e-mail transporter to send the MFA token to the user's e-mail address
         const emailTransporter = createEmailTransporter();
-        sendEmailConfirmationEmail(emailTransporter, currentCustomer, customerOTP as unknown as any);
+        sendEmailConfirmationEmail(emailTransporter, user, userOTP as unknown as any);
 
-        const customerOTPVerification = new EmailVerification({owner: currentCustomer._id, otpToken: customerOTP});
-        console.log(`Your Customer OTP Verification`)
-        await customerOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
+        const userOTPVerification = new EmailVerification({owner: user._id, otpToken: userOTP});
+        console.log(`Your User OTP Verification`)
+        await userOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
-        return sendTokenResponse(request, currentCustomer, StatusCodes.CREATED, response);
+        return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
     } 
     
     catch(error) {
@@ -127,11 +126,11 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
     try {
 
-        const {customerId, OTP} = request.body; // Extract the user id and OTP from the request body
-        const currentCustomer = await Customer.findById(customerId);
+        const {userId, OTP} = request.body; // Extract the user id and OTP from the request body
+        const currentCustomer = await User.findById(userId);
 
-        if(!isValidObjectId(customerId)) {
-            return next(new ErrorResponse("The Customer ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
+        if(!isValidObjectId(userId)) {
+            return next(new ErrorResponse("The User ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
         }
 
         if(!OTP) { // If there is no OTP present
@@ -160,14 +159,14 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
 
     try {
 
-        const {customerId, OTP} = request.body;
-        const currentCustomer = await Customer.findById(customerId);
+        const {userId, OTP} = request.body;
+        const currentCustomer = await User.findById(userId);
 
         if(!currentCustomer) { // If we have no current user
             return next(new ErrorResponse("Current user does not exist. Check user again", StatusCodes.BAD_REQUEST));
         }
 
-        if(!isValidObjectId(customerId)) {
+        if(!isValidObjectId(userId)) {
             return next(new ErrorResponse("Owner ID invalid. Check again", StatusCodes.BAD_REQUEST));
         }
 
@@ -175,7 +174,7 @@ export const resendEmailVerificationCode = asyncHandler (async (request: any, re
             return next(new ErrorResponse(`No OTP found. Please try again`, StatusCodes.BAD_REQUEST))
         }
 
-        const token = await EmailVerification.findOne({owner: customerId});
+        const token = await EmailVerification.findOne({owner: userId});
 
         if(!token) {
             return next(new ErrorResponse("User verification token not found", StatusCodes.BAD_REQUEST));
