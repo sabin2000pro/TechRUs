@@ -112,4 +112,20 @@ export const resetPassword = (email: string) => async (dispatch) => {
     catch(error) {
 
     }
+
+}
+
+export const updatePassword = (currentPassword: string, newPassword: string) => async (dispatch) => {
+    try {
+
+    } 
+    
+    catch(error) {
+
+    }
+
+}
+
+export const updateCustomerWorkShfits = (currentStartShift, newStartShift, currentEndShift, newEndShift) => async (dispatch) => {
+    
 }
