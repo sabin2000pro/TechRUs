@@ -1,7 +1,7 @@
 import { EmailVerification } from './../models/verify-email-model';
 import { createEmailTransporter } from './../utils/send-mail';
 import {generateCode } from './../utils/generate-otp-code';
-import {Customer} from '../models/user-model';
+import {User} from '../models/user-model';
 import {Request, Response, NextFunction} from 'express';
 import {TwoFactorVerification} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';
@@ -9,11 +9,10 @@ import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
 import {PasswordReset} from '../models/password-reset-model';
-// import { BadRequestError } from '../middleware/error-handler';
 
 
-export const verifyCustomerExists = async (email: any): Promise<any> => {
-    return await Customer.findOne({email});
+export const verifyUserExists = async (email: any): Promise<any> => {
+    return await User.findOne({email}); // Returns true or false if the user with that e-mail address already exists in the database
 }
 
   // @description: Sends the verify confirmation e-mail to the user after registering an account
@@ -21,17 +20,17 @@ export const verifyCustomerExists = async (email: any): Promise<any> => {
   // @returns: void
   // @public: True (No Authorization Required)
 
-  export const sendEmailConfirmationEmail = (transporter: any, newCustomer: any, customerOTP: number) => {
+  export const sendEmailConfirmationEmail = (transporter: any, newUser: any, userOTP: number) => {
 
     return transporter.sendMail({
 
         from: 'verification@techrus.com',
-        to: newCustomer.email,
+        to: newUser.email,
         subject: 'E-mail Verification',
         html: `
         
         <p>Your verification OTP</p>
-        <h1> ${customerOTP}</h1>
+        <h1> ${userOTP}</h1>
 
         `
     })
@@ -95,7 +94,7 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Customer Already exists with that e-mail address"});
         }
 
-        const currentCustomer = await Customer.create({username, email, password});
+        const currentCustomer = await User.create({username, email, password});
         await currentCustomer.save();
 
         const customerOTP = generateCode();  // Generate the OTP
