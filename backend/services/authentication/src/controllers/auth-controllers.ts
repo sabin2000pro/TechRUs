@@ -114,8 +114,6 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
 export const verifyEmailAddress = asyncHandler(async (request: Request, response: Response, next: NextFunction): Promise<any> => {
 
-    try {
-
         const {userId, OTP} = request.body; // Extract the user id and OTP from the request body
         const currentCustomer = await User.findById(userId);
 
@@ -128,22 +126,13 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
         } 
 
         if(!currentCustomer) {
-            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: `Customer that ID ${customerId} does not exist`});
+            return next(new ErrorResponse(`Customer that ID ${userId} does not exist`, StatusCodes.BAD_REQUEST));
         }
 
         return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
     } 
-    
-    catch(error) {
-        
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
 
-    }
-
-
-})
+)
 
 export const resendEmailVerificationCode = asyncHandler (async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
@@ -217,29 +206,16 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
 )
 
 export const logoutUser = asyncHandler(async (request: any, response: Response, next): Promise<any> => {
-
-    try {
         request.session = null;
-
-        return response.status(StatusCodes.OK).json({success: true, message: "You have logged out successfully"})
-    } 
-    
-    catch(error) {
-        
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-
-    }  
-
-
-})
+        return response.status(StatusCodes.OK).json({success: true, message: "You have logged out successfully", user: null})
+    }   
+)
 
 export const verifyLoginMFA = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {customerId, multiFactorToken} = request.body;
-    const customer = await Customer.findById(customerId);
+    const {userId, multiFactorToken} = request.body;
+    const customer = await User.findById(userId);
 
-    if(!isValidObjectId(customerId)) {
+    if(!isValidObjectId(userId)) {
         return next(new ErrorResponse(`This user ID is not valid. Please try again`, StatusCodes.UNAUTHORIZED));
     }
 
@@ -248,7 +224,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
         return next(new ErrorResponse("Please provide your MFA token", StatusCodes.BAD_REQUEST));
     }
 
-    const factorToken = await TwoFactorVerification.findOne({owner: customerId});
+    const factorToken = await TwoFactorVerification.findOne({owner: userId});
 
     if(!factorToken) {
         return next(new ErrorResponse(`The 2FA token associated to the user is invalid `, StatusCodes.UNAUTHORIZED));
@@ -263,7 +239,7 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
         return next(new ErrorResponse("The MFA token you entered is invalid. Try again", StatusCodes.BAD_REQUEST));
     }
 
-    const newToken = new TwoFactorVerification({owner: customer, mfaToken: multiFactorToken}); // Create a new instance of the token
+    const newToken = await TwoFactorVerification.create({owner: customer, mfaToken: multiFactorToken}); // Create a new instance of the token
     await newToken.save(); // Save the new token
 
     customer.isVerified = true; // User account is now verified
@@ -273,24 +249,21 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
 })
 
 export const forgotPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
-    try {
-
         const {email} = request.body;
-        const customer = await Customer.findOne({email});
+        const user = await User.findOne({email});
 
        // Check if we have an e-mail in the body of the request
         if(!email) {
             return next(new ErrorResponse(`User with that e-mail not found`, StatusCodes.BAD_REQUEST))
         }
     
-        if(!customer) {
+        if(!user) {
             return next(new ErrorResponse("No user found with that e-mail address", StatusCodes.NOT_FOUND));
         }
     
-        const customerHasResetToken = await PasswordReset.findOne({owner: customer._id});
+        const userHasResetToken = await PasswordReset.findOne({owner: user._id});
     
-        if(customerHasResetToken) {
+        if(userHasResetToken) {
             return next(new ErrorResponse("User already has the password reset token", StatusCodes.BAD_REQUEST));
         }
     
@@ -300,36 +273,26 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse("Reset Password Token is invalid", StatusCodes.BAD_REQUEST));
         }
     
-        const resetPasswordToken = await PasswordReset.create({owner: customer._id, resetToken: token}); // Create an instance of the Password Reset model
+        const resetPasswordToken = await PasswordReset.create({owner: user._id, resetToken: token}); // Create an instance of the Password Reset model
         await resetPasswordToken.save();
 
-        const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${customer._id}` // Create the reset password URL
-        sendForgotPasswordResetLink(customer, resetPasswordURL); // Send the reset password e-mail to the customer
+        const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${user._id}` // Create the reset password URL
+        sendForgotPasswordResetLink(user, resetPasswordURL); // Send the reset password e-mail to the customer
     
         return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent", email });
         
     } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-
-    }
-
-})
+)
 
 export const updatePassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
-    try {
         const {currentPassword, newPassword} = request.body;
 
         if(!newPassword) {
             return next(new ErrorResponse("Please provide your new password", StatusCodes.BAD_REQUEST));
         }
     
-        const customer = await Customer.findById(<any>request.user._id);
+        const customer = await User.findById(<any>request.user._id);
     
         if(!customer) {
             return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
@@ -338,28 +301,18 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
         const currentPasswordMatch = customer.comparePasswords(currentPassword);
     
         if(!currentPasswordMatch) { // If passwords do not match
-            return next(new ErrorResponse("Current password is invalid.", StatusCodes.BAD_REQUEST))
+            return next(new ErrorResponse("Current user password is invalid.", StatusCodes.BAD_REQUEST))
         }
     
         customer.password = request.body.newPassword
         await customer.save(); // Save new user
     
-        return response.status(StatusCodes.OK).json({success: true, message: "Customer Password Updated"});
+        return response.status(StatusCodes.OK).json({success: true, message: "User password updated"});
     } 
     
-    catch(error) {
-
-        if(error) {
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-
-    }
-
-})
+)
 
 export const resetPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
-    try {
 
         const currentPassword = request.body.currentPassword;
         const newPassword = request.body.newPassword;
@@ -373,7 +326,7 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
             return next(new ErrorResponse("Please specify the new password", StatusCodes.BAD_REQUEST))
         }
     
-        const customer = await Customer.findOne({owner: request.customer.id, token: resetToken});
+        const customer = await User.findOne({owner: request.customer.id, token: resetToken});
 
         if(!customer) {
             return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
@@ -390,18 +343,8 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
     
         return response.status(StatusCodes.OK).json({success: true, message: "Customer Password Reset Successfully"});
     } 
-    
-    catch(error) {
 
-        if(error) {
-            console.log(error);
-            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({success: false, message: error});
-        }
-
-
-    }
-
-})
+)
 
 export const fetchLoggedInCustomer = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
         const customer = request.customer; // Store the user in the user object
