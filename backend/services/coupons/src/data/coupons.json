@@ -1,6 +1,6 @@
 [
     {
-        "couponId": "5d713995b721c3bb38c1f5b0",
+        "_id": "5d713995b721c3bb38c1f5b0",
         "description": "Get £30 off your next order",
         "expiryDate": "2023-11-20",
         "minPurchaseAmount": 500.00,
@@ -10,7 +10,7 @@
     },
     
     {
-        "couponId": "5d713995b721c3bb38c1f5b1",
+        "_id": "5d713995b721c3bb38c1f5b1",
         "description": "Get £20 off your next order",
         "expiryDate": "2023-07-03",
         "minPurchaseAmount": 300.00,
@@ -20,7 +20,7 @@
     },
 
     {
-        "couponId": "5d713995b721c3bb38c1f5b2",
+        "_id": "5d713995b721c3bb38c1f5b2",
         "description": "Get £15 off your next order",
         "expiration_date": "2023-08-05",
         "min_purchase_amount": 200.00,
@@ -30,7 +30,7 @@
     },
 
     {
-        "couponId": "5d713995b721c3bb38c1f5b2",
+        "_id": "5d713995b721c3bb38c1f5b2",
         "description": "Get £10 off your next order",
         "expiration_date": "2023-09-10",
         "min_purchase_amount": 150.00,
@@ -40,7 +40,7 @@
     },
 
     {
-        "couponId": "5d713995b721c3bb38c1f5b3",
+        "_id": "5d713995b721c3bb38c1f5b3",
         "description": "Buy one get one free",
         "expiration_date": "2023-09-11",
         "min_purchase_amount": 1000.00,
