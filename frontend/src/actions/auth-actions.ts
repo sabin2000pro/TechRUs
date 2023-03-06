@@ -1,17 +1,25 @@
 import axios from 'axios';
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL } from '../constants/auth-constants';
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST } from '../constants/auth-constants';
 
 const fetchTokenFromSessionStorage = () => {
     const token = JSON.parse(sessionStorage.getItem("token") as any);
+}
+
+const processConfigHeader = () => {
+    const config = {headers: {'Content-Type': 'application/json'}};
+
+    return config
 }
 
 export const register = (username: string, email: string, password: string) => async (dispatch) => {
 
     try {
         dispatch({type: REGISTER_USER_REQUEST})
-        const config = {headers: {'Content-Type': 'application/json'}};
-        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
 
+        const config = processConfigHeader();
+
+        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
+        
         dispatch({type: REGISTER_USER_SUCCESS, payload: data});
     } 
     
@@ -31,13 +39,21 @@ export const register = (username: string, email: string, password: string) => a
 export const login = (email: string, password: string) => async (dispatch) => {
 
     try {
-    
+        dispatch({type: LOGIN_USER_REQUEST});
+
+        const config = processConfigHeader();
+
+        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/login`, {email, password}, config);
+        console.log(`User : `, data);
+
+        dispatch({type: REGISTER_USER_SUCCESS, payload: data});
     } 
     
     catch(error) {
         
       if(error) {
-        
+        console.error(`Login Error : `, error);
+        dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
       }
 
     }
