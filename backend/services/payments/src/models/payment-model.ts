@@ -9,6 +9,7 @@ export interface IPaymentDocument extends Document {
     stripeChargeId: string;
     status: string
     createdAt: Date
+    updatedAt: Date
 }
 
 export const PaymentSchema = new mongoose.Schema<IPaymentDocument>({

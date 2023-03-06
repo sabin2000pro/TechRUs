@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const http_status_codes_1 = require("http-status-codes");
+const payment_routes_1 = require("./routes/payment-routes");
 const app = (0, express_1.default)();
 exports.app = app;
 app.use(express_1.default.json());
@@ -35,3 +36,4 @@ app.get('/', (request, response, next) => __awaiter(void 0, void 0, void 0, func
         }
     }
 }));
+app.use('/api/v1/payments', payment_routes_1.paymentRouter); // Mount the payment routes as middleware

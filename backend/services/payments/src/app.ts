@@ -2,8 +2,11 @@ import express, {Application, Response, NextFunction} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import {StatusCodes} from 'http-status-codes'
+import {paymentRouter} from './routes/payment-routes';
 
 const app: Application = express();
+
+
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -29,6 +32,6 @@ app.get('/', async (request: any, response: Response, next: NextFunction): Promi
 
 })
 
-// app.use('/api/auth', authRouter);
+app.use('/api/v1/payments', paymentRouter); // Mount the payment routes as middleware
 
 export {app};
