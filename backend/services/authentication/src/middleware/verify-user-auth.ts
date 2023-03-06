@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 require('dotenv').config();
 import jwt from 'jsonwebtoken';
-import { Customer } from '../models/customer-model';
+import { Customer } from '../models/user-model';
 import {Response, NextFunction} from 'express';
 
 export const verifyUserAuthentication = async (request: any, response: Response, next:NextFunction) => {

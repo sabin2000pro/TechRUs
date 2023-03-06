@@ -1,15 +1,15 @@
 require('dotenv').config();
 import { connectAuthDatabase } from '../authentication/src/database/auth-db';
 import { connectProductsSchema } from './../products/src/database/products-db';
-import { connectCustomersSchema } from '../customers/src/database/customers-schema'
+import { connectUsersSchema } from '../users-service/src/database/users-schema';
 import {connectOrdersSchema} from './../orders/src/database/orders-schema';
 import { connectPaymentsSchema } from './../payments/src/database/payments-schema';
-import {Customer} from '../authentication/src/models/customer-model'
+import {User} from '../users-service/src/model/user-model';
 import {Product} from '../products/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
 import {Payment} from '../payments/src/models/payment-model';
 
-import customers from '.././authentication/src/data/customers.json';
+import customers from '.././authentication/src/data/users.json';
 import products from '../products/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
 import payments from '../payments/src/data/payments.json';
@@ -19,7 +19,7 @@ import payments from '../payments/src/data/payments.json';
 const connectServiceSchemas = () => {
     connectAuthDatabase();
     connectProductsSchema();
-    connectCustomersSchema();
+    connectUsersSchema();
     connectOrdersSchema();
     connectPaymentsSchema();
 }
@@ -33,11 +33,11 @@ const importServiceData = async () => {
     try {
      // First delete the existing data
 
-     await Customer.deleteMany();
+     await User.deleteMany();
      await Product.deleteMany();
      await Order.deleteMany();
 
-     await Customer.insertMany(customers);     
+     await User.insertMany(customers);     
      await Product.insertMany(products);
      await Order.insertMany(orders)
      await Payment.insertMany(payments);
@@ -63,7 +63,7 @@ const importServiceData = async () => {
 const removeServiceData = async () => {
     try {
 
-        await Customer.deleteMany();   
+        await User.deleteMany();   
         await Product.deleteMany();
         await Order.deleteMany();
         await Payment.deleteMany();

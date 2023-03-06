@@ -5,7 +5,9 @@
         "username": "staffmember123",
         "email": "staffmember123@gmail.com",
         "password": "staff123",
-        "role": "staff"
+        "role": "staff",
+        "startShiftDate": "2023-09-11T09:00:00.000Z",
+        "endShiftDate": "2023-09-11T18:00:00.000Z"
     },
 
     {
