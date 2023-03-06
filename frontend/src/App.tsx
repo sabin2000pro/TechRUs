@@ -12,12 +12,12 @@ const App: React.FC = () => {
 
    // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
    useEffect(() => {
+      
       const fetchStripeKey = async () => {
 
       }
 
       fetchStripeKey();
-
 
    }, [])
 
