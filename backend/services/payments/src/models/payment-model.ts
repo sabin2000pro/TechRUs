@@ -28,7 +28,8 @@ export const PaymentSchema = new mongoose.Schema<IPaymentDocument>({
 
     currency: { // Currency used for the payment
         type: String,
-        required: [true, "Please specify the currency used for the payment"]
+        required: [true, "Please specify the currency used for the payment"],
+        default: 'usd'
     },
 
     paymentMethod: { // The payment method used for the order

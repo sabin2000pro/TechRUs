@@ -20,16 +20,14 @@ export const createNewPayment = asyncHandler(async (request: any, response: Resp
         amount: currPaymentData.amount,
         currency: currPaymentData.currency,
         payment_method_types: [currPaymentData.paymentMethod],
-        
         metadata: {integration_check: 'accept_a_payment'}
       });
 
-      const stripePaymentData: any = {
-        paymentIntentId: paymentIntent,
-        clientSecret: paymentIntent.clientSecret,
-      };
+      const client_secret = paymentIntent.client_secret;
 
-    return response.status(StatusCodes.CREATED).json({success: true, stripePaymentData});
+      console.log(`The client secret : `, client_secret);
+
+    return response.status(StatusCodes.CREATED).json({success: true, client_secret});
     } 
     
     catch(error) {

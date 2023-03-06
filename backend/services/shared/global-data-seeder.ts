@@ -11,6 +11,7 @@ import {Product} from '../products/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
 import {Review} from '../reviews/src/model/review-model';
 import {Coupon} from '../coupons/src/model/coupon-model';
+import {Payment} from '../payments/src/models/payment-model';
 
 import customers from '.././authentication/src/data/customers.json';
 import products from '../products/src/data/products.json';
