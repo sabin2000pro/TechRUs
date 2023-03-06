@@ -347,8 +347,9 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 )
 
 export const fetchLoggedInCustomer = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-        const customer = request.customer; // Store the user in the user object
-        return response.status(StatusCodes.OK).json({success: true, customer});
+    
+        const user = request.user._id; // Store the user in the user object
+        return response.status(StatusCodes.OK).json({success: true, user});
     } 
 
 )

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Header from './components/Header'
+import Header from './layout/Header'
 import {Routes, Route} from 'react-router-dom';
 import Register from './components/authentication/Register';
 import Login from './components/authentication/Login';
@@ -12,7 +12,7 @@ const App: React.FC = () => {
 
    // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
    useEffect(() => {
-      
+
       const fetchStripeKey = async () => {
 
       }
