@@ -25,8 +25,8 @@ exports.UserSchema = new mongoose_1.default.Schema({
     },
     role: {
         type: String,
-        default: 'user',
-        enum: ['manager', 'admin', 'user']
+        default: 'staff',
+        enum: ['manager', 'admin', 'staff']
     },
     isActive: {
         type: Boolean,
@@ -39,6 +39,18 @@ exports.UserSchema = new mongoose_1.default.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    startShiftDate: {
+        type: Date,
+        default: Date.now
+    },
+    endShiftDate: {
+        type: Date,
+        default: Date.now
+    },
+    storePoints: {
+        type: Number,
+        default: 0
     },
     rides: [{
             rideId: String,

@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
-var auth_db_1 = require("../authentication/src/database/auth-db");
+var auth_schema_1 = require("../authentication/src/database/auth-schema");
 var products_db_1 = require("./../products/src/database/products-db");
 var users_schema_1 = require("../users-service/src/database/users-schema");
 var orders_schema_1 = require("./../orders/src/database/orders-schema");
@@ -55,7 +55,7 @@ var orders_json_1 = __importDefault(require("../orders/src/data/orders.json"));
 var payments_json_1 = __importDefault(require("../payments/src/data/payments.json"));
 // Import the load schemas functions
 var connectServiceSchemas = function () {
-    (0, auth_db_1.connectAuthDatabase)();
+    (0, auth_schema_1.connectAuthDatabase)();
     (0, products_db_1.connectProductsSchema)();
     (0, users_schema_1.connectUsersSchema)();
     (0, orders_schema_1.connectOrdersSchema)();

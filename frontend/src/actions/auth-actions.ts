@@ -1,9 +1,9 @@
-import { VERIFY_CUSTOMER_EMAIL_REQUEST } from './../constants/auth-constants';
 import axios from 'axios';
-import { REGISTER_CUSTOMER_REQUEST, REGISTER_CUSTOMER_SUCCESS, REGISTER_CUSTOMER_FAIL, LOGIN_CUSTOMER_REQUEST, LOGIN_CUSTOMER_SUCCESS, LOGIN_CUSTOMER_FAIL } from '../constants/auth-constants';
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '../constants/auth-constants';
 
 const fetchTokenFromSessionStorage = () => {
     const token = JSON.parse(sessionStorage.getItem("token") as any);
+    return token;
 }
 
 const processConfigHeader = () => {
@@ -15,20 +15,21 @@ const processConfigHeader = () => {
 export const register = (username: string, email: string, password: string) => async (dispatch) => {
 
     try {
-        dispatch({type: REGISTER_CUSTOMER_REQUEST})
+
+        dispatch({type: REGISTER_USER_REQUEST})
 
         const config = processConfigHeader();
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
         
-        dispatch({type: REGISTER_CUSTOMER_SUCCESS, payload: data});
+        dispatch({type: REGISTER_USER_SUCCESS, payload: data});
     } 
     
     catch(error) {
 
         if(error) {
             console.error(`Register Error : `, error);
-            dispatch({type: REGISTER_CUSTOMER_FAIL, payload: error.data.response.message});
+            dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
         }
     }
 
@@ -46,10 +47,8 @@ export const logout = () => async (dispatch) => {
 
 }
 
-export const verifyCustomerEmail = (customerId: string, OTP: string) => async (dispatch) => {
+export const verifyCustomerEmail = (userId: string, userOTP: string) => async (dispatch) => {
     try {
-      dispatch({type: VERIFY_CUSTOMER_EMAIL_REQUEST})
-
 
     } 
     
@@ -68,22 +67,21 @@ export const verifyCustomerEmail = (customerId: string, OTP: string) => async (d
 export const login = (email: string, password: string) => async (dispatch) => {
 
     try {
-        dispatch({type: LOGIN_CUSTOMER_REQUEST});
+        dispatch({type: LOGIN_USER_REQUEST});
 
         const config = processConfigHeader();
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/login`, {email, password}, config);
         console.log(`User : `, data);
 
-        dispatch({type: LOGIN_CUSTOMER_SUCCESS, payload: data});
+        dispatch({type: LOGIN_USER_SUCCESS, payload: data});
     } 
     
     catch(error) {
         
       if(error) {
-
         console.error(`Login Error : `, error);
-        dispatch({type: REGISTER_CUSTOMER_FAIL, payload: error.data.response.message});
+        dispatch({type: LOGIN_USER_FAIL, payload: error.data.response.message});
       }
 
     }
@@ -91,10 +89,11 @@ export const login = (email: string, password: string) => async (dispatch) => {
 
 } 
 
-export const fetchLoggedInCustomer = () => async (dispatch) => {
+export const fetchLoggedInUser = () => async (dispatch) => {
 
     try {
-    
+        const token = fetchTokenFromSessionStorage();
+        const config = processConfigHeader();
     } 
     
     catch(error) {
