@@ -1,5 +1,6 @@
+import { LOAD_USER_REQUEST } from './../constants/auth-constants';
 import axios from 'axios';
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from '../constants/auth-constants';
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 
 const fetchTokenFromSessionStorage = () => {
     const token = JSON.parse(sessionStorage.getItem("token") as any);
@@ -42,6 +43,10 @@ export const logout = () => async (dispatch) => {
     
     catch(error) {
 
+      if(error) {
+
+      }
+
     }
 
 
@@ -68,13 +73,15 @@ export const login = (email: string, password: string) => async (dispatch) => {
 
     try {
         dispatch({type: LOGIN_USER_REQUEST});
-
         const config = processConfigHeader();
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/login`, {email, password}, config);
         console.log(`User : `, data);
 
         dispatch({type: LOGIN_USER_SUCCESS, payload: data});
+    
+        sessionStorage.setItem("token", JSON.stringify(data.token));
+        sessionStorage.setItem("user", JSON.stringify(data.user));
     } 
     
     catch(error) {
@@ -92,11 +99,20 @@ export const login = (email: string, password: string) => async (dispatch) => {
 export const fetchLoggedInUser = () => async (dispatch) => {
 
     try {
-        const token = fetchTokenFromSessionStorage();
-        const config = processConfigHeader();
+        dispatch({type: LOAD_USER_REQUEST})
+        const token = JSON.parse(sessionStorage.getItem("token") as any);
+        const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
+
+        const {data} = await axios.get(`http://`)
     } 
     
     catch(error) {
+
+      if(error) {
+        console.error(`Load Logged In User Error : `, error);
+        dispatch({type: LOAD_USER_FAIL, payload: error.data.response.message});
+      }
+
 
     }
 
