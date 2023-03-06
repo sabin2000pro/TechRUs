@@ -124,6 +124,9 @@ services:
   payments-service:
     container_name: techrus-payments-api
 
+    networks:
+      - my-service-network
+
     build:
       context: ../backend/services/payments
       dockerfile: Dockerfile
