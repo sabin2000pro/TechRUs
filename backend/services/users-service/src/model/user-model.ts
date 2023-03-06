@@ -10,7 +10,9 @@ interface IUserSchemaDocument {
     isActive: boolean;
     isVerified: boolean;
     isAccountLocked: boolean;
-    points: number;
+    storePoints: number;
+    startShiftDate: Number;
+    endShiftDate; Number
     rides: any;
 
     fetchAuthToken: () => any;
@@ -57,6 +59,21 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
     isVerified: {
         type: Boolean,
         default: false
+    },
+
+    startShiftDate: {
+        type: Date,
+        default: Date.now
+    },
+
+    endShiftDate: {
+        type: Date,
+        default: Date.now
+    },
+
+    storePoints: {
+      type: Number,
+      default: 0
     },
 
     rides: [{ // Used for later development of the application for the taxi-hauling feature for the e-commerce stores that handles delivery of products as a second option of delivery
