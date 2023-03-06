@@ -103,9 +103,14 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         const emailTransporter = createEmailTransporter();
         sendEmailConfirmationEmail(emailTransporter, user, userOTP as unknown as any);
 
-        const userOTPVerification = new EmailVerification({owner: user._id, otpToken: userOTP});
-        console.log(`Your User OTP Verification`)
-        await userOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
+        const userOTPVerificationCode = new EmailVerification({owner: user._id, otpToken: userOTP}) || undefined
+
+        if(userOTPVerificationCode === undefined) {
+            return next(new ErrorResponse(`The OTP Verification code is invalid`, StatusCodes.BAD_REQUEST));
+        }
+
+        console.log(`Your User OTP Verification`, userOTPVerificationCode)
+        await userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
     } 
@@ -201,7 +206,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         const loginMfa = await TwoFactorVerification.create({owner: user, mfaToken: customerMfaToken});
         await loginMfa.save();
 
-        return sendTokenResponse(request, user, StatusCodes.CREATED, response);
+        return sendTokenResponse(request, user, StatusCodes.OK, response);
     } 
 )
 
@@ -347,8 +352,8 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 )
 
 export const fetchLoggedInCustomer = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    
-        const user = request.user._id; // Store the user in the user object
+
+        const user = request.user; // Store the user in the user object
         return response.status(StatusCodes.OK).json({success: true, user});
     } 
 

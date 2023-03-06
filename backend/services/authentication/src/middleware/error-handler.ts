@@ -27,10 +27,7 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
 
     }
 
-    // Handle production errors
-    if(process.env.AUTH_SERVICE_DEV_MODE === 'production') {
-        
-    }
+    console.log(`An error occurred on the authentication side : `, error);
 
-    return response.status(err.statusCode).json({success: false, message: err.message, stack: err.stack});
+    return response.status(error.statusCode).json({success: false, message: error.message, stack: error.stack});
 }

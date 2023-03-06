@@ -19,9 +19,11 @@ export const verifyUserAuthentication = async (request: any, response: Response,
         }
 
         const decoded: any = jwt.verify(token, process.env.JWT_TOKEN!);
-        request.customer = await User.findById(decoded._id);
+        request.user = await User.findById(decoded._id);
 
-        console.log(`Request user : `, request.customer);
+        console.log(`Verified user : `, request.user);
+
+        console.log(`Request user : `, request.user); // Log the currently logged in user
 
         return next();
     } 
