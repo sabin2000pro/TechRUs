@@ -1,13 +1,13 @@
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_CUSTOMER_FAIL, LOGIN_CUSTOMER_SUCCESS, LOAD_CUSTOMER_REQUEST } from "../constants/auth-constants";
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOAD_USER_REQUEST } from "../constants/auth-constants";
 
 const initialAuthState = {
-   customer: {}
+   user: {}
 }
 
 export interface IAuthState {
     loading?: boolean
     state: any
-    customer: any
+    user: any
     payload: any
 }
 
@@ -27,10 +27,10 @@ export const authReducer = (state = initialAuthState as any, action: any) => {
         case LOGIN_USER_REQUEST:
             return {loading: true, isAuthenticated: false}
 
-        case LOGIN_CUSTOMER_SUCCESS:
+        case LOGIN_USER_SUCCESS:
             return {...state, loading: false, isAuthenticated: true, customer: action.payload}
         
-        case LOGIN_CUSTOMER_FAIL:
+        case LOGIN_USER_FAIL:
             return {loading: false, error: action.payload}
 
         case LOAD_USER_REQUEST:
