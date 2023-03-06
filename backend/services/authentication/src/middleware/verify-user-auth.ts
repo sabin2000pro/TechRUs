@@ -1,11 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
 require('dotenv').config();
 import jwt from 'jsonwebtoken';
-import { Customer } from '../models/user-model';
+import { User } from '../models/user-model'
 import {Response, NextFunction} from 'express';
 
 export const verifyUserAuthentication = async (request: any, response: Response, next:NextFunction) => {
     try {
+
         let token;
 
         if(!token) {
@@ -18,17 +19,19 @@ export const verifyUserAuthentication = async (request: any, response: Response,
         }
 
         const decoded: any = jwt.verify(token, process.env.JWT_TOKEN!);
-        request.customer = await Customer.findById(decoded._id);
+        request.customer = await User.findById(decoded._id);
 
-        console.log(`Request customer : `, request.customer);
+        console.log(`Request user : `, request.customer);
 
         return next();
     } 
     
     catch(error) {
+
       if(error) {
         return console.error(error);
       }
+
     }
 
 

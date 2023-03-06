@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-interface ICustomerSchemaDocument {
+interface IUserSchemaDoc {
     username: string;
     email: string;
     password: string;
@@ -20,7 +20,7 @@ interface ICustomerSchemaDocument {
     comparePasswords: (enteredPassword: string) => Promise<any>;
 }
 
-export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // User Data Model
+export const UserSchema = new mongoose.Schema<IUserSchemaDoc>({ // User Data Model
 
     username: {
         type: String,
@@ -77,7 +77,7 @@ export const CustomerSchema = new mongoose.Schema<ICustomerSchemaDocument>({ // 
 }, {timestamps: true});
 
 // Hash password before saving to database
-CustomerSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(next) {
 
     if(!this.isModified("password")) {
         return next();
@@ -92,14 +92,14 @@ CustomerSchema.pre('save', async function(next) {
 })
 
 // Compare login passwords using bcrypt
-CustomerSchema.methods.comparePasswords = async function(enteredPassword: string): Promise<boolean> {
+UserSchema.methods.comparePasswords = async function(enteredPassword: string): Promise<boolean> {
     return await bcrypt.compare(enteredPassword, this.password);
 } 
 
 // Sign the JWT Token
-CustomerSchema.methods.fetchAuthToken = function() {
+UserSchema.methods.fetchAuthToken = function() {
     return jwt.sign({id: this._id, email: this.email}, process.env.JWT_TOKEN!, {expiresIn: process.env.JWT_EXPIRES_IN!})
 }
 
-const Customer = mongoose.model("Customer", CustomerSchema);
-export {Customer}
+const User = mongoose.model("User", UserSchema);
+export {User}
