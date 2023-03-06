@@ -90,6 +90,9 @@ services:
     container_name: techrus-orders-api
     image: sabin2000/techrus-orders-service
 
+    networks:
+      - my-service-network
+
     build:
       context: ../backend/services/orders
       dockerfile: Dockerfile
@@ -103,6 +106,9 @@ services:
 
   reviews-service:
       container_name: techrus-reviews-api
+
+      networks:
+        - my-service-network
 
       build:
         context: ../backend/services/reviews
@@ -143,7 +149,6 @@ services:
       - /app/node_modules
       - ../backend/services/event-bus:/app
     
-
   frontend-service:
     container_name: techrus-frontend-service
 
