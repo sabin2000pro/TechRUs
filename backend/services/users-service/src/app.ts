@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 
-if(process.env.NODE_ENV === 'development') {
+if(process.env.USERS_DEV_MODE === 'development') {
     app.use(morgan('dev'));
 }
 
