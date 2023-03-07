@@ -15,20 +15,6 @@
       },
 
       {
-        "id": "63e25f48d82eb035f7da0981",
-        "name": "Apple Watch Series 5",
-        "warranty": "1 Year",
-        "description": "The latest smartwatch from Apple, featuring an always-on display, GPS capabilities, and a wide range of health and fitness features.",
-        "price": 299.99,
-        "stockCount": 10,
-        "lowStockAlert": 3,
-        "isFeatured": false,
-        "image": "/image/appleseries5.jpg",
-        "isNew": false,
-        "reviews": []
-      },
-
-      {
         "id": "63e25f48d82eb035f7da0982",
         "name": "iPad Pro 12.9",
         "warranty": "1 Year",

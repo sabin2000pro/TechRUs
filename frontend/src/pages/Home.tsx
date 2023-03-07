@@ -13,6 +13,7 @@ const Home = () => {
         <div className = "flex w-72 justify-center items-center p-4">
 
        <div className="flex flex-row gap-6 product-card-container">
+        
          <div className="bg-white shadow-md rounded px-12 py-6 product-card">
 
             <div className ="relative w-72 m-4 product-badge-container">
