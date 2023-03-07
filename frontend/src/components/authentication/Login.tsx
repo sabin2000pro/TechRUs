@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '../../layout/Loader';
+import {Link} from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>();
@@ -14,9 +15,7 @@ const Login: React.FC = () => {
   return (
 
     <>
-      <div className = "loader-container">
-         <Loader />
-      </div>
+
 
       <div className = "flex justify-center items-center h-screen login-container">
 
@@ -48,7 +47,7 @@ const Login: React.FC = () => {
           </div>
 
           <div className = "flex justify-center">
-             <span>Forgot Password ? - Reset Here</span>
+             <span>Forgot Password ? - <Link to ='/forgot-password'>Reset Here</Link>   </span>
           </div>
 
 

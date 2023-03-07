@@ -57,7 +57,22 @@ describe("Register Unit Tests", () => {
 })
 
 describe("Login API Unit Tests", () => {
-    
+
+    it("Login with valid details", async () => {
+
+    })
+
+    it("Login with invalid password", async () => {
+
+    })
+
+    it("Login with missing password", async () => {
+
+    })
+
+    it("Login with missing e-mail address", async () => {
+        
+    })
 })
 
 
