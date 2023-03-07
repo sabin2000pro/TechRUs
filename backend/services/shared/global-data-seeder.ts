@@ -9,7 +9,7 @@ import {Product} from '../products/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
 import {Payment} from '../payments/src/models/payment-model';
 
-import customers from '.././authentication/src/data/users.json';
+import users from '.././authentication/src/data/users.json';
 import products from '../products/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
 import payments from '../payments/src/data/payments.json';
@@ -37,7 +37,7 @@ const importServiceData = async () => {
      await Product.deleteMany();
      await Order.deleteMany();
 
-     await User.insertMany(customers);     
+     await User.insertMany(users);     
      await Product.insertMany(products);
      await Order.insertMany(orders)
      await Payment.insertMany(payments);

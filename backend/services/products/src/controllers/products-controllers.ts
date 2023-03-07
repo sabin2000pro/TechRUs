@@ -6,20 +6,13 @@ import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-        const pagination = {} // Create object for pagination
-        const productsCount = await Product.countDocuments({});
-
-        const queryCopy = {...request.query};
-        const page = parseInt(request.query.page) || 1;
-        const productsPerPage = 4;
-        
         const products = await Product.find();
 
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
         }
 
-        return response.status(StatusCodes.OK).json({success: true, products, productsPerPage, productsCount})
+        return response.status(StatusCodes.OK).json({success: true, products})
     }
 )
 
@@ -74,10 +67,9 @@ export const deleteProductByID = asyncHandler(async (request, response, next) =>
 
 
 export const deleteAllProducts = asyncHandler(async (request, response, next) => {
-
-
+    await Product.deleteMany();
 })
 
-export const uploadProductPhoto = asyncHandler(async (request, response, next) => {
-
+export const uploadProductPhoto = asyncHandler(async (request: any, response, next) => {
+    const file = request.file.files
 })

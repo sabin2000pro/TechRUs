@@ -1,7 +1,13 @@
 import axios from 'axios';
 
-export const fetchProducts = () => async (dispatch: any) => {
+export const fetchProducts = (keyword = '', page = 1) => async (dispatch: any) => {
+    try {
 
+    } 
+    
+    catch(error) {
+
+    }
 }
 
 export const fetchSingleProduct = (productId) => async (dispatch: any) => {
