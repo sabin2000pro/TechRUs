@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectOrdersSchema = void 0;
 require('dotenv').config();
 var mongoose_1 = __importDefault(require("mongoose"));
-var ORDERS_DB_URI = process.env.ORDERS_DB_URI;
+var ORDERS_DB_URI = process.env.ORDERS_DB_URI || "";
 var connectOrdersSchema = function () { return __awaiter(void 0, void 0, void 0, function () {
     var error_1;
     return __generator(this, function (_a) {

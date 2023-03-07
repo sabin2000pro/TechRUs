@@ -1,10 +1,13 @@
 require('dotenv').config();
+import { connectUsersSchema } from './database/users-schema';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import {userRouter} from './routes/user-routes';
 
 const app = express();
+
+connectUsersSchema();
 
 app.use(express.json());
 

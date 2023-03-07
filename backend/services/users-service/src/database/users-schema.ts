@@ -1,7 +1,7 @@
 require('dotenv').config();
 import mongoose from 'mongoose';
 
-const USERS_SERVICE_DB_URI = process.env.CUSTOMERS_SERVICE_DB_URI
+const USERS_SERVICE_DB_URI = process.env.USERS_SERVICE_DB_URI || ""
 
 export const connectUsersSchema = async () => {
 

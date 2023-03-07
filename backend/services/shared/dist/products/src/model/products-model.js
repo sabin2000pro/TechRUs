@@ -28,11 +28,6 @@ var ProductSchema = new mongoose_1.default.Schema({
         required: [true, "Please specify the price of this product"],
         default: 0.0
     },
-    currency: {
-        type: String,
-        required: [true, "Please specify the currency that this product accepts"],
-        default: "GBP"
-    },
     stockCount: {
         type: Number,
         default: 0,
@@ -49,7 +44,7 @@ var ProductSchema = new mongoose_1.default.Schema({
     },
     reorderLevel: {
         type: Number,
-        default: 10
+        default: 5
     },
     isNew: {
         type: Boolean,

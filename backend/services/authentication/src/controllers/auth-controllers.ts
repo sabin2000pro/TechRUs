@@ -80,7 +80,7 @@ export const sendResetPasswordTokenStatus = async (request: Request, response: R
 }
 
 export const registerUser = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
-
+        const EVENT_TYPE = 'UserRegistered';
         const {username, email, password} = request.body;
 
         if(!username || !email || !password) {
@@ -111,6 +111,8 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
         console.log(`Your User OTP Verification`, userOTPVerificationCode)
         await userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
+
+        // Send AXIOS POST request to the Event Bus Service. The POST request must send the type of event been emitted to the event bus which is 'UserRegistered'
 
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
     } 
