@@ -1,7 +1,13 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Dropdown from './Dropdown';
 
 const Header = () => {
+
+  const dispatch = useDispatch();
+  const {loading, error, user} = useSelector((state: any) => state.auth);
+  const token = JSON.parse(sessionStorage.getItem("token") as any);
 
   return (
 
@@ -10,7 +16,7 @@ const Header = () => {
 
           <div className = "header-container flex justify-between items-center">
 
-           <Link to = '/'> 
+           <Link to = '/products'> 
               <img className = "logo-img" src = '/images/techrus.png' />
            </Link>
 
@@ -18,9 +24,15 @@ const Header = () => {
 
              <div className = "header-container-right flex justify-end items-center m-4">
 
-                <div className = "mr-4 p-4 login-link"> 
-                   <Link to = '/user-login'>Login</Link>
-                </div>
+                 {token ? (
+                     <Dropdown />
+                 ): (
+                      <>
+      <div className = "mr-4 p-4 login-link"> 
+                        <Link to = '/user-login'>Login</Link>
+                      </div>
+                     </>
+                 )}
 
                 <div className = "mr-25">
                    <Link className = "basket-link" to = '/my-basket'>My Basket</Link> 

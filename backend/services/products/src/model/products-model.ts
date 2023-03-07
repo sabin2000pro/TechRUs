@@ -1,4 +1,4 @@
-import { model, Model } from 'mongoose';
+import { Model } from 'mongoose';
 import mongoose from 'mongoose';
 
 interface ProductDocument extends Document {

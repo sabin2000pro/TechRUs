@@ -44,13 +44,14 @@ export const logout = () => async (dispatch) => {
         await axios.get(`http://localhost:5400/api/v1/auth/logout`, config);
 
         dispatch({type: LOGOUT_USER_SUCCESS});
-  
+        // Clear session storage
+        sessionStorage.clear();
+
     } 
     
     catch(error) {
 
       if(error) {
-        console.error(`Logout User Error : `, error);
         dispatch({type: LOGOUT_USER_FAIL, payload: error.data.response.message});
       }
 
@@ -86,9 +87,9 @@ export const login = (email: string, password: string) => async (dispatch) => {
         const config = processConfigHeader();
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/login`, {email, password}, config);
-        console.log(`User : `, data);
+        dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
 
-        dispatch({type: LOGIN_USER_SUCCESS, payload: data}); // When the user has logged in successfully, store the user data in the payload
+        console.log(`Payload : `, data.user);
     
         sessionStorage.setItem("token", JSON.stringify(data.token));
         sessionStorage.setItem("user", JSON.stringify(data.user));
@@ -97,8 +98,8 @@ export const login = (email: string, password: string) => async (dispatch) => {
     catch(error) {
         
       if(error) {
-        console.error(`Login Error : `, error);
-        dispatch({type: LOGIN_USER_FAIL, payload: error.data.response.message});
+        console.error(`Login Error : `, error.response.data.message);
+        dispatch({type: LOGIN_USER_FAIL, payload: error.response.data.message});
       }
 
     }

@@ -23,13 +23,13 @@ export const productsReducer = (state = productsInitialState as any, action: any
             return {loading: false, error: action.payload}
 
         case FETCH_NEW_PRODUCTS_REQUEST:
-            return {}
+            return {loading: true}
 
         case FETCH_NEW_PRODUCTS_SUCCESS:
-            return {}
+            return {...state, loading: false, newProducts: action.payload}
 
         case FETCH_NEW_PRODUCTS_FAIL:
-            return {}
+            return {loading: false, error: action.payload}
 
         case CLEAR_ERRORS:
             return {error: null}

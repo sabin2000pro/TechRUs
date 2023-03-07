@@ -29,7 +29,7 @@ const App: React.FC = () => {
       <Header />       
 
         <Routes>
-           <Route path = '/' element = {<Home />} />
+           <Route path = '/products' element = {<Home />} />
            <Route path = '/user-register' element = {<Register />} />
            <Route path = '/user-login' element = {<Login />} />
            <Route path = '/forgot-password' element = {<ForgotPassword />} />

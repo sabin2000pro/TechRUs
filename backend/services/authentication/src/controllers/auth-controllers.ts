@@ -188,25 +188,25 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         const user = await User.findOne({email}).select("+password"); // Find the user before logging in
 
         if(!user) {
-            return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No customer found with that e-mail address"});
+            return next(new ErrorResponse(`No user found with that e-mail address`, StatusCodes.BAD_REQUEST));
         }
 
         // Check if the passwords match
         const userPasswordsMatch = await user.comparePasswords(password);
 
         if(!userPasswordsMatch) {
-            return response.status(StatusCodes.OK).json({success: false, message: "Your passwords do not match. Try again"});
+            return next(new ErrorResponse(`Your current password is invalid. Please try again`, StatusCodes.BAD_REQUEST));
         }
 
         const userMfaToken = generateCode();
-
+        const token = user.fetchAuthToken();
         const transporter = createEmailTransporter();
         sendLoginMfa(transporter as any, user as any, userMfaToken as any);
 
         const loginMfa = await TwoFactorVerification.create({owner: user, mfaToken: userMfaToken});
         await loginMfa.save();
 
-        return sendTokenResponse(request, user, StatusCodes.OK, response);
+        return response.status(StatusCodes.OK).json({success: true, user, token});
     } 
 )
 

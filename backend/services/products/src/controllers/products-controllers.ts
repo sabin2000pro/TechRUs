@@ -1,4 +1,4 @@
-import { ErrorResponse } from './../../../authentication/src/utils/error-response';
+import { ErrorResponse } from '../utils/error-response'
 import {Product} from '../model/products-model';
 import {Response, NextFunction} from 'express'
 import asyncHandler from 'express-async-handler';
@@ -7,8 +7,9 @@ import {isValidObjectId} from 'mongoose';
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
         const pagination = {} // Create object for pagination
-        const queryCopy = {...request.query};
+        const productsCount = await Product.countDocuments({});
 
+        const queryCopy = {...request.query};
         const page = parseInt(request.query.page) || 1;
         const productsPerPage = 4;
         
@@ -18,7 +19,7 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
         }
 
-        return response.status(StatusCodes.OK).json({success: true, products})
+        return response.status(StatusCodes.OK).json({success: true, products, productsPerPage, productsCount})
     }
 )
 
@@ -37,7 +38,7 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
 )
 
 export const createNewProduct = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
+``
        request.body.user = request.user._id; // When creating a product, add the currently logged in user to the body of the request
        const {name, description, warranty, image, price, stockCount, lowStockAlert, isNew} = request.body;
 
@@ -52,12 +53,15 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
 )
 
-export const fetchNewProducts = asyncHandler(async (request: any, response: Response, next: NextFunction) => {
+export const fetchNewProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const newProducts = await Product.find({isNew: true});
 
     if(!newProducts) {
-
+      return next(new ErrorResponse(`No new products found`, StatusCodes.BAD_REQUEST));
     }
+    
+    return response.status(StatusCodes.OK).json({success: true, newProducts});
+
 })
 
 export const editProductByID = asyncHandler(async (request: any, response: Response, next: NextFunction) => {
