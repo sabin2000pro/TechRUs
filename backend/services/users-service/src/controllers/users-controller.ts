@@ -32,11 +32,14 @@ export const editUserByID = asyncHandler(async (request: any, response: Response
 
 export const deleteAllUsers = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     await User.deleteMany();
-    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Users deleted"})
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "All users deleted"})
 })
 
 export const deleteUserByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    
+    const id = request.params.id;
+    await User.findByIdAndDelete(id);
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "User Deleted"});
+
 })
 
 export const editStaffUserShifts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
