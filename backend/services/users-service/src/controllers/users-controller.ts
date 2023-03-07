@@ -1,3 +1,5 @@
+import { ErrorResponse } from '../utils/error-response';
+import { isValidObjectId } from 'mongoose';
 import { StatusCodes } from 'http-status-codes';
 import { User } from "../model/user-model";
 import {Response, NextFunction} from 'express';
@@ -14,13 +16,18 @@ export const fetchUserByID = asyncHandler(async (request: any, response: Respons
        return response.status(StatusCodes.OK).json({success: true, user});
 })
 
-export const createNewUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-       const {} = request.body;
-       const customer = await User.create();
-})
-
 export const editUserByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
+    let user = await User.findById(id);
+    const userFieldsToUpdate = {username: request.body.username, email: request.body.email}
+
+    if(!isValidObjectId(id)) {
+       return next(new ErrorResponse(`No user found with that ID`, StatusCodes.BAD_REQUEST));
+    }
+
+    user = await User.findByIdAndUpdate(id, userFieldsToUpdate, {new: true, runValidators: true});
+    return response.status(StatusCodes.OK).json({success: true, isUpdated: true, user});
+
 })
 
 export const deleteAllUsers = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -29,7 +36,7 @@ export const deleteAllUsers = asyncHandler(async (request: any, response: Respon
 })
 
 export const deleteUserByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
+    
 })
 
 export const editStaffUserShifts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -41,18 +48,10 @@ export const editStaffUserShifts = asyncHandler(async (request: any, response: R
     let user = await User.findById(id);
 
     if(!user) {
-      
+        return next()
     }
 
     user = await User.findByIdAndUpdate(id, fieldsToUpdate, {new: true, runValidators: true});
     await user!.save();
     return response.status(StatusCodes.OK).json({success: true, user, isUpdated: true});
-})
-
-export const uploadUserAvatar = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-   
-})
-
-export const fetchPopularUsers = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    
 })

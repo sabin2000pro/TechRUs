@@ -27,7 +27,5 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
 
     }
 
-    // TODO - HANDLE PRODUCTION LEVEL ERRORS
-
     return response.status(err.statusCode).json({success: false, message: err.message, stack: err.stack});
 }
