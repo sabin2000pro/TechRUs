@@ -32,7 +32,6 @@ const Register = () => { // Register Component
 
      }
 
-
   }
 
   useEffect(() => {
