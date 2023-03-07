@@ -29,10 +29,16 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDoc>({ // User Data Mod
         max: [12, "Username cannot exceed 12 characters"]
     },
 
-    email: {
+    email: { // E-mail field with regex validation
         type: String,
         required: [true, "Please provide a valid e-mail address for the user"],
-        unique: true
+        unique: true,
+
+        validate: (value: string) => { // Validates the e-mail
+            const emailRegexValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegexValidation.test(value);
+        }
+
     },
 
     password: { // user password

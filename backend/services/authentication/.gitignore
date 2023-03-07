@@ -1,2 +1,2 @@
-backend/services/authentication/.env
+.env
 ./services/node_modules
