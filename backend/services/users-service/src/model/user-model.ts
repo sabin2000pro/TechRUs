@@ -11,8 +11,8 @@ interface IUserSchemaDocument {
     isVerified: boolean;
     isAccountLocked: boolean;
     storePoints: number;
-    startShiftDate: Number;
-    endShiftDate; Number
+    startShiftDate: Date;
+    endShiftDate: Date
     rides: any;
 
     fetchAuthToken: () => any;

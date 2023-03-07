@@ -35,24 +35,23 @@ export const deleteUserByID = asyncHandler(async (request: any, response: Respon
 export const editStaffUserShifts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
     const {startShiftDate, endShiftDate} = request.body;
-    const customerId = request.params.customerId;
+    const id = request.params.id;
     const fieldsToUpdate = {startShiftDate, endShiftDate}
 
-    let user = await User.findById(customerId);
+    let user = await User.findById(id);
 
     if(!user) {
       
     }
 
-    user = await User.findByIdAndUpdate(customerId, fieldsToUpdate, {new: true, runValidators: true});
+    user = await User.findByIdAndUpdate(id, fieldsToUpdate, {new: true, runValidators: true});
     await user!.save();
-    return response.status(StatusCodes.OK).json({success: true, user});
+    return response.status(StatusCodes.OK).json({success: true, user, isUpdated: true});
 })
 
 export const uploadUserAvatar = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
    
 })
-
 
 export const fetchPopularUsers = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     
