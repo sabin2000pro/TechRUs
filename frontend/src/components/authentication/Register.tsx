@@ -17,9 +17,22 @@ const Register = () => { // Register Component
   const {loading, error, user, isAuthenticated} = useSelector((state: any) => state.auth);
 
   const onRegisterHandler = async (event) => {
-     event.preventDefault();
+     try {
+         event.preventDefault()
+         dispatch(register(username, email, password) as any);
 
-     dispatch(register(username, email, password) as any);
+         navigate('/user-login');
+     } 
+     
+     catch(error) {
+
+        if(error) {
+           console.log(error);
+        }
+
+     }
+
+
   }
 
   useEffect(() => {
