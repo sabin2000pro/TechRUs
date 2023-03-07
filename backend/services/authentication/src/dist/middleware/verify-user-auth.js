@@ -20,16 +20,15 @@ const user_model_1 = require("../models/user-model");
 const verifyUserAuthentication = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let token;
-        if (!token) {
-            return response.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({ sucess: false, message: "You are unauthorized to access this resource" });
-        }
         // Verify authorization header
         if (request.headers.authorization && request.headers.authorization.includes("Bearer")) {
             token = request.headers.authorization.split(" ")[1]; // Split by a space to take out the bearer token from the authorization header
         }
+        if (!token) {
+            return response.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({ sucess: false, message: "You are unauthorized to access this resource" });
+        }
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_TOKEN);
-        request.customer = yield user_model_1.User.findById(decoded._id);
-        console.log(`Request user : `, request.customer);
+        request.user = yield user_model_1.User.findById(decoded.id);
         return next();
     }
     catch (error) {

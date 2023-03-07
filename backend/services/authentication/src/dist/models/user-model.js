@@ -27,7 +27,11 @@ exports.UserSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
         required: [true, "Please provide a valid e-mail address for the user"],
-        unique: true
+        unique: true,
+        validate: (value) => {
+            const emailRegexValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegexValidation.test(value);
+        }
     },
     password: {
         type: String,

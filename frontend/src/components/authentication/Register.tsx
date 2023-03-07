@@ -13,7 +13,7 @@ const Register = () => { // Register Component
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {loading, error, user, isAuthenticated} = useSelector((state: any) => state.auth);
+  const {loading, error, user} = useSelector((state: any) => state.auth);
 
   const onRegisterHandler = async (event) => {
      try {
@@ -69,13 +69,13 @@ const Register = () => { // Register Component
              
                  <div className = "mb-4 login-container-inputs email-container">
                      <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
-                     <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
+                     <input value = {email} onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
                </div>
 
             
                <div className = "mb-6 login-password-container">
                      <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Password</label>
-                     <input className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
+                <input value = {password} onChange = {(event) => setPassword(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
                      {true && false ? <p className="text-red-500 text-xs italic">Please choose a password.</p> : ''}
                </div>
              

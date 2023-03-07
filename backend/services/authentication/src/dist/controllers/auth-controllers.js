@@ -100,9 +100,12 @@ exports.registerUser = (0, express_async_handler_1.default)((request, response, 
     // Create the e-mail transporter to send the MFA token to the user's e-mail address
     const emailTransporter = (0, send_mail_1.createEmailTransporter)();
     (0, exports.sendEmailConfirmationEmail)(emailTransporter, user, userOTP);
-    const userOTPVerification = new verify_email_model_1.EmailVerification({ owner: user._id, otpToken: userOTP });
-    console.log(`Your User OTP Verification`);
-    yield userOTPVerification.save(); // Save the User OTP token to the database after creating a new instance of OTP
+    const userOTPVerificationCode = new verify_email_model_1.EmailVerification({ owner: user._id, otpToken: userOTP }) || undefined;
+    if (userOTPVerificationCode === undefined) {
+        return next(new error_response_1.ErrorResponse(`The OTP Verification code is invalid`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    console.log(`Your User OTP Verification`, userOTPVerificationCode);
+    yield userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
     return (0, exports.sendTokenResponse)(request, user, http_status_codes_1.StatusCodes.CREATED, response); // Send back the response to the user
 }));
 exports.verifyEmailAddress = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -145,25 +148,26 @@ exports.resendEmailVerificationCode = (0, express_async_handler_1.default)((requ
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "E-mail Verification Re-sent" });
 }));
 exports.loginUser = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = request.body;
+    const { email, password } = request.body; // Extract the user e-mail and password from the request body
     if (!email || !password) {
         return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "Missing e-mail address or password" });
     }
     const user = yield user_model_1.User.findOne({ email }).select("+password"); // Find the user before logging in
     if (!user) {
-        return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "No customer found with that e-mail address" });
+        return next(new error_response_1.ErrorResponse(`No user found with that e-mail address`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     // Check if the passwords match
     const userPasswordsMatch = yield user.comparePasswords(password);
     if (!userPasswordsMatch) {
-        return response.status(http_status_codes_1.StatusCodes.OK).json({ success: false, message: "Your passwords do not match. Try again" });
+        return next(new error_response_1.ErrorResponse(`Your current password is invalid. Please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const customerMfaToken = (0, generate_otp_code_1.generateCode)();
+    const userMfaToken = (0, generate_otp_code_1.generateCode)();
+    const token = user.fetchAuthToken();
     const transporter = (0, send_mail_1.createEmailTransporter)();
-    (0, exports.sendLoginMfa)(transporter, user, customerMfaToken);
-    const loginMfa = yield two_factor_model_1.TwoFactorVerification.create({ owner: user, mfaToken: customerMfaToken });
+    (0, exports.sendLoginMfa)(transporter, user, userMfaToken);
+    const loginMfa = yield two_factor_model_1.TwoFactorVerification.create({ owner: user, mfaToken: userMfaToken });
     yield loginMfa.save();
-    return (0, exports.sendTokenResponse)(request, user, http_status_codes_1.StatusCodes.CREATED, response);
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, user, token });
 }));
 exports.logoutUser = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     request.session = null;
@@ -260,6 +264,6 @@ exports.resetPassword = (0, express_async_handler_1.default)((request, response,
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Customer Password Reset Successfully" });
 }));
 exports.fetchLoggedInCustomer = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = request.user._id; // Store the user in the user object
+    const user = request.user; // Store the user in the user object
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, user });
 }));

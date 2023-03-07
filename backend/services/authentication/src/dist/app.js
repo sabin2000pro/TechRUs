@@ -36,5 +36,5 @@ app.use((0, xss_clean_1.default)());
 app.use((0, hpp_1.default)());
 app.use((0, helmet_1.default)());
 app.use((0, express_mongo_sanitize_1.default)());
-app.use('/api/auth', auth_routes_1.authRouter);
+app.use('/api/v1/auth', auth_routes_1.authRouter);
 app.use(error_handler_1.errorHandler);
