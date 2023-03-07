@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { register } from '../../actions/auth-actions'
 
-
 const Register = () => { // Register Component
   const navigate = useNavigate();
   const dispatch = useDispatch();
