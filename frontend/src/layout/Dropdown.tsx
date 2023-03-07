@@ -2,15 +2,17 @@ import React from 'react'
 import { Menu} from '@headlessui/react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { logout } from '../actions/auth-actions'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const Dropdown = () => {
+    const dispatch = useDispatch();
 
     const onLogoutHandler = () => {
-        // Dispatch the logout event
+       dispatch(logout() as any);
     }
 
   return (
@@ -27,7 +29,7 @@ const Dropdown = () => {
 
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-          <div className="py-1">
+          <div className = "py-1">
 
             <Menu.Item> 
                 
@@ -45,15 +47,7 @@ const Dropdown = () => {
 
               {({ active }) => (
 
-                <a href="#" className = {classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-
-                 My Orders
-
-                </a>
+                <Link to = '/my-orders' className = {classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')} >My Orders</Link>
 
               )}
 
@@ -74,10 +68,10 @@ const Dropdown = () => {
 
           </div>
 
-
         </Menu.Items>
 
     </Menu>
+
   )
 }
 

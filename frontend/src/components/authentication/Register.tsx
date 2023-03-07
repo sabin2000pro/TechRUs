@@ -54,7 +54,7 @@ const Register = () => { // Register Component
              
                <div className = "flex items-center justify-center login-btn-container">
              
-               <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Login</button>
+               <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Register</button>
              
                </div>
              
