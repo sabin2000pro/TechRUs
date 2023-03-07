@@ -24,7 +24,7 @@ export const authReducer = (state = initialAuthState as any, action: any) => {
         case REGISTER_USER_FAIL:
             return {loading: false, isAuthenticated: false, error: action.payload}
 
-        case LOGIN_USER_REQUEST:
+        case LOGIN_USER_REQUEST: // The event when the user requests to login
             return {loading: true}
 
         case LOGIN_USER_SUCCESS:

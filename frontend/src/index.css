@@ -184,12 +184,16 @@ body {
   margin-top: 10px
 }
 
-.login-form-container {
+.auth-container {
   bottom: 100;
   width: 20%;
   margin-bottom: 450px;
-  height: 38%;
+  height: 45%;
   box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+.login-form {
+  height: 40%;
 }
 
 .login-inputs-container {
@@ -221,4 +225,12 @@ font-weight: bold;
   font-size: 18px;
   border: none;
   outline: none;
+}
+
+.login-form button {
+  margin-top: 50px
+}
+
+.username-container {
+  margin-bottom: 25px;
 }

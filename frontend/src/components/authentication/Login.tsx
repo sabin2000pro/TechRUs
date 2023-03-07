@@ -51,7 +51,7 @@ const Login: React.FC = () => {
           <>
              <div className = "flex justify-center items-center h-screen login-container">
 
-              <form method = "POST" onSubmit = {onLoginHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 login-form-container">
+              <form method = "POST" onSubmit = {onLoginHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container login-form">
 
                 <h1 className = "heading-primary h-login">User Login</h1>
 

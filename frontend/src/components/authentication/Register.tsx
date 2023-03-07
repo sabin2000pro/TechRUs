@@ -17,6 +17,7 @@ const Register = () => { // Register Component
 
   const onRegisterHandler = async (event) => {
      try {
+
          event.preventDefault()
          dispatch(register(username, email, password) as any);
 
@@ -56,20 +57,25 @@ const Register = () => { // Register Component
 
              <div className = "flex justify-center items-center h-screen login-container">
 
-             <form method = "POST" onSubmit = {onRegisterHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 login-form-container">
+             <form method = "POST" onSubmit = {onRegisterHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
              
                <h1 className = "heading-primary h-login">User Registration</h1>
+
+               <div className = "mb-4 login-container-inputs username-container">
+                     <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Username</label>
+                     <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
+               </div>
+               
              
                  <div className = "mb-4 login-container-inputs">
-            
                      <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
                      <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
-             
                </div>
-             
+
+            
                <div className = "mb-6 login-password-container">
-                   <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Password</label>
-                   <input className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
+                     <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Password</label>
+                     <input className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
                      {true && false ? <p className="text-red-500 text-xs italic">Please choose a password.</p> : ''}
                </div>
              
