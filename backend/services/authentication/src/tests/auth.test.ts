@@ -1,14 +1,14 @@
 require('dotenv').config();
 import { StatusCodes } from 'http-status-codes';
 import request from "supertest"
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 import {app} from '../app';
 
 const AUTH_SERVICE_DB_URI = process.env.AUTH_SERVICE_DB_URI || ""
  
 // Establish connection to the authentication service database before running all the tests
 beforeAll(async () => {
-    return await mongoose.connect(AUTH_SERVICE_DB_URI)
+    return await mongoose.connect("mongodb+srv://sabin2000:123mini123@techrus-auth-schema.mfj4iaa.mongodb.net/?retryWrites=true&w=majority")
 })
 
 describe("Register Unit Tests", () => {

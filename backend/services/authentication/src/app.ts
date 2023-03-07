@@ -36,7 +36,7 @@ app.use(hpp());
 app.use(helmet());
 app.use(mongoSanitize());
 
-app.use('/api/auth', authRouter);
+app.use('/api/v1/auth', authRouter);
 app.use(errorHandler);
 
 export {app};
