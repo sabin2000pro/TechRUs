@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Loader from '../../layout/Loader';
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
   const onLoginHandler = async (event) => {
     event.preventDefault();
     console.log(`On Login Handler Click`)
   }
-
   
   return (
 
     <>
+      <div className = "loader-container">
+         <Loader />
+      </div>
 
       <div className = "flex justify-center items-center h-screen login-container">
+
 
         <form method = "POST" onSubmit = {onLoginHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 login-form-container">
 

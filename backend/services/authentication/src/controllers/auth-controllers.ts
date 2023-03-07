@@ -214,6 +214,7 @@ export const logoutUser = asyncHandler(async (request: any, response: Response, 
         request.session = null;
         return response.status(StatusCodes.OK).json({success: true, message: "You have logged out successfully", user: null})
     }   
+    
 )
 
 export const verifyLoginMFA = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
