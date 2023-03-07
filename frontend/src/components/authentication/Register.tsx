@@ -67,7 +67,7 @@ const Register = () => { // Register Component
                </div>
                
              
-                 <div className = "mb-4 login-container-inputs">
+                 <div className = "mb-4 login-container-inputs email-container">
                      <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
                      <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
                </div>

@@ -188,7 +188,7 @@ body {
   bottom: 100;
   width: 20%;
   margin-bottom: 450px;
-  height: 45%;
+  height: 50%;
   box-shadow: 0 0 12px rgba(0,0,0,0.3);
 }
 
@@ -233,4 +233,9 @@ font-weight: bold;
 
 .username-container {
   margin-bottom: 25px;
+}
+
+.email-container {
+
+  margin-top: 50px;
 }

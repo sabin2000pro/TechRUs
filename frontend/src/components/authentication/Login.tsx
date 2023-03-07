@@ -22,13 +22,12 @@ const Login: React.FC = () => {
     dispatch(login(email, password) as any);
     setFormSubmitted((formSubmitted) => !formSubmitted);
 
-    navigate("/products")
   }
 
   useEffect(() => {
 
       if(isAuthenticated) {
-        console.log(`User : `, user);
+        navigate('/products')
       }
 
       if(error) {
@@ -44,12 +43,13 @@ const Login: React.FC = () => {
     
     <MetaData pageTitle = {`Login`} />
 
-     {isAuthenticated && user && <Alert message = {`Logged In`} />}
+     {isAuthenticated && <Alert message = {`Logged In`} />}
 
      {!loading && !isAuthenticated && !error && (
 
           <>
-             <div className = "flex justify-center items-center h-screen login-container">
+
+          <div className = "flex justify-center items-center h-screen login-container">
 
               <form method = "POST" onSubmit = {onLoginHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container login-form">
 
