@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer'
-import { fetchAllProducts, createNewProduct, fetchSingleProductByID, editProductByID, deleteAllProducts, deleteProductByID, uploadProductPhoto } from '../controllers/products-controllers';
+import { fetchAllProducts, createNewProduct, fetchSingleProductByID, editProductByID, deleteAllProducts, deleteProductByID, uploadProductPhoto, fetchNewProducts } from '../controllers/products-controllers';
 
 export const productRouter = express.Router();
 
@@ -22,4 +22,5 @@ const storage = multer.diskStorage({
 productRouter.route('/').get(fetchAllProducts).post(createNewProduct).delete(deleteAllProducts)
 productRouter.route('/:id').get(fetchSingleProductByID).put(editProductByID).delete(deleteProductByID);
 
+productRouter.route('/new').get(fetchNewProducts);
 productRouter.route('/upload-product-photo').post(uploadProductPhoto, productFileUpload.single("photo"));

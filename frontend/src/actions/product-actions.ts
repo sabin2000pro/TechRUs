@@ -6,7 +6,7 @@ let PRODUCTS_ENDPOINT = `http://localhost:5404/api/v1/products`;
 export const fetchProducts = () => async (dispatch: any) => {
 
     try {
-        
+
       dispatch({type: FETCH_ALL_PRODUCTS_REQUEST});
 
       const {data} = await axios.get(PRODUCTS_ENDPOINT);
@@ -31,6 +31,7 @@ export const fetchProducts = () => async (dispatch: any) => {
 export const fetchNewProducts = () => async (dispatch: any) => {
 
     try {
+        
         dispatch({type: FETCH_NEW_PRODUCTS_REQUEST});
         const {data} = await axios.get(``)
     } 
