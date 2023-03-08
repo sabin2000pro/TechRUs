@@ -112,12 +112,15 @@ UserSchema.pre('save', async function(next) {
     }
 
     const SALT_ROUNDS = 10;
+    
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    this.password = await bcrypt.hash(this.password, salt); // Hash the password before saving to DB
 
     return next();
 })
 
-UserSchema.methods.fetchAuthToken = function() {
-
+UserSchema.methods.fetchAuthToken = function() { // Function responsible for returning the signed JWT token
+    return jwt.sign({_id: this._id, email: this.email}, process.env.JWT_TOKEN, {expiresIn: process.env.JWT_EXPIRES_IN})
 }
 
 UserSchema.methods.comparePasswords = async function(enteredPassword: string) {
