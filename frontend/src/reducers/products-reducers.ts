@@ -1,5 +1,5 @@
 import { FETCH_NEW_PRODUCTS_SUCCESS, FETCH_NEW_PRODUCTS_FAIL } from './../constants/products-constants';
-import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, CLEAR_ERRORS, FETCH_NEW_PRODUCTS_REQUEST} from "../constants/products-constants";
+import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS, FETCH_SINGLE_PRODUCT_FAIL, FETCH_ALL_PRODUCTS_FAIL, CLEAR_ERRORS, FETCH_NEW_PRODUCTS_REQUEST} from "../constants/products-constants";
 
 const productsInitialState = {
     products: []
@@ -39,10 +39,16 @@ export const productsReducer = (state = productsInitialState as any, action: any
     }
 }
 
-export const singleProductReducer = (state = singleProductInitialState as any, action) => {
+// Reducer that is responsible for fetching the product details for one single product
+export const singleProductReducer = (state = singleProductInitialState as any, action: any) => {
 
     switch(action.type) {
+        
+        case CLEAR_ERRORS:
+            return {error: null}
 
+        default:
+            return state
     }
 
 }

@@ -1,11 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
-const ShippingScreen = () => {
+const ShippingScreen: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
 
-    <div>
+    <>
+       <h2>Porduct Shipping Screen</h2>
+    </>
 
-    </div>
   )
 }
 
