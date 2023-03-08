@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import ForgotPassword from './components/authentication/ForgotPassword';
 import Footer from './layout/Footer';
 
+import ResetPassword from './components/authentication/ResetPassword';
+
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -33,6 +35,7 @@ const App: React.FC = () => {
            <Route path = '/user-register' element = {<Register />} />
            <Route path = '/user-login' element = {<Login />} />
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
+           <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
         </Routes>
 
 

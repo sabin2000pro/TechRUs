@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Home = () => {
   const dispatch = useDispatch();
+  const {loading, error, products} = useSelector((state: any) => state.products);
 
 
   return (
@@ -59,7 +60,7 @@ const Home = () => {
 
       <h2 className="text-lg font-medium mb-2 heading-secondary">Product 3</h2>
 
-      <img src = "/images/ipad129.jpg" className = "mt-5 product-img" />
+      <img src = "/images/appleseries5.jpg" className = "mt-5 product-img" />
       <p className = "product-descriptions">Price: £999.99</p>
       <p className = "product-descriptions stock-text">In Stock</p>
 
