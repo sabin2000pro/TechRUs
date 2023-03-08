@@ -1,10 +1,9 @@
 require('dotenv').config();
 import { connectAuthDatabase } from '../authentication/src/database/auth-schema';
 import { connectProductsSchema } from './../products/src/database/products-db';
-import { connectUsersSchema } from '../users-service/src/database/users-schema';
 import {connectOrdersSchema} from './../orders/src/database/orders-schema';
 import { connectPaymentsSchema } from './../payments/src/database/payments-schema';
-import {User} from '../users-service/src/model/user-model';
+import {User} from '../authentication/src/models/user-model';
 import {Product} from '../products/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
 import {Payment} from '../payments/src/models/payment-model';
@@ -19,7 +18,6 @@ import payments from '../payments/src/data/payments.json';
 const connectServiceSchemas = () => {
     connectAuthDatabase();
     connectProductsSchema();
-    connectUsersSchema();
     connectOrdersSchema();
     connectPaymentsSchema();
 }
