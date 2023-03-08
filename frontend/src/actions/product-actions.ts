@@ -17,6 +17,7 @@ export const fetchProducts = () => async (dispatch: any) => {
 }
 
 export const fetchNewProducts = () => async (dispatch: any) => {
+    
     try {
 
     } 
