@@ -15,7 +15,6 @@ interface IUserSchemaDocument {
     storePoints: number;
     startShiftDate: Date;
     endShiftDate: Date
-    rides: any;
     accountActive: boolean;
     createdAt: Date
 
@@ -85,19 +84,6 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
       default: 0
     },
 
-    rides: [{ // Used for later development of the application for the taxi-hauling feature for the e-commerce stores that handles delivery of products as a second option of delivery
-        rideId: String,
-        pickupLocation: String,
-        dropoffLocation: String,
-        rideType: String,
-        rideStatus: String,
-        driver_id: String,
-        fare: Number,
-        createdAt: Date,
-        updatedAt: Date
-    }],
-
-
     createdAt: {
         type: Date,
         default: Date.now
@@ -124,7 +110,7 @@ UserSchema.methods.fetchAuthToken = function() { // Function responsible for ret
 }
 
 UserSchema.methods.comparePasswords = async function(enteredPassword: string) {
-   return bcrypt.compare()
+   return bcrypt.compare(enteredPassword, this.password);
 }
 
 
