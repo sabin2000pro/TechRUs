@@ -444,11 +444,22 @@ export const editUserByID = asyncHandler(async(request: any, response: Response,
 })
 
 export const editUserShifts = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    const id = request.params.id;
+    const {startShiftDate, endShiftDate} = request.body;
+    const user = await User.findById(id);
+
+    if(!isValidObjectId(id)) {
+
+    }
+
     
 })
 
 export const deleteUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
+    await User.findByIdAndDelete(id);
+
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "User deleted succesfully"});
 })
 
 export const deleteAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
