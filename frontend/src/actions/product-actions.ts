@@ -65,6 +65,7 @@ export const createNewProduct = () => async (dispatch: any) => {
     catch(error) {
 
     }
+
 }
 
 export const editProductByID = (productId) => async (dispatch: any) => {
@@ -77,6 +78,7 @@ export const editProductByID = (productId) => async (dispatch: any) => {
     }
 
 }
+
 
 
 export const deleteProducts = () => async (dispatch: any) => {
