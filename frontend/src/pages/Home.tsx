@@ -2,9 +2,25 @@ import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MetaData from '../layout/MetaData';
 
+
 const Home = () => {
   const dispatch = useDispatch();
   const {loading, error, products} = useSelector((state: any) => state.products);
+
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+    }
+
+    fetchAllProducts();
+  }, [])
 
   return (
 
