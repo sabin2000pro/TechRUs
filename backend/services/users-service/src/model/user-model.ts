@@ -72,7 +72,7 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
         type: Date,
         default: Date.now
     },
-    
+
     accountActive: {
         type: Boolean,
         default: false
@@ -102,6 +102,7 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
     }
 
 }, {timestamps: true});
+
 
 
 const User = mongoose.model("User", UserSchema);

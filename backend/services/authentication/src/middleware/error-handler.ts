@@ -1,6 +1,6 @@
 require('dotenv').config();
 import { ErrorResponse } from '../utils/error-response';
-import express, {NextFunction} from 'express';
+import {NextFunction} from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 let ERROR_TYPES = ['CastError']

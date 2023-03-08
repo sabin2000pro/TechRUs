@@ -1,5 +1,7 @@
 require('dotenv').config();
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 interface IUserSchemaDocument {
     username: string;
@@ -102,6 +104,25 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
     }
 
 }, {timestamps: true});
+
+//@ description: Pre-middleware function which hashes the user password before saving it to the database
+UserSchema.pre('save', async function(next) {
+    if(!this.isModified("password")) {
+        return next();
+    }
+
+    const SALT_ROUNDS = 10;
+
+    return next();
+})
+
+UserSchema.methods.fetchAuthToken = function() {
+
+}
+
+UserSchema.methods.comparePasswords = async function(enteredPassword: string) {
+   return bcrypt.compare()
+}
 
 
 const User = mongoose.model("User", UserSchema);
