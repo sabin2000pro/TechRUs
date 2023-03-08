@@ -1,4 +1,4 @@
-import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from './../constants/auth-constants';
+import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
 import { fetchTokenFromSessionStorage } from '../fetch-auth-token';
 import axios from 'axios';
@@ -79,8 +79,6 @@ export const login = (email: string, password: string) => async (dispatch) => {
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/login`, {email, password}, config);
         dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
 
-        console.log(`Payload : `, data.user);
-    
         sessionStorage.setItem("token", JSON.stringify(data.token));
         sessionStorage.setItem("user", JSON.stringify(data.user));
     } 
@@ -100,21 +98,18 @@ export const login = (email: string, password: string) => async (dispatch) => {
 export const fetchLoggedInUser = () => async (dispatch) => {
 
     try {
+
         dispatch({type: LOAD_USER_REQUEST})
         const token = JSON.parse(sessionStorage.getItem("token") as any);
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
         const {data} = await axios.get(`http://localhost:5400/api/v1/auth/me`, config);
-
-        console.log(`Logged in user data : `, data);
-
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user});
     } 
     
     catch(error) {
 
       if(error) {
-        console.error(`Load Logged In User Error : `, error);
         dispatch({type: LOAD_USER_FAIL, payload: error.data.response.message});
       }
 
@@ -125,11 +120,16 @@ export const fetchLoggedInUser = () => async (dispatch) => {
 } 
 
 export const forgotPassword = (email: string) => async (dispatch) => {
-    try {
 
-    } 
+    try {
+        dispatch({type: FORGOT_PASSWORD_REQUEST});
+    }     
     
     catch(error) {
+
+      if(error) {
+
+      }
 
     }
 
