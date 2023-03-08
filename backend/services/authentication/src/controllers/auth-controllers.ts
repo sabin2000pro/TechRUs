@@ -162,7 +162,7 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
         user.accountActive = true;
 
         await user.save();
-        await EmailVerification.findByIdAndDelete(token._id); // Find the token and delete it
+        await EmailVerification.findByIdAndDelete(token._id); // Find the token that belongs to the user and delete it
 
         const transporter = createEmailTransporter();
 
