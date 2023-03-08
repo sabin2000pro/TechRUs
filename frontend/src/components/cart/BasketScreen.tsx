@@ -1,15 +1,15 @@
 import React from 'react'
 
-const Cart = () => {
+const BasketScreen = () => {
     
   return (
 
     <>
-
+      <h2 className = "heading-secondary">Basket Screen</h2>
     </>
 
 
   )
 }
 
-export default Cart
+export default BasketScreen
