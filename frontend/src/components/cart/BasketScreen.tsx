@@ -1,11 +1,19 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-const BasketScreen = () => {
+const BasketScreen: React.FC = () => {
+  const dispatch = useDispatch();
     
   return (
 
     <>
-      <h2 className = "heading-secondary">Basket Screen</h2>
+
+      <div className = "flex justify-center basket-container">
+         <h2 className = "heading-secondary basket-heading">Your Basket</h2>
+      </div>
+
+
     </>
 
 

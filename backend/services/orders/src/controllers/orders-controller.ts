@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import { ErrorResponse } from '../utils/error-response';
 import {Order} from '../model/order-model';
 import {StatusCodes} from 'http-status-codes';
@@ -14,7 +15,7 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
        })
        
        if(!orders) {
-            return next(new ErrorResponse(`Could not find any orders`, StatusCodes.BAD_REQUEST));
+            return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
        }
 
        return response.status(StatusCodes.OK).json({success: true, orders});
@@ -40,11 +41,12 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
     const {orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice} = request.body;
     
     // Validate the request body before creating a new instance of order
+    if(!orderItems || !shippingInformation || !orderStatus || !paymentInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
+        return next(new ErrorResponse(`Some order fields are missing. Please check your entries`, StatusCodes.BAD_REQUEST));
+    }
 
     const order = await Order.create({orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
     await order.save();
-
-    console.log(`Created Order : `, order);
 
     return response.status(StatusCodes.CREATED).json({success: true, order});
 } )
@@ -77,5 +79,11 @@ export const deleteOrders = asyncHandler(async (request: any, response: Response
 })
 
 export const deleteSingleOrderByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-   
+    const id = request.params.id;
+
+    if(!isValidObjectId(id)) {
+        return next(new ErrorResponse(`Order with ID : ${id} - does not exist`, StatusCodes.BAD_REQUEST));
+    }
+
+    await Order.findByIdAndDelete(id);
 })

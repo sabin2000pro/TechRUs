@@ -1,4 +1,4 @@
-import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST } from './../constants/auth-constants';
+import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, VERIFY_USER_EMAIL_FAIL, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
 import { fetchTokenFromSessionStorage } from '../fetch-auth-token';
 import axios from 'axios';
@@ -19,7 +19,6 @@ export const register = (username: string, email: string, password: string) => a
     catch(error) {
 
         if(error) {
-            console.error(`Register Error : `, error);
             dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
         }
     }
@@ -42,7 +41,7 @@ export const logout = () => async (dispatch) => {
     catch(error) {
 
       if(error) {
-        dispatch({type: LOGOUT_USER_FAIL, payload: error.data.response.message});
+         dispatch({type: LOGOUT_USER_FAIL, payload: error.data.response.message});
       }
 
     }
@@ -54,6 +53,11 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
 
     try {
 
+       dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
+       const config = processConfigHeader();
+
+       const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, userOTP}, config);
+       console.log("`E-mail Verification Data : ", data);
     } 
     
     catch(error) {
@@ -67,8 +71,14 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
 }
 
 export const verifyLoginCode = (userId: string, mfaToken: string) => async (dispatch) => {
+    try {
+
+    } 
     
-}
+    catch(error) {
+
+    }
+}    
     
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login
 // @parameters: (email): Stores the e-mail of the customer here. (password): Stores the customers inputted password
@@ -126,13 +136,26 @@ export const fetchLoggedInUser = () => async (dispatch) => {
 export const forgotPassword = (email: string) => async (dispatch) => {
 
     try {
+        
         dispatch({type: FORGOT_PASSWORD_REQUEST});
+        const config = processConfigHeader();
+        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/forgot-password`, {email}, config);
+        const message = data.message;
+        console.log(`Forgot Password Data : `, data);
+        console.log(`Forgot password message : `, message);
+
+        dispatch({type: FORGOT_PASSWORD_SUCCESS, payload: message});
     }     
     
     catch(error) {
 
       if(error) {
 
+        if(error) {
+
+            console.log(`Forgot Password Error : `, error);
+            dispatch({type: FORGOT_PASSWORD_FAIL, payload: error.data.response.message});
+          }
       }
 
     }

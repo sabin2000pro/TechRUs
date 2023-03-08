@@ -317,3 +317,15 @@ font-weight: bold;
   font-size: 24px;
   margin-top: 18px;
 }
+
+.basket-container {
+  transform: translateX(-50%);
+  margin-left: 400px;
+  margin-top: 70px;
+}
+
+.basket-heading {
+  left: 50%;
+  font-size: 32px;
+  font-weight: bold;
+}
