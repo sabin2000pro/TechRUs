@@ -8,6 +8,7 @@ interface IEmailVerificationSchema {
     otpToken: string;
     expiresAt: Date;
     createdAt: Date;
+    compareVerificationTokens: (currentOTP: string) => any
 }
 
 export const EmailVerificationSchema = new mongoose.Schema<IEmailVerificationSchema>({

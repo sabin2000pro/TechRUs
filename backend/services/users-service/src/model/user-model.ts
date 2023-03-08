@@ -14,6 +14,8 @@ interface IUserSchemaDocument {
     startShiftDate: Date;
     endShiftDate: Date
     rides: any;
+    accountActive: boolean;
+    createdAt: Date
 
     fetchAuthToken: () => any;
     comparePasswords: (enteredPassword: string) => Promise<any>;
@@ -70,6 +72,11 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
         type: Date,
         default: Date.now
     },
+    
+    accountActive: {
+        type: Boolean,
+        default: false
+    },
 
     storePoints: {
       type: Number,
@@ -86,7 +93,13 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
         fare: Number,
         createdAt: Date,
         updatedAt: Date
-    }]
+    }],
+
+
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 
 }, {timestamps: true});
 

@@ -80,7 +80,6 @@ export const sendResetPasswordTokenStatus = async (request: Request, response: R
 }
 
 export const registerUser = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
-        const EVENT_TYPE = 'UserRegistered';
         const {username, email, password} = request.body;
 
         if(!username || !email || !password) {
@@ -112,8 +111,6 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         console.log(`Your User OTP Verification`, userOTPVerificationCode)
         await userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
-        // Send AXIOS POST request to the Event Bus Service. The POST request must send the type of event been emitted to the event bus which is 'UserRegistered'
-
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
     } 
 
@@ -121,25 +118,72 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
 
 export const verifyEmailAddress = asyncHandler(async (request: Request, response: Response, next: NextFunction): Promise<any> => {
 
-        const {userId, OTP} = request.body; // Extract the user id and OTP from the request body
-        const currentCustomer = await User.findById(userId);
+    const {userId, OTP} = request.body;
+    const user = await User.findById(userId);
 
-        if(!isValidObjectId(userId)) {
-            return next(new ErrorResponse("The User ID is invalid. Please verify it again", StatusCodes.BAD_REQUEST));
-        }
+    // Check for invalid User ID
+    if(!isValidObjectId(userId)) {
+        return next(new ErrorResponse("User ID not found. Please check your entry again.", StatusCodes.NOT_FOUND))
+    }
 
-        if(!OTP) { // If there is no OTP present
-           return next(new ErrorResponse("OTP is invalid, please check it again", StatusCodes.BAD_REQUEST));
-        } 
+    // Check for missing OTP
+    if(!OTP) {
+        return next(new ErrorResponse("OTP Entered not found. Please check your entry", StatusCodes.NOT_FOUND))
+    }
 
-        if(!currentCustomer) {
-            return next(new ErrorResponse(`Customer that ID ${userId} does not exist`, StatusCodes.BAD_REQUEST));
-        }
+    if(!user) {
+        return next(new ErrorResponse(`No user found with that ID`, StatusCodes.BAD_REQUEST));
+    }
 
-        return response.status(StatusCodes.OK).json({success: true, message: "User e-mail verified"})
+    // If the user is already verified
+    if(user.isVerified) {
+        return next(new ErrorResponse(`User account is already verified`, StatusCodes.BAD_REQUEST));
+    }
+
+    if(user.isActive) { // If the user account is already active before verifying their e-mail address, send back error
+        return next(new ErrorResponse(`User account is already active`, StatusCodes.BAD_REQUEST));
+    }
+
+    const token = await EmailVerification.findOne({owner: userId}); // Find a verification token
+
+    if(!token) {
+        return next(new ErrorResponse(`OTP Verification token is not found. Please try again`, StatusCodes.BAD_REQUEST));
+    }
+
+    const otpTokensMatch = await token.compareVerificationTokens(OTP); // Check if they match
+
+    if(!otpTokensMatch) {
+        return next(new ErrorResponse(`The token you entered does not match the one in the database.`, StatusCodes.BAD_REQUEST));
+    }
+
+    if(otpTokensMatch) { // If the OTP Tokens Match
+
+        user.isVerified = true // Set theu ser is Verified field to true
+        user.accountActive = true;
+
+        await user.save();
+        await EmailVerification.findByIdAndDelete(token._id); // Find the token and delete it
+
+        const transporter = createEmailTransporter();
+
+            // Send welcome e-mail
+            transporter.sendMail({
+
+                from: 'welcome@techrus.com',
+                to: user.email,
+                subject: 'E-mail Confirmation Success',
+                html: `
+                
+                <h1> Welcome to TechRUs. Thank you for confirming your e-mail address.</h1>
+                `
+            })
+
+        const jwtToken = user.fetchAuthToken();
+        request.session = {token: jwtToken} as any || undefined;  // Get the authentication JWT token
+
+        return response.status(StatusCodes.CREATED).json({message: "E-mail Address verified"});
     } 
-
-)
+})
 
 export const resendEmailVerificationCode = asyncHandler (async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
@@ -300,20 +344,20 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse("Please provide your new password", StatusCodes.BAD_REQUEST));
         }
     
-        const customer = await User.findById(<any>request.user._id);
+        const user = await User.findById(<any>request.user._id);
     
-        if(!customer) {
+        if(!user) {
             return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
         }
     
-        const currentPasswordMatch = customer.comparePasswords(currentPassword);
+        const currentPasswordMatch = user.comparePasswords(currentPassword);
     
         if(!currentPasswordMatch) { // If passwords do not match
             return next(new ErrorResponse("Current user password is invalid.", StatusCodes.BAD_REQUEST))
         }
     
-        customer.password = request.body.newPassword
-        await customer.save(); // Save new user
+        user.password = request.body.newPassword
+        await user.save(); // Save new user
     
         return response.status(StatusCodes.OK).json({success: true, message: "User password updated"});
     } 

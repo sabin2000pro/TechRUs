@@ -58,6 +58,8 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
 
        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, userOTP}, config);
        console.log("`E-mail Verification Data : ", data);
+
+
     } 
     
     catch(error) {
@@ -78,6 +80,7 @@ export const verifyLoginCode = (userId: string, mfaToken: string) => async (disp
     catch(error) {
 
     }
+
 }    
     
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login
