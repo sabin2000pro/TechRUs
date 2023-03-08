@@ -50,7 +50,7 @@ export const logout = () => async (dispatch) => {
 
 }
 
-export const verifyCustomerEmail = (userId: string, userOTP: string) => async (dispatch) => {
+export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch) => {
 
     try {
 
@@ -64,6 +64,10 @@ export const verifyCustomerEmail = (userId: string, userOTP: string) => async (d
 
     }
 
+}
+
+export const verifyLoginCode = (userId: string, mfaToken: string) => async (dispatch) => {
+    
 }
     
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login

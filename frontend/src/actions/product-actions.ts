@@ -5,6 +5,7 @@ import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODU
 let PRODUCTS_ENDPOINT = `http://localhost:5404/api/v1/products`;
 
 
+//@ description: Redux action which fetches all of the products from the backend in JSON format
 export const fetchProducts = () => async (dispatch: any) => {
 
     try {
