@@ -43,6 +43,15 @@ export const productsReducer = (state = productsInitialState as any, action: any
 export const singleProductReducer = (state = singleProductInitialState as any, action: any) => {
 
     switch(action.type) {
+
+        case FETCH_SINGLE_PRODUCT_REQUEST:
+            return {loading: true}
+
+        case FETCH_SINGLE_PRODUCT_SUCCESS:
+            return {...state, loading: false, product: action.payload}
+
+        case FETCH_SINGLE_PRODUCT_FAIL:
+            return {loading: false, error: action.payload}
         
         case CLEAR_ERRORS:
             return {error: null}
