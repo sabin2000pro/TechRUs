@@ -410,7 +410,7 @@ export const fetchAllUsers = asyncHandler(async(request: any, response: Response
     const users = await User.find();
 
     if(!users) {
-
+        return next(new ErrorResponse(`No users found`, StatusCodes.BAD_REQUEST));
     }
 
     return response.status(StatusCodes.OK).json({success: true, users});
@@ -422,11 +422,11 @@ export const fetchUserByID = asyncHandler(async(request: any, response: Response
     const user = await User.findById(id);
 
     if(!isValidObjectId(id)) {
-
+        return next(new ErrorResponse(`No ID provided. Please try again`, StatusCodes.BAD_REQUEST));
     }
 
     if(!user) {
-
+      return next(new ErrorResponse(`No user found with that ID ${id} - pleasae try again`, StatusCodes.BAD_REQUEST));
     }
 
     return response.status(StatusCodes.OK).json({success: true, user});
@@ -434,6 +434,13 @@ export const fetchUserByID = asyncHandler(async(request: any, response: Response
 
 export const editUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
+    let user = await User.findById(id);
+
+    if(!user) {
+        return next(new ErrorResponse(`No user found with that ID`, StatusCodes.BAD_REQUEST));
+    }
+
+    user = await User.findByIdAndUpdate(id, request.body, {new: true, runValidators: true});
 })
 
 export const editUserShifts = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -441,7 +448,7 @@ export const editUserShifts = asyncHandler(async(request: any, response: Respons
 })
 
 export const deleteUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
-    
+    const id = request.params.id;
 })
 
 export const deleteAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
