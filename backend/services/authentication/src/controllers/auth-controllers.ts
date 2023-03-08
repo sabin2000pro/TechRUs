@@ -405,3 +405,45 @@ export const fetchLoggedInCustomer = asyncHandler(async (request: any, response:
     } 
 
 )
+
+export const fetchAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    const users = await User.find();
+
+    if(!users) {
+
+    }
+
+    return response.status(StatusCodes.OK).json({success: true, users});
+
+})
+
+export const fetchUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    const id = request.params.id;
+    const user = await User.findById(id);
+
+    if(!isValidObjectId(id)) {
+
+    }
+
+    if(!user) {
+
+    }
+
+    return response.status(StatusCodes.OK).json({success: true, user});
+})
+
+export const editUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    const id = request.params.id;
+})
+
+export const editUserShifts = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    
+})
+
+export const deleteUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    
+})
+
+export const deleteAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    
+})
