@@ -1,6 +1,5 @@
+require('dotenv').config();
 import { StatusCodes } from 'http-status-codes';
-import dotenv from 'dotenv';
-dotenv.config({path: './config.env'})
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -18,7 +17,7 @@ if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
-app.get('/', async (request, response, next) => {// Route to test the authenticationmiddleware
+app.get('/', async (request, response, next) => {// Route to test the authentication middleware (WILL BE MOVED TO API GATEWAY)
     try {
         
         const responsePromise = await axios.get(`http://localhost:5400`, {headers: {Authorization: request.headers.authorization}}); // Route that requires authentication for fetching a list of orders    
