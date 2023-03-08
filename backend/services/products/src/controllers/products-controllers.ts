@@ -6,7 +6,9 @@ import {StatusCodes} from 'http-status-codes';
 import {isValidObjectId} from 'mongoose';
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+
         const products = await Product.find();
+        const numberOfProducts = await Product.countDocuments({}); // Get the total number of products there are in the database
 
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})

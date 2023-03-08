@@ -1,3 +1,3 @@
-export const advancedCustomerResults = (currentModel, populate) => async (request, response, next) => {
+export const advancedUserResults = (currentModel, populate) => async (request, response, next) => {
 
 }
