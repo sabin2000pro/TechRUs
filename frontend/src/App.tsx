@@ -9,6 +9,7 @@ import ForgotPassword from './components/authentication/ForgotPassword';
 import Footer from './layout/Footer';
 
 import ResetPassword from './components/authentication/ResetPassword';
+import BasketScreen from './components/cart/BasketScreen';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -17,6 +18,18 @@ const App: React.FC = () => {
    useEffect(() => {
 
       const fetchStripeKey = async () => {
+         try {
+            console.log(`The stripe key : `, stripeApiKey);
+
+            setStripeApiKey(stripeApiKey);
+         }
+         
+         catch(error) {
+            if(error) {
+               return console.error(error);
+            }
+         }
+
 
       }
 
@@ -33,6 +46,7 @@ const App: React.FC = () => {
         <Routes>
            <Route path = '/products' element = {<Home />} />
            <Route path = '/user-register' element = {<Register />} />
+           <Route path = '/my-basket' element = {<BasketScreen />} />
            <Route path = '/user-login' element = {<Login />} />
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
