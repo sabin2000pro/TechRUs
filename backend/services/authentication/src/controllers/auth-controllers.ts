@@ -287,7 +287,7 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
         const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${user._id}` // Create the reset password URL
         sendForgotPasswordResetLink(user, resetPasswordURL); // Send the reset password e-mail to the customer
     
-        return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent", email });
+        return response.status(StatusCodes.OK).json({success: true, message: "Reset Password E-mail Sent"});
         
     } 
 )
