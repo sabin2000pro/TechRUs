@@ -398,7 +398,7 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 
 )
 
-export const fetchLoggedInCustomer = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+export const fetchLoggedInUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
         const user = request.user; // Store the user in the user object
         return response.status(StatusCodes.OK).json({success: true, user});
