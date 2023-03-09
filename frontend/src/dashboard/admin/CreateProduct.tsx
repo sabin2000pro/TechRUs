@@ -1,18 +1,14 @@
 import React from 'react'
 import axios from 'axios';
 
-export interface ICreateProductProps {
-
-}
-
-export const CreateProduct: React.FC<ICreateProductProps> = ({}) => {
+const CreateProduct: React.FC = () => {
     
   return (
 
     <>
 
        <div className = "create-container">
-           <h2>Create Product Page</h2>
+           <h2 className = "heading-secondary">Create Product Page</h2>
        </div>
 
     </>
@@ -20,3 +16,5 @@ export const CreateProduct: React.FC<ICreateProductProps> = ({}) => {
   )
 
 }
+
+export default CreateProduct

@@ -11,6 +11,8 @@ import Footer from './layout/Footer';
 import ResetPassword from './components/authentication/ResetPassword';
 import BasketScreen from './components/cart/BasketScreen';
 import Profile from './components/authentication/Profile';
+import Dashboard from './dashboard/admin/Dashboard';
+import CreateProduct from './dashboard/admin/CreateProduct';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -53,6 +55,8 @@ const App: React.FC = () => {
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
 
            <Route path = '/my-profile' element = {<Profile />} />
+           <Route path = '/admin-dashboard' element = {<Dashboard />} />
+           <Route path = '/admin-dashboard/create-product' element = {<CreateProduct } />
         </Routes>
 
 
