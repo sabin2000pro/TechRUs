@@ -14,6 +14,7 @@ import Profile from './components/authentication/Profile';
 import Dashboard from './dashboard/admin/Dashboard';
 import CreateProduct from './dashboard/admin/CreateProduct';
 import EditProduct from './dashboard/admin/EditProduct';
+import UploadProductPhoto from './dashboard/admin/UploadProductPhoto';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -58,6 +59,7 @@ const App: React.FC = () => {
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
            <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
            <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />
+           <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
         </Routes>
 
 
