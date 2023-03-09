@@ -10,6 +10,10 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
         const products = await Product.find();
         const numberOfProducts = await Product.countDocuments({}); // Get the total number of products there are in the database
 
+        if(numberOfProducts < 3) {
+             // Send Error Response & send low stock e-mail to the inbox of manager
+        }
+
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
         }
@@ -36,6 +40,10 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 ``
        request.body.user = request.user._id; // When creating a product, add the currently logged in user to the body of the request
        const {name, description, warranty, image, price, stockCount, lowStockAlert, isNew} = request.body;
+
+       if(stockCount < 3) {
+          // Send Error Response & send low stock e-mail to the inbox of manager
+       }
 
        if(!name.toString() || !description.toString() || !warranty.toString() || !image.toString() || !price.toString() || !stockCount || !lowStockAlert || !isNew) {
            return next(new ErrorResponse(`Some entries are missing. Please check again when creating a product`, StatusCodes.BAD_REQUEST));

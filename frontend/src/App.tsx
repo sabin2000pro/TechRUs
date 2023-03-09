@@ -15,6 +15,7 @@ import Dashboard from './dashboard/admin/Dashboard';
 import CreateProduct from './dashboard/admin/CreateProduct';
 import EditProduct from './dashboard/admin/EditProduct';
 import UploadProductPhoto from './dashboard/admin/UploadProductPhoto';
+import UpdatePassword from './components/authentication/UpdatePassword';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -54,6 +55,7 @@ const App: React.FC = () => {
            <Route path = '/user-login' element = {<Login />} />
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
+           <Route path = '/update-password' element = {<UpdatePassword />} />
 
            <Route path = '/my-profile' element = {<Profile />} />
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
