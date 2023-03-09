@@ -8,16 +8,15 @@ export const fetchUserOrders = async (request: any, response: Response, next: Ne
 }
 
 export const createProductWithAuthUser = async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    request.user = {id: request.user._id, email: request.user.email};
-
     const authResponse = await axios.get('http://localhost:5400/api/v1/auth/me', {
 
       headers: {
         Authorization: request.headers.authorization
       }
 
-    });
+    });    
 
+    console.log(`Auth Response : `, authResponse);
     const data = authResponse.data;
     console.log(data);
 

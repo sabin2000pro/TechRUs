@@ -24,6 +24,9 @@ services:
     container_name: techrus-auth-api
     image: sabin2000/techrus-auth-service
 
+    networks:
+      - my-service-network
+
     build:
       context: ../backend/services/authentication
       dockerfile: Dockerfile
