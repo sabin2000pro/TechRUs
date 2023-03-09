@@ -2,24 +2,37 @@ import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
 import {Response, NextFunction} from 'express';
 
+const LOGGED_IN_USER_ENDPOINT = `http://auth-service:5400/api/v1/auth/me`
+const USER_ORDERS_ENDPOINT = `http://orders-service:5403/api/v1/orders/my-orders`
+
 export const fetchUserOrders = async (request: any, response: Response, next: NextFunction) => {
-      const ordersResponse = await axios.get(`http://localhost:5403/api/orders/list`);
+      const authorization = request.headers
+      const ordersResponse = await axios.get(USER_ORDERS_ENDPOINT, {headers: {Authorization: request.headers.authorization} })
       return response.status(StatusCodes.OK).json({success: true, ordersResponse});
 }
 
 export const createProductWithAuthUser = async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const authResponse = await axios.get('http://localhost:5400/api/v1/auth/me', {
 
-      headers: {
-        Authorization: request.headers.authorization
-      }
+    try {
 
-    });    
+        const authResponse = await axios.get(LOGGED_IN_USER_ENDPOINT, {headers: {Authorization: request.headers.authorization}
+  
+      });    
+  
+      const userResponse = authResponse.data.user;
+      const user = userResponse._id;
+      const userEmail = userResponse.email;
 
-    console.log(`Auth Response : `, authResponse);
-    const data = authResponse.data;
-    console.log(data);
+      request.user = {_id: user, email: userEmail};
+      return response.status(StatusCodes.OK).json({success: true, data: request.user});
+    }
+    
+    catch(error) {
 
-    console.log(`Auth Response for logg in user : `, authResponse);
-    return response.status(StatusCodes.OK).json({success: true, message: "user fetched"});
+     if(error) {
+        return console.error(error);
+     }
+    }
+
+
 }

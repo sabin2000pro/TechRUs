@@ -8,6 +8,7 @@ services:
 
     networks:
       - my-service-network
+      - auth-service
 
     build:
       context: ../backend/services/api-gateway
@@ -26,6 +27,7 @@ services:
 
     networks:
       - my-service-network
+      - auth-service
 
     build:
       context: ../backend/services/authentication
@@ -81,6 +83,7 @@ services:
 
     networks:
       - my-service-network
+      - orders-service
 
     build:
       context: ../backend/services/orders
@@ -174,3 +177,9 @@ volumes:
 networks:
   my-service-network:
     driver: bridge
+    external: true
+
+  auth-service:
+    external: true
+  orders-service:
+    external: true
