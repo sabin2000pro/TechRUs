@@ -21,13 +21,12 @@ export const basketReducer = (state = initialCartItems, action: any) => {
                 return {...state, cartItems: state.cartItems.map((item: any) => item.product === currCartItemExists.product ? currItem : item)}
             }
 
-            else {
+            else { // Otherwise, return all the cart items and the current item to add if the current cart item does not exist
                 return {...state, cartItems: [state.cartItems, currItem]}
             }
 
         case REMOVE_ITEM_FROM_BASKET:
-            const currentItemToRemove = action.payload
-            return {...state, cartItems: state.cartItems.filter((currentItemToRemove: any) => currentItemToRemove.product !== currentItemToRemove)}
+            return {...state, cartItems: state.cartItems.filter((currentItemToRemove: any) => currentItemToRemove.product !== action.payload)}
 
         case CLEAR_BASKET_ITEMS: // Reset the cart items, set the array to empty
             return {...state, cartItems: []}
