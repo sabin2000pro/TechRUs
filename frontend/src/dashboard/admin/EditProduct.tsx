@@ -1,11 +1,8 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 
-export interface IEditProductProps {
-    id: string
-}
 
-export const EditProduct: React.FC<IEditProductProps> = ({id}) => {
+const EditProduct: React.FC = () => {
     const navigate = useNavigate();
 
   return (
@@ -13,7 +10,7 @@ export const EditProduct: React.FC<IEditProductProps> = ({id}) => {
     <>
 
        <div className = "edit-container">
-          <h2>Edit Product Page</h2>
+          <h2 className = "heading-secondary">Edit Product Page</h2>
        </div>
 
     </>
@@ -21,3 +18,4 @@ export const EditProduct: React.FC<IEditProductProps> = ({id}) => {
   )
 }
 
+export default EditProduct

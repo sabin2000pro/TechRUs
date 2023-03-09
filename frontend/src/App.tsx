@@ -13,6 +13,7 @@ import BasketScreen from './components/cart/BasketScreen';
 import Profile from './components/authentication/Profile';
 import Dashboard from './dashboard/admin/Dashboard';
 import CreateProduct from './dashboard/admin/CreateProduct';
+import EditProduct from './dashboard/admin/EditProduct';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -23,7 +24,6 @@ const App: React.FC = () => {
       const fetchStripeKey = async () => {
          try {
             console.log(`The stripe key : `, stripeApiKey);
-
             setStripeApiKey(stripeApiKey);
          }
          
@@ -56,7 +56,8 @@ const App: React.FC = () => {
 
            <Route path = '/my-profile' element = {<Profile />} />
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
-           <Route path = '/admin-dashboard/create-product' element = {<CreateProduct } />
+           <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
+           <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />
         </Routes>
 
 
