@@ -5,7 +5,7 @@ const UploadProductPhoto = () => {
 
   return (
     <>
-      <h2>Upload Product Photo Page</h2>
+      <h2>Upload Product Photo Page - Admin Dashboard</h2>
     </>
 
 

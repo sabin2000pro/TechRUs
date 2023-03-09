@@ -1,4 +1,4 @@
-import { FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS } from './../constants/auth-constants';
+import { FETCH_ALL_USERS_REQUEST, FETCH_ALL_USERS_SUCCESS, FETCH_ALL_USERS_FAIL, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS } from './../constants/auth-constants';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOAD_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, LOGOUT_USER_FAIL, CLEAR_AUTH_ERRORS } from "../constants/auth-constants";
 
 const initialAuthState = {
@@ -69,6 +69,18 @@ export const authReducer = (state = initialAuthState as any, action: any) => {
 export const userReducer = (state = initialAuthState as any, action: any) => {
 
     switch(action.type) {
+
+        case FETCH_ALL_USERS_REQUEST:
+            return {loading: true}
+
+        case FETCH_ALL_USERS_SUCCESS:
+            return {...state, loading: false, users: action.payload}
+
+        case FETCH_ALL_USERS_FAIL:
+            return {loading: false, error: action.payload}
+
+        case CLEAR_AUTH_ERRORS:
+            return {error: null}
 
         default:
             return state
