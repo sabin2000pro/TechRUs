@@ -44,6 +44,9 @@ services:
     container_name: techrus-products-api
     image: sabin2000/techrus-products-service
 
+    networks:
+      - my-service-network
+
     build:
       context: ../backend/services/products
       dockerfile: Dockerfile
