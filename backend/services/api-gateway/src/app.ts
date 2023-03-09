@@ -1,4 +1,4 @@
-import express, {Request, Response, NextFunction, Application} from "express";
+import express, {Response, NextFunction, Application} from "express";
 import cors from 'cors';
 import morgan from 'morgan';
 import { StatusCodes } from "http-status-codes";
@@ -16,9 +16,6 @@ app.use(cors({
     origin: "*",
 }))
 
-app.get('/', async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    return response.status(StatusCodes.OK).json({success: true, message: "API Gateway Entrypoint"});
-})
 
 app.use('/api/v1/api-gateway', apiGatewayRouter);
 

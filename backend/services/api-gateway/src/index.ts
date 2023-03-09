@@ -1,12 +1,9 @@
+require('dotenv').config();
 import {app} from './app'
-import dotenv from 'dotenv';
-dotenv.config({path: '/Users/sabin2000/Documents/TechRUs/backend/services/api-gateway/config.env'})
-import axios from 'axios';
 import {logInfo} from './api-gateway-logger';
 
 const API_GATEWAY_PORT = process.env.API_GATEWAY_PORT || 5410;
 const API_GATEWAY_DEV_MODE = process.env.API_GATEWAY_DEV_MODE || 'development'
-const API_GATEWAY_API = process.env.API_GATEWAY_API || '/api/gateway';
 
 const logger = logInfo();
 

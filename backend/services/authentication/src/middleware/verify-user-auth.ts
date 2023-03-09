@@ -22,7 +22,9 @@ export const verifyUserAuthentication = async (request: any, response: Response,
 
 
         const decoded: any = jwt.verify(token, process.env.JWT_TOKEN!);
-        request.user = await User.findById(decoded.id);
+        request.user = await User.findById(decoded._id);
+        console.log(`Decoded : `, decoded);
+
         return next();
     } 
     

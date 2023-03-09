@@ -7,6 +7,7 @@ import {isValidObjectId} from 'mongoose';
 import {createEmailTransporter} from '../utils/email-transporter'
 
 export const sendLowStockEmail = (transporter: any, user: any, currStock: number) => {
+    
     try {
        // Send the low stock e-mail to the inbox
          return transporter.sendMail({
@@ -62,7 +63,7 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
 )
 
 export const createNewProduct = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-``
+
        request.body.user = request.user._id; // When creating a product, add the currently logged in user to the body of the request
        const loggedInUserEmail = request.user.email;
        const {name, description, warranty, image, price, stockCount, lowStockAlert, isNew} = request.body;
@@ -84,7 +85,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
        console.log(`Logged in user : `, request.user._id);
        console.log(`Logged in user e-mail : `, request.user.email);
-       
+
        return response.status(StatusCodes.CREATED).json({success: true, product});
     }
 

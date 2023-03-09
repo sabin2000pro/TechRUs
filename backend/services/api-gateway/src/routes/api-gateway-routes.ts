@@ -1,5 +1,6 @@
 import express from 'express';
 export const apiGatewayRouter = express.Router();
-import {fetchCustomerOrders} from '../controllers/api-gateway-controllers';
+import {fetchUserOrders, createProductWithAuthUser} from '../controllers/api-gateway-controllers';
 
-apiGatewayRouter.route('/customer-orders').get(fetchCustomerOrders);
+apiGatewayRouter.route('/customer-orders').get(fetchUserOrders);
+apiGatewayRouter.route('/get-user').get(createProductWithAuthUser)
