@@ -31,12 +31,15 @@ app.get('/', verifyUserAuthentication, (request, response, next) => {
 })
 
 // Mount security middleware
+
 app.use(xss());
 app.use(hpp());
 app.use(helmet());
+
 app.use(mongoSanitize());
 
 app.use('/api/v1/auth', authRouter);
+
 app.use(errorHandler);
 
 export {app};
