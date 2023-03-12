@@ -22,6 +22,26 @@ services:
     - /app/node_modules
     - ../backend/services/api-gateway:/app
 
+  shipping-service:
+    container_name: techrus-shipping-service
+    image: sabin2000/techrus-shipping-service
+
+    networks:
+      - my-service-network
+      - auth-service
+      - orders-service
+
+    build:
+      context: ../backend/services/shipping-service
+      dockerfile: Dockerfile
+
+    ports:
+      - "5411:5411"
+
+    volumes:
+      - /app/node_modules
+      - ../backend/services/shipping-service
+
   auth-service:
     container_name: techrus-auth-api
     image: sabin2000/techrus-auth-service
