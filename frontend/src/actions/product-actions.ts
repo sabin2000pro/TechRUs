@@ -1,6 +1,6 @@
 import { FETCH_NEW_PRODUCTS_FAIL } from './../constants/products-constants';
 import axios from 'axios';
-import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, FETCH_NEW_PRODUCTS_REQUEST } from '../constants/products-constants';
+import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, FETCH_NEW_PRODUCTS_REQUEST, FETCH_SINGLE_PRODUCT_FAIL, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS } from '../constants/products-constants';
 
 let PRODUCTS_ENDPOINT = `http://localhost:5404/api/v1/products`;
 
@@ -49,11 +49,17 @@ export const fetchNewProducts = () => async (dispatch: any) => {
 
 export const fetchSingleProduct = (productId) => async (dispatch: any) => {
     try {
+       dispatch({type: FETCH_SINGLE_PRODUCT_REQUEST});
 
+       const {data} = await axios.get(`${PRODUCTS_ENDPOINT}/${productId}`);
+       console.log(`Single product : `, data);
     } 
     
     catch(error) {
-
+      if(error) {
+        console.log(`Fetch fetch single product error: `, error);
+        dispatch({type: FETCH_SINGLE_PRODUCT_FAIL, payload: error.data.response.message});
+      }
     }
 
 }

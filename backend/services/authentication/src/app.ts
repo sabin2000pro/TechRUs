@@ -35,7 +35,6 @@ app.get('/', verifyUserAuthentication, (request, response, next) => {
 app.use(xss());
 app.use(hpp());
 app.use(helmet());
-
 app.use(mongoSanitize());
 
 app.use('/api/v1/auth', authRouter);

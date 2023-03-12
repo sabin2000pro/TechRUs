@@ -7,7 +7,7 @@ import {isValidObjectId} from 'mongoose';
 import {createEmailTransporter} from '../utils/email-transporter'
 
 export const sendLowStockEmail = (transporter: any, user: any, currStock: number) => {
-    
+
     try {
        // Send the low stock e-mail to the inbox
          return transporter.sendMail({
@@ -82,9 +82,6 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
        const product = await Product.create({name, description, warranty, image, price, stockCount, lowStockAlert, isNew});
        await product.save();
-
-       console.log(`Logged in user : `, request.user._id);
-       console.log(`Logged in user e-mail : `, request.user.email);
 
        return response.status(StatusCodes.CREATED).json({success: true, product});
     }

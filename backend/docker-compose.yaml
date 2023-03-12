@@ -9,6 +9,7 @@ services:
     networks:
       - my-service-network
       - auth-service
+      - orders-service
 
     build:
       context: ../backend/services/api-gateway
@@ -180,6 +181,8 @@ networks:
     external: true
 
   auth-service:
+    driver: bridge
     external: true
   orders-service:
+    driver: bridge
     external: true

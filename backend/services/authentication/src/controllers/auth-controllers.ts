@@ -246,6 +246,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
 
         const userMfaToken = generateCode();
         const token = user.fetchAuthToken();
+        
         const transporter = createEmailTransporter();
         sendLoginMfa(transporter as any, user as any, userMfaToken as any);
 
