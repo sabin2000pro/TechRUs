@@ -13,7 +13,6 @@ export const fetchProducts = () => async (dispatch: any) => {
       dispatch({type: FETCH_ALL_PRODUCTS_REQUEST});
 
       const {data} = await axios.get(PRODUCTS_ENDPOINT);
-      console.log(`Fetched products : `, data);
 
       dispatch({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: data.products});
     } 
@@ -52,12 +51,12 @@ export const fetchSingleProduct = (productId) => async (dispatch: any) => {
        dispatch({type: FETCH_SINGLE_PRODUCT_REQUEST});
 
        const {data} = await axios.get(`${PRODUCTS_ENDPOINT}/${productId}`);
-       console.log(`Single product : `, data);
+       dispatch({type: FETCH_SINGLE_PRODUCT_SUCCESS, payload: data.product});
     } 
     
     catch(error) {
       if(error) {
-        console.log(`Fetch fetch single product error: `, error);
+
         dispatch({type: FETCH_SINGLE_PRODUCT_FAIL, payload: error.data.response.message});
       }
     }
