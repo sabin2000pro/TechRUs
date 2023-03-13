@@ -1,3 +1,4 @@
+import { orderRouter } from './routes/order-routes';
 require('dotenv').config();
 import { StatusCodes } from 'http-status-codes';
 import express from 'express';
@@ -35,7 +36,5 @@ app.get('/', async (request, response, next) => {// Route to test the authentica
     }
 })
 
-app.use('/api/v1/orders')
-
-
+app.use('/api/v1/orders', orderRouter);
 export {app}
