@@ -7,6 +7,7 @@ export interface IShippingDocument {
     state: string;
     postalCode: string;
     shippingStatus: string;
+    phoneNo: string;
     createdAt: Date;
     updatedAt: Date
 }
@@ -37,6 +38,11 @@ export const ShippingSchema = new mongoose.Schema({
     postalCode: {
         type: String,
         required: [true, "Please specify the postal code"]
+    },
+
+    phoneNo: {
+        type: String,
+        required: [true, "Please specify the phone number for this shipping"]
     },
 
     shippingStatus: {
