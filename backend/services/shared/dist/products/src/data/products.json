@@ -33,9 +33,9 @@
         "price": 3799.99,
         "stockCount": 10,
         "lowStockAlert": 1,
-        "isFeatured": false,
+        "isFeatured": true,
         "image": "/images/mbpro16.jpg",
-        "isNew": false,
+        "isNew": true,
         "reviews": []
     }
 ]
