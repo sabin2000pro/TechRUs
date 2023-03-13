@@ -22,7 +22,7 @@ const connectServiceSchemas = () => {
     connectPaymentsSchema();
 }
 
-connectServiceSche
+connectServiceSchemas()
 // Functions to import and remove data
 
 const importServiceData = async () => {
