@@ -17,7 +17,7 @@ export const productsReducer = (state = productsInitialState as any, action: any
             return {loading: true}
         
         case FETCH_ALL_PRODUCTS_SUCCESS: // 2. When we have received all the products
-            return {...state, loading: false, products: action.payload.products}
+            return {...state, loading: false, products: action.payload}
 
         case FETCH_ALL_PRODUCTS_FAIL:
             return {loading: false, error: action.payload}
