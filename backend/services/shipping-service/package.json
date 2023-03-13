@@ -1,11 +1,15 @@
 {
   "name": "shipping-service",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Shipping Service Dependencies",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "nodemon dist/index.js",
+    "start:shipping-service:dev": "NODE_env=development npm run dev",
+    "shipping:test": "jest tests/shipping.test.ts --bail"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -112,8 +112,11 @@ export const editProductByID = asyncHandler(async (request: any, response: Respo
     return response.status(StatusCodes.OK).json({success: true, product});
 })
 
-export const deleteProductByID = asyncHandler(async (request, response, next) => {
+export const deleteProductByID = asyncHandler(async (request, response, next): Promise<any> => {
+    const id = request.params.id;
+    await Product.findByIdAndDelete(id);
 
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Product Deleted"})
 })
 
 export const deleteAllProducts = asyncHandler(async (request, response, next) => {
