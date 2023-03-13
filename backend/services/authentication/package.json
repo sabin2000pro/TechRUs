@@ -11,6 +11,7 @@
     "auth:test": "jest tests/auth.test.ts --bail",
     "start:auth-service:prod": "NODE_ENV=production node api-gateway-server.js"
   },
+
   
   "keywords": [],
   "author": "",
