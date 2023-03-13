@@ -42,7 +42,8 @@ export const ShippingSchema = new mongoose.Schema({
     shippingStatus: {
         type: String,
         required: [true, "PLease specify the shipping status"],
-        enum: ['shipped', 'delivered', 'canceled']
+        enum: ['shipped', 'delivered', 'canceled', 'processing'],
+        default: 'processing'
     },
 
     createdAt: {
