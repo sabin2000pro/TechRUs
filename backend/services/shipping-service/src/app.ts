@@ -1,5 +1,6 @@
-import { connectShippingSchema } from './schema/shipping-schema';
 require('dotenv').config();
+import { shippingRouter } from './routes/shipping-routes';
+import { connectShippingSchema } from './schema/shipping-schema';
 import express from 'express'
 import morgan from 'morgan';
 import cors from 'cors';
@@ -19,4 +20,5 @@ app.use(cors({
     methods: ['GET', "POST", 'PUT', "DELETE", 'PATCH']
 }))
 
+app.use('/api/v1/shipping', shippingRouter);
 export {app}
