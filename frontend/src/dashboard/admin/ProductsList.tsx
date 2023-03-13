@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export interface IProductsList {
     loading: boolean;
@@ -7,6 +9,8 @@ export interface IProductsList {
 }
 
 const ProductsList: React.FC<IProductsList> = ({loading, error, products}: IProductsList) => {
+    const navigate = useNavigate();
+
   return (
 
     <>
@@ -34,7 +38,7 @@ const ProductsList: React.FC<IProductsList> = ({loading, error, products}: IProd
                   
                   <p>Warranty: 1 Year</p>
 
-                  <button className="product-btn" type = "submit">Product Details</button>
+                  <Link to = {`/product-details/${product._id}`} className ="product-btn" type = "submit">Product Details</Link>
                   </div>
               
               </>
