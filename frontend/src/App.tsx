@@ -16,31 +16,33 @@ import CreateProduct from './dashboard/admin/CreateProduct';
 import EditProduct from './dashboard/admin/EditProduct';
 import UploadProductPhoto from './dashboard/admin/UploadProductPhoto';
 import UpdatePassword from './components/authentication/UpdatePassword';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from './actions/product-actions';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
 
-   // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
-   useEffect(() => {
+   // // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
+   // useEffect(() => {
 
-      const fetchStripeKey = async () => {
-         try {
-            console.log(`The stripe key : `, stripeApiKey);
-            setStripeApiKey(stripeApiKey);
-         }
+   //    const fetchStripeKey = async () => {
+   //       try {
+   //          console.log(`The stripe key : `, stripeApiKey);
+   //          setStripeApiKey(stripeApiKey);
+   //       }
          
-         catch(error) {
-            if(error) {
-               return console.error(error);
-            }
-         }
+   //       catch(error) {
+   //          if(error) {
+   //             return console.error(error);
+   //          }
+   //       }
 
 
-      }
+   //    }
 
-      fetchStripeKey();
+   //    fetchStripeKey();
 
-   }, [])
+   // }, [])
 
   return (
 
