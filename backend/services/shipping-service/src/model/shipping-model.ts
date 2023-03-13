@@ -26,12 +26,12 @@ export const ShippingSchema = new mongoose.Schema({
 
     city: {
         type: String,
-        required: [true, "Please specify the city for the shipping"]
+        required: [true, "Please specify the city for this shipping"]
     },
 
-    state: {
+    country: {
         type: String,
-        required: [true, "Please specify the state"]
+        required: [true, "Please specify the country for this shipping"]
     },
 
     postalCode: {
