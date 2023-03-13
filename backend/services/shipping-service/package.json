@@ -9,7 +9,6 @@
     "start:shipping-service:dev": "NODE_env=development npm run dev",
     "shipping:test": "jest tests/shipping.test.ts --bail"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -22,6 +21,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.21",
+    "ts-node": "^10.9.1"
   }
 }

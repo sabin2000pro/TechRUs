@@ -4,6 +4,10 @@ export interface IShippingDocument {
     address: string;
     city: string;
     state: string;
+    postalCode: string;
+    shippingStatus: string;
+    createdAt: Date;
+    updatedAt: Date
 }
 
 export const ShippingSchema = new mongoose.Schema({

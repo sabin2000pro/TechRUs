@@ -40,7 +40,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/shipping-service
+      - ../backend/services/shipping-service:/app
 
   auth-service:
     container_name: techrus-auth-api

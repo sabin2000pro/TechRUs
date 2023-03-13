@@ -15,3 +15,5 @@ app.use(cors({
     origin: "*",
     methods: ['GET', "POST", 'PUT', "DELETE", 'PATCH']
 }))
+
+export {app}
