@@ -64,11 +64,7 @@ export const udpateOrderStatus = asyncHandler(async (request: any, response: Res
     if(order?.orderStatus === 'Delivered') { // Before updating the order status, make sure it has not alreayd been delivered
         return next(new ErrorResponse(`The status of this order you are trying to update has already been delivered`, StatusCodes.BAD_REQUEST));
     }
-
-    // 1. Use axios to send a POST request to the endpoint of the API gateway which is responsible for updating the product stock after updating the order status
-
-    console.log(`The order : `, order);
-
+    
     order = await Order.findByIdAndUpdate(id, orderStatus, {new: true, runValidators: true});
 })
 

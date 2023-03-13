@@ -1,5 +1,5 @@
-import { orderRouter } from './routes/order-routes';
 require('dotenv').config();
+import { orderRouter } from './routes/order-routes';
 import { StatusCodes } from 'http-status-codes';
 import express from 'express';
 import morgan from 'morgan';
