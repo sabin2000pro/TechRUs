@@ -42,7 +42,7 @@ const Home = () => {
 
           <>    
 
-            <ProductsList loading = {loading} error = {error} products = {products} />
+            <ProductsList products = {products} />
  
           </>
 

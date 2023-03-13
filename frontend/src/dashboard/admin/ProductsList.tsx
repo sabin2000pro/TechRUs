@@ -3,13 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export interface IProductsList {
-    loading: boolean;
-    error: string;
     products: any
 }
 
-const ProductsList: React.FC<IProductsList> = ({loading, error, products}: IProductsList) => {
-    const navigate = useNavigate();
+const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
 
   return (
 
