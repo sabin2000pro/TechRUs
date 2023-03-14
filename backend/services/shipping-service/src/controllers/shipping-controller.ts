@@ -1,3 +1,4 @@
+import {ErrorResponse} from '../utils/error-response';
 import { StatusCodes } from 'http-status-codes';
 import {Response, NextFunction} from 'express';
 import {Shipping} from '../model/shipping-model';
@@ -7,7 +8,7 @@ export const fetchShippingDetails = asyncHandler(async (request, response, next)
     const shipping = await Shipping.find();
 
     if(!shipping) {
-
+        return next(new ErrorResponse("No shipping details found.", StatusCodes.BAD_REQUEST));
     }
 
     return response.status(StatusCodes.OK).json({success: true, shipping});
@@ -18,7 +19,7 @@ export const fetchShippingDetailsByID = asyncHandler(async (request, response, n
     const shipping = await Shipping.findById(id);
 
     if(!shipping) {
-
+    
     }
 
     return response.status(StatusCodes.OK).json({success: true, shipping});
