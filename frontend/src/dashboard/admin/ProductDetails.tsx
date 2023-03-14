@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchSingleProduct } from '../../actions/product-actions';
 import Loader from '../../layout/Loader';
 import MetaData from '../../layout/MetaData';
+import { addProductToBasket } from '../../actions/basket-actions';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -23,11 +24,13 @@ const ProductDetails = () => {
 
     const addToBasketHandler = () => {
         try {
-
+            dispatch(addProductToBasket(product._id, quantity) as any);
         } 
         
         catch(error) {
-
+            if(error) {
+                return console.error(error);
+            }
         }
 
     }
