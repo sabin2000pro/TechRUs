@@ -6,7 +6,20 @@ import Dropdown from './Dropdown';
 const Header = () => {
   const dispatch = useDispatch();
   const {loading, error, user} = useSelector((state: any) => state.auth);
+  const {basketItems} = useSelector((state: any) => state.basket);
+
+  let currentBasketCount = 0;
+
   const token = JSON.parse(sessionStorage.getItem("token") as any);
+
+  if(basketItems.length > 0) {
+    currentBasketCount =  basketItems.reduce((acc, item) => acc + Number(item.quantity), 0);
+  }
+
+
+  console.log(`Basket Items : `, basketItems);
+  console.log(`Current basket coiunt : `, currentBasketCount);
+
 
   return (
 
@@ -41,7 +54,7 @@ const Header = () => {
 
              <div className = "mr-25">
                 <Link className = "basket-link" to = '/my-basket'>My Basket</Link> 
-                <span className = "basket-count">0</span>
+                <span className = "basket-count">{currentBasketCount}</span>
             </div>
 
         </div>

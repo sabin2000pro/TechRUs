@@ -10,16 +10,7 @@ const BasketScreen: React.FC = () => {
     
   return (
 
-    <>
-
-      {basketItems.map((basketItem: any) => (
-         <>
-
-             {basketItem.name}
-
-         </>
-      ))}
-
+    <>    
 
     </>
 
