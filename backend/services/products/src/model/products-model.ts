@@ -75,5 +75,5 @@ const ProductSchema = new mongoose.Schema<ProductDocument>({
 }, {timestamps: true});
 
 
-const Product: Model<ProductDocument> = mongoose.model("Product", ProductSchema);
+const Product = mongoose.model("Product", ProductSchema);
 export {Product, ProductDocument}

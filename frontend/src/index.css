@@ -345,3 +345,7 @@ font-weight: bold;
   margin-right: 25px;
   margin-top: 50px;
 }
+
+.product-img {
+  width: 500px;
+}
