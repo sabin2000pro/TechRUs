@@ -19,7 +19,7 @@ export const fetchShippingDetailsByID = asyncHandler(async (request, response, n
     const shipping = await Shipping.findById(id);
 
     if(!shipping) {
-    
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No shipping details found"})
     }
 
     return response.status(StatusCodes.OK).json({success: true, shipping});
@@ -29,7 +29,20 @@ export const createNewShipping = async (request: any, response: Response, next: 
     const {} = request.body;
 }
 
+export const editShippingStatus = async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    const {} = request.body;
+    const id = request.params.id;
+    let shipping = await Shipping.findById(id);
+}
+
 export const editShippingDetails = async (request, response, next) => {
+   const id = request.params.id;
+   let shipping = await Shipping.findById(id);
+
+   if(!shipping) {
+
+   }
+
 
 }
 
@@ -39,8 +52,4 @@ export const deleteShippingDetails = async (request, response, next) => {
 
 export const deleteShippingDetailsByID = async (request, response, next) => {
     
-}
-
-export const editShippingStatus = async (reqeust, response, next) => {
-
 }
