@@ -59,7 +59,7 @@ const ProductDetails = () => {
 
     <div className = "flex items-center">
 
-      <button className="bg-gray-200  py-1 px-2 rounded-l" type="button">
+      <button disabled = {quantity === 0} onClick = {() => setQuantity(quantity - 1)} className="bg-gray-200  py-1 px-2 rounded-l" type="button">
          <span>-</span>
       </button>
 
