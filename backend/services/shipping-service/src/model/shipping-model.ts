@@ -6,12 +6,13 @@ export interface IShippingDocument {
     state: string;
     postalCode: string;
     shippingStatus: string;
+    country: string;
     phoneNo: string;
     createdAt: Date;
     updatedAt: Date
 }
 
-export const ShippingSchema = new mongoose.Schema({
+export const ShippingSchema = new mongoose.Schema<IShippingDocument>({
 
     address: {
         type: String,
