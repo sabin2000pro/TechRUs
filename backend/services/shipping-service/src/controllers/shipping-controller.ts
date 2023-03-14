@@ -26,7 +26,7 @@ export const fetchShippingDetailsByID = asyncHandler(async (request: any, respon
 })
 
 export const createNewShipping = async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {} = request.body;
+    const {address, city, country, postalCode, phoneNo, sh} = request.body;
 }
 
 export const editShippingStatus = async (request: any, response: Response, next: NextFunction): Promise<any> => {

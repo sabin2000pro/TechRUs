@@ -3,10 +3,9 @@ import mongoose from 'mongoose';
 export interface IShippingDocument {
     address: string;
     city: string;
-    state: string;
+    country: string;
     postalCode: string;
     shippingStatus: string;
-    country: string;
     phoneNo: string;
     createdAt: Date;
     updatedAt: Date
@@ -41,7 +40,6 @@ export const ShippingSchema = new mongoose.Schema<IShippingDocument>({
 
     shippingStatus: {
         type: String,
-        required: [true, "PLease specify the shipping status"],
         enum: ['shipped', 'delivered', 'canceled', 'processing'],
         default: 'processing'
     },
