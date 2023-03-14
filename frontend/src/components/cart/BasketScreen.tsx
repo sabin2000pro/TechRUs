@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const BasketScreen: React.FC = () => {
   const dispatch = useDispatch();
+  const {} = useSelector((state: any) => state.basket)
     
   return (
 
