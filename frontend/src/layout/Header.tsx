@@ -17,10 +17,6 @@ const Header = () => {
   }
 
 
-  console.log(`Basket Items : `, basketItems);
-  console.log(`Current basket coiunt : `, currentBasketCount)
-
-
   return (
 
     <>
