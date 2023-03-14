@@ -4,15 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const BasketScreen: React.FC = () => {
   const dispatch = useDispatch();
-  const {} = useSelector((state: any) => state.basket)
+  const {basketItems} = useSelector((state: any) => state.basket)
+
+  console.log(`Basket Items : ,`, basketItems);
     
   return (
 
     <>
 
-      <div className = "flex justify-center basket-container">
-         <h2 className = "heading-secondary basket-heading">Your Basket</h2>
-      </div>
+      {basketItems.map((basketItem: any) => (
+         <>
+
+             {basketItem.name}
+
+         </>
+      ))}
 
 
     </>
