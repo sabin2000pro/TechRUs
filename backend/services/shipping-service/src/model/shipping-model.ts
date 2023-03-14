@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 export interface IShippingDocument {
-    order: mongoose.Schema.Types.ObjectId;
     address: string;
     city: string;
     state: string;
@@ -13,12 +12,6 @@ export interface IShippingDocument {
 }
 
 export const ShippingSchema = new mongoose.Schema({
-
-    order: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Order",
-        required: [true, "Please specify the order ID that relates to this shipping information"]
-    },
 
     address: {
         type: String,

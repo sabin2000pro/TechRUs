@@ -4,7 +4,7 @@ import {Response, NextFunction} from 'express';
 import {Shipping} from '../model/shipping-model';
 import asyncHandler from 'express-async-handler';
 
-export const fetchShippingDetails = asyncHandler(async (request, response, next): Promise<any> => {
+export const fetchShippingDetails = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const shipping = await Shipping.find();
 
     if(!shipping) {
@@ -14,7 +14,7 @@ export const fetchShippingDetails = asyncHandler(async (request, response, next)
     return response.status(StatusCodes.OK).json({success: true, shipping});
 })
 
-export const fetchShippingDetailsByID = asyncHandler(async (request, response, next): Promise<any> => {
+export const fetchShippingDetailsByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
     const shipping = await Shipping.findById(id);
 
