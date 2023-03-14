@@ -19,7 +19,7 @@ export const basketReducer = (state = initialBasketItems, action: any) => {
             }
 
             else { // Otherwise, return all the cart items and the current item to add if the current cart item does not exist
-                return {...state, basketItems: [state.basketItems, currItem]}
+                return {...state, basketItems: [...state.basketItems, currItem]}
             }
 
         case REMOVE_ITEM_FROM_BASKET:
