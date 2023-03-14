@@ -5,9 +5,9 @@ export interface IBasket {
     quantity: number;
 }
 
-const initialBasketItems = localStorage.getItem("basketItems") ? JSON.parse(localStorage.getItem("basketItems") as any) : {basketItems: []}
+const basketItems = localStorage.getItem("basketItems") ? JSON.parse(localStorage.getItem("basketItems") as any) : []
 
-export const basketReducer = (state = initialBasketItems, action: any) => {
+export const basketReducer = (state = {basketItems}, action: any) => {
     switch(action.type) {
 
         case ADD_ITEM_TO_BASKET:
