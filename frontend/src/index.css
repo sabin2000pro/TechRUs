@@ -23,6 +23,7 @@
 .heading-secondary {
    font-size: 28px;
    text-align: center;
+   margin-top: 28px;
    font-weight: bold;
    color: black;
 }
@@ -348,4 +349,14 @@ font-weight: bold;
 
 .product-img {
   width: 500px;
+}
+
+.basket-card {
+  margin-left: 500px;
+  margin-top: 150px;
+}
+
+.product-img-basket {
+  width: 250px;
+  height: auto;
 }
