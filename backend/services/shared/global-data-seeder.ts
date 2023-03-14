@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { connectShippingSchema } from './../shipping-service/src/schema/shipping-schema';
 import { connectAuthDatabase } from '../authentication/src/database/auth-schema';
 import { connectProductsSchema } from './../products/src/database/products-db';
 import {connectOrdersSchema} from './../orders/src/database/orders-schema';
@@ -20,6 +21,7 @@ import shipping from '../shipping-service/src/data/shipping.json';
 const connectServiceSchemas = () => {
     connectAuthDatabase();
     connectProductsSchema();
+    connectShippingSchema();
     connectOrdersSchema();
     connectPaymentsSchema();
 }
