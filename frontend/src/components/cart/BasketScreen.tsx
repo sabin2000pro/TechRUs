@@ -7,11 +7,10 @@ const BasketScreen: React.FC = () => {
   const dispatch = useDispatch();
   const {basketItems} = useSelector((state: any) => state.basket)
 
-  console.log(`Basket Items : ,`, basketItems);
 
-  const onRemoveProductHandler = () => {
+  const onRemoveProductHandler = (id: string) => {
     try {
-       dispatch(removeProductFromBasket(basketItems._id) as any)
+       dispatch(removeProductFromBasket(id) as any)
     } 
     
     catch(error) {
@@ -45,7 +44,7 @@ const BasketScreen: React.FC = () => {
     <img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />
 
      <div className = "flex items-center justify-end">
-        <button onClick = {onRemoveProductHandler} className=" px-4 rounded basket-btn mb-5" type="button">Remove</button>
+        <button onClick = {() => onRemoveProductHandler(basketItem._id)} className=" px-4 rounded basket-btn mb-5" type="button">Remove</button>
      </div>
        
        </div>
