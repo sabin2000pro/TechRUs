@@ -19,6 +19,7 @@ import UpdatePassword from './components/authentication/UpdatePassword';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from './actions/product-actions';
 import ProductDetails from './dashboard/admin/ProductDetails';
+import UsersList from './dashboard/admin/UsersList';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -66,6 +67,7 @@ const App: React.FC = () => {
            <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
            <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />
            <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
+           <Route path = '/admin-dashboard/users' element = {<UsersList />} />
         </Routes>
 
 
