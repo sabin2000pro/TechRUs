@@ -4,8 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
-const shipping_schema_1 = require("./schema/shipping-schema");
 require('dotenv').config();
+const shipping_routes_1 = require("./routes/shipping-routes");
+const shipping_schema_1 = require("./schema/shipping-schema");
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
@@ -20,3 +21,4 @@ app.use((0, cors_1.default)({
     origin: "*",
     methods: ['GET', "POST", 'PUT', "DELETE", 'PATCH']
 }));
+app.use('/api/v1/shipping', shipping_routes_1.shippingRouter);

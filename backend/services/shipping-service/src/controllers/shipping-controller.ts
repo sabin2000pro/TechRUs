@@ -30,9 +30,19 @@ export const createNewShipping = async (request: any, response: Response, next: 
 }
 
 export const editShippingStatus = async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {} = request.body;
+    const {shippingStatus} = request.body;
+    const fieldToUpdate = shippingStatus;
+
     const id = request.params.id;
     let shipping = await Shipping.findById(id);
+
+    if(!shipping) {
+      return next(new ErrorResponse(`No shipping details found`, StatusCodes.BAD_REQUEST));
+    }
+
+    shipping = await Shipping.findByIdAndUpdate(id, fieldToUpdate, {new: true, runValidators: true});
+    return response.status(StatusCodes.OK).json({success: true, message: "Shipping status updated..."});
+
 }
 
 export const editShippingDetails = async (request, response, next) => {
