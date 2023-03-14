@@ -68,6 +68,7 @@ const removeServiceData = async () => {
         await User.deleteMany();   
         await Product.deleteMany();
         await Order.deleteMany();
+        await Shipping.deleteMany();
         await Payment.deleteMany();
 
          console.log(`All data removed from each service schema successfully`);
