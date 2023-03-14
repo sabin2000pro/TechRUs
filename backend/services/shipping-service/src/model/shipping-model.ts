@@ -15,7 +15,7 @@ export const ShippingSchema = new mongoose.Schema({
 
     address: {
         type: String,
-        required: true
+        required: [true, "Please provide the address for the shipping"]
     },
 
     city: {
