@@ -315,6 +315,11 @@ font-weight: bold;
   width: auto;
 }
 
+.product-btn:hover {
+  transition: all 0.3s;
+  background-color: #5b90e0e0;
+}
+
 .product-descriptions {
   text-align: center;
   font-size: 24px;

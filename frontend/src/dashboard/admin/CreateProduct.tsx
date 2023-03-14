@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CreateProduct: React.FC = () => {
+  const dispatch = useDispatch();
     
   return (
 

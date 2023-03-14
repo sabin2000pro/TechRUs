@@ -4,9 +4,15 @@ import { Link } from 'react-router-dom';
 
 const UsersList = () => {
     const dispatch = useDispatch();
+
+
   return (
     <>
-       <h2>Users List Here</h2>
+        <div className = "flex justify-center">
+           <h2 className = "heading-secondary">Users List</h2>
+       </div>
+
+
     </>
   )
 }
