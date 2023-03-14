@@ -7,6 +7,7 @@ import {User} from '../authentication/src/models/user-model';
 import {Product} from '../products/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
 import {Payment} from '../payments/src/models/payment-model';
+import {Shipping} from '../shipping-service/src/model/shipping-model';
 
 import users from '.././authentication/src/data/users.json';
 import products from '../products/src/data/products.json';
