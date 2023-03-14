@@ -33,7 +33,10 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
                   <p className ="product-descriptions ">{product.price} </p>
                   <p className = "product-descriptions stock-text">{product.stockCount > 0 ? "In Stock" : "Out Of Stock"}</p>
                   
+                  <div className = "flex justify-center">
                   <p>Warranty: 1 Year</p>
+                  </div>
+                    
 
                   <Link to = {`/product-details/${product._id}`} className ="product-btn" type = "submit">Product Details</Link>
                   </div>

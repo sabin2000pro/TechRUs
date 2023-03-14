@@ -150,7 +150,7 @@ body {
 }
 
 .basket-count {
-  background-color: #B62323;
+  background-color: #5B90E0;
   margin-left: 20px;
   padding: 8px 20px;
   font-size: 24px;
@@ -263,7 +263,7 @@ font-weight: bold;
 }
 
 .product-btn {
-  margin-top: 80px;
+  margin-top: 70px;
   margin-left: 50px;
   background-color: #042658;
   padding: 6px 12px;
@@ -282,6 +282,7 @@ font-weight: bold;
   text-align: center;
   padding: 10px 12px;
   width: 150px;
+  position: relative;
   margin-right: 50px;
 }
 
@@ -311,7 +312,7 @@ font-weight: bold;
 .product-img {
   margin-top: 50px;
   height: 40%;
-  width: 100%;
+  width: auto;
 }
 
 .product-descriptions {
@@ -352,11 +353,35 @@ font-weight: bold;
 }
 
 .basket-card {
-  margin-left: 500px;
-  margin-top: 150px;
+  margin-left: 300px;
+  margin-top: 170px;
+  height: 150%;
+}
+
+.basket-btn:hover {
+  transition: all 0.3s;
+  background-color: #5B90E0;
 }
 
 .product-img-basket {
-  width: 250px;
+  width: 200px;
   height: auto;
+  margin-top: -200px;
+}
+
+.checkout-card {
+  position: fixed;
+  height: 250px;
+  width: 400px;
+  padding: 12px 24px;
+  margin-left: 1600px;
+  margin-top: -200px;
+}
+
+.checkout-btn {
+  position: absolute; /* set position to absolute */
+  margin-right: 120px;
+  height: 50px;
+  bottom: 0; /* align to the bottom */
+  right: 0; /* align to the right */
 }
