@@ -13,6 +13,7 @@ import users from '.././authentication/src/data/users.json';
 import products from '../products/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
 import payments from '../payments/src/data/payments.json';
+import shipping from '../shipping-service/src/data/shipping.json';
 
 // Import the load schemas functions
 
@@ -39,6 +40,7 @@ const importServiceData = async () => {
      await Product.insertMany(products);
      await Order.insertMany(orders)
      await Payment.insertMany(payments);
+     await Shipping.insertMany(shipping)
 
      console.log(`All data inserted to each service schema successfully`);
      return process.exit(1);

@@ -29,10 +29,11 @@ export const createNewShipping = async (request: any, response: Response, next: 
     const {address, city, country, postalCode, phoneNo} = request.body;
 
     if(!address || !city || !country || !postalCode || !phoneNo) {
-        
+        return next(new ErrorResponse(`Some of the shipping fields are missing. Please check again`, StatusCodes.BAD_REQUEST));
     }
 
-    const shipping = await Shipping.create
+    const shipping = await Shipping.create({address, city, country, postalCode, phoneNo});
+    await shipping.save(); // Save the shipping resource to the database
 }
 
 export const editShippingStatus = async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -51,21 +52,19 @@ export const editShippingStatus = async (request: any, response: Response, next:
 
 }
 
-export const editShippingDetails = async (request, response, next) => {
+export const editShippingDetails = async (request: any, response, next) => {
    const id = request.params.id;
    let shipping = await Shipping.findById(id);
 
    if(!shipping) {
-
+    return next(new ErrorResponse(`No shipping details found`, StatusCodes.BAD_REQUEST));
    }
 
+   return response.status(StatusCodes.OK).json({success: true, message: "Shipping Details Updated"})
 
 }
 
 export const deleteShippingDetails = async (request, response, next) => {
-
-}
-
-export const deleteShippingDetailsByID = async (request, response, next) => {
-    
+    await Shipping.deleteMany();
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Shipping Details Deleted"});
 }
