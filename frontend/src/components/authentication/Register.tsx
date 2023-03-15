@@ -14,14 +14,15 @@ const Register = () => { // Register Component
   const [password, setPassword] = useState("");
 
   const {loading, error, user} = useSelector((state: any) => state.auth);
+  const [showAlert, setShowAlert] = useState<boolean>(false)
 
-  const onRegisterHandler = async (event) => {
+  const onRegisterHandler = (event) => {
      try {
 
          event.preventDefault()
          dispatch(register(username, email, password) as any);
 
-         navigate('/user-login');
+         setShowAlert(true);
      } 
      
      catch(error) {
@@ -34,25 +35,15 @@ const Register = () => { // Register Component
 
   }
 
-  useEffect(() => {
-
-    if(error) {
-      console.log(`Register Error : `, error);
-    }
-
-     if(user) {
-       console.log(`Registered user : `, user);
-     }
-
-  }, [user, error])
-
   return (
 
     <>
 
         <MetaData pageTitle = {`Register`} />
 
-        {!loading && (
+        {showAlert && <h2 className = "heading-secondary">Registered Successfully</h2>}
+
+      
 
              <div className = "flex justify-center items-center h-screen login-container">
 
@@ -93,7 +84,7 @@ const Register = () => { // Register Component
              
              
              </div>
-        )}
+        
 
        
 

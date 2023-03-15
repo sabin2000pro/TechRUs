@@ -1,4 +1,3 @@
-import { CREATE_ORDER_REQUEST } from './../constants/orders-constants';
 import { CREATE_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, EDIT_PRODUCT_REQUEST, EDIT_PRODUCT_FAIL, EDIT_PRODUCT_SUCCESS } from './../constants/products-constants';
 
 import axios from 'axios';
@@ -74,6 +73,7 @@ export const createNewProduct = (name: string, description: string, warranty: st
 export const editProductByID = (id: number, updatedData: any) => async (dispatch: any) => {
 
     try {
+
         dispatch({type: EDIT_PRODUCT_REQUEST});
 
         const {data} = await axios.put(`${PRODUCTS_ENDPOINT}/${id}`, updatedData);
@@ -95,16 +95,21 @@ export const editProductByID = (id: number, updatedData: any) => async (dispatch
 
 
 export const deleteProducts = () => async (dispatch: any) => {
+
   try {
 
   } 
   
   catch(error) {
+     if(error) {
 
+     }
+     
   }
+
 }
 
-export const deleteProductByID = () => async (dispatch: any) => {
+export const deleteProductByID = (id: string) => async (dispatch: any) => {
 
     try {
 

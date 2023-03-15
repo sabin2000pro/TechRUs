@@ -16,6 +16,8 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
             <div className = "flex w-72 justify-center items-center p-4">
 
               <div className="flex flex-row gap-6 product-card-container">
+
+                {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
  
            {products.map((product: any) => (
 

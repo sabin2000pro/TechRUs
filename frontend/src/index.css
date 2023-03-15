@@ -251,6 +251,11 @@ font-weight: bold;
   margin-top: -100px;
 }
 
+.forgot-form-container {
+  width: 30%;
+  margin-bottom: 180px;
+}
+
 .username-container {
   margin-bottom: 25px;
 }
