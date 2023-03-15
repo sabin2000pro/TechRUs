@@ -3,21 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNewProduct } from '../../actions/product-actions';
 
 const CreateProduct: React.FC = () => {
-  const [name, setName] = useState<string | undefined>("");
-  const [description, setDescription] = useState<string | undefined>("");
-  const [warranty, setWarranty] = useState<string | undefined>("");
-  const [price, setPrice] = useState<number | undefined>(0);
+  const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [warranty, setWarranty] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [stockCount, setStockCount] = useState<number>(0);
+  const [lowStockAlert, setLowStockAlert] = useState(0);
+
+  const {loading, error, user} = useSelector((state: any) => state.auth);
 
   const dispatch = useDispatch();
 
   const handleProductCreate = async () => {
 
     try {
-    
+        dispatch(createNewProduct(name, description, warranty, price, stockCount, lowStockAlert) as any)
     }
     
     catch(error) {
-      
+
        if(error) {
         return console.error(error);
        }

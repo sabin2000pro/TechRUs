@@ -1,5 +1,5 @@
 import { CREATE_ORDER_REQUEST } from './../constants/orders-constants';
-import { CREATE_PRODUCT_FAIL } from './../constants/products-constants';
+import { CREATE_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS } from './../constants/products-constants';
 
 import axios from 'axios';
 import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, FETCH_NEW_PRODUCTS_REQUEST, FETCH_SINGLE_PRODUCT_FAIL, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS } from '../constants/products-constants';
@@ -53,10 +53,15 @@ export const fetchSingleProduct = (productId) => async (dispatch: any) => {
 }
 
 // @description: Action which creates a new product. it accepts the product details as parameters
-export const createNewProduct = (name: string, description: string, warranty: string, price: number, stockCount: number, lowStockAlert: number, isNew: boolean) => async (dispatch: any) => {
+export const createNewProduct = (name: string, description: string, warranty: string, price: number, stockCount: number, lowStockAlert: number) => async (dispatch: any) => {
     try {
 
-       dispatch({type: CREATE_ORDER_REQUEST});
+       dispatch({type: CREATE_PRODUCT_REQUEST});
+
+       const {data} = await axios.post(PRODUCTS_ENDPOINT);
+       console.log(`Created Product Data : `, data);
+
+       dispatch({type: CREATE_PRODUCT_SUCCESS, payload: data.product});
     } 
     
     catch(error) {
