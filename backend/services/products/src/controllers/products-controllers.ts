@@ -69,20 +69,9 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
 )
 
 export const createNewProduct = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
-       request.body.user = request.user._id; // When creating a product, add the currently logged in user to the body of the request
-       const loggedInUserEmail = request.user.email;
        const {name, description, warranty, image, price, stockCount, lowStockAlert, isNew} = request.body;
 
-       let currStockCount;
-       currStockCount = stockCount; // Make a copy of the current product stock
-
-       if(stockCount < 3) {
-           const lowStockEmailTransporter = createEmailTransporter();
-           sendLowStockEmail(lowStockEmailTransporter, loggedInUserEmail, currStockCount);
-       }
-
-       if(!name.toString() || !description.toString() || !warranty.toString() || !image.toString() || !price.toString() || !stockCount || !lowStockAlert || !isNew) {
+       if(!name || !description || !warranty || !price || !stockCount || !lowStockAlert || !isNew) {
            return next(new ErrorResponse(`Some entries are missing. Please check again when creating a product`, StatusCodes.BAD_REQUEST));
        }
 
