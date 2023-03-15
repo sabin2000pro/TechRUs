@@ -1,4 +1,4 @@
-import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, VERIFY_USER_EMAIL_FAIL, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST } from './../constants/auth-constants';
+import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, VERIFY_USER_EMAIL_FAIL, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
 import { fetchTokenFromSessionStorage } from '../fetch-auth-token';
 import axios from 'axios';
@@ -186,12 +186,16 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
     try {
       dispatch({type: UPDATE_PASSWORD_REQUEST});
 
-      const {data} 
+      const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword});
+      console.log(`Updated User Password Data : `, data);
+
+      dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
     } 
     
     catch(error) {
-      if(error) {
 
+      if(error) {
+        dispatch({type: UPDATE_PASSWORD_FAIL, payload: error.data.response.message});
       }
 
     }
