@@ -43,7 +43,7 @@ const ShippingDetails: React.FC = () => {
 
     <>
 
-       <div className = "flex justify-center items-center h-screen login-container">
+       <div className = "flex justify-center items-center h-screen shipping-container">
 
           <form onSubmit = {handleShippingSubmit} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
 
@@ -55,11 +55,20 @@ const ShippingDetails: React.FC = () => {
               </div>
               
 
-              <div className = "mb-4 login-container-inputs email-container">
+            <div className = "mb-4 login-container-inputs email-container">
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">City</label>
                   <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
+            <div className = "mb-4 login-container-inputs email-container">
+                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Country</label>
+                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+            </div>
+
+            <div className = "mb-4 login-container-inputs email-container">
+                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Postal Code</label>
+                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+            </div>
 
               <div className = "mb-6 login-password-container">
                     <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Phone</label>
