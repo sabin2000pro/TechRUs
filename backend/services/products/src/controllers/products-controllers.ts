@@ -132,7 +132,7 @@ export const deleteAllProducts = asyncHandler(async (request: any, response: Res
 
 export const uploadProductPhoto = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const file = request.files.file as any
-    console.log(`Current File : `, file);
+    console.log(`File Object ; `, file);
 
     if(!file) {
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload a valid file"});
@@ -143,7 +143,13 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "File size is too large, please upload again"});
     }
 
-    const fileName = `product_photo_${request.params.id}${path.parse(file.originalname).ext}`;
+    if(!file.mimetype.startsWith("image/png") || !file.mimetype.startsWith("image/jpg")) {
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Invalid file type, please upload again"});
+    }
+
+
+
+    const fileName = `product_photo_${request.params.id}${path.parse(file.name).ext}`;
     console.log(`The file name : `, fileName);
 
   file.mv(`${process.env.PRODUCTS_SERVICE_FILE_UPLOAD_PATH}/${fileName}`, async (error) => {
@@ -154,5 +160,6 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
     }
 
     await Product.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+    return response.status(StatusCodes.OK).json({success: true, message: "File Uploaded"});
 
 })})
