@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewProduct } from '../../actions/product-actions';
 
@@ -30,6 +30,10 @@ const CreateProduct: React.FC = () => {
 
 
   }
+
+  useEffect(() => {
+     console.log(`Logged In user : `, user);
+  }, [user])
     
   return (
 

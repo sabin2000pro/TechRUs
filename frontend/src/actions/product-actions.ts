@@ -74,7 +74,7 @@ export const createNewProduct = (name: string, description: string, warranty: st
 
 }
 
-export const editProductByID = (productId) => async (dispatch: any) => {
+export const editProductByID = (id: number) => async (dispatch: any) => {
 
     try {
         
