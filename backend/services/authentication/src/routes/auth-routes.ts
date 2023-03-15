@@ -18,4 +18,4 @@ authRouter.route('/update-password').put(updatePassword as any);
 authRouter.route('/users').get(fetchAllUsers).delete(deleteAllUsers);
 authRouter.route('/users/:id').get(fetchUserByID).put(editUserByID).delete(deleteUserByID);
 
-authRouter.route('/users/:id/edit-shifts').put(editUserShifts);
+authRouter.route('/users/:id/update-shifts').put(editUserShifts);

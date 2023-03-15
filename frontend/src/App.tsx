@@ -13,6 +13,7 @@ import BasketScreen from './components/cart/BasketScreen';
 import Profile from './components/authentication/Profile';
 import Dashboard from './dashboard/admin/Dashboard';
 import CreateProduct from './dashboard/admin/CreateProduct';
+import UpdateProfile from './components/authentication/UpdateProfile';
 import EditProduct from './dashboard/admin/EditProduct';
 import UploadProductPhoto from './dashboard/admin/UploadProductPhoto';
 import UpdatePassword from './components/authentication/UpdatePassword';
