@@ -33,13 +33,14 @@ export const fetchProducts = () => async (dispatch: any) => {
 }
 
 export const fetchSingleProduct = (productId) => async (dispatch: any) => {
+
     try {
 
        dispatch({type: FETCH_SINGLE_PRODUCT_REQUEST});
 
        const {data} = await axios.get(`${PRODUCTS_ENDPOINT}/${productId}`);
        dispatch({type: FETCH_SINGLE_PRODUCT_SUCCESS, payload: data.product});
-       
+
     } 
     
     catch(error) {
@@ -51,7 +52,8 @@ export const fetchSingleProduct = (productId) => async (dispatch: any) => {
 
 }
 
-export const createNewProduct = (name: string, description: string, warranty: string, price: number, stockCount: number, lowStockAlert: number) => async (dispatch: any) => {
+// @description: Action which creates a new product. it accepts the product details as parameters
+export const createNewProduct = (name: string, description: string, warranty: string, price: number, stockCount: number, lowStockAlert: number, isNew: boolean) => async (dispatch: any) => {
     try {
 
        dispatch({type: CREATE_ORDER_REQUEST});

@@ -36,15 +36,20 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
 }
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+        const resultsPerPage = 3; // How many products we want to display per page
+        const searchKey = request.query.keyword;
+        const page = parseInt(request.query.page) || 1; // Get the current page number
+        const skipBy = resultsPerPage * (page - 1);
 
-        const products = await Product.find();
-        const numberOfProducts = await Product.countDocuments({}); // Get the total number of products there are in the database
+        const keyword = request.query.keyword ? {name: {$regex: searchKey, $options: 'i'}} : {}; // Keyword used to search for a product
+        const numberOfProducts = await Product.countDocuments({ ...keyword });
+        const products = await Product.find({ ...keyword }).limit(resultsPerPage).skip(skipBy);
 
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
         }
 
-        return response.status(StatusCodes.OK).json({success: true, products, numberOfProducts})
+        return response.status(StatusCodes.OK).json({success: true, products, numberOfProducts, page})
     }
 )
 
