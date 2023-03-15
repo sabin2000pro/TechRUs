@@ -51,6 +51,7 @@ export const logout = () => async (dispatch) => {
 
 export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch) => {
 
+
     try {
 
        dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
@@ -58,7 +59,8 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
 
        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, userOTP}, config);
        console.log("`E-mail Verification Data : ", data);
-
+    
+       dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
 
     } 
     
@@ -71,17 +73,7 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
     }
 
 }
-
-export const verifyLoginCode = (userId: string, mfaToken: string) => async (dispatch) => {
-    try {
-
-    } 
-    
-    catch(error) {
-
-    }
-
-}    
+  
     
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login
 // @parameters: (email): Stores the e-mail of the customer here. (password): Stores the customers inputted password
@@ -167,7 +159,7 @@ export const forgotPassword = (email: string) => async (dispatch) => {
 
 }
 
-export const resetPassword = (email: string) => async (dispatch) => {
+export const resetPassword = (email: string, resetToken: string) => async (dispatch) => {
     try {
 
     } 
