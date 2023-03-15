@@ -12,10 +12,10 @@ export const userReducer = (state = initialUserState as any, action: any) => {
 
     switch(action.type) {
         
-        case FETCH_USERS_REQUEST:
+        case FETCH_USERS_REQUEST: // When requesting all the users, we set the loading flag to true
             return {loading: true}
 
-        case FETCH_USERS_SUCCESS:
+        case FETCH_USERS_SUCCESS: // When the users have been fetched we set the users to its payload
             return {...state, loading: false, users: action.payload}
 
         case FETCH_USERS_FAIL:
@@ -46,7 +46,7 @@ export const singleUserReducer = (state = singleUserState as any, action: any) =
             return {...state, loading: false, user: updatedUserShifts}
 
         case EDIT_USER_SHIFTS_FAIL:
-            return {}
+            return {...state, loading: false, error: action.payload}
 
         default:
             return state
