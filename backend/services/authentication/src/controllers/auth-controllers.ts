@@ -456,6 +456,15 @@ export const editUserShifts = asyncHandler(async(request: any, response: Respons
         return next(new ErrorResponse(`ID invalid`, StatusCodes.BAD_REQUEST));
     }
 
+    // Validate Start and End Shift Dates
+    if(!startShiftDate || !endShiftDate) {
+        return next(new ErrorResponse(`Start or end shift dates are missing`, StatusCodes.BAD_REQUEST));
+    }
+
+    if(new Date(startShiftDate) > new Date(endShiftDate)) {
+        return next(new ErrorResponse(`Start shift date cannot be later than the end`, StatusCodes.BAD_REQUEST));
+    }
+
     user = await User.findByIdAndUpdate(id, fieldsToUpdate, {new: true, runValidators: true});
     await user.save();
 
@@ -470,5 +479,6 @@ export const deleteUserByID = asyncHandler(async(request: any, response: Respons
 })
 
 export const deleteAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
-    
+    await User.deleteMany();
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Users deleted"});
 })
