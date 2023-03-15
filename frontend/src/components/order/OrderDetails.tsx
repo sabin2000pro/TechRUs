@@ -7,7 +7,6 @@ const OrderDetails = () => {
   return (
 
     <>
-
        <h2>Order Details Component</h2>
     </>
 

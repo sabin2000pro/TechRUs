@@ -21,6 +21,8 @@ import { fetchProducts } from './actions/product-actions';
 import ProductDetails from './dashboard/admin/ProductDetails';
 import UsersList from './dashboard/admin/UsersList';
 import ShippingDetails from './components/shipping/ShippingDetails';
+import OrderSuccess from './components/order/OrderSuccess';
+import OrderConfirmation from './components/order/OrderConfirmation';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -70,7 +72,10 @@ const App: React.FC = () => {
            <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
 
+
            <Route path = '/shipping' element = {<ShippingDetails />} />
+            <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
+           <Route path = '/order-success' element = {<OrderSuccess />} />
         </Routes>
 
 

@@ -19,14 +19,10 @@ const Register = () => { // Register Component
   const onRegisterHandler = (event) => {
      try {
 
-      if(error) {
-        alert(JSON.stringify(error));
-      }
-
          event.preventDefault()
          dispatch(register(username, email, password) as any);
 
-         setShowAlert(true);
+         setShowAlert((showAlert) => !showAlert);
 
          setTimeout(() => {
             navigate("/user-login")
@@ -89,10 +85,8 @@ const Register = () => { // Register Component
              </form>
              
              
-             </div>
-        
-
-       
+        </div>
+      
 
      </>
 
