@@ -143,7 +143,6 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
     }
 
     const fileName = `product_photo_${request.params.id}${path.parse(file.name).ext}`;
-    console.log(`The file name : `, fileName);
 
   file.mv(`${process.env.PRODUCTS_SERVICE_FILE_UPLOAD_PATH}/${fileName}`, async (error) => {
 
