@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
+var shipping_schema_1 = require("./../shipping-service/src/schema/shipping-schema");
 var auth_schema_1 = require("../authentication/src/database/auth-schema");
 var products_db_1 = require("./../products/src/database/products-db");
 var orders_schema_1 = require("./../orders/src/database/orders-schema");
@@ -48,14 +49,17 @@ var user_model_1 = require("../authentication/src/models/user-model");
 var products_model_1 = require("../products/src/model/products-model");
 var order_model_1 = require("../orders/src/model/order-model");
 var payment_model_1 = require("../payments/src/models/payment-model");
+var shipping_model_1 = require("../shipping-service/src/model/shipping-model");
 var users_json_1 = __importDefault(require(".././authentication/src/data/users.json"));
 var products_json_1 = __importDefault(require("../products/src/data/products.json"));
 var orders_json_1 = __importDefault(require("../orders/src/data/orders.json"));
 var payments_json_1 = __importDefault(require("../payments/src/data/payments.json"));
+var shipping_json_1 = __importDefault(require("../shipping-service/src/data/shipping.json"));
 // Import the load schemas functions
 var connectServiceSchemas = function () {
     (0, auth_schema_1.connectAuthDatabase)();
     (0, products_db_1.connectProductsSchema)();
+    (0, shipping_schema_1.connectShippingSchema)();
     (0, orders_schema_1.connectOrdersSchema)();
     (0, payments_schema_1.connectPaymentsSchema)();
 };
@@ -66,7 +70,7 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 8, , 9]);
+                _a.trys.push([0, 9, , 10]);
                 // First delete the existing data
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
@@ -90,16 +94,19 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
             case 7:
                 _a.sent();
+                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
+            case 8:
+                _a.sent();
                 console.log("All data inserted to each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 8:
+            case 9:
                 error_1 = _a.sent();
                 if (error_1) {
                     console.error(error_1);
                     process.exit(1);
                 }
-                return [3 /*break*/, 9];
-            case 9: return [2 /*return*/];
+                return [3 /*break*/, 10];
+            case 10: return [2 /*return*/];
         }
     });
 }); };
@@ -109,7 +116,7 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
+                _a.trys.push([0, 6, , 7]);
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
                 _a.sent();
@@ -119,18 +126,21 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, order_model_1.Order.deleteMany()];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, payment_model_1.Payment.deleteMany()];
+                return [4 /*yield*/, shipping_model_1.Shipping.deleteMany()];
             case 4:
+                _a.sent();
+                return [4 /*yield*/, payment_model_1.Payment.deleteMany()];
+            case 5:
                 _a.sent();
                 console.log("All data removed from each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 5:
+            case 6:
                 error_2 = _a.sent();
                 if (error_2) {
                     return [2 /*return*/, console.error(error_2)];
                 }
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };

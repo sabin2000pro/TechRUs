@@ -21,7 +21,7 @@ var ProductSchema = new mongoose_1.default.Schema({
     },
     image: {
         type: String,
-        default: ''
+        default: 'no-photo.png'
     },
     price: {
         type: Number,
@@ -37,14 +37,6 @@ var ProductSchema = new mongoose_1.default.Schema({
         type: Number,
         required: [true, "Please specify when a stock alert should be placed for this product"],
         default: 2
-    },
-    arrivingStockCount: {
-        type: Number,
-        default: 0
-    },
-    reorderLevel: {
-        type: Number,
-        default: 5
     },
     isNew: {
         type: Boolean,

@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "5d713995b721c3bb38c1f9f9",
+        "address": "190 High Road",
+        "city": "Dundee",
+        "country": "United Kingdom",
+        "postalCode": "ED11 7DB",
+        "phoneNo": "07881354909",
+        "shippingStatus": "processing"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f9f2",
+        "address": "190 Main Street",
+        "city": "Edinburgh",
+        "country": "United Kingdom",
+        "postalCode": "EH10 1FC",
+        "phoneNo": "07881365900",
+        "shippingStatus": "processing"
+    }
+]
