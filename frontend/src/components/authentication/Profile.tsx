@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUser } from '../../actions/auth-actions'
@@ -9,7 +9,7 @@ const Profile = () => { // User personal profile page
 
     useEffect(() => {
        const loadUser = async () => {
-        
+
          try {
            dispatch(fetchLoggedInUser() as any)
          } 

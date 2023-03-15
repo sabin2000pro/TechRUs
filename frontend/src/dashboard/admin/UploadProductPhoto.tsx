@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useDispatch , useSelector} from 'react-redux'
 
 const UploadProductPhoto = () => {
+  const [image, setImage] = useState<string>("");
+  const dispatch = useDispatch();
 
   return (
     <>
-      <h2>Upload Product Photo Page - Admin Dashboard</h2>
+      <h2 className = "heading-secondary">Upload Product Photo Page - Admin Dashboard</h2>
     </>
 
 
