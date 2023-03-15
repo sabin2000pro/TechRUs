@@ -131,7 +131,7 @@ export const deleteAllProducts = asyncHandler(async (request: any, response: Res
 })
 
 export const uploadProductPhoto = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const file = request.file.files as any
+    const file = request.files.file as any
     console.log(`Current File : `, file);
 
     if(!file) {
@@ -143,15 +143,10 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "File size is too large, please upload again"});
     }
 
-    // Check to see if the image is valid type
-    if(!file.mimetype.startsWith("image")) {
-        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload an image with a valid type"});
-    }
-
     const fileName = `product_photo_${request.params.id}${path.parse(file.originalname).ext}`;
     console.log(`The file name : `, fileName);
 
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${fileName}`, async (error) => {
+  file.mv(`${process.env.PRODUCTS_SERVICE_FILE_UPLOAD_PATH}/${fileName}`, async (error) => {
 
     if (error) {
       console.error(error);
