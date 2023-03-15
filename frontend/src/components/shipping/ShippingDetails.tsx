@@ -18,6 +18,21 @@ const ShippingDetails: React.FC = () => {
       loadUser();
   }, [dispatch, user])
 
+  const handleShippingSubmit = (event) => {
+    try {
+       event.preventDefault();
+    } 
+    
+    catch(error) {
+
+      if(error) {
+        return console.error(error);
+      }
+
+    }
+
+  }
+
   return (
 
     <>
@@ -25,15 +40,15 @@ const ShippingDetails: React.FC = () => {
 
        <div className = "flex justify-center items-center h-screen login-container">
 
-          <form method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
+          <form onSubmit = {handleShippingSubmit} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
 
-<h2 className = "heading-secondary mb-8">Your Shipping Details</h2>
+            <h2 className = "heading-secondary mb-8">Your Shipping Details</h2>
 
-  <div className = "mb-4 login-container-inputs username-container">
-        <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Address</label>
-        <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder="Enter Shipping Address" />
-  </div>
-  
+              <div className = "mb-4 login-container-inputs username-container">
+                    <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Address</label>
+                    <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder="Enter Shipping Address" />
+              </div>
+              
 
     <div className = "mb-4 login-container-inputs email-container">
         <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">City</label>
