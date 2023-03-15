@@ -10,7 +10,7 @@ export interface IAuthState {
     payload: any
 }
 
-export const authReducer = (state = initialAuthState as any, action: any) => {
+export const authReducer = (state = {initialAuthState} as any, action: any) => {
 
     switch(action.type) {
 

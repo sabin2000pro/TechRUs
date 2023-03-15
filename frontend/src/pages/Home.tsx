@@ -8,11 +8,7 @@ import ProductsList from '../dashboard/admin/ProductsList';
 const Home = () => {
   const dispatch = useDispatch();
   const {loading, error, products} = useSelector((state: any) => state.products);
-  const {user} = useSelector((state: any) => state.auth);
 
-  useEffect(() => {
-    console.log(`User : `, user);
-  }, [user])
 
   useEffect(() => {
     const fetchAllProducts = async () => {

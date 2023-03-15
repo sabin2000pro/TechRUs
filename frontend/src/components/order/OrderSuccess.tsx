@@ -1,10 +1,41 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchLoggedInUser } from '../../actions/auth-actions';
 
 const OrderSuccess = () => {
+    const dispatch = useDispatch();
+    const {loading, error, user} = useSelector((state: any) => state.auth);
+
+    useEffect(() => {
+
+      const loadUser = async () => {
+         try {
+            dispatch(fetchLoggedInUser() as any);
+
+            console.log(`User : `, user);
+         }
+         
+         catch(error) {
+            if(error) {
+                return console.error(error);
+            }
+
+         }
+      }
+
+      loadUser();
+    }, [dispatch])
+
   return (
+
     <>
-      <h2 className = "heading-secondary">Order Success Page</h2>
+        {user && !loading && (
+            <>
+         <h2 className = "heading-secondary">We got it - Your order has been placed.</h2>
+            </>
+        )}
     </>
+
   )
 }
 

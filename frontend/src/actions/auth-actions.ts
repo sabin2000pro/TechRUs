@@ -121,6 +121,8 @@ export const fetchLoggedInUser = () => async (dispatch) => {
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
         const {data} = await axios.get(`http://localhost:5400/api/v1/auth/me`, config);
+        console.log(`Logged In User : `, data);
+
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user});
     } 
     
@@ -141,9 +143,11 @@ export const forgotPassword = (email: string) => async (dispatch) => {
     try {
         
         dispatch({type: FORGOT_PASSWORD_REQUEST});
+        
         const config = processConfigHeader();
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/forgot-password`, {email}, config);
         const message = data.message;
+
         console.log(`Forgot Password Data : `, data);
         console.log(`Forgot password message : `, message);
 
