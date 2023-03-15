@@ -1,4 +1,6 @@
-import { FETCH_NEW_PRODUCTS_FAIL } from './../constants/products-constants';
+import { CREATE_ORDER_REQUEST } from './../constants/orders-constants';
+import { CREATE_PRODUCT_FAIL } from './../constants/products-constants';
+
 import axios from 'axios';
 import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, FETCH_NEW_PRODUCTS_REQUEST, FETCH_SINGLE_PRODUCT_FAIL, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS } from '../constants/products-constants';
 
@@ -30,28 +32,14 @@ export const fetchProducts = () => async (dispatch: any) => {
 
 }
 
-export const fetchNewProducts = () => async (dispatch: any) => {
-
-    try {
-
-        dispatch({type: FETCH_NEW_PRODUCTS_REQUEST}); // When the fgunction is being invoked, we are loading the new products
-        const {data} = await axios.get(``)
-    } 
-    
-    catch(error) {
-        console.log(`Fetch new products error: `, error);
-        dispatch({type: FETCH_NEW_PRODUCTS_FAIL, payload: error.data.response.message});
-    }
-
-
-}
-
 export const fetchSingleProduct = (productId) => async (dispatch: any) => {
     try {
+
        dispatch({type: FETCH_SINGLE_PRODUCT_REQUEST});
 
        const {data} = await axios.get(`${PRODUCTS_ENDPOINT}/${productId}`);
        dispatch({type: FETCH_SINGLE_PRODUCT_SUCCESS, payload: data.product});
+       
     } 
     
     catch(error) {
@@ -63,18 +51,24 @@ export const fetchSingleProduct = (productId) => async (dispatch: any) => {
 
 }
 
-export const createNewProduct = () => async (dispatch: any) => {
+export const createNewProduct = (name: string, description: string, warranty: string, price: number, stockCount: number, lowStockAlert: number) => async (dispatch: any) => {
     try {
 
+       dispatch({type: CREATE_ORDER_REQUEST});
     } 
     
     catch(error) {
+
+      if(error) {
+        dispatch({type: CREATE_PRODUCT_FAIL, payload: error.data.response.message});
+      }
 
     }
 
 }
 
 export const editProductByID = (productId) => async (dispatch: any) => {
+
     try {
         
     } 
@@ -88,7 +82,13 @@ export const editProductByID = (productId) => async (dispatch: any) => {
 
 
 export const deleteProducts = () => async (dispatch: any) => {
+  try {
 
+  } 
+  
+  catch(error) {
+
+  }
 }
 
 export const deleteProductByID = () => async (dispatch: any) => {

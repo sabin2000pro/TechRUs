@@ -1,18 +1,21 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
-const CreateProduct: React.FC = () => {
+const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
-    
+  const navigate = useNavigate();
+
   return (
 
     <>
+      
 
-<div className = "flex justify-center items-center h-screen login-container">
+       <div className = "flex justify-center items-center h-screen login-container">
 
 <form method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
 
-<h2 className = "heading-secondary mb-8">Create Product</h2>
+<h2 className = "heading-secondary mb-8">Your Shipping Details</h2>
 
   <div className = "mb-4 login-container-inputs username-container">
         <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Address</label>
@@ -35,7 +38,7 @@ const CreateProduct: React.FC = () => {
 
   <div className = "flex items-center justify-center login-btn-container">
 
-  <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Create Product</button>
+  <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Confirm Order</button>
 
   </div>
 
@@ -44,11 +47,9 @@ const CreateProduct: React.FC = () => {
 
 
 </div>
-
     </>
 
   )
-
 }
 
-export default CreateProduct
+export default ShippingDetails

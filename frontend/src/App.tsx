@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from './actions/product-actions';
 import ProductDetails from './dashboard/admin/ProductDetails';
 import UsersList from './dashboard/admin/UsersList';
+import ShippingDetails from './components/shipping/ShippingDetails';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -68,6 +69,8 @@ const App: React.FC = () => {
            <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />
            <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
+
+           <Route path = '/shipping' element = {<ShippingDetails />} />
         </Routes>
 
 

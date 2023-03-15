@@ -1,32 +1,42 @@
 import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import MetaData from '../../layout/MetaData'
+import { useNavigate } from 'react-router-dom'
 import { removeProductFromBasket } from '../../actions/basket-actions'
 
 const BasketScreen: React.FC = () => {
   const dispatch = useDispatch();
   const {basketItems} = useSelector((state: any) => state.basket)
+  const navigate = useNavigate();
   const applicableTax = 0.2; // 20% VAT tax
   const basketSubtotal = basketItems.reduce((acc, item) => acc + Number(item.price * item.quantity), 0)
 
   const shippingRate = 0.3;
   const taxPrice = basketSubtotal * applicableTax;
-  const shippingPrice = shippingRate;
+  const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
 
 
   const onRemoveProductHandler = (id: string) => {
+
+
     try {
        dispatch(removeProductFromBasket(id) as any)
     } 
     
     catch(error) {
+
+
       if(error) {
         return console.error(error);
       }
     }
 
 
+  }
+
+  const handleShippingNavigate = () => {
+    navigate('/shipping')
   }
     
   return (
@@ -38,7 +48,8 @@ const BasketScreen: React.FC = () => {
 
        {basketItems.map((basketItem: any) => (
         <>
-<div className = "w-1/2 bg-white shadow-md rounded mt-12 basket-card">
+
+          <div className = "w-1/2 bg-white shadow-md rounded mt-12 basket-card">
 
    <div className = "flex items-center justify-center mt-12">
       <p className = "text-xl font-medium mb-4"> Product Name: {basketItem.name}</p>
@@ -67,11 +78,40 @@ const BasketScreen: React.FC = () => {
        ))}
 
           {basketItems.length > 0 ? (
+
              <>
-            <div className = "flex justify-center mr-12 bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
-                    <h3 className = "text-lg">Total Price: £{parseInt(totalPrice)}</h3>
-                    <button className = "px-4 rounded basket-btn mb-5 checkout-btn">Checkout</button>
-            </div>
+            <div className="flex justify-center bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
+             <h2 className="heading-secondary order-heading">Order Summary</h2>
+
+    <hr/>
+
+    <div className="flex flex-col px-4 py-2">
+        <div className="flex justify-between mb-2">
+            <h3 className="text-lg mr-3">Subtotal:</h3>
+            <h3 className="text-md">£{basketSubtotal.toFixed(2)} </h3>
+        </div>
+
+        <div className="flex justify-between mb-2">
+            <h3 className="text-md">Tax:</h3>
+            <h3 className="text-md">£{taxPrice.toFixed(2)}</h3>
+        </div>
+
+        <div className="flex justify-between mb-2">
+            <h3 className="text-md">Shipping:</h3>
+            <h3 className="text-md">£{shippingPrice.toFixed(2)}</h3>
+        </div>
+
+        <div className="flex justify-between mb-2">
+            <h3 className="text-lg">Total:</h3>
+            <h3 className="text-lg">£{totalPrice.toFixed(2)}</h3>
+        </div>
+
+        <button onClick = {handleShippingNavigate} className="px-4 rounded basket-btn mb-5 checkout-btn">Checkout</button>
+    </div>
+
+
+</div>
+
 
              </>
           ) : null}

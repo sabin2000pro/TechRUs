@@ -35,7 +35,7 @@ export const productsReducer = (state = productsInitialState as any, action: any
             return {loading: true}
 
         case CREATE_PRODUCT_SUCCESS:
-            return {...state, loading: false}
+            return {...state, loading: false, product: action.payload}
 
         case CREATE_PRODUCT_FAIL:
             return {loading: false, error: action.payload}
