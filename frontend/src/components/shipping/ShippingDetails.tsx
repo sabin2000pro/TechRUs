@@ -12,10 +12,11 @@ const ShippingDetails: React.FC = () => {
   useEffect(() => {
       const loadUser = async () => {
 
+          dispatch(fetchLoggedInUser() as any);
       }
 
       loadUser();
-  }, [])
+  }, [dispatch, user])
 
   return (
 
