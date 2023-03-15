@@ -29,6 +29,7 @@ const App: React.FC = () => {
    useEffect(() => {
 
       const fetchStripeKey = async () => {
+
          try {
             console.log(`The stripe key : `, stripeApiKey);
             setStripeApiKey(stripeApiKey);
@@ -54,6 +55,7 @@ const App: React.FC = () => {
       <Header />       
 
         <Routes>
+
            <Route path = '/products' element = {<Home />} />
            <Route path = '/product-details/:id' element = {<ProductDetails />} />
            <Route path = '/user-register' element = {<Register />} />
@@ -63,6 +65,8 @@ const App: React.FC = () => {
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
            <Route path = '/update-password' element = {<UpdatePassword />} />
 
+           <Route path = '/update-profile' element = {<UpdateProfile />} />
+
            <Route path = '/my-profile' element = {<Profile />} />
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
            <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
@@ -71,9 +75,9 @@ const App: React.FC = () => {
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
 
  
-            <Route path = '/shipping' element = {<ShippingDetails />} />
-            <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
-            <Route path = '/order-success' element = {<OrderSuccess />} />
+         <Route path = '/shipping' element = {<ShippingDetails />} />
+         <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
+         <Route path = '/order-success' element = {<OrderSuccess />} />
 
            
         </Routes>
