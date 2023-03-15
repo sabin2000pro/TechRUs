@@ -103,7 +103,7 @@ export const editProductByID = asyncHandler(async (request: any, response: Respo
     }
 
     product = await Product.findByIdAndUpdate(id, request.body, {new: true, runValidators: true});
-    await product.save();
+    await product.save(); // Save the new product
     return response.status(StatusCodes.OK).json({success: true, product});
 })
 
