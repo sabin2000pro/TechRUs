@@ -13,6 +13,7 @@ const ShippingDetails: React.FC = () => {
   const [city, setCity] = useState<string>(shipping.city);
   const [country, setCountry] = useState<string>(shipping.country);
   const [postalCode, setPostalCode] = useState<string>(shipping.postalCode);
+  const [phoneNo, setPhoneNo] = useState<string>(shipping.phoneNo);
 
   useEffect(() => {
 
