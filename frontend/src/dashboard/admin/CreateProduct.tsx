@@ -41,7 +41,7 @@ const CreateProduct: React.FC = () => {
 
 <div className = "flex justify-center items-center h-screen login-container">
 
-  <form onChange = {handleProductCreate} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container cp-container">
+  <form onSubmit = {handleProductCreate} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container cp-container">
 
 <h2 className = "heading-secondary mb-8">Inventory - Upload Product Data</h2>
 
