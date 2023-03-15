@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { fetchLoggedInUser } from '../../actions/auth-actions';
+import { Link } from 'react-router-dom';
 
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const {shipping} = useSelector((state: any) => state.shipping);
-  const {loading, isAuthenticated, user} = useSelector((state: any) => state.auth)
+  const {isAuthenticated, user} = useSelector((state: any) => state.auth)
 
   useEffect(() => {
       const loadUser = async () => {
@@ -19,6 +19,7 @@ const ShippingDetails: React.FC = () => {
   }, [dispatch, user])
 
   const handleShippingSubmit = (event) => {
+
     try {
        event.preventDefault();
     } 
@@ -36,7 +37,6 @@ const ShippingDetails: React.FC = () => {
   return (
 
     <>
-      
 
        <div className = "flex justify-center items-center h-screen login-container">
 
