@@ -11,8 +11,6 @@ const OrderSuccess = () => {
       const loadUser = async () => {
          try {
             dispatch(fetchLoggedInUser() as any);
-
-            console.log(`User : `, user);
          }
          
          catch(error) {
@@ -30,8 +28,9 @@ const OrderSuccess = () => {
 
     <>
         {user && !loading && (
+
             <>
-         <h2 className = "heading-secondary">We got it - Your order has been placed.</h2>
+               <h2 className = "heading-secondary">We got it - Your order has been placed.</h2>
             </>
         )}
     </>
