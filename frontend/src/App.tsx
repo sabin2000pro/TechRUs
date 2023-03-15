@@ -16,7 +16,6 @@ import CreateProduct from './dashboard/admin/CreateProduct';
 import EditProduct from './dashboard/admin/EditProduct';
 import UploadProductPhoto from './dashboard/admin/UploadProductPhoto';
 import UpdatePassword from './components/authentication/UpdatePassword';
-import { useDispatch, useSelector } from 'react-redux';
 import ProductDetails from './dashboard/admin/ProductDetails';
 import UsersList from './dashboard/admin/UsersList';
 import ShippingDetails from './components/shipping/ShippingDetails';
@@ -27,27 +26,27 @@ import Protect from './components/Protect';
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
 
-   // // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
-   // useEffect(() => {
+   // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
+   useEffect(() => {
 
-   //    const fetchStripeKey = async () => {
-   //       try {
-   //          console.log(`The stripe key : `, stripeApiKey);
-   //          setStripeApiKey(stripeApiKey);
-   //       }
+      const fetchStripeKey = async () => {
+         try {
+            console.log(`The stripe key : `, stripeApiKey);
+            setStripeApiKey(stripeApiKey);
+         }
          
-   //       catch(error) {
-   //          if(error) {
-   //             return console.error(error);
-   //          }
-   //       }
+         catch(error) {
+            if(error) {
+               return console.error(error);
+            }
+         }
 
 
-   //    }
+      }
 
-   //    fetchStripeKey();
+      fetchStripeKey();
 
-   // }, [])
+   }, [])
 
   return (
 

@@ -8,11 +8,11 @@ const ShippingDetails: React.FC = () => {
   const {shipping} = useSelector((state: any) => state.shipping);
   const {isAuthenticated, user} = useSelector((state: any) => state.auth)
 
-  const [address, setAddress] = useState<string>(shipping.address);
-  const [city, setCity] = useState<string>(shipping.city);
-  const [country, setCountry] = useState<string>(shipping.country);
-  const [postalCode, setPostalCode] = useState<string>(shipping.postalCode);
-  const [phoneNo, setPhoneNo] = useState<string>(shipping.phoneNo);
+  const [address, setAddress] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [postalCode, setPostalCode] = useState<string>("");
+  const [phoneNo, setPhoneNo] = useState<string>("");
 
   useEffect(() => {
 
@@ -21,7 +21,7 @@ const ShippingDetails: React.FC = () => {
       }
 
       loadUser();
-  }, [dispatch, user])
+  }, [dispatch])
 
   const handleShippingSubmit = (event) => {
 
