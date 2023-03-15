@@ -1,5 +1,6 @@
 import { ErrorResponse } from '../utils/error-response'
 import {Product} from '../model/products-model';
+import path from 'path';
 import {Response, NextFunction} from 'express'
 import asyncHandler from 'express-async-handler';
 import {StatusCodes} from 'http-status-codes';
@@ -146,6 +147,16 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload an image with a valid type"});
     }
 
-    
+    const fileName = `product_photo_${request.params.id}${path.parse(file.originalname).ext}`;
+    console.log(`The file name : `, fileName);
 
-})
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${fileName}`, async (error) => {
+
+    if (error) {
+      console.error(error);
+      return next(new ErrorResponse('Problem with file upload', StatusCodes.INTERNAL_SERVER_ERROR));
+    }
+
+    await Product.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+
+})})

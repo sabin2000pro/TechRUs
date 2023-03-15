@@ -23,4 +23,4 @@ productRouter.route('/').get(fetchAllProducts).post(createNewProduct).delete(del
 productRouter.route('/:id').get(fetchSingleProductByID).put(editProductByID).delete(deleteProductByID);
 
 productRouter.route('/new').get(fetchNewProducts);
-productRouter.route('/upload-product-photo').post(uploadProductPhoto, productFileUpload.single("photo"));
+productRouter.route('/:id/upload-photo').put(uploadProductPhoto);
