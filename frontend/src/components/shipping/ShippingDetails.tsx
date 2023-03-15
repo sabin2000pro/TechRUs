@@ -51,13 +51,13 @@ const ShippingDetails: React.FC = () => {
 
               <div className = "mb-4 login-container-inputs username-container">
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Address</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder="Enter Shipping Address" />
+                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder = "Enter Shipping Address" />
               </div>
               
 
             <div className = "mb-4 login-container-inputs email-container">
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">City</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "city" type = "text" placeholder = "Enter City" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">

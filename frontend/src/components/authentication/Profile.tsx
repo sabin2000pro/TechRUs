@@ -26,7 +26,7 @@ const Profile = () => { // User personal profile page
 
        loadUser();
 
-    }, [dispatch, user])
+    }, [dispatch])
 
   return (
     <>
