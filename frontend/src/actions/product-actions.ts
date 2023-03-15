@@ -15,8 +15,6 @@ export const fetchProducts = (keyword = '', page = 1) => async (dispatch: any) =
       dispatch({type: FETCH_ALL_PRODUCTS_REQUEST});
 
       const {data} = await axios.get(`${PRODUCTS_ENDPOINT}?keyword=${keyword}&page=${page}`);
-      console.log(`Data : `, data);
-
       dispatch({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: data.products});
     } 
     
