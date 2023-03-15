@@ -152,7 +152,7 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
       return next(new ErrorResponse('Problem with file upload', StatusCodes.INTERNAL_SERVER_ERROR));
     }
 
-    await Product.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+    await Product.findByIdAndUpdate(request.params.id, { image: `/public/images/${fileName}` });
     return response.status(StatusCodes.OK).json({success: true, message: "File Uploaded"});
 
 })})
