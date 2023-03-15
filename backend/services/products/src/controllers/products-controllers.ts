@@ -131,7 +131,8 @@ export const deleteAllProducts = asyncHandler(async (request: any, response: Res
 })
 
 export const uploadProductPhoto = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const file = request.file.files
+    const file = request.file.files as any
+    console.log(`Current File : `, file);
 
     if(!file) {
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload a valid file"});
