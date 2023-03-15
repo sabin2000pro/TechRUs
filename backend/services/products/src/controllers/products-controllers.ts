@@ -124,10 +124,28 @@ export const deleteProductByID = asyncHandler(async (request, response, next): P
     return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Product Deleted"})
 })
 
-export const deleteAllProducts = asyncHandler(async (request, response, next) => {
+export const deleteAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     await Product.deleteMany();
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "No products found"})
 })
 
-export const uploadProductPhoto = asyncHandler(async (request: any, response, next) => {
+export const uploadProductPhoto = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const file = request.file.files
+
+    if(!file) {
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload a valid file"});
+    }
+
+    // Check the file size
+    if(file.size > process.env.PRODUCTS_SERVICE_MAX_FILE_UPLOAD_SIZE) {
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "File size is too large, please upload again"});
+    }
+
+    // Check to see if the image is valid type
+    if(!file.mimetype.startsWith("image")) {
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload an image with a valid type"});
+    }
+
+    
+
 })
