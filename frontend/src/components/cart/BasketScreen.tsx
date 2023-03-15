@@ -15,7 +15,8 @@ const BasketScreen: React.FC = () => {
   const taxPrice = basketSubtotal * applicableTax;
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
-
+  
+  console.log(`My basket items : `, basketItems);
 
   const onRemoveProductHandler = (id: string) => {
 
