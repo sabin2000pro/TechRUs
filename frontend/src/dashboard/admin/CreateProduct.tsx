@@ -17,9 +17,11 @@ const CreateProduct: React.FC = () => {
     console.log(`Logged In User : `, user);
  }, [user])
 
-  const handleProductCreate = async () => {
+  const handleProductCreate = async (event) => {
 
     try {
+      console.log(`Creating product...`);
+      event.preventDefault();
         dispatch(createNewProduct(name, description, warranty, price, stockCount, lowStockAlert) as any)
     }
     
