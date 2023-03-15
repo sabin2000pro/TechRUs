@@ -1,8 +1,9 @@
 import { shippingReducer } from './reducers/shipping-reducers';
 import { productsReducer, singleProductReducer } from './reducers/products-reducers';
 import {configureStore} from "@reduxjs/toolkit"
-import { authReducer, userReducer } from "./reducers/auth-reducer"
+import { authReducer } from "./reducers/auth-reducer"
 import { basketReducer } from './reducers/basket-reducer';
+import { userReducer } from './reducers/user-reducers';
 
 export const store = configureStore({
     

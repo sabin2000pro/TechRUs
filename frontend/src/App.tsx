@@ -76,9 +76,9 @@ const App: React.FC = () => {
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
 
  
-         <Route path = '/shipping' element = {<ShippingDetails />} />
-         <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
-         <Route path = '/order-success' element = {<OrderSuccess />} />
+          <Route path = '/shipping' element = {<ShippingDetails />} />
+          <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
+          <Route path = '/order-success' element = {<OrderSuccess />} />
 
            
         </Routes>
