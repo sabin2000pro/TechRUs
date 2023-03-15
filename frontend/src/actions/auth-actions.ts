@@ -104,12 +104,10 @@ export const login = (email: string, password: string) => async (dispatch) => {
     catch(error) {
         
       if(error) {
-        console.error(`Login Error : `, error.response.data.message);
         dispatch({type: LOGIN_USER_FAIL, payload: error.response.data.message});
       }
 
     }
-
 
 } 
 
@@ -122,8 +120,6 @@ export const fetchLoggedInUser = () => async (dispatch) => {
 
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
         const {data} = await axios.get(`http://localhost:5400/api/v1/auth/me`, config);
-        
-        console.log(`Logged In User : `, data);
 
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user});
     } 
@@ -161,7 +157,6 @@ export const forgotPassword = (email: string) => async (dispatch) => {
       if(error) {
 
         if(error) {
-
             console.log(`Forgot Password Error : `, error);
             dispatch({type: FORGOT_PASSWORD_FAIL, payload: error.data.response.message});
           }
@@ -179,6 +174,10 @@ export const resetPassword = (email: string) => async (dispatch) => {
     
     catch(error) {
 
+     if(error) {
+
+     }
+
     }
 
 }
@@ -189,11 +188,21 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
     } 
     
     catch(error) {
+      if(error) {
+
+      }
 
     }
 
 }
 
-export const updateCustomerWorkShfits = (currentStartShift, newStartShift, currentEndShift, newEndShift) => async (dispatch) => {
+export const updateCustomerWorkShfits = (newCurrentShift: any, newEndShift: any) => async (dispatch) => {
+    try {
+
+    } 
+    
+    catch(error) {
+
+    }
 
 }

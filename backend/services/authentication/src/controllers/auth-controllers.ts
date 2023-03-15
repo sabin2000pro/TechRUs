@@ -400,12 +400,9 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 )
 
 export const fetchLoggedInUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-
         const user = request.user; // Store the user in the user object
-        console.log(`The user : `, user);
         return response.status(StatusCodes.OK).json({success: true, user});
     } 
-
 )
 
 export const fetchAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
