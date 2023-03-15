@@ -19,9 +19,9 @@ const ForgotPassword: React.FC = () => {
     <>
       <MetaData pageTitle = {`Forgot Password`} />
 
-      <div className = "flex justify-center items-center h-screen login-container">
+      <div className = "flex justify-center items-center h-screen forgot-container">
 
-<form method = "POST" onSubmit = {onForgotPasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 mt-4 login-form-container">
+<form method = "POST" onSubmit = {onForgotPasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 mt-4 forgot-form-container">
 
   <h1 className = "heading-primary h-login mt-4">Forgot Password</h1>
 

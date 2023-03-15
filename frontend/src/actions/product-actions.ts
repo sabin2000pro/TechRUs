@@ -8,13 +8,14 @@ let PRODUCTS_ENDPOINT = `http://localhost:5404/api/v1/products`;
 
 
 //@ description: Redux action which fetches all of the products from the backend in JSON format
-export const fetchProducts = () => async (dispatch: any) => {
+export const fetchProducts = (keyword = '', page = 1) => async (dispatch: any) => {
 
     try {
 
       dispatch({type: FETCH_ALL_PRODUCTS_REQUEST});
 
-      const {data} = await axios.get(PRODUCTS_ENDPOINT);
+      const {data} = await axios.get(`${PRODUCTS_ENDPOINT}?keyword=${keyword}&page=${page}`);
+      console.log(`Data : `, data);
 
       dispatch({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: data.products});
     } 
@@ -28,8 +29,6 @@ export const fetchProducts = () => async (dispatch: any) => {
 
 
     }
-
-
 }
 
 export const fetchSingleProduct = (productId) => async (dispatch: any) => {

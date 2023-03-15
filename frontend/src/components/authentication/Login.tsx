@@ -70,7 +70,7 @@ const Login: React.FC = () => {
                 </div>
 
                 <div className = "flex justify-center">
-                  <span>Need an account? - <Link className = "reset-link" to ='/user-register'>Register Here</Link>   </span>
+                  <span>Forgot your password? - <Link className = "reset-link" to ='/forgot-password'>Reset Here</Link>   </span>
                 </div>
 
                 <div className = "flex items-center justify-center login-btn-container">

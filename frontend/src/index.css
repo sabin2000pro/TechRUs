@@ -20,6 +20,10 @@
   margin-bottom: -100px;
 }
 
+.search-input {
+  width: 500px;
+}
+
 .heading-secondary {
    font-size: 28px;
    text-align: center;
@@ -87,7 +91,7 @@ body {
     margin-right: 50px;
     height: 35px;
     text-align: center;
-    width: 25%;
+    width: 300px;
 }
 
 .header-container input:focus {
@@ -241,6 +245,10 @@ font-weight: bold;
 
 .login-form button {
   margin-top: 50px
+}
+
+.forgot-container {
+  margin-top: -100px;
 }
 
 .username-container {

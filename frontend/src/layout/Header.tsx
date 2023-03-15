@@ -1,12 +1,14 @@
-import React  from 'react'
+import React, { useState }  from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Dropdown from './Dropdown';
+import { fetchProducts } from '../actions/product-actions';
 
 const Header = () => {
   const dispatch = useDispatch();
   const {loading, error, user} = useSelector((state: any) => state.auth);
   const {basketItems} = useSelector((state: any) => state.basket);
+  const [keyword, setKeyword] = useState<string>("");
 
   let currentBasketCount = 0;
 
@@ -14,6 +16,17 @@ const Header = () => {
 
   if(basketItems.length > 0) {
     currentBasketCount =  basketItems.reduce((acc, item) => acc + Number(item.quantity), 0);
+  }
+
+  const handleSearch = (event) => {
+    setKeyword(event.target.value);
+    console.log(`iN Saerch`)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    dispatch(fetchProducts(keyword) as any);
   }
 
 
@@ -32,8 +45,13 @@ const Header = () => {
            <img className = "logo-img" src = '/images/techrus.png' />
         </Link>
 
-          <input type = "text" placeholder = "Search Products" />
+  
 
+        <form onSubmit={handleSubmit}>
+              <input className = "search-input" onChange = {handleSearch} value = {keyword} type = "text" placeholder = "Search Products" />
+         </form>
+
+          
           <div className = "header-container-right flex justify-end items-center m-4">
 
               {token ? ( <Dropdown />
@@ -42,7 +60,7 @@ const Header = () => {
                    <>
 
                     <div className = "mr-4 p-4 login-link"> 
-                      <Link to = '/user-login'>Login</Link>
+                      <Link to = '/user-register'>Register</Link>
                    </div>
 
                   </>
