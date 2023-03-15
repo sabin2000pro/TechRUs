@@ -52,7 +52,7 @@ export const editShippingStatus = async (request: any, response: Response, next:
 
 }
 
-export const editShippingDetails = async (request: any, response, next) => {
+export const editShippingDetails = async (request: any, response: Response, next: NextFunction): Promise<any> => {
    const id = request.params.id;
    let shipping = await Shipping.findById(id);
 
@@ -64,7 +64,7 @@ export const editShippingDetails = async (request: any, response, next) => {
 
 }
 
-export const deleteShippingDetails = async (request, response, next) => {
+export const deleteShippingDetails = async (request: any, response: Response, next: NextFunction): Promise<any> => {
     await Shipping.deleteMany();
     return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Shipping Details Deleted"});
 }
