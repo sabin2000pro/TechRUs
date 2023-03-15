@@ -17,7 +17,6 @@ import EditProduct from './dashboard/admin/EditProduct';
 import UploadProductPhoto from './dashboard/admin/UploadProductPhoto';
 import UpdatePassword from './components/authentication/UpdatePassword';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from './actions/product-actions';
 import ProductDetails from './dashboard/admin/ProductDetails';
 import UsersList from './dashboard/admin/UsersList';
 import ShippingDetails from './components/shipping/ShippingDetails';
@@ -72,8 +71,8 @@ const App: React.FC = () => {
            <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
 
-
-           <Route path = '/shipping' element = {<ShippingDetails />} />
+ 
+            <Route path = '/shipping' element = {<ShippingDetails />} />
             <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
            <Route path = '/order-success' element = {<OrderSuccess />} />
         </Routes>
