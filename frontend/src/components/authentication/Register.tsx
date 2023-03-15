@@ -19,10 +19,18 @@ const Register = () => { // Register Component
   const onRegisterHandler = (event) => {
      try {
 
+      if(error) {
+        alert(JSON.stringify(error));
+      }
+
          event.preventDefault()
          dispatch(register(username, email, password) as any);
 
          setShowAlert(true);
+
+         setTimeout(() => {
+            navigate("/user-login")
+         }, 1200)
      } 
      
      catch(error) {
@@ -42,8 +50,6 @@ const Register = () => { // Register Component
         <MetaData pageTitle = {`Register`} />
 
         {showAlert && <h2 className = "heading-secondary">Registered Successfully</h2>}
-
-      
 
              <div className = "flex justify-center items-center h-screen login-container">
 
