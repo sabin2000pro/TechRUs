@@ -58,7 +58,7 @@ export const createNewProduct = (name: string, description: string, warranty: st
 
        dispatch({type: CREATE_PRODUCT_REQUEST});
 
-       const {data} = await axios.post(PRODUCTS_ENDPOINT);
+       const {data} = await axios.post(PRODUCTS_ENDPOINT, {name, description, warranty, price, stockCount, lowStockAlert});
        console.log(`Created Product Data : `, data);
 
        dispatch({type: CREATE_PRODUCT_SUCCESS, payload: data.product});
