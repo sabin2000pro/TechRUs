@@ -448,13 +448,18 @@ export const editUserByID = asyncHandler(async(request: any, response: Response,
 export const editUserShifts = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
     const {startShiftDate, endShiftDate} = request.body;
-    const user = await User.findById(id);
+    const fieldsToUpdate = {startShiftDate, endShiftDate};
+
+    let user = await User.findById(id);
 
     if(!isValidObjectId(id)) {
-        
+        return next(new ErrorResponse(`ID invalid`, StatusCodes.BAD_REQUEST));
     }
 
-    
+    user = await User.findByIdAndUpdate(id, fieldsToUpdate, {new: true, runValidators: true});
+    await user.save();
+
+    return response.status(StatusCodes.OK).json({success: true, message: "Shifts updated successfully"});
 })
 
 export const deleteUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
