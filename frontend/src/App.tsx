@@ -21,7 +21,6 @@ import UsersList from './dashboard/admin/UsersList';
 import ShippingDetails from './components/shipping/ShippingDetails';
 import OrderSuccess from './components/order/OrderSuccess';
 import OrderConfirmation from './components/order/OrderConfirmation';
-import Protect from './components/Protect';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
