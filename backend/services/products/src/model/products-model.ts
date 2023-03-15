@@ -9,8 +9,6 @@ interface ProductDocument extends Document {
     stockCount: Number;
     price: number;
     lowStockAlert: number;
-    arrivingStockCount: number;
-    reorderLevel: number;
     isNew: boolean
 }
 
@@ -34,7 +32,7 @@ const ProductSchema = new mongoose.Schema<ProductDocument>({
 
     image: {
         type: String,
-        default: ''
+        default: 'no-photo.png'
     },
 
     price: {
@@ -53,16 +51,6 @@ const ProductSchema = new mongoose.Schema<ProductDocument>({
         type: Number,
         required: [true, "Please specify when a stock alert should be placed for this product"],
         default: 2
-    },
-
-    arrivingStockCount: { // Stores how much stock the inventory is expecting
-        type: Number,
-        default: 0
-    },
-
-    reorderLevel: { // When a product hits 5, the inventory system automatically re-orders a product
-        type: Number,
-        default: 5
     },
 
     isNew: {
