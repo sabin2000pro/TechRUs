@@ -45,13 +45,10 @@ const Header = () => {
            <img className = "logo-img" src = '/images/techrus.png' />
         </Link>
 
-  
-
-        <form onSubmit={handleSubmit}>
+        <form onSubmit = {handleSubmit}>
               <input className = "search-input" onChange = {handleSearch} value = {keyword} type = "text" placeholder = "Search Products" />
          </form>
 
-          
           <div className = "header-container-right flex justify-end items-center m-4">
 
               {token ? ( <Dropdown />
