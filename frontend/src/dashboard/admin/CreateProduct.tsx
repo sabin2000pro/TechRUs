@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { createNewProduct } from '../../actions/product-actions';
 
 const CreateProduct: React.FC = () => {
+  const [name, setName] = useState<string | undefined>("");
+  const [description, setDescription] = useState<string | undefined>("");
+  const [warranty, setWarranty] = useState<string | undefined>("");
+  const [price, setPrice] = useState<number | undefined>(0);
+
   const dispatch = useDispatch();
+
+  const handleProductCreate = async () => {
+
+    try {
+    
+    }
+    
+    catch(error) {
+      
+       if(error) {
+        return console.error(error);
+       }
+
+    }
+
+
+  }
     
   return (
 
@@ -10,7 +33,7 @@ const CreateProduct: React.FC = () => {
 
 <div className = "flex justify-center items-center h-screen login-container">
 
-<form method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
+<form onChange = {handleProductCreate} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
 
 <h2 className = "heading-secondary mb-8">Create Product</h2>
 
