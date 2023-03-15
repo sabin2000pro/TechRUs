@@ -4,21 +4,6 @@ import { fetchAllProducts, createNewProduct, fetchSingleProductByID, editProduct
 
 export const productRouter = express.Router();
 
-// Define storage for the uploaded files
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-
-      cb(null, 'public/images/products'); // upload the photos to the public folder
-    },
-
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname); // set the file name to be unique
-    }
-
-  });
-
-  const productFileUpload = multer({storage});
-
 productRouter.route('/').get(fetchAllProducts).post(createNewProduct).delete(deleteAllProducts)
 productRouter.route('/:id').get(fetchSingleProductByID).put(editProductByID).delete(deleteProductByID);
 
