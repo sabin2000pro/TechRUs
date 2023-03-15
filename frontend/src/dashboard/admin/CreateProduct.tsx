@@ -9,10 +9,9 @@ const CreateProduct: React.FC = () => {
   const [price, setPrice] = useState<number>(0);
   const [stockCount, setStockCount] = useState<number>(0);
   const [lowStockAlert, setLowStockAlert] = useState(0);
-
+  const dispatch = useDispatch();
   const {loading, error, user} = useSelector((state: any) => state.auth);
 
-  const dispatch = useDispatch();
 
   const handleProductCreate = async () => {
 
@@ -32,8 +31,8 @@ const CreateProduct: React.FC = () => {
   }
 
   useEffect(() => {
-     console.log(`Logged In user : `, user);
-  }, [user])
+     console.log(`Logged In User : `, user);
+  }, [])
     
   return (
 
@@ -41,19 +40,19 @@ const CreateProduct: React.FC = () => {
 
 <div className = "flex justify-center items-center h-screen login-container">
 
-<form onChange = {handleProductCreate} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
+  <form onChange = {handleProductCreate} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
 
 <h2 className = "heading-secondary mb-8">Create Product</h2>
 
   <div className = "mb-4 login-container-inputs username-container">
-        <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Address</label>
-        <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
+        <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Name</label>
+        <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "name" type = "text" placeholder = "Name" />
   </div>
   
 
     <div className = "mb-4 login-container-inputs email-container">
-        <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">City</label>
-        <input  className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
+        <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Description</label>
+        <input  className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "description" type = "text" placeholder="Description" />
   </div>
 
 
