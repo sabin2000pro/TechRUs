@@ -441,6 +441,16 @@ font-weight: bold;
 
 .profile-container {
   width: 700px;
-  height: 350px;
+  height: 450px;
   margin-top: 200px;
+}
+
+.profile-btns button {
+  background-color: #042658;
+  margin-top: 25px;
+}
+
+.profile-btns button:hover {
+  transition: all 0.3s;
+  background-color: #5B90E0;
 }
