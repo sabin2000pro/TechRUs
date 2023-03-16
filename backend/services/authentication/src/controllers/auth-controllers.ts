@@ -2,6 +2,7 @@ import { EmailVerification } from './../models/verify-email-model';
 import { createEmailTransporter } from './../utils/send-mail';
 import {generateCode } from './../utils/generate-otp-code';
 import {User} from '../models/user-model';
+import path from 'path';
 import {Request, Response, NextFunction} from 'express';
 import {TwoFactorVerification} from '../models/two-factor-model';
 import asyncHandler from 'express-async-handler';
@@ -10,8 +11,15 @@ import {isValidObjectId} from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
 import {PasswordReset} from '../models/password-reset-model';
 
+// @API Description: Returns the JSON for the root route of the authentication service
+// @method: GET
+// @route: /api/v1/auth
+// @access: Public (No Authorization Required)
+
 export const rootRoute = asyncHandler(async (request: any, response: any, next: NextFunction): Promise<any> => {
-    return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
+    if(request.method === 'GET') {
+        return response.status(StatusCodes.OK).json({success: true, message: "Root Route Auth!"});
+    }
 })
 
 export const verifyUserExists = async (email: any): Promise<any> => {
@@ -55,7 +63,7 @@ export const sendLoginMfa = (transporter: any, user: any, userMfa: any) => {
 
 export const sendForgotPasswordResetLink = (user: any, resetPasswordURL: string) => {
 
-    const transporter = createEmailTransporter();
+   const transporter = createEmailTransporter() // Create instance of the e-mail transporter
      
    return transporter.sendMail({
         from: 'resetpassword@techrus.dev',
@@ -487,3 +495,29 @@ export const deleteAllUsers = asyncHandler(async(request: any, response: Respons
     await User.deleteMany();
     return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Users deleted"});
 })
+
+export const uploadUserAvatar = asyncHandler (async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    const file = request.files.file as any
+
+    if(!file) {
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload a valid file"});
+    }
+
+    // Check the file size
+    if(file.size > process.env.PRODUCTS_SERVICE_MAX_FILE_UPLOAD_SIZE) {
+        return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "File size is too large, please upload again"});
+    }
+
+    const fileName = `product_photo_${request.params.id}${path.parse(file.name).ext}`;
+
+  file.mv(`${process.env.PRODUCTS_SERVICE_FILE_UPLOAD_PATH}/${fileName}`, async (error) => {
+
+    if (error) {
+      console.error(error);
+      return next(new ErrorResponse('Problem with file upload', StatusCodes.INTERNAL_SERVER_ERROR));
+    }
+
+    await User.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+    return response.status(StatusCodes.OK).json({success: true, message: "User Avatar Uploaded"});
+
+})})

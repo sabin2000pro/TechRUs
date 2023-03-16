@@ -37,7 +37,7 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
 }
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-  
+
         const resultsPerPage = 3; // How many products we want to display per page
         const searchKey = request.query.keyword;
         const page = parseInt(request.query.page) || 1; // Get the current page number
@@ -53,6 +53,7 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
 
         return response.status(StatusCodes.OK).json({success: true, products, numberOfProducts, page})
     }
+
 )
 
 export const fetchSingleProductByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -75,6 +76,8 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
        if(!name || !description || !warranty || !price || !stockCount || !lowStockAlert) {
            return next(new ErrorResponse(`Some entries are missing. Please check again when creating a product`, StatusCodes.BAD_REQUEST));
        }
+
+       // 1. Check to see if the stock for the product is low and if it is true, send low stock e-mail to the inbox
 
        const product = await Product.create({name, description, warranty, price, stockCount, lowStockAlert});
        await product.save();
