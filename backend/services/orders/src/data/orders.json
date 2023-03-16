@@ -21,12 +21,6 @@
         }],
 
         "orderStatus": "received",
-
-        "paymentInformation": {
-            "id": "5d713995b721c3bb38c1f9c9",
-            "status": "received"
-        },
-
         "itemPrice": 3999.99,
         "taxPrice": 4.99,
         "shippingPrice": 2.99,
@@ -55,12 +49,6 @@
         }],
 
         "orderStatus": "received",
-
-        "paymentInformation": {
-            "id": "5d713995b721c3bb38c1f9c7",
-            "status": "received"
-        },
-
         "itemPrice": 999.99,
         "taxPrice": 2.99,
         "shippingPrice": 0.99,
