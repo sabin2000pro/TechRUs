@@ -37,6 +37,7 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
 }
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+  
         const resultsPerPage = 3; // How many products we want to display per page
         const searchKey = request.query.keyword;
         const page = parseInt(request.query.page) || 1; // Get the current page number

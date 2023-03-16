@@ -8,10 +8,10 @@ interface IUserSchemaDocument {
     email: string;
     password: string;
     role: string;
-    country: string;
     isActive: boolean;
     isVerified: boolean;
     isAccountLocked: boolean;
+    image: string;
     storePoints: number;
     startShiftDate: Date;
     endShiftDate: Date
@@ -47,6 +47,11 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
         type: String,
         default: 'staff',
         enum: ['manager', 'admin', 'staff']
+    },
+
+    image: {
+        type: String,
+        default: 'no-avatar.jpg'
     },
 
     isActive: { // Is the customer's account active or not
