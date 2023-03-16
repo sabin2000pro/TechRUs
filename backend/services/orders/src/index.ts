@@ -1,7 +1,7 @@
 require('dotenv').config();
 import { app } from "./app"
 
-const ORDERS_SERVICE_PORT = process.env.ORDERS_SERVICE_PORT || 5402;
+const ORDERS_SERVICE_PORT = process.env.ORDERS_SERVICE_PORT || 5403;
 
 // Start of authentication server
 export const startOrdersServer = async () => {

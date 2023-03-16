@@ -8,6 +8,7 @@ export const connectOrdersSchema = async (): Promise<any> => { // Create connect
     try {
 
        return await mongoose.connect(ORDERS_DB_URI as any).then(conn => {
+        
             if(conn.connection) {
                 return console.log(`Connected to the orders schema`);
             }

@@ -10,10 +10,10 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
        const totalOrders = await Order.countDocuments({});
        let totalOrderAmount = 0;
        
-       orders.forEach((currOrder) => {
-          console.log(`All your orders : `, currOrder);
-          totalOrderAmount += currOrder.totalPrice
-       })
+    //    orders.forEach((currOrder) => {
+    //       console.log(`All your orders : `, currOrder);
+    //       totalOrderAmount += currOrder.totalPrice
+    //    })
        
        if(!orders) {
             return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
