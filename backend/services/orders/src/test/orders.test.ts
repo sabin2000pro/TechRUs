@@ -51,21 +51,21 @@ describe("Create New Order Test Suite", () => {
 
         for(const orderData of orderBodyPayload) {
             const response = await request(app).post(`/api/v1/orders`).send(orderData);
-            console.log(`Response : `, response);
             return expect(response.statusCode).toBe(StatusCodes.CREATED);
         }
     })
 
     it("Fetch all orders unit test", async () => {
+
         try {
             const response = await request(app).get(`/api/v1/orders`).send();
             return expect(response.statusCode).toBe(StatusCodes.OK);
         } 
         
         catch(error) {
-            
+
            if(error) {
-            return console.error(error);
+              return console.error(error);
            }
 
         }
@@ -73,7 +73,7 @@ describe("Create New Order Test Suite", () => {
     })
 
     it("Update order status unit test", async () => {
-
+       const updateOrderStatusPayload = {orderStatus: ""}
     })
 
     it("Create order with invalid data", async () => {

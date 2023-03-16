@@ -69,7 +69,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
-        enum: ['received', 'pending', 'shipped', 'processing', 'canceled', 'refunded'],
+        enum: ['received', 'pending', 'completed', 'processing', 'canceled', 'refunded'],
         default: 'processing'
     },
 
