@@ -7,6 +7,7 @@ import asyncHandler from 'express-async-handler';
 
 export const fetchAllOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
        const orders = await Order.find();
+       const totalOrders = await Order.countDocuments({});
        let totalOrderAmount = 0;
        
        orders.forEach((currOrder) => {
@@ -18,7 +19,7 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
        }
 
-       return response.status(StatusCodes.OK).json({success: true, orders});
+       return response.status(StatusCodes.OK).json({success: true, orders, totalOrders});
     }
     
 )

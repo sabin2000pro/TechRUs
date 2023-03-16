@@ -66,6 +66,10 @@ exports.UserSchema = new mongoose_1.default.Schema({
         default: 'staff',
         enum: ['manager', 'admin', 'staff']
     },
+    image: {
+        type: String,
+        default: 'no-avatar.jpg'
+    },
     isActive: {
         type: Boolean,
         default: false

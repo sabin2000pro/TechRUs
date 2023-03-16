@@ -43,7 +43,6 @@ const UsersList = () => {
     <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">
-
               <div className = "flex flex-row gap-6 product-card-container">
 
                 {users && users.length === 0 && <h2 className = "heading-secondary">No Users Found</h2>}
@@ -62,7 +61,7 @@ const UsersList = () => {
 
                           <p className ="product-descriptions "> {user.email} </p>
 
-                          <Link to = {`/product-details/${user._id}`} className = "product-btn" type = "submit">View User</Link>
+                          <Link to = {`/user-details/${user._id}`} className = "product-btn" type = "submit">View User</Link>
 
                           </div>
 

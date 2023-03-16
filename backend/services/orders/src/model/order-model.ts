@@ -4,7 +4,6 @@ export interface IOrderDocument {
     orderItems: mongoose.Schema.Types.ObjectId;
     shippingInformation: Object
     orderStatus: String
-    paymentInformation: Object
     itemPrice: Number;
     taxPrice: Number;
     totalPrice: number;
@@ -51,6 +50,11 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
             required: [true, "Please specify the shipping city"]
         },
 
+        country: {
+            type: String,
+            required: [true, "Please specify the country for this order shipping"]
+        },
+
         phoneNo: {
             type: String,
             required: [true, "Please specify the shipping phone number"]
@@ -59,34 +63,14 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         postalCode: {
             type: String,
             required: [true, "Please specify the shipping postal code"]
-        },
-
-        country: { // Country of the shipping
-            type: String,
-            required: [true, "Please specify the shipping country"]
         }
 
     },
 
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
-        required: [true, "Please specify the status that the order is in"],
         enum: ['received', 'pending', 'shipped', 'processing', 'canceled', 'refunded'],
         default: 'processing'
-    },
-
-    paymentInformation: { // Payment object will hold the payment used for the payment, transaction ID, the status of the payment such as Pending, Failed or Canceled
-
-        id: { // ID of the payment
-            type: String
-        },
-
-        status: { // Status of the transaction
-            type: String,
-            default: "pending",
-            enum: ['pending', 'received', 'canceled', 'refund']
-        }
-
     },
 
     itemPrice: { // Items price being ordered
@@ -118,8 +102,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         default: Date.now
     }
 
-
 }, {timestamps: true});
 
 const Order = mongoose.model("Order", OrderSchema);
-export {Order}
+export {Order} // Export the order model
