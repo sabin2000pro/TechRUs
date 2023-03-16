@@ -64,8 +64,8 @@ const App: React.FC = () => {
            <Route path = '/user-login' element = {<Login />} />
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
-           <Route path = '/update-password' element = {<UpdatePassword />} />
 
+           <Route path = '/update-password' element = {<UpdatePassword />} />
            <Route path = '/update-profile' element = {<UpdateProfile />} />
 
            <Route path = '/my-profile' element = {<Profile />} />
@@ -79,9 +79,8 @@ const App: React.FC = () => {
           <Route path = '/shipping' element = {<ShippingDetails />} />
           <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
           <Route path = '/order-success' element = {<OrderSuccess />} />
-
            
-        </Routes>
+         </Routes>
 
 
         <Footer />

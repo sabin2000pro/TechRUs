@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUser } from '../../actions/auth-actions'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => { // User personal profile page
     const dispatch = useDispatch();
     const {isAuthenticated, error, user} = useSelector((state: any) => state.auth);
+    const navigate = useNavigate();
 
     useEffect(() => {
+
        const loadUser = async () => {
 
          try {
@@ -28,13 +30,21 @@ const Profile = () => { // User personal profile page
 
     }, [dispatch])
 
+    const handleUpdateProfileNavigate = () => {
+
+    }
+
+    const handleUpdatePasswordNavigate = () => {
+
+    }
+
   return (
 
     <>
     
       {isAuthenticated && !error && (
 
-                  <div className = "flex flex-col justify-center items-center">
+            <div className = "flex flex-col justify-center items-center">
 
                     <div className = "w-1/3 p-4">
 
@@ -63,23 +73,21 @@ const Profile = () => { // User personal profile page
                         </div>
 
                         <div className = "mb-4">
+                           <label className = "block text-gray-700 font-bold mb-4">Start Shift Date: </label>
+                           <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "startShiftDate" type = "text" value = {user.startShiftDate} disabled/>
+                        </div>
 
-                           <label>Start Shift Date: </label>
-
-                           <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="startShiftDate" type = "text" value = {user.startShiftDate}
-                            disabled
-                          />
-
-                           
+                        <div className = "mb-4">
+                          <label className = "block text-gray-700 font-bold mb-4">End Shift Date: </label>
                         </div>
 
                         <div className="flex flex-row justify-center profile-btns">
 
-                          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4">
+                          <button onClick = {handleUpdateProfileNavigate} className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4">
                             Update Profile
                           </button>
 
-                          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                          <button onClick = {handleUpdatePasswordNavigate} className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Update Password
                           </button>
 
