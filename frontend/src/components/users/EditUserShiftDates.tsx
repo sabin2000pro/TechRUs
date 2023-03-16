@@ -11,12 +11,18 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
     const [startShiftDate, setStarShiftDate] = useState(Date.now());
     const [endShiftDate, setEndShiftDate] = useState(Date.now());
     const dispatch = useDispatch();
-    const {loading, error} = useSelector((state: any) => state.user) as any;
+    const {loading, error, user} = useSelector((state: any) => state.user) as any;
+
+    const handleEditUserShift = (event) => {
+      event.preventDefault();
+    }
 
   return (
 
     <>
        <MetaData pageTitle = {`Edit Staff User Shifts`} />
+
+        
     </>
 
 

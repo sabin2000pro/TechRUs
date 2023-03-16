@@ -30,8 +30,8 @@ describe("Create New Order Test Suite", () => {
                 quantity: 1,
                 image: "no-photo.jpg",
                 price: 3999.99,
-                product: "product_id",
-                _id: "item_id"
+                product: "63e25f48d82eb035f7da0982",
+                _id: "63f388bf2b02ac6637b871bc"
             }],
 
             orderStatus: "received",
@@ -51,13 +51,24 @@ describe("Create New Order Test Suite", () => {
 
         for(const orderData of orderBodyPayload) {
             const response = await request(app).post(`/api/v1/orders`).send(orderData);
+            console.log(`Response : `, response);
             return expect(response.statusCode).toBe(StatusCodes.CREATED);
         }
-
-
     })
 
     it("Fetch all orders unit test", async () => {
+        try {
+            const response = await request(app).get(`/api/v1/orders`).send();
+            return expect(response.statusCode).toBe(StatusCodes.OK);
+        } 
+        
+        catch(error) {
+            
+           if(error) {
+            return console.error(error);
+           }
+
+        }
 
     })
 

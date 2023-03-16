@@ -1,8 +1,8 @@
-import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, VERIFY_USER_EMAIL_FAIL, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL } from './../constants/auth-constants';
+import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
-import { fetchTokenFromSessionStorage } from '../fetch-auth-token';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
+import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL } from './../constants/user-constants';
 
 export const register = (username: string, email: string, password: string) => async (dispatch) => {
 
@@ -103,7 +103,7 @@ export const login = (email: string, password: string) => async (dispatch) => {
 
 } 
 
-export const fetchLoggedInUser = () => async (dispatch) => {
+export const fetchLoggedInUser = () => async (dispatch) => { // Authentication action responsible for fetching the currently logged in user on the platform
 
     try {
 
@@ -176,6 +176,7 @@ export const resetPassword = (email: string, resetToken: string) => async (dispa
 
 export const updatePassword = (currentPassword: string, newPassword: string) => async (dispatch) => {
     try {
+
       dispatch({type: UPDATE_PASSWORD_REQUEST});
 
       const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword});
@@ -194,13 +195,23 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
 }
 
-export const updateCustomerWorkShfits = (newCurrentShift: any, newEndShift: any) => async (dispatch) => {
-    try {
+export const updateCustomerWorkShfits = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch) => {
 
+    try {
+       dispatch({type: EDIT_USER_SHIFTS_REQUEST});
+
+       const {data} = await axios.put(`http://localhost:5400/api/v1/auth/users/${id}/update-shifts`, {newStartShiftDate, newEndShiftDate});
+       console.log(`Updated staff user shifts : `, data);
+
+       dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data});
     } 
     
     catch(error) {
+      if(error) {
+        console.error(`Error : `, error);
+        dispatch({type: EDIT_USER_SHIFTS_FAIL, payload: error.data.response.message});
 
+      }
     }
 
 }
