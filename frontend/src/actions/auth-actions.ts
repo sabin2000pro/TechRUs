@@ -1,4 +1,4 @@
-import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL } from './../constants/auth-constants';
+import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
@@ -159,15 +159,19 @@ export const forgotPassword = (email: string) => async (dispatch) => {
 
 }
 
-export const resetPassword = (email: string, resetToken: string) => async (dispatch) => {
+export const resetPassword = (currentPassword: string, newPassword: string, resetToken: string) => async (dispatch) => {
     try {
+      dispatch({type: RESET_PASSWORD_REQUEST});
 
+      const {data} = await axios.put(`http://localhost:5400/api/v1/auth/reset-password/${resetToken}`, {currentPassword, newPassword});
     } 
     
     catch(error) {
 
      if(error) {
 
+        console.log(`Reset Password Error : `, error);
+        dispatch({type: RESET_PASSWORD_FAIL, payload: error.data.response.message});
      }
 
     }
@@ -195,7 +199,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
 }
 
-export const updateCustomerWorkShfits = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch) => {
+export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch) => {
 
     try {
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});
@@ -214,4 +218,12 @@ export const updateCustomerWorkShfits = (id: string, newStartShiftDate: Date, ne
       }
     }
 
+}
+
+export const fetchAllUsers = () => async (dispatch) => {
+
+}
+
+export const fetchUserByID = (id: string) => async (dispatch) => {
+    
 }
