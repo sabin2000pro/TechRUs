@@ -406,13 +406,16 @@ export const fetchLoggedInUser = asyncHandler(async (request: any, response: Res
 )
 
 export const fetchAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
+    const resultsPerPage = 3;
+    const currentPage = parseInt(request.query.page) || 1;
+    const totalUsers = await User.countDocuments({})
     const users = await User.find();
 
     if(!users) {
         return next(new ErrorResponse(`No users found`, StatusCodes.BAD_REQUEST));
     }
 
-    return response.status(StatusCodes.OK).json({success: true, users});
+    return response.status(StatusCodes.OK).json({success: true, users, totalUsers});
 
 })
 

@@ -64,17 +64,17 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
         default: false
     },
 
-    isVerified: {
+    isVerified: { // Determines if the user account is verified or not
         type: Boolean,
         default: false
     },
 
-    startShiftDate: {
+    startShiftDate: { // users start shift in the store
         type: Date,
         default: Date.now
     },
 
-    endShiftDate: {
+    endShiftDate: { // The user's end shift date
         type: Date,
         default: Date.now
     },
