@@ -53,12 +53,17 @@ describe("Register Unit Tests", () => {
 
     })
 
-
 })
 
 describe("Login API Unit Tests", () => {
 
     it("Login with valid details", async () => {
+       const loginPayload = [{email: "mike99@gmail.com", password: "123mini123"}]
+
+       for(const body of loginPayload) {
+         const loginResponse = await request(app).post(`/api/v1/auth/login`).send(body);
+         return expect(loginResponse.statusCode).toBe(StatusCodes.OK)
+       }
 
     })
 
