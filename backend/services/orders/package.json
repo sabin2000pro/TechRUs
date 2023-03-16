@@ -4,7 +4,7 @@
   "description": "Orders Microservice JSON Dependencies File",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build:orders-service": "tsc",
     "dev": "nodemon dist/index.js",
     "start:orders-service:dev": "NODE_ENV=development nodemon dist/index.js",
     "orders:test": "jest test/orders.test.ts --bail",

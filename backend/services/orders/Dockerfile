@@ -8,5 +8,5 @@ COPY nodemon.json .
 RUN npm install 
 COPY . .
 EXPOSE 5403
-RUN npm run build
+RUN npm run build:orders-service
 CMD [ "npm", "run", "start:orders-service:dev"]

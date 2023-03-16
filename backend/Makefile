@@ -13,9 +13,8 @@ build-services:
 	- cd services/products* && npm run build
 	- cd services/reviews* && npm run build
 	- cd services/shipping-service* && npm run build
-	- cd services/
-	- cd services/api-gateway* && npm run build
-	- cd services/orders* && npm run build
+	- cd services/api-gateway* && npm run build:api-gateway
+	- cd services/orders* && npm run build:orders-service
 	- cd services/payments* && npm run build
 
 	- docker login
