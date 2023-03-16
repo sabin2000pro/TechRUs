@@ -7,7 +7,7 @@ const UpdateProfile = () => {
   return (
 
     <>
-      <h2 className = "heading-secondary">Update Profile Page</h2>
+      <h2 className = "heading-secondary">Account Settings</h2>
     </>
 
   )

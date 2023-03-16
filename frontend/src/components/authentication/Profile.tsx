@@ -31,11 +31,11 @@ const Profile = () => { // User personal profile page
     }, [dispatch])
 
     const handleUpdateProfileNavigate = () => {
-
+       navigate(`/update-profile/${user._id}`)
     }
 
     const handleUpdatePasswordNavigate = () => {
-
+      navigate(`/update-password/${user._id}`)
     }
 
   return (
