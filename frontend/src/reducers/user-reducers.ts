@@ -8,7 +8,7 @@ const singleUserState = {
     user: {}
 }
 
-export const userReducer = (state = initialUserState as any, action: any) => {
+export const usersReducer = (state = initialUserState as any, action: any) => {
 
     switch(action.type) {
         

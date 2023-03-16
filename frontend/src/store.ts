@@ -3,13 +3,13 @@ import { productsReducer, singleProductReducer } from './reducers/products-reduc
 import {configureStore} from "@reduxjs/toolkit"
 import { authReducer } from "./reducers/auth-reducer"
 import { basketReducer } from './reducers/basket-reducer';
-import { userReducer, singleUserReducer } from './reducers/user-reducers';
+import { usersReducer, singleUserReducer } from './reducers/user-reducers';
 
 export const store = configureStore({
     
     reducer: {
         auth: authReducer,
-        user: userReducer,
+        users: usersReducer,
         products: productsReducer,
         singleProduct: singleProductReducer,
         singleUser: singleUserReducer,
