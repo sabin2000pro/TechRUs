@@ -12,19 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchLoggedInCustomer = exports.resetPassword = exports.updatePassword = exports.forgotPassword = exports.verifyLoginMFA = exports.logoutUser = exports.loginUser = exports.resendEmailVerificationCode = exports.verifyEmailAddress = exports.registerUser = exports.sendResetPasswordTokenStatus = exports.sendTokenResponse = exports.sendForgotPasswordResetLink = exports.sendLoginMfa = exports.sendEmailConfirmationEmail = exports.verifyUserExists = exports.rootRoute = void 0;
+exports.uploadUserAvatar = exports.deleteAllUsers = exports.deleteUserByID = exports.editUserShifts = exports.editUserByID = exports.fetchUserByID = exports.fetchAllUsers = exports.fetchLoggedInUser = exports.resetPassword = exports.updatePassword = exports.forgotPassword = exports.verifyLoginMFA = exports.logoutUser = exports.loginUser = exports.resendEmailVerificationCode = exports.verifyEmailAddress = exports.registerUser = exports.sendResetPasswordTokenStatus = exports.sendTokenResponse = exports.sendForgotPasswordResetLink = exports.sendLoginMfa = exports.sendEmailConfirmationEmail = exports.verifyUserExists = exports.rootRoute = void 0;
 const verify_email_model_1 = require("./../models/verify-email-model");
 const send_mail_1 = require("./../utils/send-mail");
 const generate_otp_code_1 = require("./../utils/generate-otp-code");
 const user_model_1 = require("../models/user-model");
+const path_1 = __importDefault(require("path"));
 const two_factor_model_1 = require("../models/two-factor-model");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const http_status_codes_1 = require("http-status-codes");
 const mongoose_1 = require("mongoose");
 const error_response_1 = require("../utils/error-response");
 const password_reset_model_1 = require("../models/password-reset-model");
+// @API Description: Returns the JSON for the root route of the authentication service
+// @method: GET
+// @route: /api/v1/auth
+// @access: Public (No Authorization Required)
 exports.rootRoute = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Root Route Auth!" });
+    if (request.method === 'GET') {
+        return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Root Route Auth!" });
+    }
 }));
 const verifyUserExists = (email) => __awaiter(void 0, void 0, void 0, function* () {
     return yield user_model_1.User.findOne({ email }); // Returns true or false if the user with that e-mail address already exists in the database
@@ -62,7 +69,7 @@ const sendLoginMfa = (transporter, user, userMfa) => {
 };
 exports.sendLoginMfa = sendLoginMfa;
 const sendForgotPasswordResetLink = (user, resetPasswordURL) => {
-    const transporter = (0, send_mail_1.createEmailTransporter)();
+    const transporter = (0, send_mail_1.createEmailTransporter)(); // Create instance of the e-mail transporter
     return transporter.sendMail({
         from: 'resetpassword@techrus.dev',
         to: user.email,
@@ -109,18 +116,54 @@ exports.registerUser = (0, express_async_handler_1.default)((request, response, 
     return (0, exports.sendTokenResponse)(request, user, http_status_codes_1.StatusCodes.CREATED, response); // Send back the response to the user
 }));
 exports.verifyEmailAddress = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId, OTP } = request.body; // Extract the user id and OTP from the request body
-    const currentCustomer = yield user_model_1.User.findById(userId);
+    const { userId, OTP } = request.body;
+    const user = yield user_model_1.User.findById(userId);
+    // Check for invalid User ID
     if (!(0, mongoose_1.isValidObjectId)(userId)) {
-        return next(new error_response_1.ErrorResponse("The User ID is invalid. Please verify it again", http_status_codes_1.StatusCodes.BAD_REQUEST));
+        return next(new error_response_1.ErrorResponse("User ID not found. Please check your entry again.", http_status_codes_1.StatusCodes.NOT_FOUND));
     }
-    if (!OTP) { // If there is no OTP present
-        return next(new error_response_1.ErrorResponse("OTP is invalid, please check it again", http_status_codes_1.StatusCodes.BAD_REQUEST));
+    // Check for missing OTP
+    if (!OTP) {
+        return next(new error_response_1.ErrorResponse("OTP Entered not found. Please check your entry", http_status_codes_1.StatusCodes.NOT_FOUND));
     }
-    if (!currentCustomer) {
-        return next(new error_response_1.ErrorResponse(`Customer that ID ${userId} does not exist`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    if (!user) {
+        return next(new error_response_1.ErrorResponse(`No user found with that ID`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User e-mail verified" });
+    // If the user is already verified
+    if (user.isVerified) {
+        return next(new error_response_1.ErrorResponse(`User account is already verified`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    if (user.isActive) { // If the user account is already active before verifying their e-mail address, send back error
+        return next(new error_response_1.ErrorResponse(`User account is already active`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    const token = yield verify_email_model_1.EmailVerification.findOne({ owner: userId }); // Find a verification token
+    if (!token) {
+        return next(new error_response_1.ErrorResponse(`OTP Verification token is not found. Please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    const otpTokensMatch = yield token.compareVerificationTokens(OTP); // Check if they match
+    if (!otpTokensMatch) {
+        return next(new error_response_1.ErrorResponse(`The token you entered does not match the one in the database.`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    if (otpTokensMatch) { // If the OTP Tokens Match
+        user.isVerified = true; // Set theu ser is Verified field to true
+        user.accountActive = true;
+        yield user.save();
+        yield verify_email_model_1.EmailVerification.findByIdAndDelete(token._id); // Find the token that belongs to the user and delete it
+        const transporter = (0, send_mail_1.createEmailTransporter)();
+        // Send welcome e-mail
+        transporter.sendMail({
+            from: 'welcome@techrus.com',
+            to: user.email,
+            subject: 'E-mail Confirmation Success',
+            html: `
+                
+                <h1> Welcome to TechRUs. Thank you for confirming your e-mail address.</h1>
+                `
+        });
+        const jwtToken = user.fetchAuthToken();
+        request.session = { token: jwtToken } || undefined; // Get the authentication JWT token
+        return response.status(http_status_codes_1.StatusCodes.CREATED).json({ message: "E-mail Address verified" });
+    }
 }));
 exports.resendEmailVerificationCode = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, OTP } = request.body;
@@ -222,23 +265,23 @@ exports.forgotPassword = (0, express_async_handler_1.default)((request, response
     yield resetPasswordToken.save();
     const resetPasswordURL = `http://localhost:3000/reset-password?token=${token}&id=${user._id}`; // Create the reset password URL
     (0, exports.sendForgotPasswordResetLink)(user, resetPasswordURL); // Send the reset password e-mail to the customer
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Reset Password E-mail Sent", email });
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Reset Password E-mail Sent" });
 }));
 exports.updatePassword = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { currentPassword, newPassword } = request.body;
     if (!newPassword) {
         return next(new error_response_1.ErrorResponse("Please provide your new password", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const customer = yield user_model_1.User.findById(request.user._id);
-    if (!customer) {
+    const user = yield user_model_1.User.findById(request.user._id);
+    if (!user) {
         return next(new error_response_1.ErrorResponse("No user found", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const currentPasswordMatch = customer.comparePasswords(currentPassword);
+    const currentPasswordMatch = user.comparePasswords(currentPassword);
     if (!currentPasswordMatch) { // If passwords do not match
         return next(new error_response_1.ErrorResponse("Current user password is invalid.", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    customer.password = request.body.newPassword;
-    yield customer.save(); // Save new user
+    user.password = request.body.newPassword;
+    yield user.save(); // Save new user
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User password updated" });
 }));
 exports.resetPassword = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -263,7 +306,86 @@ exports.resetPassword = (0, express_async_handler_1.default)((request, response,
     yield customer.save(); // Save new user after reset the password
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Customer Password Reset Successfully" });
 }));
-exports.fetchLoggedInCustomer = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.fetchLoggedInUser = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const user = request.user; // Store the user in the user object
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, user });
+}));
+exports.fetchAllUsers = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const resultsPerPage = 3; // How many users to display per page
+    const currentPage = parseInt(request.query.page) || 1; // Get the current page number by parsing the page in the request query
+    const searchKey = request.query.keyword;
+    const skipPagesBy = resultsPerPage * (currentPage - 1); // How many pages to skip by
+    const keyword = request.query.keyword ? { name: { $regex: searchKey, $options: 'i' } } : {}; // Keyword used to search for a product
+    const totalUsers = yield user_model_1.User.countDocuments(Object.assign({}, keyword));
+    const users = yield user_model_1.User.find(Object.assign({}, keyword)).limit(resultsPerPage).skip(skipPagesBy); // Find users with the search keywod if provided and limit by the number of pages
+    if (!users) {
+        return next(new error_response_1.ErrorResponse(`No users found`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, users, totalUsers });
+}));
+exports.fetchUserByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    const user = yield user_model_1.User.findById(id);
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`No ID provided. Please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    if (!user) {
+        return next(new error_response_1.ErrorResponse(`No user found with that ID ${id} - pleasae try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, user });
+}));
+exports.editUserByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    let user = yield user_model_1.User.findById(id);
+    if (!user) {
+        return next(new error_response_1.ErrorResponse(`No user found with that ID`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    user = yield user_model_1.User.findByIdAndUpdate(id, request.body, { new: true, runValidators: true });
+}));
+exports.editUserShifts = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    const { startShiftDate, endShiftDate } = request.body;
+    const fieldsToUpdate = { startShiftDate, endShiftDate };
+    let user = yield user_model_1.User.findById(id);
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`ID invalid`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    // Validate Start and End Shift Dates
+    if (!startShiftDate || !endShiftDate) {
+        return next(new error_response_1.ErrorResponse(`Start or end shift dates are missing`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    if (new Date(startShiftDate) > new Date(endShiftDate)) {
+        return next(new error_response_1.ErrorResponse(`Start shift date cannot be later than the end`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    user = yield user_model_1.User.findByIdAndUpdate(id, fieldsToUpdate, { new: true, runValidators: true });
+    yield user.save();
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Shifts updated successfully" });
+}));
+exports.deleteUserByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    yield user_model_1.User.findByIdAndDelete(id);
+    return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "User deleted succesfully" });
+}));
+exports.deleteAllUsers = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    yield user_model_1.User.deleteMany();
+    return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "Users deleted" });
+}));
+exports.uploadUserAvatar = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const file = request.files.file;
+    if (!file) {
+        return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "Please upload a valid file" });
+    }
+    // Check the file size
+    if (file.size > process.env.PRODUCTS_SERVICE_MAX_FILE_UPLOAD_SIZE) {
+        return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "File size is too large, please upload again" });
+    }
+    const fileName = `product_photo_${request.params.id}${path_1.default.parse(file.name).ext}`;
+    file.mv(`${process.env.PRODUCTS_SERVICE_FILE_UPLOAD_PATH}/${fileName}`, (error) => __awaiter(void 0, void 0, void 0, function* () {
+        if (error) {
+            console.error(error);
+            return next(new error_response_1.ErrorResponse('Problem with file upload', http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR));
+        }
+        yield user_model_1.User.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+        return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User Avatar Uploaded" });
+    }));
 }));

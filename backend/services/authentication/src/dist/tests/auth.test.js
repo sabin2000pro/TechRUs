@@ -53,6 +53,11 @@ describe("Register Unit Tests", () => {
 });
 describe("Login API Unit Tests", () => {
     it("Login with valid details", () => __awaiter(void 0, void 0, void 0, function* () {
+        const loginPayload = [{ email: "mike99@gmail.com", password: "123mini123" }];
+        for (const body of loginPayload) {
+            const loginResponse = yield (0, supertest_1.default)(app_1.app).post(`/api/v1/auth/login`).send(body);
+            return expect(loginResponse.statusCode).toBe(http_status_codes_1.StatusCodes.OK);
+        }
     }));
     it("Login with invalid password", () => __awaiter(void 0, void 0, void 0, function* () {
     }));

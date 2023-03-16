@@ -27,11 +27,7 @@ exports.UserSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
         required: [true, "Please provide a valid e-mail address for the user"],
-        unique: true,
-        validate: (value) => {
-            const emailRegexValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegexValidation.test(value);
-        }
+        unique: true
     },
     password: {
         type: String,
@@ -42,6 +38,10 @@ exports.UserSchema = new mongoose_1.default.Schema({
         type: String,
         default: 'staff',
         enum: ['manager', 'admin', 'staff']
+    },
+    image: {
+        type: String,
+        default: 'no-avatar.jpg'
     },
     isActive: {
         type: Boolean,
@@ -55,39 +55,46 @@ exports.UserSchema = new mongoose_1.default.Schema({
         type: Boolean,
         default: false
     },
-    rides: [{
-            rideId: String,
-            pickupLocation: String,
-            dropoffLocation: String,
-            rideType: String,
-            rideStatus: String,
-            driver_id: String,
-            fare: Number,
-            createdAt: Date,
-            updatedAt: Date
-        }]
+    startShiftDate: {
+        type: Date,
+        default: Date.now
+    },
+    endShiftDate: {
+        type: Date,
+        default: Date.now
+    },
+    accountActive: {
+        type: Boolean,
+        default: false
+    },
+    storePoints: {
+        type: Number,
+        default: 0
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 }, { timestamps: true });
-// Hash password before saving to database
+//@ description: Pre-middleware function which hashes the user password before saving it to the database
 exports.UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!this.isModified("password")) {
             return next();
         }
         const SALT_ROUNDS = 10;
-        const passwordSalt = yield bcryptjs_1.default.genSalt(SALT_ROUNDS);
-        this.password = yield bcryptjs_1.default.hash(this.password, passwordSalt);
+        const salt = yield bcryptjs_1.default.genSalt(SALT_ROUNDS);
+        this.password = yield bcryptjs_1.default.hash(this.password, salt); // Hash the password before saving to DB
         return next();
     });
 });
-// Compare login passwords using bcrypt
+exports.UserSchema.methods.fetchAuthToken = function () {
+    return jsonwebtoken_1.default.sign({ _id: this._id, email: this.email }, process.env.JWT_TOKEN, { expiresIn: process.env.JWT_EXPIRES_IN });
+};
 exports.UserSchema.methods.comparePasswords = function (enteredPassword) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield bcryptjs_1.default.compare(enteredPassword, this.password);
+        return bcryptjs_1.default.compare(enteredPassword, this.password);
     });
-};
-// Sign the JWT Token
-exports.UserSchema.methods.fetchAuthToken = function () {
-    return jsonwebtoken_1.default.sign({ id: this._id, email: this.email }, process.env.JWT_TOKEN, { expiresIn: process.env.JWT_EXPIRES_IN });
 };
 const User = mongoose_1.default.model("User", exports.UserSchema);
 exports.User = User;
