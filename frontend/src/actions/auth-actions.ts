@@ -2,7 +2,7 @@ import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY
 import {processConfigHeader} from '../headers'
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
-import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS } from './../constants/user-constants';
+import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS } from './../constants/user-constants';
 
 export const register = (username: string, email: string, password: string) => async (dispatch) => {
 
@@ -223,12 +223,19 @@ export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShif
 
 export const fetchAllUsers = () => async (dispatch) => {
    try {
+     dispatch({type: FETCH_USERS_REQUEST});
+     const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users`);
 
+     console.log(`All Staff Users : `, data);
+
+     dispatch({type: FETCH_USERS_SUCCESS, payload: data.users});
    } 
    
    catch(error) {
-
+    console.error(`Error fetching users: `, error);
+    dispatch({type: FETCH_USERS_FAIL, payload: error.data.response.message});
    }
+
 }
 
 export const fetchUserByID = (id: string) => async (dispatch) => {

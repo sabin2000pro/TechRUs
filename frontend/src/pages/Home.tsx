@@ -9,13 +9,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const {loading, error, products} = useSelector((state: any) => state.products);
 
-
   useEffect(() => {
+
     const fetchAllProducts = async () => {
 
         try {
           dispatch(fetchProducts() as any)
-          
+
         } 
         
         catch(error) {
@@ -37,6 +37,7 @@ const Home = () => {
     <MetaData pageTitle={`Homepage`} />
 
       {loading ? <div>
+        
         <Loader />
 
         </div> : (
