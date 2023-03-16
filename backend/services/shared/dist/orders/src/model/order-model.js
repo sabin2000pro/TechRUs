@@ -34,6 +34,10 @@ exports.OrderSchema = new mongoose_1.default.Schema({
             type: String,
             required: [true, "Please specify the shipping city"]
         },
+        country: {
+            type: String,
+            required: [true, "Please specify the country for this order shipping"]
+        },
         phoneNo: {
             type: String,
             required: [true, "Please specify the shipping phone number"]
@@ -41,27 +45,12 @@ exports.OrderSchema = new mongoose_1.default.Schema({
         postalCode: {
             type: String,
             required: [true, "Please specify the shipping postal code"]
-        },
-        country: {
-            type: String,
-            required: [true, "Please specify the shipping country"]
         }
     },
     orderStatus: {
         type: String,
-        required: [true, "Please specify the status that the order is in"],
         enum: ['received', 'pending', 'shipped', 'processing', 'canceled', 'refunded'],
         default: 'processing'
-    },
-    paymentInformation: {
-        id: {
-            type: String
-        },
-        status: {
-            type: String,
-            default: "pending",
-            enum: ['pending', 'received', 'canceled', 'refund']
-        }
     },
     itemPrice: {
         type: Number,

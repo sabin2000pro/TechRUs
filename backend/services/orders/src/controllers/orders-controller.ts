@@ -52,7 +52,7 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
     return response.status(StatusCodes.CREATED).json({success: true, order});
 } )
 
-export const udpateOrderStatus = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+export const updateOrderStatus = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const {orderStatus} = request.body;
     const id = request.params.id;
 
