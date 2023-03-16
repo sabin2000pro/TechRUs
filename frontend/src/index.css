@@ -438,3 +438,9 @@ font-weight: bold;
   height: 1800px;
   margin-top: -150px;
 }
+
+.profile-container {
+  width: 700px;
+  height: 350px;
+  margin-top: 200px;
+}
