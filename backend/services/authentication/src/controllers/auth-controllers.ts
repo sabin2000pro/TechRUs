@@ -406,16 +406,21 @@ export const fetchLoggedInUser = asyncHandler(async (request: any, response: Res
 )
 
 export const fetchAllUsers = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
-    const resultsPerPage = 3;
-    const currentPage = parseInt(request.query.page) || 1;
-    const totalUsers = await User.countDocuments({})
-    const users = await User.find();
+    const resultsPerPage = 3; // How many users to display per page
+    const currentPage = parseInt(request.query.page) || 1; // Get the current page number by parsing the page in the request query
+    const searchKey = request.query.keyword;
+    const skipPagesBy = resultsPerPage * (currentPage - 1); // How many pages to skip by
+
+    const keyword = request.query.keyword ? {name: {$regex: searchKey, $options: 'i'}} : {}; // Keyword used to search for a product
+    const totalUsers = await User.countDocuments({...keyword})
+
+    const users = await User.find({...keyword}).limit(resultsPerPage).skip(skipPagesBy); // Find users with the search keywod if provided and limit by the number of pages
 
     if(!users) {
         return next(new ErrorResponse(`No users found`, StatusCodes.BAD_REQUEST));
     }
 
-    return response.status(StatusCodes.OK).json({success: true, users, totalUsers});
+     return response.status(StatusCodes.OK).json({success: true, users, totalUsers});
 
 })
 
