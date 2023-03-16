@@ -6,14 +6,20 @@ import {Response, NextFunction} from 'express';
 import asyncHandler from 'express-async-handler';
 
 export const fetchAllOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-       const orders = await Order.find();
+       const ordersPerPage = 3;
        const totalOrders = await Order.countDocuments({});
-       let totalOrderAmount = 0;
+       const currentPage = parseInt(request.query.page) || 1;
        
-    //    orders.forEach((currOrder) => {
-    //       console.log(`All your orders : `, currOrder);
-    //       totalOrderAmount += currOrder.totalPrice
-    //    })
+       const searchKeyword = request.query.keyword;
+       const skipByPages = ordersPerPage * (currentPage - 1);
+
+       const orders = await Order.find({...searchKeyword}); // Fetch all the orders
+    //    let totalOrderAmount = 0;
+       
+    // //    orders.forEach((currOrder) => {
+    // //       console.log(`All your orders : `, currOrder);
+    // //       totalOrderAmount += currOrder.totalPrice
+    // //    })
        
        if(!orders) {
             return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
