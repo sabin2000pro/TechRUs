@@ -12,6 +12,7 @@ build-services:
 	- cd services/authentication* && npm run build
 	- cd services/products* && npm run build
 	- cd services/reviews* && npm run build
+	- cd services/shipping-service* && npm run build
 	- cd services/
 	- cd services/api-gateway* && npm run build
 	- cd services/orders* && npm run build

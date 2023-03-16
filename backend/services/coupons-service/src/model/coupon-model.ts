@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 export interface ICouponDocument {
     product: mongoose.Schema.Types.ObjectId;
     description: string;
-    expiryDate: Date;
+    code: string;
+    isActive: boolean;
+    expirationDate: Date;
     minPurchaseAmount: Number;
 }
 
@@ -21,7 +23,8 @@ export const CouponSchema = new mongoose.Schema<ICouponDocument>({
     },
 
     code: {
-
+      type: String,
+      required: [true, "Please specify the code of the coupon when creating it"]
     },
 
     isActive: {
