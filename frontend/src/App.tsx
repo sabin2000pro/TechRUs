@@ -7,7 +7,6 @@ import React from 'react';
 import Home from './pages/Home';
 import ForgotPassword from './components/authentication/ForgotPassword';
 import Footer from './layout/Footer';
-
 import ResetPassword from './components/authentication/ResetPassword';
 import BasketScreen from './components/cart/BasketScreen';
 import Profile from './components/authentication/Profile';

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewProduct } from '../../actions/product-actions';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProduct: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [warranty, setWarranty] = useState<string>("");
@@ -20,9 +22,22 @@ const CreateProduct: React.FC = () => {
   const handleProductCreate = async (event) => {
 
     try {
-      console.log(`Creating product...`);
+      
       event.preventDefault();
+
         dispatch(createNewProduct(name, description, warranty, price, stockCount, lowStockAlert) as any)
+
+        alert("Product Created")
+
+        setName("");
+        setDescription("");
+        setWarranty("");
+        setPrice(0);
+        
+
+        setTimeout(() => {
+            navigate("/products");
+        }, 1500)
     }
     
     catch(error) {

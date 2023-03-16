@@ -222,7 +222,9 @@ export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShif
 }
 
 export const fetchAllUsers = () => async (dispatch) => {
+
    try {
+    
      dispatch({type: FETCH_USERS_REQUEST});
      const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users`);
 
