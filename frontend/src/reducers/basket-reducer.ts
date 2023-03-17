@@ -10,7 +10,7 @@ const basketItems = localStorage.getItem("basketItems") ? JSON.parse(localStorag
 export const basketReducer = (state = {basketItems}, action: any) => {
     switch(action.type) {
 
-        case ADD_ITEM_TO_BASKET:
+        case ADD_ITEM_TO_BASKET: // Reducer for adding an item to the cart
             const currItem = action.payload
             const currCartItemExists = state.basketItems.find((cartItem: any) => cartItem.product === currItem.product)
 

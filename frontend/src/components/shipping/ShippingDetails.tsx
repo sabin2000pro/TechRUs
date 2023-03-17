@@ -50,8 +50,8 @@ const ShippingDetails: React.FC = () => {
             <h2 className = "heading-secondary mb-8">Your Shipping Details</h2>
 
               <div className = "mb-4 login-container-inputs username-container">
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Address</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder = "Enter Shipping Address" />
+                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "address">Address</label>
+                  <input value = {address} onChange = {(event) => setAddress(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder = "Enter Shipping Address" />
               </div>
               
 
@@ -61,7 +61,7 @@ const ShippingDetails: React.FC = () => {
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Country</label>
+                  <label className = "block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Country</label>
                   <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
