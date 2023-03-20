@@ -11,6 +11,7 @@ export interface IShippingDocument {
     updatedAt: Date
 }
 
+// Shipping Microservice Data Model 
 export const ShippingSchema = new mongoose.Schema<IShippingDocument>({
 
     address: {
