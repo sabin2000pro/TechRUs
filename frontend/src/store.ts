@@ -1,3 +1,4 @@
+import { couponReducer } from './reducers/coupon-reducers';
 import { shippingReducer } from './reducers/shipping-reducers';
 import { productsReducer, singleProductReducer } from './reducers/products-reducers';
 import {configureStore} from "@reduxjs/toolkit"
@@ -11,6 +12,7 @@ export const store = configureStore({
         auth: authReducer,
         users: usersReducer,
         products: productsReducer,
+        coupon: couponReducer,
         singleProduct: singleProductReducer,
         singleUser: singleUserReducer,
         basket: basketReducer,

@@ -20,6 +20,17 @@ build-services:
 	- docker login
 	- docker-compose up --build
 
+create-networks:
+	- docker network create products-service
+	- docker network create my-service-network
+	- docker network create auth-service
+	- docker network create orders-service
+	- docker network create shipping-service
+	- docker network create payments-service
+	- docker network create coupons-service
+	- docker network create reviews-service
+	
+
 stop-services:
 	- docker-compose -f docker-compose.yaml -f docker-compose.yaml down --remove-orphans
 
