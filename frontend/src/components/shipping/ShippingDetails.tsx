@@ -16,7 +16,7 @@ const ShippingDetails: React.FC = () => {
 
   useEffect(() => {
 
-      const loadUser = async () => {
+      const loadUser = async () => { // Fetch the logged in user
           dispatch(fetchLoggedInUser() as any);
       }
 
@@ -54,14 +54,13 @@ const ShippingDetails: React.FC = () => {
                   <input value = {address} onChange = {(event) => setAddress(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "address" type = "text" placeholder = "Enter Shipping Address" />
               </div>
               
-
             <div className = "mb-4 login-container-inputs email-container">
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">City</label>
+                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "city">City</label>
                   <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "city" type = "text" placeholder = "Enter City" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
-                  <label className = "block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Country</label>
+                  <label className = "block text-sm font-bold mb-2 login-username-label" htmlFor = "country">Country</label>
                   <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
@@ -76,9 +75,9 @@ const ShippingDetails: React.FC = () => {
               </div>
 
 
-            <div className = "flex items-center justify-center login-btn-container">
-                <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Place Order</button>
-            </div>
+        <div className = "flex items-center justify-center login-btn-container">
+            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Place Order</button>
+        </div>
 
    </form>
 </div>

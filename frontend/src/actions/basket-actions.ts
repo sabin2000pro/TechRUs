@@ -11,6 +11,7 @@ export const addProductToBasket = (id: string, quantity: number) => async (dispa
     } 
     
     catch(error) {
+
        if(error) {
          return console.error(error)
        }
@@ -19,7 +20,9 @@ export const addProductToBasket = (id: string, quantity: number) => async (dispa
 }
 
 export const removeProductFromBasket = (id: string) => async (dispatch: any, getState: any) => {
+    
     try {
+
         dispatch({type: REMOVE_ITEM_FROM_BASKET, payload: id});
 
         localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))

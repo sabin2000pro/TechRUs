@@ -49,7 +49,7 @@ const Profile = () => { // User personal profile page
                     <div className = "w-1/3 p-4">
 
                       <div className = "bg-blue rounded-lg shadow-lg p-6 h-30 mt-12 profile-container">
-                            <h2 className="text-xl font-bold mb-4">Logged In As: {user.username}</h2>
+                          <h2 className="text-xl font-bold mb-4">Logged In As: {user.username}</h2>
 
                         <div className = "mb-4">
 
