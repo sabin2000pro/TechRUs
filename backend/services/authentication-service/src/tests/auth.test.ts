@@ -34,7 +34,7 @@ describe("Register Unit Tests", () => {
 
     it("Register with missing e-mail address", async () => {
 
-         const validRegisterData = [{username: "user092", password: "123mini123"}]
+        const validRegisterData = [{username: "user092", password: "123mini123"}]
 
         for(const body of validRegisterData) {
             const response = await request(app).post(`/api/v1/auth/register`).send(body);
@@ -42,6 +42,7 @@ describe("Register Unit Tests", () => {
         }
 
     })
+
 
     it("Register API with invalid e-mail address", async () => {
         const validRegisterData = [{username: "user092", email: "nfj", password: "123mini123"}]
@@ -68,6 +69,13 @@ describe("Login API Unit Tests", () => {
     })
 
     it("Login with invalid password", async () => {
+        const loginPayload = [{email: "mike99@gmail.com", password: "bb00"}]
+
+        for(const body of loginPayload) {
+          const loginResponse = await request(app).post(`/api/v1/auth/login`).send(body);
+          return expect(loginResponse.statusCode).toBe(StatusCodes.OK)
+        }
+
 
     })
 
@@ -77,7 +85,34 @@ describe("Login API Unit Tests", () => {
 
     it("Login with missing e-mail address", async () => {
         
+
+
     })
+})
+
+describe("Forgot Password API - Unit Tests", () => {
+    it("Forgot Password - Valid E-mail Address", async () => {
+
+
+       const forgotPasswordPayload = [{email: "testuser09@gmail.com"}]
+
+       for(const body of forgotPasswordPayload) {
+           const response = await request(app).post(`/api/v1/auth/forgot-password`).send(body);
+           return expect(response.statusCode).toBe(StatusCodes.OK)
+       }
+
+
+    })
+
+    it("Forgot Password - Invalid E-mail Address", async () => {
+
+    })
+
+    it("Forgot Password - Missing E-mail Address", async () => {
+
+    })
+
+
 })
 
 
