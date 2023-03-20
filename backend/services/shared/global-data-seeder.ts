@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { connectCouponsSchema } from './../coupons-service/src/database/coupons-schema';
 import { connectShippingSchema } from './../shipping-service/src/schema/shipping-schema';
 import { connectAuthDatabase } from '../authentication-service/src/database/auth-schema';
 import { connectProductsSchema } from './../products-service/src/database/products-db';
@@ -23,8 +24,10 @@ import shipping from '../shipping-service/src/data/shipping.json';
 const connectServiceSchemas = () => {
     connectAuthDatabase();
     connectProductsSchema();
+
     connectShippingSchema();
     connectOrdersSchema();
+    connectCouponsSchema();
     connectPaymentsSchema();
 }
 
@@ -85,6 +88,7 @@ const removeServiceData = async () => {
         if(error) {
             return console.error(error);
         }
+        
     }
 
 }

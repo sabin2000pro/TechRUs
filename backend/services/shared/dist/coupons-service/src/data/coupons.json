@@ -3,20 +3,22 @@
         "_id": "5d713995b721c3bb38c1f5b0",
         "product": "63e25f48d82eb035f7da0980",
         "description": "Get £30 off your next order",
-        "code": "THRTYOFF",
-        "expiryDate": "2023-11-31",
-        "isActive": true
+        "expiryDate": "2023-11-20",
+        "minPurchaseAmount": 500.00,
+        "discountType": "percentage",
+        "discountAmount": 30.00,
+        "couponCode": "THRTYOFF"
     },
-    
     {
         "_id": "5d713995b721c3bb38c1f5b1",
         "product": "63e25f48d82eb035f7da0982",
         "description": "Get £20 off your next order",
         "expiryDate": "2023-07-03",
-        "code": "TWNTYOFF",
-        "isActive": true
+        "minPurchaseAmount": 300.00,
+        "discountType": "fixed",
+        "discountAmount": 20.00,
+        "discountCode": "TWNTYOFF"
     },
-
     {
         "_id": "5d713995b721c3bb38c1f5b2",
         "product": "63e25f48d82eb035f7da0983",
@@ -27,7 +29,6 @@
         "discount_amount": 15.00,
         "discount_code": "FIFTNOFF"
     },
-
     {
         "_id": "5d713995b721c3bb38c1f5b2",
         "product": "63e25f48d82eb035f7da0982",
@@ -38,7 +39,6 @@
         "discount_amount": 10.00,
         "discount_code": "TENPNDOFF"
     },
-
     {
         "_id": "5d713995b721c3bb38c1f5b3",
         "description": "Buy one get one free",
@@ -48,6 +48,4 @@
         "discount_amount": null,
         "discount_code": "BUYONEFREE100"
     }
-
-
 ]

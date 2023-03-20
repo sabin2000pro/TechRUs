@@ -40,20 +40,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
+var coupons_schema_1 = require("./../coupons-service/src/database/coupons-schema");
 var shipping_schema_1 = require("./../shipping-service/src/schema/shipping-schema");
-var auth_schema_1 = require("../authentication/src/database/auth-schema");
-var products_db_1 = require("./../products/src/database/products-db");
-var orders_schema_1 = require("./../orders/src/database/orders-schema");
-var payments_schema_1 = require("./../payments/src/database/payments-schema");
-var user_model_1 = require("../authentication/src/models/user-model");
-var products_model_1 = require("../products/src/model/products-model");
-var order_model_1 = require("../orders/src/model/order-model");
-var payment_model_1 = require("../payments/src/models/payment-model");
+var auth_schema_1 = require("../authentication-service/src/database/auth-schema");
+var products_db_1 = require("./../products-service/src/database/products-db");
+var orders_schema_1 = require("../orders-service/src/database/orders-schema");
+var payments_schema_1 = require("../payments-service/src/database/payments-schema");
+var user_model_1 = require("../authentication-service/src/models/user-model");
+var products_model_1 = require("../products-service/src/model/products-model");
+var coupon_model_1 = require("../coupons-service/src/model/coupon-model");
+var order_model_1 = require("../orders-service/src/model/order-model");
+var payment_model_1 = require("../payments-service/src/models/payment-model");
 var shipping_model_1 = require("../shipping-service/src/model/shipping-model");
-var users_json_1 = __importDefault(require(".././authentication/src/data/users.json"));
-var products_json_1 = __importDefault(require("../products/src/data/products.json"));
-var orders_json_1 = __importDefault(require("../orders/src/data/orders.json"));
-var payments_json_1 = __importDefault(require("../payments/src/data/payments.json"));
+var users_json_1 = __importDefault(require(".././authentication-service/src/data/users.json"));
+var products_json_1 = __importDefault(require("../products-service/src/data/products.json"));
+var orders_json_1 = __importDefault(require("../orders-service/src/data/orders.json"));
+var payments_json_1 = __importDefault(require("../payments-service/src/data/payments.json"));
+var coupons_json_1 = __importDefault(require("../coupons-service/src/data/coupons.json"));
 var shipping_json_1 = __importDefault(require("../shipping-service/src/data/shipping.json"));
 // Import the load schemas functions
 var connectServiceSchemas = function () {
@@ -61,6 +64,7 @@ var connectServiceSchemas = function () {
     (0, products_db_1.connectProductsSchema)();
     (0, shipping_schema_1.connectShippingSchema)();
     (0, orders_schema_1.connectOrdersSchema)();
+    (0, coupons_schema_1.connectCouponsSchema)();
     (0, payments_schema_1.connectPaymentsSchema)();
 };
 connectServiceSchemas();
@@ -70,7 +74,7 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 9, , 10]);
+                _a.trys.push([0, 11, , 12]);
                 // First delete the existing data
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
@@ -82,31 +86,37 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, order_model_1.Order.deleteMany()];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, user_model_1.User.insertMany(users_json_1.default)];
+                return [4 /*yield*/, coupon_model_1.Coupon.deleteMany()];
             case 4:
                 _a.sent();
-                return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
+                return [4 /*yield*/, user_model_1.User.insertMany(users_json_1.default)];
             case 5:
                 _a.sent();
-                return [4 /*yield*/, order_model_1.Order.insertMany(orders_json_1.default)];
+                return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
             case 6:
                 _a.sent();
-                return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
+                return [4 /*yield*/, order_model_1.Order.insertMany(orders_json_1.default)];
             case 7:
                 _a.sent();
-                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
+                return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
             case 8:
+                _a.sent();
+                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
+            case 9:
+                _a.sent();
+                return [4 /*yield*/, coupon_model_1.Coupon.insertMany(coupons_json_1.default)];
+            case 10:
                 _a.sent();
                 console.log("All data inserted to each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 9:
+            case 11:
                 error_1 = _a.sent();
                 if (error_1) {
                     console.error(error_1);
                     process.exit(1);
                 }
-                return [3 /*break*/, 10];
-            case 10: return [2 /*return*/];
+                return [3 /*break*/, 12];
+            case 12: return [2 /*return*/];
         }
     });
 }); };
@@ -116,7 +126,7 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 6, , 7]);
+                _a.trys.push([0, 7, , 8]);
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
                 _a.sent();
@@ -132,15 +142,18 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, payment_model_1.Payment.deleteMany()];
             case 5:
                 _a.sent();
+                return [4 /*yield*/, coupon_model_1.Coupon.deleteMany()];
+            case 6:
+                _a.sent();
                 console.log("All data removed from each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 6:
+            case 7:
                 error_2 = _a.sent();
                 if (error_2) {
                     return [2 /*return*/, console.error(error_2)];
                 }
-                return [3 /*break*/, 7];
-            case 7: return [2 /*return*/];
+                return [3 /*break*/, 8];
+            case 8: return [2 /*return*/];
         }
     });
 }); };
