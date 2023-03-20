@@ -9,6 +9,11 @@ export interface ICouponDocument {
     minPurchaseAmount: Number;
 }
 
+// Coupon Microservice Data Model
+// 1. Product: We need to know what product ID the coupon is applied to
+// 2. Description: We need a description of the coupon before being applied.
+// 3. Code:
+
 export const CouponSchema = new mongoose.Schema<ICouponDocument>({
 
     product: {

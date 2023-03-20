@@ -68,6 +68,10 @@ export const editShippingDetails = async (request: any, response: Response, next
 }
 
 export const deleteShippingDetails = async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    await Shipping.deleteMany();
-    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Shipping Details Deleted"});
+
+    if(request.method === 'DELETE') {
+        await Shipping.deleteMany();
+        return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Shipping Details Deleted"});
+    }
+   
 }
