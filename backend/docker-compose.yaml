@@ -42,16 +42,16 @@ services:
       - /app/node_modules
       - ../backend/services/shipping-service:/app
 
-  auth-service:
+  authentication-service:
     container_name: techrus-auth-api
-    image: sabin2000/techrus-auth-service
+    image: sabin2000/techrus-authentication-service
 
     networks:
       - my-service-network
       - auth-service
 
     build:
-      context: ../backend/services/authentication
+      context: ../backend/services/authentication-service
       dockerfile: Dockerfile
 
     restart: always
@@ -61,7 +61,7 @@ services:
       
     volumes:
        - /app/node_modules
-       - ../backend/services/authentication:/app
+       - ../backend/services/authentication-service:/app
 
   products-service:
     container_name: techrus-products-api
@@ -124,7 +124,7 @@ services:
         - my-service-network
 
       build:
-        context: ../backend/services/reviews
+        context: ../backend/services/reviews-service
         dockerfile: Dockerfile
 
       ports:
@@ -132,7 +132,7 @@ services:
 
       volumes:
        - /app/node_modules
-       - ../backend/services/reviews:/app
+       - ../backend/services/reviews-service:/app
 
   payments-service:
     container_name: techrus-payments-api
