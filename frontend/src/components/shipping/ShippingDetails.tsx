@@ -56,7 +56,7 @@ const ShippingDetails: React.FC = () => {
               
             <div className = "mb-4 login-container-inputs email-container">
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "city">City</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "city" type = "text" placeholder = "Enter City" />
+                  <input value = {city} onChange = {(event) => setCity(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "city" type = "text" placeholder = "Enter City" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
