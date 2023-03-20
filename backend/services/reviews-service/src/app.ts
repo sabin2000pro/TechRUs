@@ -2,6 +2,7 @@ require('dotenv').config();
 import express, {Application, Response, NextFunction} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import { reviewsRouter } from './routes/review-routes';
 import {StatusCodes} from 'http-status-codes';
 
 const app: Application = express();
@@ -33,6 +34,6 @@ app.get('/', async (request: any, response: Response, next: NextFunction): Promi
 
 })
 
-// app.use('/api/auth', authRouter);
+app.use('/api/v1/reviews', reviewsRouter); // Mount the reviews router
 
 export {app};

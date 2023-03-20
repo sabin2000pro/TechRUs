@@ -1,4 +1,4 @@
-class ReviewsErrorResponse extends Error {
+class ErrorResponse extends Error {
     statusCode: number;
 
     constructor(message: string, statusCode: number) { // Error Response constructor for reviews service
@@ -8,4 +8,4 @@ class ReviewsErrorResponse extends Error {
 
 }
 
-export {ReviewsErrorResponse}
+export {ErrorResponse}
