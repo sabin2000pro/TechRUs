@@ -2,17 +2,17 @@ require('dotenv').config();
 import { connectShippingSchema } from './../shipping-service/src/schema/shipping-schema';
 import { connectAuthDatabase } from '../authentication-service/src/database/auth-schema';
 import { connectProductsSchema } from './../products-service/src/database/products-db';
-import {connectOrdersSchema} from './../orders/src/database/orders-schema';
+import {connectOrdersSchema} from '../orders-service/src/database/orders-schema';
 import { connectPaymentsSchema } from '../payments-service/src/database/payments-schema';
 import {User} from '../authentication-service/src/models/user-model';
 import {Product} from '../products-service/src/model/products-model';
-import { Order } from '../orders/src/model/order-model';
+import { Order } from '../orders-service/src/model/order-model';
 import {Payment} from '../payments-service/src/models/payment-model';
 import {Shipping} from '../shipping-service/src/model/shipping-model';
 
 import users from '.././authentication-service/src/data/users.json';
 import products from '../products-service/src/data/products.json';
-import orders from '../orders/src/data/orders.json';
+import orders from '../orders-service/src/data/orders.json';
 import payments from '../payments-service/src/data/payments.json';
 import shipping from '../shipping-service/src/data/shipping.json';
 
