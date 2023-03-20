@@ -70,6 +70,7 @@ const importServiceData = async () => {
 
 // Function to remove all the service data from their schema
 const removeServiceData = async () => {
+    
     try {
 
         await User.deleteMany();   

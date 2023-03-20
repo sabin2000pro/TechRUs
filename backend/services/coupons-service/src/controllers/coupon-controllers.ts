@@ -4,6 +4,8 @@ import {Response, NextFunction} from 'express';
 
 export const fetchAllCoupons = asyncHandler(async (request, response: Response, next: NextFunction): Promise<any> => {
     const coupons = await Coupon.find();
+    
+    
 })
 
 export const fetchCouponByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {

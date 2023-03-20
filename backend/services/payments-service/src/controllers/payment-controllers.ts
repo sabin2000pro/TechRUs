@@ -1,6 +1,6 @@
+require('dotenv').config();
 import { StatusCodes } from 'http-status-codes';
 import asyncHandler from 'express-async-handler';
-require('dotenv').config();
 import stripe from 'stripe'
 import { IPaymentIntent } from '../interface/payments-interface';
 import {Response, NextFunction} from 'express';
@@ -28,6 +28,7 @@ export const createNewPayment = asyncHandler(async (request: any, response: Resp
       console.log(`The client secret : `, client_secret);
 
     return response.status(StatusCodes.CREATED).json({success: true, client_secret});
+    
     } 
     
     catch(error) {
