@@ -29,6 +29,7 @@ export const removeProductFromBasket = (id: string) => async (dispatch: any, get
     } 
     
     catch(error) {
+      
       if(error) {
         return console.error(error);
       }

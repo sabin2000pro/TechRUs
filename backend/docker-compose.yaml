@@ -71,7 +71,7 @@ services:
       - my-service-network
 
     build:
-      context: ../backend/services/products
+      context: ../backend/services/products-service
       dockerfile: Dockerfile
 
     restart: always
@@ -81,7 +81,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/products:/app
+      - ../backend/services/products-service:/app
 
   coupons-service:
     container_name: techrus-coupons-api

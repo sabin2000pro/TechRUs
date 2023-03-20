@@ -60,7 +60,11 @@ const App: React.FC = () => {
            <Route path = '/product-details/:id' element = {<ProductDetails />} />
            <Route path = '/user-register' element = {<Register />} />
            <Route path = '/my-basket' element = {<BasketScreen />} />
+
+           
            <Route path = '/user-login' element = {<Login />} />
+         
+           
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
 

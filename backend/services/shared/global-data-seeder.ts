@@ -1,19 +1,19 @@
 require('dotenv').config();
 import { connectShippingSchema } from './../shipping-service/src/schema/shipping-schema';
-import { connectAuthDatabase } from '../authentication/src/database/auth-schema';
-import { connectProductsSchema } from './../products/src/database/products-db';
+import { connectAuthDatabase } from '../authentication-service/src/database/auth-schema';
+import { connectProductsSchema } from './../products-service/src/database/products-db';
 import {connectOrdersSchema} from './../orders/src/database/orders-schema';
-import { connectPaymentsSchema } from './../payments/src/database/payments-schema';
-import {User} from '../authentication/src/models/user-model';
-import {Product} from '../products/src/model/products-model';
+import { connectPaymentsSchema } from '../payments-service/src/database/payments-schema';
+import {User} from '../authentication-service/src/models/user-model';
+import {Product} from '../products-service/src/model/products-model';
 import { Order } from '../orders/src/model/order-model';
-import {Payment} from '../payments/src/models/payment-model';
+import {Payment} from '../payments-service/src/models/payment-model';
 import {Shipping} from '../shipping-service/src/model/shipping-model';
 
-import users from '.././authentication/src/data/users.json';
-import products from '../products/src/data/products.json';
+import users from '.././authentication-service/src/data/users.json';
+import products from '../products-service/src/data/products.json';
 import orders from '../orders/src/data/orders.json';
-import payments from '../payments/src/data/payments.json';
+import payments from '../payments-service/src/data/payments.json';
 import shipping from '../shipping-service/src/data/shipping.json';
 
 // Import the load schemas functions
