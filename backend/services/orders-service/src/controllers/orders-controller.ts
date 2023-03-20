@@ -14,12 +14,12 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
        const skipByPages = ordersPerPage * (currentPage - 1);
 
        const orders = await Order.find({...searchKeyword}); // Fetch all the orders
-    //    let totalOrderAmount = 0;
+       let totalOrderAmount = 0;
        
-    // //    orders.forEach((currOrder) => {
-    // //       console.log(`All your orders : `, currOrder);
-    // //       totalOrderAmount += currOrder.totalPrice
-    // //    })
+       orders.forEach((currOrder) => {
+          console.log(`All your orders : `, currOrder);
+          totalOrderAmount += currOrder.totalPrice
+       })
        
        if(!orders) {
             return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
