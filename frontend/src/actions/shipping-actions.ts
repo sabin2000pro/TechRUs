@@ -20,12 +20,13 @@ export const createNewShipping = (address: string, city: string, country: string
       if(error) {
         dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
       }
+
     }
 
 
 }
 
-export const editShippingDetails = (id: string) => async (dispatch) => {
+export const editShippingDetails = (id: string, address: string, city: string, country: string, postalCode: string, phoneNo: string) => async (dispatch) => {
 
     try {
        dispatch({type: EDIT_SHIPPING_INFO_REQUEST});
@@ -40,5 +41,41 @@ export const editShippingDetails = (id: string) => async (dispatch) => {
           }
 
     }
+
+}
+
+export const editShippingStatus = (id: string, currentStatus: string, newStatus: string) => async (dispatch) => {
+  try {
+  
+  } 
+  
+  catch(error) {
+
+  }
+
+
+}
+
+export const fetchAllShippingDetails = (id: string, currentStatus: string, newStatus: string) => async (dispatch) => {
+  try {
+
+  } 
+  
+  catch(error) {
+
+  }
+
+
+}
+
+export const fetchShippingDetailsByID = (id: string, currentStatus: string, newStatus: string) => async (dispatch) => {
+  try {
+
+  } 
+  
+  catch(error) {
+
+  }
+
 
 }
