@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadUserAvatar = exports.deleteAllUsers = exports.deleteUserByID = exports.editUserShifts = exports.editUserByID = exports.fetchUserByID = exports.fetchAllUsers = exports.fetchLoggedInUser = exports.resetPassword = exports.updatePassword = exports.forgotPassword = exports.verifyLoginMFA = exports.logoutUser = exports.loginUser = exports.resendEmailVerificationCode = exports.verifyEmailAddress = exports.registerUser = exports.sendResetPasswordTokenStatus = exports.sendTokenResponse = exports.sendForgotPasswordResetLink = exports.sendLoginMfa = exports.sendEmailConfirmationEmail = exports.verifyUserExists = exports.rootRoute = void 0;
-const verify_email_model_1 = require("./../models/verify-email-model");
-const send_mail_1 = require("./../utils/send-mail");
-const generate_otp_code_1 = require("./../utils/generate-otp-code");
+const verify_email_model_1 = require("../models/verify-email-model");
+const send_mail_1 = require("../utils/send-mail");
+const generate_otp_code_1 = require("../utils/generate-otp-code");
 const user_model_1 = require("../models/user-model");
 const path_1 = __importDefault(require("path"));
 const two_factor_model_1 = require("../models/two-factor-model");

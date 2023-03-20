@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 require('dotenv').config();
 const http_status_codes_1 = require("http-status-codes");
-const verify_user_auth_1 = require("../src/middleware/verify-user-auth");
+const verify_user_auth_1 = require("./middleware/verify-user-auth");
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cookie_session_1 = __importDefault(require("cookie-session"));

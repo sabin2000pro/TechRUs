@@ -15,6 +15,10 @@ export const fetchReviewByID = asyncHandler(async (request, response, next) => {
 
 export const createReview = asyncHandler(async (request, response, next) => {
     const {rating, comment} = request.body;
+
+    if(!rating || !comment) {
+        
+    }
 })
 
 export const editReviewByID = asyncHandler(async (request, response: Response, next: NextFunction) => {

@@ -107,7 +107,7 @@ services:
       - orders-service
 
     build:
-      context: ../backend/services/orders
+      context: ../backend/services/orders-service
       dockerfile: Dockerfile
 
     ports:
@@ -115,7 +115,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/orders:/app
+      - ../backend/services/orders-service:/app
 
   reviews-service:
       container_name: techrus-reviews-api
@@ -141,7 +141,7 @@ services:
       - my-service-network
 
     build:
-      context: ../backend/services/payments
+      context: ../backend/services/payments-service
       dockerfile: Dockerfile
 
     ports:
@@ -149,7 +149,7 @@ services:
 
     volumes:
       - /app/node_modules
-      - ../backend/services/payments:/app
+      - ../backend/services/payments-service:/app
 
   eventbus-service:
     container_name: eventbus-api

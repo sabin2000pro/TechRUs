@@ -25,11 +25,11 @@ exports.fetchAllOrders = (0, express_async_handler_1.default)((request, response
     const searchKeyword = request.query.keyword;
     const skipByPages = ordersPerPage * (currentPage - 1);
     const orders = yield order_model_1.Order.find(Object.assign({}, searchKeyword)); // Fetch all the orders
-    //    let totalOrderAmount = 0;
-    // //    orders.forEach((currOrder) => {
-    // //       console.log(`All your orders : `, currOrder);
-    // //       totalOrderAmount += currOrder.totalPrice
-    // //    })
+    let totalOrderAmount = 0;
+    orders.forEach((currOrder) => {
+        console.log(`All your orders : `, currOrder);
+        totalOrderAmount += currOrder.totalPrice;
+    });
     if (!orders) {
         return next(new error_response_1.ErrorResponse(`Could not find any orders in the database`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }

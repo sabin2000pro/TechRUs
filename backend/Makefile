@@ -21,7 +21,7 @@ build-services:
 	- docker-compose up --build
 
 stop-services:
-	- docker-compose -f docker-compose.dev.yaml -f docker-compose.dev.yaml down --remove-orphans
+	- docker-compose -f docker-compose.yaml -f docker-compose.yaml down --remove-orphans
 
 run-backend-prod:
 	- pm2 start server

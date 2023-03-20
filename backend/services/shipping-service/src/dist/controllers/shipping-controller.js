@@ -55,15 +55,19 @@ const editShippingStatus = (request, response, next) => __awaiter(void 0, void 0
 exports.editShippingStatus = editShippingStatus;
 const editShippingDetails = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
+    const shippingFieldsToUpdate = { address: request.body.address, city: request.body.city, country: request.body.country, postalCode: request.body.postalCode, phoneNo: request.body.phoneNo };
     let shipping = yield shipping_model_1.Shipping.findById(id);
     if (!shipping) {
         return next(new error_response_1.ErrorResponse(`No shipping details found`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
+    shipping = yield shipping_model_1.Shipping.findByIdAndUpdate(id, shippingFieldsToUpdate, { new: true, runValidators: true });
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Shipping Details Updated" });
 });
 exports.editShippingDetails = editShippingDetails;
 const deleteShippingDetails = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    yield shipping_model_1.Shipping.deleteMany();
-    return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "Shipping Details Deleted" });
+    if (request.method === 'DELETE') {
+        yield shipping_model_1.Shipping.deleteMany();
+        return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "Shipping Details Deleted" });
+    }
 });
 exports.deleteShippingDetails = deleteShippingDetails;
