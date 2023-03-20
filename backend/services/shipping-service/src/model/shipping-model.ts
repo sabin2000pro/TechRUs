@@ -65,4 +65,4 @@ export const ShippingSchema = new mongoose.Schema<IShippingDocument>({
 }, {timestamps: true})
 
 const Shipping = mongoose.model("Shipping", ShippingSchema);
-export {Shipping}
+export {Shipping} // Export the shipping data model as part of the shipping microservice
