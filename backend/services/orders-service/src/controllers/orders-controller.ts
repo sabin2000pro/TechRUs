@@ -5,6 +5,11 @@ import {StatusCodes} from 'http-status-codes';
 import {Response, NextFunction} from 'express';
 import asyncHandler from 'express-async-handler';
 
+// @description: Fetches all the orders from the orders database
+// @method: GET
+// @route: /api/v1/orders
+// @access: No Auth Token Required
+
 export const fetchAllOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
        const ordersPerPage = 3;
        const totalOrders = await Order.countDocuments({});
@@ -56,7 +61,7 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
     await order.save();
 
     return response.status(StatusCodes.CREATED).json({success: true, order});
-} )
+})
 
 export const updateOrderStatus = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const {orderStatus} = request.body;
@@ -75,7 +80,6 @@ export const updateOrderStatus = asyncHandler(async (request: any, response: Res
     order = await Order.findByIdAndUpdate(id, orderStatus, {new: true, runValidators: true});
 })
 
-
 export const deleteOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
    await Order.deleteMany();
    return response.status(StatusCodes.NO_CONTENT).json({success: true, mesage: "Orders deleted successfully"})
@@ -89,4 +93,5 @@ export const deleteSingleOrderByID = asyncHandler(async (request: any, response:
     }
 
     await Order.findByIdAndDelete(id);
+    return response.status
 })

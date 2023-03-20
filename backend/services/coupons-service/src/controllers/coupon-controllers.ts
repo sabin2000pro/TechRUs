@@ -10,11 +10,6 @@ export const fetchCouponByID = asyncHandler(async (request: any, response: Respo
     const id = request.params.id;
     const coupon = await Coupon.findById(id);
 
-    if(!coupon) {
-     
-    }
-
-
 })
 
 export const createNewCoupon = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {

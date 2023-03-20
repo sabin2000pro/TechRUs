@@ -166,7 +166,7 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
     if(otpTokensMatch) { // If the OTP Tokens Match
 
-        user.isVerified = true // Set theu ser is Verified field to true
+        user.isVerified = true // Set the user is Verified field to true
         user.accountActive = true;
 
         await user.save();
