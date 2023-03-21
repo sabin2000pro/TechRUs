@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReviewByID = exports.editReviewByID = exports.createReview = exports.fetchReviewByID = exports.fetchAllReviews = void 0;
+const error_response_1 = require("../utils/error-response");
 const http_status_codes_1 = require("http-status-codes");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const review_model_1 = require("../model/review-model");
@@ -25,15 +26,21 @@ exports.fetchReviewByID = (0, express_async_handler_1.default)((request, respons
     const review = yield review_model_1.Review.findById(id);
 }));
 exports.createReview = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { product, user } = request.query;
     const { rating, comment } = request.body;
     if (!rating || !comment) {
+        return next(new error_response_1.ErrorResponse(`No rating or comment found, please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
+    const review = yield review_model_1.Review.create({ product, user, rating, comment });
+    yield review.save();
+    return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, review });
 }));
 exports.editReviewByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const reviewFieldsToUpdate = { rating: request.body.rating, comment: request.body.comment };
     const id = request.params.id;
     let review = yield review_model_1.Review.findById(id);
     if (!review) {
+        return next(new error_response_1.ErrorResponse(`No review found`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     review = yield review_model_1.Review.findByIdAndUpdate(id);
 }));
