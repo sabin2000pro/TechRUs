@@ -1,10 +1,11 @@
 import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, VERIFY_USER_EMAIL_FAIL } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
+import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS } from './../constants/user-constants';
 
-export const register = (username: string, email: string, password: string) => async (dispatch) => {
+export const register = (username: string, email: string, password: string) => async (dispatch: Dispatch) => {
 
     try {
 
@@ -25,7 +26,7 @@ export const register = (username: string, email: string, password: string) => a
 
 } 
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: Dispatch) => {
 
     try {
         dispatch({type: LOGOUT_USER_REQUEST})
@@ -49,7 +50,7 @@ export const logout = () => async (dispatch) => {
 
 }
 
-export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch) => {
+export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch: Dispatch) => {
 
 
     try {

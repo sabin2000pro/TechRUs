@@ -115,8 +115,6 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         if(userOTPVerificationCode === undefined) {
             return next(new ErrorResponse(`The OTP Verification code is invalid`, StatusCodes.BAD_REQUEST));
         }
-
-        console.log(`Your User OTP Verification`, userOTPVerificationCode)
         await userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
