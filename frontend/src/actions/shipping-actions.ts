@@ -1,4 +1,5 @@
-import { EDIT_SHIPPING_INFO_REQUEST } from './../constants/shipping-constants';
+import { Dispatch } from 'redux';
+import { EDIT_SHIPPING_INFO_REQUEST, EDTI_SHIPPING_STATUS_REQUEST, EDIT_SHIPPING_INFO_SUCCESS } from './../constants/shipping-constants';
 import { SAVE_SHIPPING_INFO_REQUEST, SAVE_SHIPPING_INFO_SUCCESS, SAVE_SHIPPING_INFO_FAIL } from "../constants/shipping-constants";
 import axios from 'axios';
 
@@ -27,7 +28,6 @@ export const createNewShipping = (address: string, city: string, country: string
 
     }
 
-
 }
 
 export const editShippingDetails = (id: string, address: string, city: string, country: string, postalCode: string, phoneNo: string) => async (dispatch) => {
@@ -50,9 +50,15 @@ export const editShippingDetails = (id: string, address: string, city: string, c
 
 }
 
-export const editShippingStatus = (id: string, currentStatus: string, newStatus: string) => async (dispatch) => {
+export const editShippingStatus = (id: string, currentStatus: string, newStatus: string) => async (dispatch: Dispatch): Promise<void> => {
   try {
-  
+     dispatch({type: EDTI_SHIPPING_STATUS_REQUEST});
+     
+     const {data} = await axios.put(`http://localhost:5411/api/v1/shipping/${id}/update-status`, {currentStatus, newStatus})
+    
+     console.log(`Edited  Shipping Data: `, data);
+
+     dispatch({type: EDIT_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   
   catch(error) {

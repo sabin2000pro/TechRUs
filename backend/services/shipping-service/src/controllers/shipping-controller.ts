@@ -48,7 +48,10 @@ export const editShippingStatus = async (request: any, response: Response, next:
     }
 
     shipping = await Shipping.findByIdAndUpdate(id, fieldToUpdate, {new: true, runValidators: true});
-    return response.status(StatusCodes.OK).json({success: true, message: "Shipping status updated..."});
+    shipping.shippingStatus = shippingStatus;
+
+    await shipping.save();
+    return response.status(StatusCodes.OK).json({success: true, message: "Shipping status updated"});
 
 }
 
@@ -62,6 +65,8 @@ export const editShippingDetails = async (request: any, response: Response, next
    }
 
    shipping = await Shipping.findByIdAndUpdate(id, shippingFieldsToUpdate, {new: true, runValidators: true});
+   
+   await shipping.save();
 
    return response.status(StatusCodes.OK).json({success: true, message: "Shipping Details Updated"})
 
