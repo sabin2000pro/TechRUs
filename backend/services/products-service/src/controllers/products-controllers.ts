@@ -22,7 +22,7 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
        <h3>${currStock}</h3>
 
         `
-    })
+       })
     }
     
     catch(error) {
@@ -32,7 +32,6 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
       }
 
     }
-
 
 }
 
@@ -49,6 +48,10 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
 
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
+        }
+
+        if(numberOfProducts === 0) {
+          return next(new ErrorResponse(`No products found on the server-side.`, StatusCodes.BAD_REQUEST));
         }
 
         return response.status(StatusCodes.OK).json({success: true, products, numberOfProducts, page})
@@ -102,19 +105,28 @@ export const editProductByID = asyncHandler(async (request: any, response: Respo
     const id = request.params.id;
     let product = await Product.findById(id);
 
+    if(!isValidObjectId(id)) {
+      return next(new ErrorResponse(`The product ID is in the incorrect format. Please check the ID again`, StatusCodes.BAD_REQUEST));
+    }
+
     if(!product) {
       return next(new ErrorResponse(`No product found with that ID `, StatusCodes.BAD_REQUEST));
     }
 
     product = await Product.findByIdAndUpdate(id, request.body, {new: true, runValidators: true});
     await product.save(); // Save the new product
+
     return response.status(StatusCodes.OK).json({success: true, product});
 })
 
 export const deleteProductByID = asyncHandler(async (request, response, next): Promise<any> => {
     const id = request.params.id;
-    await Product.findByIdAndDelete(id);
 
+    if(!isValidObjectId(id)) {
+       return next(new ErrorResponse(`The Product ID is in the wrong format. Please try again`, StatusCodes.BAD_REQUEST));
+    }
+
+    await Product.findByIdAndDelete(id);
     return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Product Deleted"})
 })
 
@@ -125,12 +137,17 @@ export const deleteAllProducts = asyncHandler(async (request: any, response: Res
 
 export const uploadProductPhoto = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const file = request.files.file as any
+    const id = request.params.id;
+
+    if(!isValidObjectId(id)) {
+      return next(new ErrorResponse(`The product ID is in the wrong format. Please check your ID again`, StatusCodes.BAD_REQUEST));
+    }
 
     if(!file) {
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "Please upload a valid file"});
     }
 
-    // Check the file size
+    // Validate the file size
     if(file.size > process.env.PRODUCTS_SERVICE_MAX_FILE_UPLOAD_SIZE) {
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "File size is too large, please upload again"});
     }
@@ -144,7 +161,7 @@ export const uploadProductPhoto = asyncHandler(async (request: any, response: Re
       return next(new ErrorResponse('Problem with file upload', StatusCodes.INTERNAL_SERVER_ERROR));
     }
 
-    await Product.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+    await Product.findByIdAndUpdate(id, { image: `/images/${fileName}` });
     return response.status(StatusCodes.OK).json({success: true, message: "File Uploaded"});
 
 })})
