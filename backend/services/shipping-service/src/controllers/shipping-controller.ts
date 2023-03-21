@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import {ErrorResponse} from '../utils/error-response';
 import { StatusCodes } from 'http-status-codes';
 import {Response, NextFunction} from 'express';
@@ -39,9 +40,13 @@ export const createNewShipping = async (request: any, response: Response, next: 
 export const editShippingStatus = async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const {shippingStatus} = request.body;
     const fieldToUpdate = shippingStatus;
-
+    
     const id = request.params.id;
     let shipping = await Shipping.findById(id);
+
+    if(!isValidObjectId(id)) {
+        return next(new ErrorResponse(`The shipping ID is not valid. Check the ID again`, StatusCodes.BAD_REQUEST));
+    }
 
     if(!shipping) {
       return next(new ErrorResponse(`No shipping details found`, StatusCodes.BAD_REQUEST));
@@ -60,14 +65,27 @@ export const editShippingDetails = async (request: any, response: Response, next
    const shippingFieldsToUpdate = {address: request.body.address, city: request.body.city, country: request.body.country, postalCode: request.body.postalCode, phoneNo: request.body.phoneNo};
    let shipping = await Shipping.findById(id);
 
+   if(!isValidObjectId(id)) {
+      return next(new ErrorResponse(`The shipping ID you provided is invalid. Check your ID`, StatusCodes.BAD_REQUEST));
+   }
+
    if(!shipping) {
-    return next(new ErrorResponse(`No shipping details found`, StatusCodes.BAD_REQUEST));
+     return next(new ErrorResponse(`No shipping details found`, StatusCodes.BAD_REQUEST));
+   }
+
+   if(shippingFieldsToUpdate) {
+      return next(new ErrorResponse(`Some of the shipping fields are missing, please try again`, StatusCodes.BAD_REQUEST));
    }
 
    shipping = await Shipping.findByIdAndUpdate(id, shippingFieldsToUpdate, {new: true, runValidators: true});
-   
    await shipping.save();
 
+   shipping.address = request.body.address;
+   shipping.city = request.body.city
+
+   shipping.country = request.body.country;
+   shipping.postalCode = request.body.postalCode;
+   shipping.phoneNo = request.body.phoneNo;
    return response.status(StatusCodes.OK).json({success: true, message: "Shipping Details Updated"})
 
 }
