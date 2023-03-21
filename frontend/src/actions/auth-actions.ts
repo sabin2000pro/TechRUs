@@ -3,7 +3,7 @@ import {processConfigHeader} from '../headers'
 import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
-import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL } from './../constants/user-constants';
+import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST } from './../constants/user-constants';
 
 export const register = (username: string, email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
@@ -238,14 +238,14 @@ export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => 
 }
 
 export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
-    try {
-        dispatch({type: FETCH_USERS_REQUEST});
 
+    try {
+        dispatch({type: FETCH_SINGLE_USER_REQUEST});
         const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users/${id}`); // Send GET request to fetch the user
 
         console.log(`Fetched Single User Data : `, data);
 
-        dispatch({type: FETCH_USERS_SUCCESS, payload: data.user})
+        dispatch({type: FETCH_SINGLE_USER_SUCCESS, payload: data.user})
     } 
     
     catch(error) {
@@ -264,6 +264,10 @@ export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promis
   }
   
   catch(error) {
+    
+    if(error) {
+
+    }
 
   }
 

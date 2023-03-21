@@ -42,8 +42,8 @@ export const singleUserReducer = (state = singleUserState as any, action: any) =
             return {loading: true}
 
         case EDIT_USER_SHIFTS_SUCCESS:
-            const updatedUserShifts = {...state.user, startShiftDate: action.payload.startShiftDate, endShiftDate: action.payload.endShiftDate};
-            return {...state, loading: false, user: updatedUserShifts}
+            const shiftsToUpdate = {startShiftDate: action.payload.startShiftDate, endShiftDate: action.payload.endShiftDate};
+            return {...state, loading: false, user: shiftsToUpdate}
 
         case EDIT_USER_SHIFTS_FAIL:
             return {...state, loading: false, error: action.payload}
