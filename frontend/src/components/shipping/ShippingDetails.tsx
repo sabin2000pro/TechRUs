@@ -21,6 +21,7 @@ const ShippingDetails: React.FC = () => {
       }
 
       loadUser();
+      
   }, [dispatch])
 
   const handleShippingSubmit = (event) => {
@@ -61,22 +62,22 @@ const ShippingDetails: React.FC = () => {
 
             <div className = "mb-4 login-container-inputs email-container">
                   <label className = "block text-sm font-bold mb-2 login-username-label" htmlFor = "country">Country</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+                  <input value = {country} onChange = {(event) => setCountry(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Postal Code</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+                  <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Postal Code</label>
+                  <input value = {postalCode} onChange = {(event) => setPostalCode(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
-              <div className = "mb-6 login-password-container">
-                    <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Phone</label>
-                    <input className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />  
-              </div>
+             <div className = "mb-6 login-password-container">
+                  <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Phone</label>
+                  <input value = {phoneNo} onChange = {(event) => setPhoneNo(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />  
+            </div>
 
 
         <div className = "flex items-center justify-center login-btn-container">
-            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Place Order</button>
+            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Submit</button>
         </div>
 
    </form>

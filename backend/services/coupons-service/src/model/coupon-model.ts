@@ -5,11 +5,14 @@ export interface ICouponDocument {
     description: string;
     code: string;
     isActive: boolean;
-    expirationDate: Date;
-    minPurchaseAmount: Number;
+    expiryDate: Date;
+    discountAmount: Number
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35c98a5b (Refactoring the coupons JSON file)
 export const CouponSchema = new mongoose.Schema<ICouponDocument>({
 
     product: {
@@ -34,10 +37,15 @@ export const CouponSchema = new mongoose.Schema<ICouponDocument>({
       required: [true, "Please specify if this coupon is active or not"]
     },
 
-    expirationDate: {
+    expiryDate: {
         type: Date,
         required: [true, "Please specify when the coupon code expires"],
         default: Date.now
+    },
+
+    discountAmount: {
+        type: Number,
+        default: 0.00
     }
 
 }, {timestamps: true});
