@@ -13,7 +13,6 @@ export const createNewShipping = (address: string, city: string, country: string
         dispatch({type: SAVE_SHIPPING_INFO_REQUEST});
 
         const {data} = await axios.post(`http://localhost:5411/api/v1/shipping`, {address, city, country, postalCode, phoneNo})
-
         console.log(`Shipping Data : `, data);
         localStorage.setItem("shippingInfo", JSON.stringify(data.shipping)); // We will store the shipping information in local storage to be used for creating an order.
 

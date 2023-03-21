@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUser } from '../../actions/auth-actions';
 import { Link } from 'react-router-dom';
+import { createNewShipping } from '../../actions/shipping-actions';
 
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,13 +22,15 @@ const ShippingDetails: React.FC = () => {
       }
 
       loadUser();
-      
+
   }, [dispatch])
 
   const handleShippingSubmit = (event) => {
 
     try {
        event.preventDefault();
+
+        dispatch(createNewShipping(address, city, country, postalCode, phoneNo) as any);
     } 
     
     catch(error) {
@@ -43,7 +46,6 @@ const ShippingDetails: React.FC = () => {
   return (
 
     <>
-
        <div className = "flex justify-center items-center h-screen shipping-container">
 
           <form onSubmit = {handleShippingSubmit} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
