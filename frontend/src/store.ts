@@ -1,3 +1,4 @@
+import { reviewsReducer, singleReviewReducer } from './reducers/review-reducers';
 import { orderReducer, singleOrderReducer } from './reducers/order-reducers';
 import { couponReducer } from './reducers/coupon-reducers';
 import { shippingReducer } from './reducers/shipping-reducers';
@@ -16,6 +17,8 @@ export const store = configureStore({ // Create the global store
         coupon: couponReducer,
         singleProduct: singleProductReducer,
         singleUser: singleUserReducer,
+        review: reviewsReducer,
+        singleReview: singleReviewReducer,
         basket: basketReducer,
         shipping: shippingReducer,
         orders: orderReducer,
