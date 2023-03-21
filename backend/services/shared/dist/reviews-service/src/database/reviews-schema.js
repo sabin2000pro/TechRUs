@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectReviewSchema = void 0;
 require('dotenv').config();
 var mongoose_1 = __importDefault(require("mongoose"));
-var REVIEWS_SERVICE_DB_URI = process.env.REVIEWS_SERVICE_DB_URI;
+var REVIEWS_SERVICE_DB_URI = process.env.REVIEWS_SERVICE_DB_URI || "";
 var connectReviewSchema = function () { return __awaiter(void 0, void 0, void 0, function () {
     var error_1;
     return __generator(this, function (_a) {

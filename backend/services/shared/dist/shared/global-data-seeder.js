@@ -53,12 +53,14 @@ var coupon_model_1 = require("../coupons-service/src/model/coupon-model");
 var order_model_1 = require("../orders-service/src/model/order-model");
 var payment_model_1 = require("../payments-service/src/models/payment-model");
 var shipping_model_1 = require("../shipping-service/src/model/shipping-model");
+var review_model_1 = require("../reviews-service/src/model/review-model");
 var users_json_1 = __importDefault(require(".././authentication-service/src/data/users.json"));
 var products_json_1 = __importDefault(require("../products-service/src/data/products.json"));
 var orders_json_1 = __importDefault(require("../orders-service/src/data/orders.json"));
 var payments_json_1 = __importDefault(require("../payments-service/src/data/payments.json"));
 var coupons_json_1 = __importDefault(require("../coupons-service/src/data/coupons.json"));
 var shipping_json_1 = __importDefault(require("../shipping-service/src/data/shipping.json"));
+var reviews_json_1 = __importDefault(require("../reviews-service/src/data/reviews.json"));
 // Import the load schemas functions
 var connectServiceSchemas = function () {
     (0, auth_schema_1.connectAuthDatabase)();
@@ -76,11 +78,11 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 11, , 12]);
-                // First delete the existing data
+                _a.trys.push([0, 13, , 14]);
+                // First delete the existing data before importing any data
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
-                // First delete the existing data
+                // First delete the existing data before importing any data
                 _a.sent();
                 return [4 /*yield*/, products_model_1.Product.deleteMany()];
             case 2:
@@ -91,34 +93,40 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, coupon_model_1.Coupon.deleteMany()];
             case 4:
                 _a.sent();
-                return [4 /*yield*/, user_model_1.User.insertMany(users_json_1.default)];
+                return [4 /*yield*/, review_model_1.Review.deleteMany()];
             case 5:
                 _a.sent();
-                return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
+                return [4 /*yield*/, user_model_1.User.insertMany(users_json_1.default)];
             case 6:
                 _a.sent();
-                return [4 /*yield*/, order_model_1.Order.insertMany(orders_json_1.default)];
+                return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
             case 7:
                 _a.sent();
-                return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
+                return [4 /*yield*/, order_model_1.Order.insertMany(orders_json_1.default)];
             case 8:
                 _a.sent();
-                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
+                return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
             case 9:
                 _a.sent();
-                return [4 /*yield*/, coupon_model_1.Coupon.insertMany(coupons_json_1.default)];
+                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
             case 10:
+                _a.sent();
+                return [4 /*yield*/, coupon_model_1.Coupon.insertMany(coupons_json_1.default)];
+            case 11:
+                _a.sent();
+                return [4 /*yield*/, review_model_1.Review.insertMany(reviews_json_1.default)];
+            case 12:
                 _a.sent();
                 console.log("All data inserted to each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 11:
+            case 13:
                 error_1 = _a.sent();
                 if (error_1) {
                     console.error(error_1);
                     process.exit(1);
                 }
-                return [3 /*break*/, 12];
-            case 12: return [2 /*return*/];
+                return [3 /*break*/, 14];
+            case 14: return [2 /*return*/];
         }
     });
 }); };
@@ -128,7 +136,7 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 7, , 8]);
+                _a.trys.push([0, 8, , 9]);
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
                 _a.sent();
@@ -147,15 +155,18 @@ var removeServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, coupon_model_1.Coupon.deleteMany()];
             case 6:
                 _a.sent();
+                return [4 /*yield*/, review_model_1.Review.deleteMany()];
+            case 7:
+                _a.sent();
                 console.log("All data removed from each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 7:
+            case 8:
                 error_2 = _a.sent();
                 if (error_2) {
                     return [2 /*return*/, console.error(error_2)];
                 }
-                return [3 /*break*/, 8];
-            case 8: return [2 /*return*/];
+                return [3 /*break*/, 9];
+            case 9: return [2 /*return*/];
         }
     });
 }); };

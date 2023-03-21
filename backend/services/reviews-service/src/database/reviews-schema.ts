@@ -1,7 +1,7 @@
 require('dotenv').config();
 import mongoose from 'mongoose';
 
-const REVIEWS_SERVICE_DB_URI = process.env.REVIEWS_SERVICE_DB_URI;
+const REVIEWS_SERVICE_DB_URI = process.env.REVIEWS_SERVICE_DB_URI || ""
 
 export const connectReviewSchema = async () => {
 

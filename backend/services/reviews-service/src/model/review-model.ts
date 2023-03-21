@@ -26,7 +26,7 @@ const ReviewSchema = new mongoose.Schema<IReviewDocument>({
       required: [true, "Please provide a valid comment for this review"]
     },
 
-    createdAt: {
+    createdAt: { // The date at which the review was created at
        type: Date,
        default: Date.now
     }

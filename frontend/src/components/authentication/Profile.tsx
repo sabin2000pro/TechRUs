@@ -46,29 +46,27 @@ const Profile = () => { // User personal profile page
 
             <div className = "flex flex-col justify-center items-center">
 
-                    <div className = "w-1/3 p-4">
+                <div className = "w-1/4 h-20 p-5">
 
-                      <div className = "bg-blue rounded-lg shadow-lg p-6 h-30 mt-12 profile-container">
-                          <h2 className="text-xl font-bold mb-4">Logged In As: {user.username}</h2>
+                   <div className = "bg-blue rounded-lg shadow-lg p-6 h-30 mt-12 profile-container">
+                      <h2 className="text-xl font-bold mb-4">Logged In As: {user.username}</h2>
 
-                        <div className = "mb-4">
+                    <div className = "mb-4">
 
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-                            Username
-                          </label>
+                      <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+                        Username
+                      </label>
 
-                      <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type="text" value = {user.username} disabled />
-                        </div>
+                <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type="text" value = {user.username} disabled />
+               </div>
 
                         <div className="mb-4">
 
-                           <label className="block text-gray-700 font-bold mb-2" htmlFor = "email">
-                              E-mail Address
-                            </label>
+                        <label className="block text-gray-700 font-bold mb-2" htmlFor = "email">
+                           E-mail Address
+                        </label>
 
-                          <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type = "email" value = {user.email}
-                            disabled
-                          />
+                          <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type = "email" value = {user.email} disabled />
 
                         </div>
 
@@ -79,6 +77,8 @@ const Profile = () => { // User personal profile page
 
                         <div className = "mb-4">
                           <label className = "block text-gray-700 font-bold mb-4">End Shift Date: </label>
+                          <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "endShiftDate" type = "text" value = {user.endShiftDate} disabled/>
+
                         </div>
 
                         <div className="flex flex-row justify-center profile-btns">

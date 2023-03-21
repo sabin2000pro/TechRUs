@@ -43,8 +43,8 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
 
         <>
 
-            <form method = "PUT" onSubmit = {handleEditUserShift}>
-                      
+            <form onSubmit = {handleEditUserShift}>
+                     
             </form>
    
         </>
