@@ -40,8 +40,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
-var coupons_schema_1 = require("./../coupons-service/src/database/coupons-schema");
 var shipping_schema_1 = require("./../shipping-service/src/schema/shipping-schema");
+var reviews_schema_1 = require("./../reviews-service/src/database/reviews-schema");
+var coupons_schema_1 = require("./../coupons-service/src/database/coupons-schema");
 var auth_schema_1 = require("../authentication-service/src/database/auth-schema");
 var products_db_1 = require("./../products-service/src/database/products-db");
 var orders_schema_1 = require("../orders-service/src/database/orders-schema");
@@ -65,6 +66,7 @@ var connectServiceSchemas = function () {
     (0, shipping_schema_1.connectShippingSchema)();
     (0, orders_schema_1.connectOrdersSchema)();
     (0, coupons_schema_1.connectCouponsSchema)();
+    (0, reviews_schema_1.connectReviewSchema)();
     (0, payments_schema_1.connectPaymentsSchema)();
 };
 connectServiceSchemas();

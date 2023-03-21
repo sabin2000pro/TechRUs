@@ -12,6 +12,7 @@ import {Coupon} from '../coupons-service/src/model/coupon-model';
 import { Order } from '../orders-service/src/model/order-model';
 import {Payment} from '../payments-service/src/models/payment-model';
 import {Shipping} from '../shipping-service/src/model/shipping-model';
+import {Review} from '../reviews-service/src/model/review-model';
 
 import users from '.././authentication-service/src/data/users.json';
 import products from '../products-service/src/data/products.json';
@@ -19,6 +20,7 @@ import orders from '../orders-service/src/data/orders.json';
 import payments from '../payments-service/src/data/payments.json';
 import coupons from '../coupons-service/src/data/coupons.json';
 import shipping from '../shipping-service/src/data/shipping.json';
+import reviews from '../reviews-service/src/data/reviews.json';
 
 // Import the load schemas functions
 
@@ -38,12 +40,14 @@ connectServiceSchemas()
 const importServiceData = async () => {
 
     try {
-     // First delete the existing data
+
+     // First delete the existing data before importing any data
 
      await User.deleteMany();
      await Product.deleteMany();
      await Order.deleteMany();
      await Coupon.deleteMany();
+     await Review.deleteMany();
 
      await User.insertMany(users);     
      await Product.insertMany(products);
@@ -51,8 +55,10 @@ const importServiceData = async () => {
      await Payment.insertMany(payments);
      await Shipping.insertMany(shipping)
      await Coupon.insertMany(coupons);
+     await Review.insertMany(reviews);
 
      console.log(`All data inserted to each service schema successfully`);
+
      return process.exit(1);
 
     }     
@@ -80,6 +86,7 @@ const removeServiceData = async () => {
         await Shipping.deleteMany();
         await Payment.deleteMany();
         await Coupon.deleteMany();
+        await Review.deleteMany();
 
          console.log(`All data removed from each service schema successfully`);
          return process.exit(1);

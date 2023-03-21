@@ -111,7 +111,6 @@ exports.registerUser = (0, express_async_handler_1.default)((request, response, 
     if (userOTPVerificationCode === undefined) {
         return next(new error_response_1.ErrorResponse(`The OTP Verification code is invalid`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    console.log(`Your User OTP Verification`, userOTPVerificationCode);
     yield userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
     return (0, exports.sendTokenResponse)(request, user, http_status_codes_1.StatusCodes.CREATED, response); // Send back the response to the user
 }));

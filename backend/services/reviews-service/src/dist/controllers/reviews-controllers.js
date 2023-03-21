@@ -24,14 +24,18 @@ exports.fetchAllReviews = (0, express_async_handler_1.default)((request, respons
 exports.fetchReviewByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
     const review = yield review_model_1.Review.findById(id);
+    if (!review) {
+        return next(new error_response_1.ErrorResponse(`No review found with that ID : ${id}`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, review });
 }));
 exports.createReview = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { product, user } = request.query;
+    const { product } = request.query;
     const { rating, comment } = request.body;
     if (!rating || !comment) {
         return next(new error_response_1.ErrorResponse(`No rating or comment found, please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const review = yield review_model_1.Review.create({ product, user, rating, comment });
+    const review = yield review_model_1.Review.create({ product, rating, comment });
     yield review.save();
     return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, review });
 }));
@@ -40,9 +44,13 @@ exports.editReviewByID = (0, express_async_handler_1.default)((request, response
     const id = request.params.id;
     let review = yield review_model_1.Review.findById(id);
     if (!review) {
-        return next(new error_response_1.ErrorResponse(`No review found`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+        return next(new error_response_1.ErrorResponse(`No review found with ID : ${request.params.id}`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    review = yield review_model_1.Review.findByIdAndUpdate(id);
+    review = yield review_model_1.Review.findByIdAndUpdate(id, reviewFieldsToUpdate, { new: true, runValidators: true });
+    review.rating = request.body.rating;
+    review.comment = request.body.comment;
+    yield review.save(); // Save the review after updating the fields
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Review Updated" });
 }));
 exports.deleteReviewByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Delete Review By ID" });

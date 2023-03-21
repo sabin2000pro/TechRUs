@@ -12,11 +12,6 @@ const ReviewSchema = new mongoose_1.default.Schema({
         ref: "Product",
         required: [true, "Please provide the product ID for this review"]
     },
-    user: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "Please provide the user that this review belongs to"]
-    },
     rating: {
         type: Number,
         required: [true, "Please specify a valid rating for this review"]
