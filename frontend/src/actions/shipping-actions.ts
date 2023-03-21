@@ -31,7 +31,9 @@ export const editShippingDetails = (id: string, address: string, city: string, c
     try {
        dispatch({type: EDIT_SHIPPING_INFO_REQUEST});
 
-       const {data} = await axios.put(`http://localhost:5411/api/v1/shipping/${id}`, {})
+       const {data} = await axios.put(`http://localhost:5411/api/v1/shipping/${id}`, {address, city, country, postalCode, phoneNo})
+
+       dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping})
     } 
     
     catch(error) {

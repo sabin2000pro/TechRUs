@@ -1,4 +1,4 @@
-import { SAVE_SHIPPING_INFO_REQUEST,  SAVE_SHIPPING_INFO_SUCCESS, SAVE_SHIPPING_INFO_FAIL} from "../constants/shipping-constants";
+import { SAVE_SHIPPING_INFO_REQUEST, SAVE_SHIPPING_INFO_FAIL, SAVE_SHIPPING_INFO_SUCCESS } from "../constants/shipping-constants";
 
 const shippingInfoState = localStorage.getItem("shippingInfo") ? JSON.parse(localStorage.getItem("shippingInfo") as any) : {};
 
@@ -14,6 +14,8 @@ export const shippingReducer = (state = shippingInfoState, action: any) => {
 
         case SAVE_SHIPPING_INFO_FAIL:
             return {loading: false, error: action.payload}
+
+        
 
         default:
             return state;
