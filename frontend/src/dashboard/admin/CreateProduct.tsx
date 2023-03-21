@@ -15,10 +15,6 @@ const CreateProduct: React.FC = () => {
 
   const {loading, error, user} = useSelector((state: any) => state.auth);
 
-  useEffect(() => {
-    console.log(`Logged In User : `, user);
- }, [user])
-
   const handleProductCreate = async (event) => {
 
     try {
@@ -34,7 +30,6 @@ const CreateProduct: React.FC = () => {
         setWarranty("");
         setPrice(0);
         
-
         setTimeout(() => {
             navigate("/products");
         }, 1500)
@@ -48,9 +43,7 @@ const CreateProduct: React.FC = () => {
 
     }
 
-
   }
-
     
   return (
 

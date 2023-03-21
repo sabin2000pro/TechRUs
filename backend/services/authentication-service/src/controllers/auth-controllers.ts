@@ -133,7 +133,6 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
     if(!isValidObjectId(userId)) {
         return next(new ErrorResponse("User ID not found. Please check your entry again.", StatusCodes.NOT_FOUND))
     }
-
     // Check for missing OTP
     if(!OTP) {
         return next(new ErrorResponse("OTP Entered not found. Please check your entry", StatusCodes.NOT_FOUND))

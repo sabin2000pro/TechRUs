@@ -54,8 +54,8 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
 
     request.body.user = user; // Add the logged in user ID to the body of the request from the query params
 
-    const order = await Order.create({orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
-    await order.save();
+    const order = await Order.create({user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
+    await order.save(); // Asynchronously save the order into the database
 
     return response.status(StatusCodes.CREATED).json({success: true, order});
 })
@@ -73,7 +73,7 @@ export const updateOrderStatus = asyncHandler(async (request: any, response: Res
     if(order?.orderStatus === 'completed' || order?.orderStatus === 'canceled' || order?.orderStatus === 'refunded') { // Before updating the order status, make sure it has not alreayd been delivered
         return next(new ErrorResponse(`One or more orders have been either completed, canceled or refunded. Cannot modify the order status`, StatusCodes.BAD_REQUEST));
     }
-        
+
     order = await Order.findByIdAndUpdate(id, orderStatus, {new: true, runValidators: true});
     order.orderStatus = orderStatus;
 
