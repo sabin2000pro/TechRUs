@@ -5,6 +5,8 @@ import {Response, NextFunction} from 'express';
 import {Shipping} from '../model/shipping-model';
 import asyncHandler from 'express-async-handler';
 
+// @description: Fetches all the shipping details from the shipping microservice database
+// @method: GET
 export const fetchShippingDetails = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const shipping = await Shipping.find();
 
@@ -18,6 +20,10 @@ export const fetchShippingDetails = asyncHandler(async (request: any, response: 
 export const fetchShippingDetailsByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
     const shipping = await Shipping.findById(id);
+
+    if(!isValidObjectId(id)) {
+        return next(new ErrorResponse(`The shipping ID you provided is not in the correct format`, StatusCodes.BAD_REQUEST));
+    }
 
     if(!shipping) {
         return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No shipping details found"})
@@ -35,12 +41,14 @@ export const createNewShipping = async (request: any, response: Response, next: 
 
     const shipping = await Shipping.create({address, city, country, postalCode, phoneNo});
     await shipping.save(); // Save the shipping resource to the database
+
+    return response.status(StatusCodes.CREATED).json({success: true, shipping});
 }
 
 export const editShippingStatus = async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const {shippingStatus} = request.body;
     const fieldToUpdate = shippingStatus;
-    
+
     const id = request.params.id;
     let shipping = await Shipping.findById(id);
 
