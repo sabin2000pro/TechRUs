@@ -60,10 +60,28 @@ describe("Login API Unit Tests", () => {
         }
     }));
     it("Login with invalid password", () => __awaiter(void 0, void 0, void 0, function* () {
+        const loginPayload = [{ email: "mike99@gmail.com", password: "bb00" }];
+        for (const body of loginPayload) {
+            const loginResponse = yield (0, supertest_1.default)(app_1.app).post(`/api/v1/auth/login`).send(body);
+            return expect(loginResponse.statusCode).toBe(http_status_codes_1.StatusCodes.OK);
+        }
     }));
     it("Login with missing password", () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     it("Login with missing e-mail address", () => __awaiter(void 0, void 0, void 0, function* () {
+    }));
+});
+describe("Forgot Password API - Unit Tests", () => {
+    it("Forgot Password - Valid E-mail Address", () => __awaiter(void 0, void 0, void 0, function* () {
+        const forgotPasswordPayload = [{ email: "testuser09@gmail.com" }];
+        for (const body of forgotPasswordPayload) {
+            const response = yield (0, supertest_1.default)(app_1.app).post(`/api/v1/auth/forgot-password`).send(body);
+            return expect(response.statusCode).toBe(http_status_codes_1.StatusCodes.OK);
+        }
+    }));
+    it("Forgot Password - Invalid E-mail Address", () => __awaiter(void 0, void 0, void 0, function* () {
+    }));
+    it("Forgot Password - Missing E-mail Address", () => __awaiter(void 0, void 0, void 0, function* () {
     }));
 });
 // Close the connection to the server after all tests are ran

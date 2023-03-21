@@ -2,15 +2,19 @@ import { EDIT_SHIPPING_INFO_REQUEST } from './../constants/shipping-constants';
 import { SAVE_SHIPPING_INFO_REQUEST, SAVE_SHIPPING_INFO_SUCCESS, SAVE_SHIPPING_INFO_FAIL } from "../constants/shipping-constants";
 import axios from 'axios';
 
-export const createNewShipping = (address: string, city: string, country: string, postalCode: string) => async (dispatch) => {
+
+// @description: Redux action which is responsible for sending a POST request to the shipping microservice endpoint to create a resource
+// @method: POST
+// @parameters: The user's shipping address, city, country, post code and phone number
+export const createNewShipping = (address: string, city: string, country: string, postalCode: string, phoneNo: string) => async (dispatch) => {
     try {
 
         dispatch({type: SAVE_SHIPPING_INFO_REQUEST});
 
-        const {data} = await axios.post(`http://localhost:5411/api/v1/shipping`, {address, city, country, postalCode})
+        const {data} = await axios.post(`http://localhost:5411/api/v1/shipping`, {address, city, country, postalCode, phoneNo})
 
         console.log(`Shipping Data : `, data);
-        localStorage.setItem("shippingInfo", JSON.stringify(data.shipping));
+        localStorage.setItem("shippingInfo", JSON.stringify(data.shipping)); // We will store the shipping information in local storage to be used for creating an order.
 
         dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping});
     } 
