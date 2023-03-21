@@ -40,16 +40,13 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
                   <p className = "product-descriptions stock-text">{product.stockCount > 0 ? "In Stock" : "Low Stock"}</p>
                   <p className = "product-descriptions text-red-500">{product.stockCount === 0 && "Out Of Stock"}</p>
                 
-
                   <Link to = {`/product-details/${product._id}`} className = "product-btn" type = "submit">Product Details</Link>
 
                   </div>
               
               </>
            ))}
-  
- 
-  
+
      
    </div>
  

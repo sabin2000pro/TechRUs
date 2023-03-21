@@ -6,7 +6,7 @@ import { createNewShipping } from '../../actions/shipping-actions';
 
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
-  const {shipping} = useSelector((state: any) => state.shipping);
+  const {shippingInfo} = useSelector((state: any) => state.shipping);
   const {isAuthenticated, user} = useSelector((state: any) => state.auth)
 
   const [address, setAddress] = useState<string>("");

@@ -22,6 +22,7 @@ export const createNewShipping = (address: string, city: string, country: string
     catch(error) {
 
       if(error) {
+        console.log(`Shipping Error : `, error);
         dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
       }
 
