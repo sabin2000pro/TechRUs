@@ -1,0 +1,41 @@
+import { FETCH_ORDERS_SUCCESS, FETCH_ORDERS_FAIL, FETCH_ORDERS_REQUEST, FETCH_SINGLE_ORDER_REQUEST, FETCH_SINGLE_ORDER_SUCCESS, FETCH_SINGLE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_FAIL, CREATE_ORDER_SUCCESS } from "../constants/orders-constants";
+
+const initialOrdersState = {
+    orders: []
+}
+
+const singleOrderState = {
+    order: {}
+}
+
+export const orderReducer = (state = initialOrdersState as any, action: any) => {
+
+    switch(action.type) {
+         case FETCH_ORDERS_REQUEST:
+            return {loading: true}
+
+        case FETCH_ORDERS_SUCCESS: // In the event that we have retrieved all the orders from the orders database
+            return {...state, loading: false, orders: action.payload}
+
+        case FETCH_ORDERS_FAIL:
+            return {loading: false, error: action.payload}
+
+        case CREATE_ORDER_REQUEST:
+            return {loading: true}
+
+        case CREATE_ORDER_SUCCESS:
+            return {...state, loading: false, orderCreated: true, order: action.payload}
+
+        default:
+            return state
+    }
+}
+
+export const singleOrderReducer = (state = singleOrderState as any, action: any) => {
+    switch(action.type) {
+        
+
+        default:
+            return state
+    }
+}

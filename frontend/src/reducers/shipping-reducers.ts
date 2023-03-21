@@ -15,8 +15,6 @@ export const shippingReducer = (state = shippingInfoState, action: any) => {
         case SAVE_SHIPPING_INFO_FAIL:
             return {loading: false, error: action.payload}
 
-        
-
         default:
             return state;
     }

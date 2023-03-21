@@ -1,3 +1,4 @@
+import { orderReducer, singleOrderReducer } from './reducers/order-reducers';
 import { couponReducer } from './reducers/coupon-reducers';
 import { shippingReducer } from './reducers/shipping-reducers';
 import { productsReducer, singleProductReducer } from './reducers/products-reducers';
@@ -6,7 +7,7 @@ import { authReducer } from "./reducers/auth-reducer"
 import { basketReducer } from './reducers/basket-reducer';
 import { usersReducer, singleUserReducer } from './reducers/user-reducers';
 
-export const store = configureStore({
+export const store = configureStore({ // Create the global store
     
     reducer: {
         auth: authReducer,
@@ -16,7 +17,9 @@ export const store = configureStore({
         singleProduct: singleProductReducer,
         singleUser: singleUserReducer,
         basket: basketReducer,
-        shipping: shippingReducer
+        shipping: shippingReducer,
+        orders: orderReducer,
+        singleOrder: singleOrderReducer
     }
 
 })

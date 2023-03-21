@@ -50,8 +50,8 @@ exports.createNewOrder = (0, express_async_handler_1.default)((request, response
         return next(new error_response_1.ErrorResponse(`Some order fields are missing. Please check your entries`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     request.body.user = user; // Add the logged in user ID to the body of the request from the query params
-    const order = yield order_model_1.Order.create({ orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice });
-    yield order.save();
+    const order = yield order_model_1.Order.create({ user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice });
+    yield order.save(); // Asynchronously save the order into the database
     return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, order });
 }));
 exports.updateOrderStatus = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
