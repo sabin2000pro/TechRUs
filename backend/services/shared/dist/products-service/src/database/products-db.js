@@ -42,14 +42,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectProductsSchema = void 0;
 require('dotenv').config();
 var mongoose_1 = __importDefault(require("mongoose"));
-var PRODUCTS_DB_URI = process.env.PRODUCTS_DB_URI;
+var PRODUCTS_SERVICE_DB_URI = process.env.PRODUCTS_SERVICE_DB_URI || "";
 var connectProductsSchema = function () { return __awaiter(void 0, void 0, void 0, function () {
     var error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, mongoose_1.default.connect(PRODUCTS_DB_URI).then(function (conn) {
+                return [4 /*yield*/, mongoose_1.default.connect(PRODUCTS_SERVICE_DB_URI).then(function (conn) {
                         if (conn.connection) {
                             return console.log("Connected to the products database schema successfully");
                         }
