@@ -50,12 +50,15 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
 )
 
 export const createNewOrder = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    const {user} = request.query;
     const {orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice} = request.body;
     
     // Validate the request body before creating a new instance of order
-    if(!orderItems || !shippingInformation || !orderStatus || !paymentInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
+    if(!orderItems || !shippingInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
         return next(new ErrorResponse(`Some order fields are missing. Please check your entries`, StatusCodes.BAD_REQUEST));
     }
+
+    request.body.user = user; // Add the logged in user ID to the body of the request from the query params
 
     const order = await Order.create({orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
     await order.save();
