@@ -14,11 +14,7 @@
         "product": "63e25f48d82eb035f7da0982",
         "description": "Get £20 off your next order",
         "expiryDate": "2023-07-03",
-<<<<<<< HEAD
-        "code": "TWENTY",
-=======
         "code": "TWNTYOFF",
->>>>>>> 35c98a5b (Refactoring the coupons JSON file)
         "isActive": true,
         "discountAmount": 20
     },
@@ -27,20 +23,14 @@
         "_id": "5d713995b721c3bb38c1f5b2",
         "product": "63e25f48d82eb035f7da0983",
         "description": "Get £15 off your next order",
-<<<<<<< HEAD
-        "expiryDate": "2023-08-05",
-        "code": "FIFTEEN",
-        "isActive": true,
-=======
         "code": "FIFTNOFF",
         "expiryDate": "2022-08-05",
         "isActive": false,
->>>>>>> 35c98a5b (Refactoring the coupons JSON file)
         "discountAmount": 15
     },
 
     {
-        "_id": "5d713995b721c3bb38c1f5b2",
+        "_id": "5d713995b721c3bb38c1f5b3",
         "product": "63e25f48d82eb035f7da0982",
         "description": "Get £10 off your next order",
         "expiryDate": "2023-09-10",

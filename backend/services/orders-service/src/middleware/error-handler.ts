@@ -25,8 +25,6 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
             error = new ErrorResponse(message, StatusCodes.BAD_REQUEST);
         }
     }
-
-    console.log(error);
-
+    
     return response.status(error.statusCode).json({success: false, message: error.message, stack: error.stack});
 }

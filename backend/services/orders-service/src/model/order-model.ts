@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface IOrderDocument {
+    user: mongoose.Schema.Types.ObjectId;
     orderItems: mongoose.Schema.Types.ObjectId;
     shippingInformation: Object
     orderStatus: String
@@ -12,6 +13,12 @@ export interface IOrderDocument {
 }
 
 export const OrderSchema = new mongoose.Schema<IOrderDocument>({
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Please include the User ID that belongs to this order"]
+    },
 
     orderItems: [{ // Array of all the order items being ordered
         
@@ -70,7 +77,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
         enum: ['received', 'pending', 'completed', 'processing', 'canceled', 'refunded'],
-        default: 'processing'
+        default: 'received' // By default, when an order is placed, it is received
     },
 
     itemPrice: { // Items price being ordered
@@ -79,7 +86,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         default: 0.0
     },
 
-    taxPrice: { // The tax price incurred
+    taxPrice: { // The tax price incurred as part of the order
         type: Number,
         required: true,
         default: 0.0

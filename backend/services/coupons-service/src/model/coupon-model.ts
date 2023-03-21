@@ -9,10 +9,6 @@ export interface ICouponDocument {
     discountAmount: Number
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 35c98a5b (Refactoring the coupons JSON file)
 export const CouponSchema = new mongoose.Schema<ICouponDocument>({
 
     product: {

@@ -19,13 +19,7 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
        const skipByPages = ordersPerPage * (currentPage - 1);
 
        const orders = await Order.find({...searchKeyword}); // Fetch all the orders
-       let totalOrderAmount = 0;
-       
-       orders.forEach((currOrder) => {
-          console.log(`All your orders : `, currOrder);
-          totalOrderAmount += currOrder.totalPrice
-       })
-       
+
        if(!orders) {
             return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
        }
@@ -76,11 +70,15 @@ export const updateOrderStatus = asyncHandler(async (request: any, response: Res
         return next(new ErrorResponse(`No order found with ID : ${id}`, StatusCodes.BAD_REQUEST));
     }
 
-    if(order?.orderStatus === 'Delivered') { // Before updating the order status, make sure it has not alreayd been delivered
-        return next(new ErrorResponse(`The status of this order you are trying to update has already been delivered`, StatusCodes.BAD_REQUEST));
+    if(order?.orderStatus === 'completed' || order?.orderStatus === 'canceled' || order?.orderStatus === 'refunded') { // Before updating the order status, make sure it has not alreayd been delivered
+        return next(new ErrorResponse(`One or more orders have been either completed, canceled or refunded. Cannot modify the order status`, StatusCodes.BAD_REQUEST));
     }
-    
+        
     order = await Order.findByIdAndUpdate(id, orderStatus, {new: true, runValidators: true});
+    order.orderStatus = orderStatus;
+
+    await order.save();
+    return response.status(StatusCodes.OK).json({success: true, message: "Order Updated", order});
 })
 
 export const deleteOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -96,5 +94,5 @@ export const deleteSingleOrderByID = asyncHandler(async (request: any, response:
     }
 
     await Order.findByIdAndDelete(id);
-    return response.status
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Order deleted"});
 })
