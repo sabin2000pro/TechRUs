@@ -15,7 +15,7 @@ interface ISingleOrder {
     order: {}
 }
 
-export const orderReducer = (state = initialOrdersState as any, action: any) => {
+export const orderReducer = (state = initialOrdersState as any, action: any): any => {
 
     switch(action.type) {
 
@@ -26,13 +26,13 @@ export const orderReducer = (state = initialOrdersState as any, action: any) => 
             return {...state, loading: false, orders: action.payload}
 
         case FETCH_ORDERS_FAIL:
-            return {loading: false, error: action.payload}
+            return {loading: false, orders: [], error: action.payload}
 
         case CREATE_ORDER_REQUEST:
-            return {loading: true}
+            return {loading: true, error: undefined, orders: []}
 
         case CREATE_ORDER_SUCCESS:
-            return {...state, loading: false, orderCreated: true, order: action.payload}
+            return {...state, loading: false, order: action.payload}
 
         case UPDATE_ORDER_STATUS_REQUEST:
             return {loading: true, error: undefined, order: action.payload}
@@ -43,6 +43,7 @@ export const orderReducer = (state = initialOrdersState as any, action: any) => 
 }
 
 export const singleOrderReducer = (state = singleOrderState as ISingleOrder, action: any): ISingleOrder => {
+
     switch(action.type) {
 
         case FETCH_SINGLE_ORDER_REQUEST:

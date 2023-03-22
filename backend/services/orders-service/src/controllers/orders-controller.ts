@@ -70,6 +70,10 @@ export const updateOrderStatus = asyncHandler(async (request: any, response: Res
 
     let order = await Order.findById(id);
 
+    if(!isValidObjectId(id)) {
+        return next(new ErrorResponse(`The order ID is invalid. Try again`, StatusCodes.BAD_REQUEST));
+    }
+
     if(!order) {
         return next(new ErrorResponse(`No order found with ID : ${id}`, StatusCodes.BAD_REQUEST));
     }
