@@ -15,7 +15,7 @@ export const fetchReviewByID = asyncHandler(async (request: any, response: Respo
     const review = await Review.findById(id);
 
     if(!isValidObjectId(id)) {
-        
+       return next(new ErrorResponse(`The Review ID is invalid`, StatusCodes.BAD_REQUEST));
     }
 
     if(!review) {
