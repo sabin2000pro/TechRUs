@@ -47,7 +47,7 @@ const Profile = () => { // User personal profile page
 
                    <div className = "bg-blue rounded-lg shadow-lg p-6 h-30 mt-12 profile-container">
 
-                      <h2 className="text-xl font-bold mb-4">Logged In As: {user.username}</h2>
+                      <h2 className="text-xl font-bold mb-4">Logged In As: {user?.username}</h2>
 
                     <div className = "mb-4">
 
@@ -55,7 +55,7 @@ const Profile = () => { // User personal profile page
                         Username
                       </label>
 
-                 <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" value = {user.username} disabled />
+                 <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" value = {user?.username} disabled />
 
                </div>
 
@@ -65,18 +65,18 @@ const Profile = () => { // User personal profile page
                            E-mail Address
                         </label>
 
-                          <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type = "email" value = {user.email} disabled />
+                          <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type = "email" value = {user?.email} disabled />
 
                         </div>
 
                         <div className = "mb-4">
                            <label className = "block text-gray-700 font-bold mb-4">Start Shift Date: </label>
-                           <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "startShiftDate" type = "text" value = {user.startShiftDate} disabled/>
+                           <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "startShiftDate" type = "text" value = {user?.startShiftDate} disabled/>
                         </div>
 
                         <div className = "mb-4">
                           <label className = "block text-gray-700 font-bold mb-4">End Shift Date: </label>
-                          <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "endShiftDate" type = "text" value = {user.endShiftDate} disabled/>
+                          <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "endShiftDate" type = "text" value = {user?.endShiftDate} disabled/>
 
                         </div>
 

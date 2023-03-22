@@ -13,12 +13,10 @@ const Register: React.FC = () => { // Register Component
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
-  const {loading} = useSelector((state: any) => state.auth);
   const [registerSuccess, setOnRegisterSuccess] = useState<boolean>(false)
 
   const onRegisterHandler = (event) => {
-   
+
      try {
 
          event.preventDefault(); // Prevent form re-submission
@@ -28,7 +26,7 @@ const Register: React.FC = () => { // Register Component
 
          setTimeout(() => {
             setOnRegisterSuccess((registerSuccess) => !registerSuccess);
-            navigate(`verify-email`)
+            navigate(`/verify-email`)
          }, 1200);
      } 
      
@@ -49,8 +47,6 @@ const Register: React.FC = () => { // Register Component
     <>
 
         <MetaData pageTitle = {`Register`} />
-
-         {loading && <Loader />}
 
             {registerSuccess && (
 

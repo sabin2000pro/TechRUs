@@ -13,11 +13,15 @@ export const fetchAllOrders = (keyword = '', page = 1) => async (dispatch: Dispa
     }
     
     catch(error) {
-
+       if(error) {
+         dispatch({type: FETCH_ORDERS_FAIL, payload: error.data.response.message});
+       }
     }
+
+
 }
 
-export const createNewOrder = (user: string, orderItems: any) => async (dispatch: Dispatch): Promise<void> => {
+export const createNewOrder = (user: string, orderItems: any, shippingInformation: Object, itemPrice: number, taxPrice: number) => async (dispatch: Dispatch): Promise<void> => {
     try {
 
     } 

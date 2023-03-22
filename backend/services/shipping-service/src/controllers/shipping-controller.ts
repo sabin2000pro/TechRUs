@@ -33,13 +33,13 @@ export const fetchShippingDetailsByID = asyncHandler(async (request: any, respon
 })
 
 export const createNewShipping = async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {address, city, country, postalCode, phoneNo} = request.body;
+    const {user, address, city, country, postalCode, phoneNo} = request.body;
 
     if(!address || !city || !country || !postalCode || !phoneNo) {
         return next(new ErrorResponse(`Some of the shipping fields are missing. Please check again`, StatusCodes.BAD_REQUEST));
     }
 
-    const shipping = await Shipping.create({address, city, country, postalCode, phoneNo});
+    const shipping = await Shipping.create({user, address, city, country, postalCode, phoneNo});
     await shipping.save(); // Save the shipping resource to the database
 
     return response.status(StatusCodes.CREATED).json({success: true, shipping});

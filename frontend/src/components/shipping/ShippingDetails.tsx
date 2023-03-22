@@ -7,7 +7,8 @@ import { createNewShipping } from '../../actions/shipping-actions';
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isAuthenticated, user, error} = useSelector((state: any) => state.auth)
+  const user = JSON.parse(sessionStorage.getItem("user") as any);
+  const {error} = useSelector((state: any) => state.auth)
 
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -15,6 +16,8 @@ const ShippingDetails: React.FC = () => {
   const [postalCode, setPostalCode] = useState<string>("");
   const [phoneNo, setPhoneNo] = useState<string>("");
   const [shippingDetailsSubmitted, setShippingDetailsSubmitted] = useState<boolean>(false);
+
+  console.log(`User : `, user)
 
   useEffect(() => { // On page load
 
@@ -24,14 +27,14 @@ const ShippingDetails: React.FC = () => {
 
       loadUser();
 
-  }, [dispatch, isAuthenticated, navigate])
+  }, [dispatch])
 
   const handleShippingSubmit = (event) => {
 
     try {
 
         event.preventDefault();
-        dispatch(createNewShipping(user?._id, address, city, country, postalCode, phoneNo) as any);
+        dispatch(createNewShipping(user._id, address, city, country, postalCode, phoneNo) as any);
 
         setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
         navigate(`/order-confirm`);

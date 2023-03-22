@@ -293,16 +293,16 @@ exports.resetPassword = (0, express_async_handler_1.default)((request, response,
     if (!newPassword) {
         return next(new error_response_1.ErrorResponse("Please specify the new password", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const customer = yield user_model_1.User.findOne({ owner: request.customer.id, token: resetToken });
-    if (!customer) {
+    const user = yield user_model_1.User.findOne({ owner: request.user.id, token: resetToken });
+    if (!user) {
         return next(new error_response_1.ErrorResponse("No user found", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const customerPasswordsMatch = yield customer.comparePasswords(currentPassword); // Check if passwords match before resetting password
+    const customerPasswordsMatch = yield user.comparePasswords(currentPassword); // Check if passwords match before resetting password
     if (!customerPasswordsMatch) {
         return next(new error_response_1.ErrorResponse("Current Password Invalid", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    customer.password = newPassword;
-    yield customer.save(); // Save new user after reset the password
+    user.password = newPassword;
+    yield user.save(); // Save new user after reset the password
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Customer Password Reset Successfully" });
 }));
 exports.fetchLoggedInUser = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -340,6 +340,8 @@ exports.editUserByID = (0, express_async_handler_1.default)((request, response, 
         return next(new error_response_1.ErrorResponse(`No user found with that ID`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     user = yield user_model_1.User.findByIdAndUpdate(id, request.body, { new: true, runValidators: true });
+    yield user.save();
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User updated" });
 }));
 exports.editUserShifts = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
