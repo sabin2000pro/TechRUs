@@ -8,9 +8,16 @@ const singleOrderState = {
     order: {}
 }
 
+interface ISingleOrder {
+    loading?: boolean;
+    error?: string;
+    order: {}
+}
+
 export const orderReducer = (state = initialOrdersState as any, action: any) => {
 
     switch(action.type) {
+
          case FETCH_ORDERS_REQUEST:
             return {loading: true}
 
@@ -31,10 +38,15 @@ export const orderReducer = (state = initialOrdersState as any, action: any) => 
     }
 }
 
-export const singleOrderReducer = (state = singleOrderState as any, action: any) => {
+export const singleOrderReducer = (state = singleOrderState as ISingleOrder, action: any): ISingleOrder => {
     switch(action.type) {
-        
 
+        case FETCH_SINGLE_ORDER_REQUEST:
+            return {loading: true, error: undefined, order: {}}
+
+        case FETCH_SINGLE_ORDER_SUCCESS:
+            return {...state, loading: false, error: undefined, order: action.payload}
+        
         default:
             return state
     }
