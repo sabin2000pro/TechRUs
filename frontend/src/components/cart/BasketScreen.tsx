@@ -6,13 +6,12 @@ import { removeProductFromBasket } from '../../actions/basket-actions'
 
 const BasketScreen: React.FC = () => {
   const dispatch = useDispatch();
-
   const {basketItems} = useSelector((state: any) => state.basket) // Pull out the basket items from state
+
   const navigate = useNavigate();
   const applicableTax = 0.2; // 20% VAT tax
   const basketSubtotal = basketItems.reduce((acc, item) => acc + Number(item.price * item.quantity), 0)
 
-  const shippingRate = 0.3;
   const taxPrice = basketSubtotal * applicableTax;
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
@@ -83,8 +82,7 @@ const BasketScreen: React.FC = () => {
 
              <>
 
-         <div className="flex justify-center bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
-
+         <div className = "flex justify-center bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
              <h2 className="heading-secondary order-heading">Order Summary</h2>
 
     <hr/>

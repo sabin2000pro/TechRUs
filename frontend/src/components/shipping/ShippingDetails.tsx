@@ -7,13 +7,14 @@ import { createNewShipping } from '../../actions/shipping-actions';
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isAuthenticated} = useSelector((state: any) => state.auth)
+  const {isAuthenticated, error} = useSelector((state: any) => state.auth)
 
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
   const [phoneNo, setPhoneNo] = useState<string>("");
+  const [shippingDetailsSubmitted, setShippingDetailsSubmitted] = useState<boolean>(false);
 
   useEffect(() => { // On page load
 
@@ -33,6 +34,8 @@ const ShippingDetails: React.FC = () => {
 
         dispatch(createNewShipping(address, city, country, postalCode, phoneNo) as any);
 
+        setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
+
         navigate(`/order-confirm`);
     } 
     
@@ -49,7 +52,27 @@ const ShippingDetails: React.FC = () => {
   return (
 
     <>
-    
+
+       {error && (
+
+        <>
+          
+        <div className = "bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>{error.message}</h2>
+        </div>
+
+        </>
+
+       )}
+
+        {shippingDetailsSubmitted && (
+
+        <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>Shipping Details Submitted</h2>
+        </div>
+
+        )}
+
        <div className = "flex justify-center items-center h-screen shipping-container">
 
           <form onSubmit = {handleShippingSubmit} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
@@ -87,6 +110,7 @@ const ShippingDetails: React.FC = () => {
         </div>
 
    </form>
+   
 </div>
 
     </>

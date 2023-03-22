@@ -6,35 +6,29 @@ import { useNavigate } from 'react-router-dom'
 import { register } from '../../actions/auth-actions'
 import Loader from '../../layout/Loader'
 
-const Register = () => { // Register Component
+const Register: React.FC = () => { // Register Component
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const {loading, error, user} = useSelector((state: any) => state.auth);
+  const {loading} = useSelector((state: any) => state.auth);
   const [registerSuccess, setOnRegisterSuccess] = useState<boolean>(false)
-  const [showNavBar, setShowNavBar] = useState<boolean>(false);
-
-  useEffect(() => {
-   console.log(`Is laoding : ? `, loading)
-}, [loading, dispatch])
 
   const onRegisterHandler = (event) => {
      try {
 
-         event.preventDefault()
+         event.preventDefault(); // Prevent form re-submission
          dispatch(register(username, email, password) as any);
 
          setOnRegisterSuccess((registerSuccess) => !registerSuccess);
 
          setTimeout(() => {
-            setShowNavBar(false);
-            setOnRegisterSuccess(false);
-            
-         }, 2000);
+            setOnRegisterSuccess((registerSuccess) => !registerSuccess);
+            navigate(`verify-email`)
+         }, 1200);
      } 
      
      catch(error) {
@@ -54,6 +48,8 @@ const Register = () => { // Register Component
     <>
 
         <MetaData pageTitle = {`Register`} />
+
+         {loading && <Loader />}
 
             {registerSuccess && (
 
