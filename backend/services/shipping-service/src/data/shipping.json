@@ -2,6 +2,7 @@
 
     {
         "_id": "5d713995b721c3bb38c1f9f9",
+        "user": "63e25f48d82eb035f7dc0652",
         "address": "190 High Road",
         "city": "Dundee",
         "country": "United Kingdom",
@@ -12,6 +13,7 @@
 
     {
         "_id": "5d713995b721c3bb38c1f9f2",
+        "user": "63e25f48d82eb035f7dc0652",
         "address": "190 Main Street",
         "city": "Edinburgh",
         "country": "United Kingdom",

@@ -37,6 +37,9 @@ exports.fetchAllOrders = (0, express_async_handler_1.default)((request, response
 exports.fetchSingleOrderByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
     let order = yield order_model_1.Order.findById(id);
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`No order found with that ID`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     if (!order) {
         return next(new error_response_1.ErrorResponse(`No order found with ID : ${id}`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
@@ -58,6 +61,9 @@ exports.updateOrderStatus = (0, express_async_handler_1.default)((request, respo
     const { orderStatus } = request.body;
     const id = request.params.id;
     let order = yield order_model_1.Order.findById(id);
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`The order ID is invalid. Try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     if (!order) {
         return next(new error_response_1.ErrorResponse(`No order found with ID : ${id}`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
