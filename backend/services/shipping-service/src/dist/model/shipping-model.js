@@ -7,6 +7,11 @@ exports.Shipping = exports.ShippingSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 // Shipping Microservice Data Model 
 exports.ShippingSchema = new mongoose_1.default.Schema({
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Please provide the User ID when creating your shipping details"]
+    },
     address: {
         type: String,
         required: [true, "Please provide the address for the shipping"]

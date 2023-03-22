@@ -14,7 +14,7 @@ export interface IOrderDocument {
 
 export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
-    user: {
+    user: { // The user which the order relats to
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: [true, "Please include the User ID that belongs to this order"]
@@ -22,7 +22,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
     orderItems: [{ // Array of all the order items being ordered
         
-        name: {
+        name: { // Name of the product being ordered
             type: String,
             required: true
         },
@@ -37,7 +37,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
             required: true
         },
 
-        product: { // Product itself part of the order items
+        product: { // Product ID that is being ordered
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product",
             required: true
@@ -45,7 +45,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
     }],
 
-    shippingInformation: {
+    shippingInformation: { // Shipping Information Object will be part of the order
 
         address: {
             type: String,
