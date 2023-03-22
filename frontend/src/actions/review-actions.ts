@@ -47,8 +47,10 @@ export const createReview = (product: string, rating: number, comment: string) =
     } 
     
     catch(error) {
-
+        console.log(`Create Review Error : `)
+        dispatch({type: FETCH_SINGLE_REVIEW_FAIL, payload: error.data.response.message});
     }
+
 }
 
 export const editReviewByID = () => async (dispatch: Dispatch): Promise<void> => {

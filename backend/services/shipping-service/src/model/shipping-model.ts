@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface IShippingDocument {
+    user: mongoose.Schema.Types.ObjectId;
     address: string;
     city: string;
     country: string;
@@ -13,6 +14,12 @@ export interface IShippingDocument {
 
 // Shipping Microservice Data Model 
 export const ShippingSchema = new mongoose.Schema<IShippingDocument>({
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Please provide the User ID when creating your shipping details"]
+    },
 
     address: { // User address
         type: String,
