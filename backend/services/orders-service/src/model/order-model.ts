@@ -8,6 +8,7 @@ export interface IOrderDocument {
     itemPrice: Number;
     taxPrice: Number;
     totalPrice: number;
+    createdAt: Date;
     shippingPrice: Number;
     paidAt: Date
 }
@@ -82,26 +83,31 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
     itemPrice: { // Items price being ordered
         type: Number,
-        required: true,
+        required: [true, 'Please ensure the order has the price of the item being ordered'],
         default: 0.0
     },
 
     taxPrice: { // The tax price incurred as part of the order
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order has the tax price of the item being ordered"],
         default: 0.0
     },
 
     shippingPrice: { // Shipping price of the order
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order has the shipping price of the item being ordered"],
         default: 0.00
     },
 
     totalPrice: { // Total price for the order
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order contains the total price for the order"],
         default: 0.00
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now
     },
 
     paidAt: { // Date at which the order has been paid at
