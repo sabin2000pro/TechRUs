@@ -34,6 +34,10 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
         const id = request.params.id;
         let order = await Order.findById(id);
 
+        if(!isValidObjectId(id)) {
+            return next(new ErrorResponse(`No order found with that ID`, StatusCodes.BAD_REQUEST));
+        }
+
         if(!order) {
             return next(new ErrorResponse(`No order found with ID : ${id}`, StatusCodes.BAD_REQUEST));
         }
