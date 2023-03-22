@@ -37,17 +37,16 @@ export const createNewShipping = (user: any, address: string, city: string, coun
         dispatch({type: SAVE_SHIPPING_INFO_REQUEST});
 
         const {data} = await axios.post(`http://localhost:5411/api/v1/shipping`, {user, address, city, country, postalCode, phoneNo})
-        console.log(`Shipping Data : `, data);
 
         dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping});
-        localStorage.setItem("shippingInfo", JSON.stringify(data.shipping));
+        localStorage.setItem("shippingInformation", JSON.stringify(data.shipping));
 
     } 
     
     catch(error) {
 
       if(error) {
-        console.log(`Shipping Error : `, error);
+
         dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
       }
 
@@ -97,6 +96,7 @@ export const editShippingStatus = (id: string, currentStatus: string, newStatus:
 }
 
 export const fetchShippingDetailsByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
+  
   try {
     dispatch({type: FETCH_SHIPPING_INFO_REQUEST});
 

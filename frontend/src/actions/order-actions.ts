@@ -21,13 +21,23 @@ export const fetchAllOrders = (keyword = '', page = 1) => async (dispatch: Dispa
 
 }
 
-export const createNewOrder = (user: string, orderItems: any, shippingInformation: Object, itemPrice: number, taxPrice: number) => async (dispatch: Dispatch): Promise<void> => {
+export const createNewOrder = (user: string, orderItems: any, shippingInformation: any, itemPrice: number, taxPrice: number, shippingPrice: number, totalPrice: number) => async (dispatch: Dispatch): Promise<void> => {
     try {
+       dispatch({type: CREATE_ORDER_REQUEST});
 
+
+       const {data} = await axios.post(`http://localhost:5403/api/v1/orders`, {user, orderItems, shippingInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
+       console.log(`Order Data : `, data);
+
+       dispatch({type: CREATE_ORDER_SUCCESS, payload: data.order});
+
+       localStorage.setItem("order", JSON.stringify(data.order));
     } 
     
     catch(error) {
-
+        if(error) {
+            console.log(`Create Order Error : `, error);
+        }
     }
 
 

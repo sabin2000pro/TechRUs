@@ -15,9 +15,9 @@ const BasketScreen: React.FC = () => {
   const taxPrice = basketSubtotal * applicableTax;
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
-  
-  const onRemoveProductHandler = (id: string) => {
 
+
+  const onRemoveProductHandler = (id: string) => {
 
     try {
        dispatch(removeProductFromBasket(id) as any)
@@ -35,7 +35,15 @@ const BasketScreen: React.FC = () => {
   }
 
   const handleShippingNavigate = () => {
+
+    const orderItems = basketItems.map((item: any) => {
+      return {product: item.product, taxPrice, shippingPrice, totalPrice};
+    });
+
+    localStorage.setItem("orderItems", JSON.stringify(orderItems));
+
     navigate('/shipping')
+
   }
     
   return (
