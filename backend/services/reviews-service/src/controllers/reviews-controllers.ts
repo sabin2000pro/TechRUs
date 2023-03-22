@@ -7,6 +7,12 @@ import { Review } from '../model/review-model';
 
 export const fetchAllReviews = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const reviews = await Review.find();
+
+    if(!reviews) {
+      return next(new ErrorResponse(`No reviews found`, StatusCodes.BAD_REQUEST));
+    }
+
+
     return response.status(StatusCodes.OK).json({success: true, reviews});
 })
 
