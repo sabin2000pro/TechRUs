@@ -55,6 +55,7 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
     try {
 
        dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
+
        const config = processConfigHeader();
 
        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, userOTP}, config);
@@ -78,7 +79,7 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login
 // @parameters: (email): Stores the e-mail of the customer here. (password): Stores the customers inputted password
 
-export const login = (email: string, password: string) => async (dispatch: Dispatch) => {
+export const login = (email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
@@ -103,7 +104,7 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
 
 } 
 
-export const fetchLoggedInUser = () => async (dispatch: Dispatch) => { // Authentication action responsible for fetching the currently logged in user on the platform
+export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void> => { // Authentication action responsible for fetching the currently logged in user on the platform
 
     try {
 
@@ -264,7 +265,7 @@ export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promis
   }
   
   catch(error) {
-    
+
     if(error) {
 
     }

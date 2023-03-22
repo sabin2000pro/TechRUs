@@ -18,6 +18,7 @@ const Register: React.FC = () => { // Register Component
   const [registerSuccess, setOnRegisterSuccess] = useState<boolean>(false)
 
   const onRegisterHandler = (event) => {
+   
      try {
 
          event.preventDefault(); // Prevent form re-submission

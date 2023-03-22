@@ -31,11 +31,9 @@ const ShippingDetails: React.FC = () => {
     try {
 
         event.preventDefault();
-
         dispatch(createNewShipping(address, city, country, postalCode, phoneNo) as any);
 
         setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
-
         navigate(`/order-confirm`);
     } 
     
@@ -110,7 +108,7 @@ const ShippingDetails: React.FC = () => {
         </div>
 
    </form>
-   
+
 </div>
 
     </>
