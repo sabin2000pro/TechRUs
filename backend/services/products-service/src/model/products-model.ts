@@ -2,6 +2,7 @@ import { Model } from 'mongoose';
 import mongoose from 'mongoose';
 
 interface ProductDocument extends Document {
+    user: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
     image: string
@@ -13,6 +14,12 @@ interface ProductDocument extends Document {
 }
 
 const ProductSchema = new mongoose.Schema<ProductDocument>({
+    
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Please include the user ID that created this product"]
+    },
 
     name: {
         type: String,

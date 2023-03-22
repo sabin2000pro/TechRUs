@@ -39,11 +39,11 @@ exports.fetchShippingDetailsByID = (0, express_async_handler_1.default)((request
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, shipping });
 }));
 const createNewShipping = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { address, city, country, postalCode, phoneNo } = request.body;
+    const { user, address, city, country, postalCode, phoneNo } = request.body;
     if (!address || !city || !country || !postalCode || !phoneNo) {
         return next(new error_response_1.ErrorResponse(`Some of the shipping fields are missing. Please check again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const shipping = yield shipping_model_1.Shipping.create({ address, city, country, postalCode, phoneNo });
+    const shipping = yield shipping_model_1.Shipping.create({ user, address, city, country, postalCode, phoneNo });
     yield shipping.save(); // Save the shipping resource to the database
     return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, shipping });
 });
