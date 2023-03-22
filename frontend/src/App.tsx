@@ -21,6 +21,8 @@ import UsersList from './dashboard/admin/UsersList';
 import ShippingDetails from './components/shipping/ShippingDetails';
 import OrderSuccess from './components/order/OrderSuccess';
 import OrderConfirmation from './components/order/OrderConfirmation';
+import VerifyEmail from './components/authentication/VerifyEmail';
+import VerifyLogin from './components/authentication/VerifyLogin';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -66,6 +68,10 @@ const App: React.FC = () => {
            <Route path = '/update-password/:id' element = {<UpdatePassword />} />
            <Route path = '/update-profile/:id' element = {<UpdateProfile />} />
            <Route path = '/my-profile' element = {<Profile />} />
+
+            <Route path = '/verify-email' element = {<VerifyEmail />} />
+            <Route path = '/verify-login' element = {<VerifyLogin />} />
+
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
            <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
            <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />

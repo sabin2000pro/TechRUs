@@ -24,6 +24,19 @@ body {
   margin-bottom: -100px;
 }
 
+.success-banner {
+  width: 500px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 870px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: all 0.2s;
+}
+
 .search-input {
   width: 500px;
 }

@@ -33,7 +33,7 @@ const Header = () => {
 
     <>
 
-     {!loading && !error && (
+
 
        <header className = "main-header">
 
@@ -73,7 +73,7 @@ const Header = () => {
 
  </header>
 
-     )}
+  
 
     </>
 

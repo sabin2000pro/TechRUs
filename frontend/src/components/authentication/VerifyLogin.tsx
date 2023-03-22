@@ -1,16 +1,14 @@
 import React from 'react'
+import {useDispatch, useSelector} from 'react-redux';
 
-export interface IVerifyLoginProps {
-
-}
-
-const VerifyLogin = () => {
+const VerifyLogin: React.FC = () => {
 
   return (
 
     <>
 
     </>
+
     
   )
 }

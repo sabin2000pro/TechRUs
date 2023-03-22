@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { register } from '../../actions/auth-actions'
+import Loader from '../../layout/Loader'
 
 const Register = () => { // Register Component
   const navigate = useNavigate();
@@ -14,7 +15,12 @@ const Register = () => { // Register Component
   const [password, setPassword] = useState("");
 
   const {loading, error, user} = useSelector((state: any) => state.auth);
-  const [showAlert, setShowAlert] = useState<boolean>(false)
+  const [registerSuccess, setOnRegisterSuccess] = useState<boolean>(false)
+  const [showNavBar, setShowNavBar] = useState<boolean>(false);
+
+  useEffect(() => {
+   console.log(`Is laoding : ? `, loading)
+}, [loading, dispatch])
 
   const onRegisterHandler = (event) => {
      try {
@@ -22,16 +28,19 @@ const Register = () => { // Register Component
          event.preventDefault()
          dispatch(register(username, email, password) as any);
 
-         setShowAlert((showAlert) => !showAlert);
+         setOnRegisterSuccess((registerSuccess) => !registerSuccess);
 
          setTimeout(() => {
-            navigate("/user-login")
-         }, 1200)
+            setShowNavBar(false);
+            setOnRegisterSuccess(false);
+            
+         }, 2000);
      } 
      
      catch(error) {
 
         if(error) {
+           setOnRegisterSuccess(false);
            console.log(error);
         }
 
@@ -39,13 +48,20 @@ const Register = () => { // Register Component
 
   }
 
+
   return (
 
     <>
 
         <MetaData pageTitle = {`Register`} />
 
-        {showAlert && <h2 className = "heading-secondary">Registered Successfully</h2>}
+            {registerSuccess && (
+
+               <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+                  <h2>Registered Successfully</h2>
+               </div>
+               
+               )}
 
              <div className = "flex justify-center items-center h-screen login-container">
 

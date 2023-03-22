@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUser } from '../../actions/auth-actions';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createNewShipping } from '../../actions/shipping-actions';
 
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
-  const {shippingInfo} = useSelector((state: any) => state.shipping);
-  const {isAuthenticated, user} = useSelector((state: any) => state.auth)
+  const navigate = useNavigate();
+  const {isAuthenticated} = useSelector((state: any) => state.auth)
 
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -15,7 +15,7 @@ const ShippingDetails: React.FC = () => {
   const [postalCode, setPostalCode] = useState<string>("");
   const [phoneNo, setPhoneNo] = useState<string>("");
 
-  useEffect(() => {
+  useEffect(() => { // On page load
 
       const loadUser = async () => { // Fetch the logged in user
           dispatch(fetchLoggedInUser() as any);
@@ -23,14 +23,17 @@ const ShippingDetails: React.FC = () => {
 
       loadUser();
 
-  }, [dispatch])
+  }, [dispatch, isAuthenticated, navigate])
 
   const handleShippingSubmit = (event) => {
 
     try {
-       event.preventDefault();
+
+        event.preventDefault();
 
         dispatch(createNewShipping(address, city, country, postalCode, phoneNo) as any);
+
+        navigate(`/order-confirm`);
     } 
     
     catch(error) {
@@ -46,6 +49,7 @@ const ShippingDetails: React.FC = () => {
   return (
 
     <>
+    
        <div className = "flex justify-center items-center h-screen shipping-container">
 
           <form onSubmit = {handleShippingSubmit} method = "POST" className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">

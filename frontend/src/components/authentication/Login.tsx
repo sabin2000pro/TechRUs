@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import MetaData from '../../layout/MetaData';
 import { login } from '../../actions/auth-actions';
-import Alert from '../../layout/Alert';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
   const {loading, error, isAuthenticated, user} = useSelector((state: any) => state.auth);
@@ -19,8 +19,11 @@ const Login: React.FC = () => {
   const onLoginHandler = (event) => {
 
     event.preventDefault();
-    dispatch(login(email, password) as any);
+
+    dispatch(login(email, password) as any); // Dispatch login action with e-mail and password
+
     setFormSubmitted((formSubmitted) => !formSubmitted);
+    setIsLoggedIn((isLoggedIn) => !isLoggedIn);
 
   }
 
@@ -42,12 +45,17 @@ const Login: React.FC = () => {
 
     
     <MetaData pageTitle = {`Login`} />
-
-     {isAuthenticated && <Alert message = {`Logged In`} />}
-
-     {!loading && !isAuthenticated && !error && (
-
+    
+     
           <>
+
+          {isLoggedIn && formSubmitted && (
+
+            <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+              <h2>You are logged in</h2>
+            </div>
+
+            )}
 
           <div className = "flex justify-center items-center h-screen login-container">
 
@@ -85,7 +93,7 @@ const Login: React.FC = () => {
         </>
 
 
-     )}
+ 
       
   
     </>
