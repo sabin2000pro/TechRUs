@@ -23,6 +23,7 @@ import OrderSuccess from './components/order/OrderSuccess';
 import OrderConfirmation from './components/order/OrderConfirmation';
 import VerifyEmail from './components/authentication/VerifyEmail';
 import VerifyLogin from './components/authentication/VerifyLogin';
+import MyOrders from './components/order/MyOrders';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -69,8 +70,8 @@ const App: React.FC = () => {
            <Route path = '/update-profile/:id' element = {<UpdateProfile />} />
            <Route path = '/my-profile' element = {<Profile />} />
 
-            <Route path = '/verify-email' element = {<VerifyEmail />} />
-            <Route path = '/verify-login' element = {<VerifyLogin />} />
+           <Route path = '/verify-email' element = {<VerifyEmail />} />
+           <Route path = '/verify-login' element = {<VerifyLogin />} />
 
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
            <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
@@ -80,6 +81,9 @@ const App: React.FC = () => {
            <Route path = '/shipping' element = {<ShippingDetails />} />
            <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
            <Route path = '/order-success' element = {<OrderSuccess />} />
+
+           <Route path = '/my-orders' element = {<MyOrders />} />
+         
            
          </Routes>
 
