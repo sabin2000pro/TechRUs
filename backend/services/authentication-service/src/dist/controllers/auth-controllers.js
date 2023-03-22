@@ -217,12 +217,12 @@ exports.logoutUser = (0, express_async_handler_1.default)((request, response, ne
 }));
 exports.verifyLoginMFA = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, multiFactorToken } = request.body;
-    const customer = yield user_model_1.User.findById(userId);
+    const user = yield user_model_1.User.findById(userId);
     if (!(0, mongoose_1.isValidObjectId)(userId)) {
         return next(new error_response_1.ErrorResponse(`This user ID is not valid. Please try again`, http_status_codes_1.StatusCodes.UNAUTHORIZED));
     }
     if (!multiFactorToken) {
-        customer.isActive = false; // User is not active yet
+        user.isActive = false; // User is not active yet
         return next(new error_response_1.ErrorResponse("Please provide your MFA token", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     const factorToken = yield two_factor_model_1.TwoFactorVerification.findOne({ owner: userId });
@@ -232,15 +232,15 @@ exports.verifyLoginMFA = (0, express_async_handler_1.default)((request, response
     // Check to see if the tokens match
     const mfaTokensMatch = yield factorToken.compareVerificationTokens(multiFactorToken);
     if (!mfaTokensMatch) { // If tokens don't match
-        customer.isActive = (!customer.isActive);
-        customer.isVerified = (!customer.isVerified);
+        user.isActive = (!user.isActive);
+        user.isVerified = (!user.isVerified);
         return next(new error_response_1.ErrorResponse("The MFA token you entered is invalid. Try again", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const newToken = yield two_factor_model_1.TwoFactorVerification.create({ owner: customer, mfaToken: multiFactorToken }); // Create a new instance of the token
+    const newToken = yield two_factor_model_1.TwoFactorVerification.create({ owner: user, mfaToken: multiFactorToken }); // Create a new instance of the token
     yield newToken.save(); // Save the new token
-    customer.isVerified = true; // User account is now verified
-    customer.isActive = true; // And user account is active
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ customer, message: "Your account is now active" });
+    user.isVerified = true; // User account is now verified
+    user.isActive = true; // And user account is active
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ user, message: "Your account is now active" });
 }));
 exports.forgotPassword = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = request.body;
@@ -362,6 +362,9 @@ exports.editUserShifts = (0, express_async_handler_1.default)((request, response
 }));
 exports.deleteUserByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`User ID is invalid. Please check your ID again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     yield user_model_1.User.findByIdAndDelete(id);
     return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "User deleted succesfully" });
 }));
