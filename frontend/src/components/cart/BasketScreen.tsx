@@ -17,7 +17,7 @@ const BasketScreen: React.FC = () => {
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
 
-  const onRemoveProductHandler = (id: string) => {
+  const onRemoveProductHandler = (id: string): void => {
 
     try {
        dispatch(removeProductFromBasket(id) as any)
@@ -52,9 +52,9 @@ const BasketScreen: React.FC = () => {
 
     <>   
 
-    <MetaData pageTitle = {`My Basket`} />
+     <MetaData pageTitle = {`My Basket`} />
 
-    {basketItems.length === 0 && <h2 className = "heading-secondary">Your Cart Is Empty</h2>}
+     {basketItems.length === 0 && <h2 className = "heading-secondary">Your Cart Is Empty</h2>}
 
        {basketItems.map((basketItem: any) => (
 

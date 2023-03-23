@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updatePassword } from '../../actions/auth-actions'
+import MetaData from '../../layout/MetaData'
 
 const UpdatePassword: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState<string>("");
@@ -23,7 +24,8 @@ const UpdatePassword: React.FC = () => {
        
         catch(error) {
            if(error) {
-             
+               setPasswordUpdated(false)
+               console.log(error)
            }
        }
 
@@ -33,6 +35,9 @@ const UpdatePassword: React.FC = () => {
   return (
 
     <>
+
+     <MetaData pageTitle = {`Update Password`} />
+     
       <h2 className = "heading-secondary">Update Password</h2>
 
       <div className = "flex justify-center items-center h-screen login-container">
