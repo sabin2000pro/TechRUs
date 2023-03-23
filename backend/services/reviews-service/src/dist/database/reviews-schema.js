@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectReviewSchema = void 0;
 require('dotenv').config();
 const mongoose_1 = __importDefault(require("mongoose"));
-const REVIEWS_SERVICE_DB_URI = process.env.REVIEWS_SERVICE_DB_URI;
+const REVIEWS_SERVICE_DB_URI = process.env.REVIEWS_SERVICE_DB_URI || "";
 const connectReviewSchema = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         return yield mongoose_1.default.connect(REVIEWS_SERVICE_DB_URI).then(conn => {

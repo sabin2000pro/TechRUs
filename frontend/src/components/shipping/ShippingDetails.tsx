@@ -1,32 +1,43 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUser } from '../../actions/auth-actions';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { createNewShipping } from '../../actions/shipping-actions';
 
 const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
-  const {shipping} = useSelector((state: any) => state.shipping);
-  const {isAuthenticated, user} = useSelector((state: any) => state.auth)
+  const navigate = useNavigate();
+  const user = JSON.parse(sessionStorage.getItem("user") as any);
+  const {error} = useSelector((state: any) => state.auth)
 
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
   const [phoneNo, setPhoneNo] = useState<string>("");
+  const [shippingDetailsSubmitted, setShippingDetailsSubmitted] = useState<boolean>(false);
 
-  useEffect(() => {
+  console.log(`User : `, user)
+
+  useEffect(() => { // On page load
 
       const loadUser = async () => { // Fetch the logged in user
           dispatch(fetchLoggedInUser() as any);
       }
 
       loadUser();
+
   }, [dispatch])
 
   const handleShippingSubmit = (event) => {
 
     try {
-       event.preventDefault();
+
+        event.preventDefault();
+        dispatch(createNewShipping(user._id, address, city, country, postalCode, phoneNo) as any);
+
+        setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
+        navigate(`/order-confirm`);
     } 
     
     catch(error) {
@@ -42,6 +53,26 @@ const ShippingDetails: React.FC = () => {
   return (
 
     <>
+
+       {error && (
+
+        <>
+          
+        <div className = "bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>{error.message}</h2>
+        </div>
+
+        </>
+
+       )}
+
+        {shippingDetailsSubmitted && (
+
+        <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>Shipping Details Submitted</h2>
+        </div>
+
+        )}
 
        <div className = "flex justify-center items-center h-screen shipping-container">
 
@@ -61,25 +92,26 @@ const ShippingDetails: React.FC = () => {
 
             <div className = "mb-4 login-container-inputs email-container">
                   <label className = "block text-sm font-bold mb-2 login-username-label" htmlFor = "country">Country</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+                  <input value = {country} onChange = {(event) => setCountry(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Postal Code</label>
-                  <input className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
+                  <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Postal Code</label>
+                  <input value = {postalCode} onChange = {(event) => setPostalCode(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Username" />
             </div>
 
-              <div className = "mb-6 login-password-container">
-                    <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Phone</label>
-                    <input className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />  
-              </div>
+             <div className = "mb-6 login-password-container">
+                  <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Phone</label>
+                  <input value = {phoneNo} onChange = {(event) => setPhoneNo(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />  
+            </div>
 
 
         <div className = "flex items-center justify-center login-btn-container">
-            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Place Order</button>
+            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Submit</button>
         </div>
 
    </form>
+
 </div>
 
     </>

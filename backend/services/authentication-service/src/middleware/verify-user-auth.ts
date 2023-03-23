@@ -1,11 +1,11 @@
-import { StatusCodes } from 'http-status-codes';
 require('dotenv').config();
+import { StatusCodes } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/user-model'
 import {Response, NextFunction} from 'express';
 import { ErrorResponse } from '../utils/error-response';
 
-export const verifyUserAuthentication = async (request: any, response: Response, next:NextFunction) => {
+export const verifyUserAuthentication = async (request: any, response: Response, next: NextFunction): Promise<any> => {
   
     try {
 
@@ -19,7 +19,6 @@ export const verifyUserAuthentication = async (request: any, response: Response,
         if(!token) {
           return response.status(StatusCodes.UNAUTHORIZED).json({sucess: false, message: "You are unauthorized to access this resource"});
       }
-
 
         const decoded: any = jwt.verify(token, process.env.JWT_TOKEN!);
         request.user = await User.findById(decoded._id);

@@ -9,9 +9,9 @@ beforeAll(async () => {
     return await mongoose.connect("mongodb+srv://sabin2000:123mini123@techrus-auth-schema.mfj4iaa.mongodb.net/?retryWrites=true&w=majority")
 })
 
-describe("Register Unit Tests", () => {
+describe("Register Unit Tests", () => { // Unit Test Suite 1
 
-    it("Register API with valid data", async () => {
+    it("Register API with valid data", async () => { // Test 1: Register User Account with valid credentials
 
         const validRegisterData = [{username: "testuser09", email: "testusre09@gmail.com", password: "123mini123"}]
 

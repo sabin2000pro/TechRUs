@@ -133,3 +133,42 @@
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+<<<<<<< HEAD
+=======
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+>>>>>>> 5cf8c4c86f03c03df536640384c52e14c20b2471

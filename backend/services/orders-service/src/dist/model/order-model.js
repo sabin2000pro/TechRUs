@@ -6,6 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Order = exports.OrderSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 exports.OrderSchema = new mongoose_1.default.Schema({
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Please include the User ID that belongs to this order"]
+    },
     orderItems: [{
             name: {
                 type: String,
@@ -50,27 +55,31 @@ exports.OrderSchema = new mongoose_1.default.Schema({
     orderStatus: {
         type: String,
         enum: ['received', 'pending', 'completed', 'processing', 'canceled', 'refunded'],
-        default: 'processing'
+        default: 'received' // By default, when an order is placed, it is received
     },
     itemPrice: {
         type: Number,
-        required: true,
+        required: [true, 'Please ensure the order has the price of the item being ordered'],
         default: 0.0
     },
     taxPrice: {
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order has the tax price of the item being ordered"],
         default: 0.0
     },
     shippingPrice: {
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order has the shipping price of the item being ordered"],
         default: 0.00
     },
     totalPrice: {
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order contains the total price for the order"],
         default: 0.00
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     },
     paidAt: {
         type: Date,

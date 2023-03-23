@@ -1,12 +1,12 @@
 require('dotenv').config();
-import express from 'express';
+import express, {Application} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import {connectProductsSchema} from './database/products-db';
 import {productRouter} from './routes/product-routes';
 
-const app = express();
+const app: Application = express();
 
 connectProductsSchema();
 

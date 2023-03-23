@@ -10,7 +10,7 @@ exports.ShippingSchema = new mongoose_1.default.Schema({
     user: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "User",
-        required: [true, "Please specify the user that belongs to this shipping details"]
+        required: [true, "Please provide the User ID when creating your shipping details"]
     },
     address: {
         type: String,

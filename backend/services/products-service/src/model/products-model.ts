@@ -1,4 +1,3 @@
-import { Model } from 'mongoose';
 import mongoose from 'mongoose';
 
 interface ProductDocument extends Document {
@@ -13,7 +12,7 @@ interface ProductDocument extends Document {
 }
 
 const ProductSchema = new mongoose.Schema<ProductDocument>({
-
+    
     name: {
         type: String,
         required: [true, "Please specify the name of this product"]

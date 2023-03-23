@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.restrictRolesTo = exports.verifyUserAuthentication = void 0;
-const http_status_codes_1 = require("http-status-codes");
 require('dotenv').config();
+const http_status_codes_1 = require("http-status-codes");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_model_1 = require("../models/user-model");
 const error_response_1 = require("../utils/error-response");

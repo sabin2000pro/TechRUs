@@ -1,21 +1,29 @@
 import mongoose from 'mongoose';
 
 export interface IOrderDocument {
+    user: mongoose.Schema.Types.ObjectId;
     orderItems: mongoose.Schema.Types.ObjectId;
     shippingInformation: Object
     orderStatus: String
     itemPrice: Number;
     taxPrice: Number;
     totalPrice: number;
+    createdAt: Date;
     shippingPrice: Number;
     paidAt: Date
 }
 
 export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
+    user: { // The user which the order relats to
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Please include the User ID that belongs to this order"]
+    },
+
     orderItems: [{ // Array of all the order items being ordered
         
-        name: {
+        name: { // Name of the product being ordered
             type: String,
             required: true
         },
@@ -30,7 +38,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
             required: true
         },
 
-        product: { // Product itself part of the order items
+        product: { // Product ID that is being ordered
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product",
             required: true
@@ -38,7 +46,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
     }],
 
-    shippingInformation: {
+    shippingInformation: { // Shipping Information Object will be part of the order
 
         address: {
             type: String,
@@ -70,31 +78,36 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
     orderStatus: { // The status the order is in. It can take 6 values as outlined below
         type: String,
         enum: ['received', 'pending', 'completed', 'processing', 'canceled', 'refunded'],
-        default: 'processing'
+        default: 'received' // By default, when an order is placed, it is received
     },
 
     itemPrice: { // Items price being ordered
         type: Number,
-        required: true,
+        required: [true, 'Please ensure the order has the price of the item being ordered'],
         default: 0.0
     },
 
-    taxPrice: { // The tax price incurred
+    taxPrice: { // The tax price incurred as part of the order
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order has the tax price of the item being ordered"],
         default: 0.0
     },
 
     shippingPrice: { // Shipping price of the order
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order has the shipping price of the item being ordered"],
         default: 0.00
     },
 
     totalPrice: { // Total price for the order
         type: Number,
-        required: true,
+        required: [true, "Please ensure that this order contains the total price for the order"],
         default: 0.00
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now
     },
 
     paidAt: { // Date at which the order has been paid at

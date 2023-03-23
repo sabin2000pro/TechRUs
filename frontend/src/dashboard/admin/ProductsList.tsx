@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export interface IProductsList {
@@ -11,19 +10,19 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
   return (
 
     <>
-           <div className  = "flex justify-center">
+      <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">
 
               <div className="flex flex-row gap-6 product-card-container">
 
-                {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
+        {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
  
              {products.map((product: any) => (
 
               <>
 
-          <div className="bg-white shadow-md rounded px-12 py-6 product-card">
+          <div className = "bg-white shadow-md rounded px-12 py-6 product-card">
  
             <div className ="relative w-72 m-4 product-badge-container">
                 
@@ -37,19 +36,18 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
 
                   <p className ="product-descriptions ">£{product.price} </p>
 
-                  <p className = "product-descriptions stock-text">{product.stockCount > 0 ? "In Stock" : "Low Stock"}</p>
+                  {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
+                  {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}
+
                   <p className = "product-descriptions text-red-500">{product.stockCount === 0 && "Out Of Stock"}</p>
                 
-
                   <Link to = {`/product-details/${product._id}`} className = "product-btn" type = "submit">Product Details</Link>
 
                   </div>
               
               </>
            ))}
-  
- 
-  
+
      
    </div>
  

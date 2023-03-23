@@ -1,39 +1,32 @@
 require('dotenv').config();
 import mongoose from 'mongoose';
 
-interface ReviewDocument {
+interface IReviewDocument {
     product: mongoose.Schema.Types.ObjectId;
-    user: mongoose.Schema.Types.ObjectId;
     rating: number;
     comment: string;
     createdAt: Date
 }
 
-const ReviewSchema = new mongoose.Schema<ReviewDocument>({
+const ReviewSchema = new mongoose.Schema<IReviewDocument>({
 
-    product: {
+    product: { // The Product ID to create a review for
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
       required: [true, "Please provide the product ID for this review"]
     },
 
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "Please provide the user that this review belongs to"]
-    },
-
-    rating: {
+    rating: { // Rating for the product
       type: Number,
       required: [true, "Please specify a valid rating for this review"]
     },
 
-    comment: {
+    comment: { // Comment for the review
       type: String,
       required: [true, "Please provide a valid comment for this review"]
     },
 
-    createdAt: {
+    createdAt: { // The date at which the review was created at
        type: Date,
        default: Date.now
     }
@@ -41,4 +34,4 @@ const ReviewSchema = new mongoose.Schema<ReviewDocument>({
 }, {timestamps: true});
 
 const Review = mongoose.model("Review", ReviewSchema);
-export {Review}
+export {Review} // Export the review model

@@ -7,7 +7,7 @@ const PRODUCT_SERVICE_PORT = process.env.PRODUCT_SERVICE_PORT || 5404;
 const listenProductsServer = () => {
     try {
         return app_1.app.listen(PRODUCT_SERVICE_PORT, () => {
-            console.log(`Product server listening for requests on port ${PRODUCT_SERVICE_PORT} in mode: ${process.env.PRODUCT_SERVICE_NODE_ENV}`);
+            console.log(`Product Microservice Service is listening for incoming requests on port ${PRODUCT_SERVICE_PORT} in mode: ${process.env.PRODUCTS_SERVICE_PORT}`);
         });
     }
     catch (error) {

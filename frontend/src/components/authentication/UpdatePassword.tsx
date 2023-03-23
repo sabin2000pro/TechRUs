@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { updatePassword } from '../../actions/auth-actions'
 
 const UpdatePassword: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState<string>("");
+<<<<<<< HEAD
     const [newPassword, setNewPassword] = useState<string>(""); // Local state Variable to store the new password
+=======
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [passwordUpdated, setPasswordUpdated] = useState<boolean>(false);
+>>>>>>> 5cf8c4c86f03c03df536640384c52e14c20b2471
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {} = useSelector((state: any) => state.auth);
@@ -25,11 +31,28 @@ const UpdatePassword: React.FC = () => {
 
     }
 
+    const onUpdatePasswordHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+       try {
+          event.preventDefault();
+
+          dispatch(updatePassword(currentPassword, newPassword) as any);
+          setPasswordUpdated((passwordUpdated) => !passwordUpdated);
+
+       }
+       
+        catch(error) {
+
+       }
+
+
+    }
+
   return (
 
     <>
       <h2 className = "heading-secondary">Update Password</h2>
 
+<<<<<<< HEAD
       <div className = "flex justify-center items-center h-screen login-container">
 
         <form method = "POST" onSubmit = {onUpdatePasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container login-form">
@@ -59,6 +82,11 @@ const UpdatePassword: React.FC = () => {
         </form>
 
 </div>
+=======
+       <form onSubmit = {onUpdatePasswordHandler} className = "update-password-form" method = "POST">
+ 
+       </form>
+>>>>>>> 5cf8c4c86f03c03df536640384c52e14c20b2471
     </>
 
   )

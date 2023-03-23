@@ -18,9 +18,8 @@ const Header = () => {
     currentBasketCount =  basketItems.reduce((acc, item) => acc + Number(item.quantity), 0);
   }
 
-  const handleSearch = (event) => {
+  const handleSearch = (event) => { // When a search event occurs
     setKeyword(event.target.value);
-    console.log(`iN Saerch`)
   }
 
   const handleSubmit = (event) => {
@@ -34,7 +33,6 @@ const Header = () => {
 
     <>
 
-     {!loading && !error && (
 
 
        <header className = "main-header">
@@ -75,7 +73,7 @@ const Header = () => {
 
  </header>
 
-     )}
+  
 
     </>
 

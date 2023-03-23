@@ -1,11 +1,12 @@
 require('dotenv').config();
 import { connectOrdersSchema } from './database/orders-schema';
+import {errorHandler} from './middleware/error-handler';
 import { orderRouter } from './routes/order-routes';
-import express from 'express';
+import express, {Application} from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-const app = express();
+const app: Application = express();
 
 connectOrdersSchema();
 
@@ -21,5 +22,6 @@ if(process.env.ORDERS_SERVICE_DEV_MODE === 'development') {
 }
 
 app.use('/api/v1/orders', orderRouter);
+app.use(errorHandler)
 
 export {app}

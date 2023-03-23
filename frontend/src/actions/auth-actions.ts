@@ -1,10 +1,11 @@
 import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, VERIFY_USER_EMAIL_FAIL } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
+import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
-import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS } from './../constants/user-constants';
+import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL } from './../constants/user-constants';
 
-export const register = (username: string, email: string, password: string) => async (dispatch) => {
+export const register = (username: string, email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
@@ -25,7 +26,7 @@ export const register = (username: string, email: string, password: string) => a
 
 } 
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
     try {
         dispatch({type: LOGOUT_USER_REQUEST})
@@ -33,7 +34,6 @@ export const logout = () => async (dispatch) => {
         const config = processConfigHeader();
 
         await axios.get(`http://localhost:5400/api/v1/auth/logout`, config);
-
         dispatch({type: LOGOUT_USER_SUCCESS});
         sessionStorage.clear();       // Clear session storage
     } 
@@ -49,12 +49,13 @@ export const logout = () => async (dispatch) => {
 
 }
 
-export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch) => {
+export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch: Dispatch): Promise<void> => {
 
 
     try {
 
        dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
+
        const config = processConfigHeader();
 
        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, userOTP}, config);
@@ -78,7 +79,7 @@ export const verifyEmailAddress = (userId: string, userOTP: string) => async (di
 // @description: This function acts as an action that will be invoked from the Login component which allows the user to login
 // @parameters: (email): Stores the e-mail of the customer here. (password): Stores the customers inputted password
 
-export const login = (email: string, password: string) => async (dispatch) => {
+export const login = (email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
@@ -103,7 +104,7 @@ export const login = (email: string, password: string) => async (dispatch) => {
 
 } 
 
-export const fetchLoggedInUser = () => async (dispatch) => { // Authentication action responsible for fetching the currently logged in user on the platform
+export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void> => { // Authentication action responsible for fetching the currently logged in user on the platform
 
     try {
 
@@ -128,7 +129,7 @@ export const fetchLoggedInUser = () => async (dispatch) => { // Authentication a
 
 } 
 
-export const forgotPassword = (email: string) => async (dispatch) => {
+export const forgotPassword = (email: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
         
@@ -159,7 +160,7 @@ export const forgotPassword = (email: string) => async (dispatch) => {
 
 }
 
-export const resetPassword = (currentPassword: string, newPassword: string, resetToken: string) => async (dispatch) => {
+export const resetPassword = (currentPassword: string, newPassword: string, resetToken: any) => async (dispatch: Dispatch): Promise<void> => {
     try {
       dispatch({type: RESET_PASSWORD_REQUEST});
 
@@ -170,8 +171,6 @@ export const resetPassword = (currentPassword: string, newPassword: string, rese
     catch(error) {
 
      if(error) {
-
-        console.log(`Reset Password Error : `, error);
         dispatch({type: RESET_PASSWORD_FAIL, payload: error.data.response.message});
      }
 
@@ -179,7 +178,7 @@ export const resetPassword = (currentPassword: string, newPassword: string, rese
 
 }
 
-export const updatePassword = (currentPassword: string, newPassword: string) => async (dispatch) => {
+export const updatePassword = (currentPassword: string, newPassword: string) => async (dispatch: Dispatch): Promise<void> => {
     try {
 
       dispatch({type: UPDATE_PASSWORD_REQUEST});
@@ -200,7 +199,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
 }
 
-export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch) => {
+export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});
@@ -212,40 +211,72 @@ export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShif
     } 
     
     catch(error) {
-      if(error) {
-        console.error(`Error : `, error);
-        dispatch({type: EDIT_USER_SHIFTS_FAIL, payload: error.data.response.message});
 
+      if(error) {
+        console.error(`Updating User Shifts Error : `, error);
+        dispatch({type: EDIT_USER_SHIFTS_FAIL, payload: error.data.response.message});
       }
+
     }
 
 }
 
-export const fetchAllUsers = () => async (dispatch) => {
+// @description: reducer function that fetches all registered users in the authentication database 
+export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => {
 
    try {
     
      dispatch({type: FETCH_USERS_REQUEST});
      const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users`);
 
-     console.log(`All Staff Users : `, data);
-
      dispatch({type: FETCH_USERS_SUCCESS, payload: data.users});
    } 
    
    catch(error) {
-    console.error(`Error fetching users: `, error);
     dispatch({type: FETCH_USERS_FAIL, payload: error.data.response.message});
    }
 
 }
 
-export const fetchUserByID = (id: string) => async (dispatch) => {
-    try {
+export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
 
+    try {
+        dispatch({type: FETCH_SINGLE_USER_REQUEST});
+        const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users/${id}`); // Send GET request to fetch the user
+
+        console.log(`Fetched Single User Data : `, data);
+
+        dispatch({type: FETCH_SINGLE_USER_SUCCESS, payload: data.user})
     } 
     
     catch(error) {
 
+      if(error) {
+         console.log(`Fetching user by ID error : `, error);
+         dispatch({type: FETCH_SINGLE_USER_FAIL, payload: error.data.response.message});
+      }
     }
+
+}
+
+export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
+
+  try {
+     dispatch({type: DELETE_SINGLE_USER_REQUEST});
+
+     const {data} = await axios.delete(`http://localhost:5400/api/v1/auth/users/${id}`);
+     console.log(`Delete User Data : `, data);
+
+
+  }
+  
+  catch(error) {
+
+    if(error) {
+       dispatch({type: DELETE_SINGLE_USER_FAIL, payload: error.data.response.message});
+    }
+
+  }
+
+
 }

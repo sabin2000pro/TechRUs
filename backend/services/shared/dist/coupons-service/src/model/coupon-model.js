@@ -24,10 +24,14 @@ exports.CouponSchema = new mongoose_1.default.Schema({
         default: false,
         required: [true, "Please specify if this coupon is active or not"]
     },
-    expirationDate: {
+    expiryDate: {
         type: Date,
         required: [true, "Please specify when the coupon code expires"],
         default: Date.now
+    },
+    discountAmount: {
+        type: Number,
+        default: 0.00
     }
 }, { timestamps: true });
 var Coupon = mongoose_1.default.model("Coupon", exports.CouponSchema);

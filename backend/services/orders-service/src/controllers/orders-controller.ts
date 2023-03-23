@@ -19,13 +19,7 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
        const skipByPages = ordersPerPage * (currentPage - 1);
 
        const orders = await Order.find({...searchKeyword}); // Fetch all the orders
-       let totalOrderAmount = 0;
-       
-       orders.forEach((currOrder) => {
-          console.log(`All your orders : `, currOrder);
-          totalOrderAmount += currOrder.totalPrice
-       })
-       
+
        if(!orders) {
             return next(new ErrorResponse(`Could not find any orders in the database`, StatusCodes.BAD_REQUEST));
        }
@@ -40,6 +34,10 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
         const id = request.params.id;
         let order = await Order.findById(id);
 
+        if(!isValidObjectId(id)) {
+            return next(new ErrorResponse(`No order found with that ID`, StatusCodes.BAD_REQUEST));
+        }
+
         if(!order) {
             return next(new ErrorResponse(`No order found with ID : ${id}`, StatusCodes.BAD_REQUEST));
         }
@@ -50,15 +48,18 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
 )
 
 export const createNewOrder = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
+    const {user} = request.query;
     const {orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice} = request.body;
     
     // Validate the request body before creating a new instance of order
-    if(!orderItems || !shippingInformation || !orderStatus || !paymentInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
+    if(!orderItems || !shippingInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
         return next(new ErrorResponse(`Some order fields are missing. Please check your entries`, StatusCodes.BAD_REQUEST));
     }
 
-    const order = await Order.create({orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
-    await order.save();
+    request.body.user = user; // Add the logged in user ID to the body of the request from the query params
+
+    const order = await Order.create({user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
+    await order.save(); // Asynchronously save the order into the database
 
     return response.status(StatusCodes.CREATED).json({success: true, order});
 })
@@ -69,15 +70,23 @@ export const updateOrderStatus = asyncHandler(async (request: any, response: Res
 
     let order = await Order.findById(id);
 
+    if(!isValidObjectId(id)) {
+        return next(new ErrorResponse(`The order ID is invalid. Try again`, StatusCodes.BAD_REQUEST));
+    }
+
     if(!order) {
         return next(new ErrorResponse(`No order found with ID : ${id}`, StatusCodes.BAD_REQUEST));
     }
 
-    if(order?.orderStatus === 'Delivered') { // Before updating the order status, make sure it has not alreayd been delivered
-        return next(new ErrorResponse(`The status of this order you are trying to update has already been delivered`, StatusCodes.BAD_REQUEST));
+    if(order?.orderStatus === 'completed' || order?.orderStatus === 'canceled' || order?.orderStatus === 'refunded') { // Before updating the order status, make sure it has not alreayd been delivered
+        return next(new ErrorResponse(`One or more orders have been either completed, canceled or refunded. Cannot modify the order status`, StatusCodes.BAD_REQUEST));
     }
-    
+
     order = await Order.findByIdAndUpdate(id, orderStatus, {new: true, runValidators: true});
+    order.orderStatus = orderStatus;
+
+    await order.save();
+    return response.status(StatusCodes.OK).json({success: true, message: "Order Updated", order});
 })
 
 export const deleteOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -93,5 +102,5 @@ export const deleteSingleOrderByID = asyncHandler(async (request: any, response:
     }
 
     await Order.findByIdAndDelete(id);
-    return response.status
+    return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "Order deleted"});
 })

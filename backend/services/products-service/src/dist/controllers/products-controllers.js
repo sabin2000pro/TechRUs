@@ -52,6 +52,9 @@ exports.fetchAllProducts = (0, express_async_handler_1.default)((request, respon
     if (!products) {
         return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "No products found" });
     }
+    if (numberOfProducts === 0) {
+        return next(new error_response_1.ErrorResponse(`No products found on the server-side.`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, products, numberOfProducts, page });
 }));
 exports.fetchSingleProductByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -82,6 +85,9 @@ exports.fetchNewProducts = (0, express_async_handler_1.default)((request, respon
 exports.editProductByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
     let product = yield products_model_1.Product.findById(id);
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`The product ID is in the incorrect format. Please check the ID again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     if (!product) {
         return next(new error_response_1.ErrorResponse(`No product found with that ID `, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
@@ -91,6 +97,9 @@ exports.editProductByID = (0, express_async_handler_1.default)((request, respons
 }));
 exports.deleteProductByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`The Product ID is in the wrong format. Please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     yield products_model_1.Product.findByIdAndDelete(id);
     return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "Product Deleted" });
 }));
@@ -100,10 +109,14 @@ exports.deleteAllProducts = (0, express_async_handler_1.default)((request, respo
 }));
 exports.uploadProductPhoto = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const file = request.files.file;
+    const id = request.params.id;
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`The product ID is in the wrong format. Please check your ID again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     if (!file) {
         return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "Please upload a valid file" });
     }
-    // Check the file size
+    // Validate the file size
     if (file.size > process.env.PRODUCTS_SERVICE_MAX_FILE_UPLOAD_SIZE) {
         return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "File size is too large, please upload again" });
     }
@@ -113,7 +126,7 @@ exports.uploadProductPhoto = (0, express_async_handler_1.default)((request, resp
             console.error(error);
             return next(new error_response_1.ErrorResponse('Problem with file upload', http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR));
         }
-        yield products_model_1.Product.findByIdAndUpdate(request.params.id, { image: `/images/${fileName}` });
+        yield products_model_1.Product.findByIdAndUpdate(id, { image: `/images/${fileName}` });
         return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "File Uploaded" });
     }));
 }));

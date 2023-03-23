@@ -115,8 +115,6 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         if(userOTPVerificationCode === undefined) {
             return next(new ErrorResponse(`The OTP Verification code is invalid`, StatusCodes.BAD_REQUEST));
         }
-
-        console.log(`Your User OTP Verification`, userOTPVerificationCode)
         await userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
@@ -133,7 +131,6 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
     if(!isValidObjectId(userId)) {
         return next(new ErrorResponse("User ID not found. Please check your entry again.", StatusCodes.NOT_FOUND))
     }
-
     // Check for missing OTP
     if(!OTP) {
         return next(new ErrorResponse("OTP Entered not found. Please check your entry", StatusCodes.NOT_FOUND))
@@ -265,7 +262,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
     } 
 )
 
-export const logoutUser = asyncHandler(async (request: any, response: Response, next): Promise<any> => {
+export const logoutUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
         request.session = null;
         return response.status(StatusCodes.OK).json({success: true, message: "You have logged out successfully", user: null})
     }   
@@ -274,14 +271,14 @@ export const logoutUser = asyncHandler(async (request: any, response: Response, 
 
 export const verifyLoginMFA = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const {userId, multiFactorToken} = request.body;
-    const customer = await User.findById(userId);
+    const user = await User.findById(userId);
 
     if(!isValidObjectId(userId)) {
         return next(new ErrorResponse(`This user ID is not valid. Please try again`, StatusCodes.UNAUTHORIZED));
     }
 
     if(!multiFactorToken) {
-        customer.isActive = false; // User is not active yet
+        user.isActive = false; // User is not active yet
         return next(new ErrorResponse("Please provide your MFA token", StatusCodes.BAD_REQUEST));
     }
 
@@ -295,18 +292,18 @@ export const verifyLoginMFA = asyncHandler(async (request: any, response: Respon
     const mfaTokensMatch = await factorToken.compareVerificationTokens(multiFactorToken as any);
 
     if(!mfaTokensMatch) { // If tokens don't match
-        customer.isActive = (!customer.isActive)
-        customer.isVerified = (!customer.isVerified)
+        user.isActive = (!user.isActive)
+        user.isVerified = (!user.isVerified)
         return next(new ErrorResponse("The MFA token you entered is invalid. Try again", StatusCodes.BAD_REQUEST));
     }
 
-    const newToken = await TwoFactorVerification.create({owner: customer, mfaToken: multiFactorToken}); // Create a new instance of the token
+    const newToken = await TwoFactorVerification.create({owner: user, mfaToken: multiFactorToken}); // Create a new instance of the token
     await newToken.save(); // Save the new token
 
-    customer.isVerified = true; // User account is now verified
-    customer.isActive = true; // And user account is active
+    user.isVerified = true; // User account is now verified
+    user.isActive = true; // And user account is active
 
-    return response.status(StatusCodes.OK).json({customer, message: "Your account is now active"});
+    return response.status(StatusCodes.OK).json({user, message: "Your account is now active"});
 })
 
 export const forgotPassword = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -387,20 +384,20 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
             return next(new ErrorResponse("Please specify the new password", StatusCodes.BAD_REQUEST))
         }
     
-        const customer = await User.findOne({owner: request.customer.id, token: resetToken});
+        const user = await User.findOne({owner: request.user.id, token: resetToken});
 
-        if(!customer) {
+        if(!user) {
             return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
         }
     
-        const customerPasswordsMatch = await customer.comparePasswords(currentPassword); // Check if passwords match before resetting password
+        const customerPasswordsMatch = await user.comparePasswords(currentPassword); // Check if passwords match before resetting password
     
         if(!customerPasswordsMatch) {
            return next(new ErrorResponse("Current Password Invalid", StatusCodes.BAD_REQUEST))
         }
     
-        customer.password = newPassword;    
-        await customer.save(); // Save new user after reset the password
+        user.password = newPassword;    
+        await user.save(); // Save new user after reset the password
     
         return response.status(StatusCodes.OK).json({success: true, message: "Customer Password Reset Successfully"});
     } 
@@ -456,6 +453,9 @@ export const editUserByID = asyncHandler(async(request: any, response: Response,
     }
 
     user = await User.findByIdAndUpdate(id, request.body, {new: true, runValidators: true});
+    await user.save();
+
+    return response.status(StatusCodes.OK).json({success: true, message: "User updated"});
 })
 
 export const editUserShifts = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
@@ -486,6 +486,11 @@ export const editUserShifts = asyncHandler(async(request: any, response: Respons
 
 export const deleteUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
+
+    if(!isValidObjectId(id)) {
+       return next(new ErrorResponse(`User ID is invalid. Please check your ID again`, StatusCodes.BAD_REQUEST));
+    }
+
     await User.findByIdAndDelete(id);
 
     return response.status(StatusCodes.NO_CONTENT).json({success: true, message: "User deleted succesfully"});

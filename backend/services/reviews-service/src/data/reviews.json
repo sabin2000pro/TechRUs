@@ -1,20 +1,23 @@
 [
     {
-        "reviewId": "63e25f48d82eb035f7dr0700",
+        "_id": "63e25f48d82eb035f7dc0701",
+        "product": "63e25f48d82eb035f7da0980",
         "rating": 8,
-        "comment":  "I love this apple product, I recommend it."
+        "comment":  "I like this apple phone, I recommend it for others too."
     },
 
     {
-        "reviewId": "63e25f48d82eb035f7dr0701",
-        "rating": 2,
-        "comment":  "Awful product, I do not recommend this"
+        "_id": "63e25f48d82eb035f7dc0702",
+        "product": "63e25f48d82eb035f7da0980",
+        "rating": 1,
+        "comment":  "Awful phone, I do not recommend this"
     },
 
     {
-        "reviewId": "63e25f48d82eb035f7dr0702",
+        "_id": "63e25f48d82eb035f7dc0703",
+        "product": "63e25f48d82eb035f7da0980",
         "rating": 10,
-        "comment":  "Phenomenal product, very good headphones for use at the gym"
+        "comment":  "Phenomenal product, very good phone to use"
     }
 
 ]

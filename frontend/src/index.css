@@ -16,12 +16,32 @@ body {
   color: green;
 }
 
+.card-container {
+  margin-top: 170px;
+}
+
+.product-heading {
+  font-size: 21px;
+}
 
 /* Loader Spinning Component */
 
 .loader-container {
   margin-top: -410px;
   margin-bottom: -100px;
+}
+
+.success-banner {
+  width: 500px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 870px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: all 0.2s;
 }
 
 .search-input {
@@ -341,7 +361,6 @@ font-weight: bold;
   text-align: center;
   font-size: 24px;
   margin-top: 24px;
-  color: #042658;
   font-weight: bold;
 }
 
@@ -435,13 +454,13 @@ font-weight: bold;
 
 .shipping-container {
   overflow: auto;
-  height: 1800px;
+  height: 1750px;
   margin-top: -150px;
 }
 
 .profile-container {
   width: 700px;
-  height: 450px;
+  height: 520px;
   margin-top: 200px;
 }
 
@@ -453,4 +472,14 @@ font-weight: bold;
 .profile-btns button:hover {
   transition: all 0.3s;
   background-color: #5B90E0;
+}
+
+.order-container {
+  margin-left: 150px;
+  margin-top: 80px;
+  font-size: 24px;
+}
+
+.btn-basket-container {
+  bottom: 50px;
 }

@@ -1,4 +1,4 @@
-import { FETCH_ALL_COUPONS_FAIL, FETCH_ALL_COUPONS_SUCCESS, FETCH_ALL_COUPONS_REQUEST, FETCH_SINGLE} from "../constants/coupon-constants"
+import { FETCH_ALL_COUPONS_FAIL, FETCH_ALL_COUPONS_SUCCESS, FETCH_ALL_COUPONS_REQUEST, FETCH_SINGLE_COUPON_REQUEST} from "../constants/coupon-constants"
 
 const defaultCouponsState = {
     coupons: []
@@ -8,7 +8,7 @@ const defaultSingleCouponState = {
     coupon: {}
 }
 
-export const couponReducer = (state = defaultCouponsState, action: any) => {
+export const couponReducer = (state = defaultCouponsState as any, action: any) => {
 
     switch(action.type) {
 

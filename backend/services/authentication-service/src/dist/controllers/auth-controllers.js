@@ -111,7 +111,6 @@ exports.registerUser = (0, express_async_handler_1.default)((request, response, 
     if (userOTPVerificationCode === undefined) {
         return next(new error_response_1.ErrorResponse(`The OTP Verification code is invalid`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    console.log(`Your User OTP Verification`, userOTPVerificationCode);
     yield userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
     return (0, exports.sendTokenResponse)(request, user, http_status_codes_1.StatusCodes.CREATED, response); // Send back the response to the user
 }));
@@ -218,12 +217,12 @@ exports.logoutUser = (0, express_async_handler_1.default)((request, response, ne
 }));
 exports.verifyLoginMFA = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, multiFactorToken } = request.body;
-    const customer = yield user_model_1.User.findById(userId);
+    const user = yield user_model_1.User.findById(userId);
     if (!(0, mongoose_1.isValidObjectId)(userId)) {
         return next(new error_response_1.ErrorResponse(`This user ID is not valid. Please try again`, http_status_codes_1.StatusCodes.UNAUTHORIZED));
     }
     if (!multiFactorToken) {
-        customer.isActive = false; // User is not active yet
+        user.isActive = false; // User is not active yet
         return next(new error_response_1.ErrorResponse("Please provide your MFA token", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     const factorToken = yield two_factor_model_1.TwoFactorVerification.findOne({ owner: userId });
@@ -233,15 +232,15 @@ exports.verifyLoginMFA = (0, express_async_handler_1.default)((request, response
     // Check to see if the tokens match
     const mfaTokensMatch = yield factorToken.compareVerificationTokens(multiFactorToken);
     if (!mfaTokensMatch) { // If tokens don't match
-        customer.isActive = (!customer.isActive);
-        customer.isVerified = (!customer.isVerified);
+        user.isActive = (!user.isActive);
+        user.isVerified = (!user.isVerified);
         return next(new error_response_1.ErrorResponse("The MFA token you entered is invalid. Try again", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const newToken = yield two_factor_model_1.TwoFactorVerification.create({ owner: customer, mfaToken: multiFactorToken }); // Create a new instance of the token
+    const newToken = yield two_factor_model_1.TwoFactorVerification.create({ owner: user, mfaToken: multiFactorToken }); // Create a new instance of the token
     yield newToken.save(); // Save the new token
-    customer.isVerified = true; // User account is now verified
-    customer.isActive = true; // And user account is active
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ customer, message: "Your account is now active" });
+    user.isVerified = true; // User account is now verified
+    user.isActive = true; // And user account is active
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ user, message: "Your account is now active" });
 }));
 exports.forgotPassword = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = request.body;
@@ -294,16 +293,16 @@ exports.resetPassword = (0, express_async_handler_1.default)((request, response,
     if (!newPassword) {
         return next(new error_response_1.ErrorResponse("Please specify the new password", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const customer = yield user_model_1.User.findOne({ owner: request.customer.id, token: resetToken });
-    if (!customer) {
+    const user = yield user_model_1.User.findOne({ owner: request.user.id, token: resetToken });
+    if (!user) {
         return next(new error_response_1.ErrorResponse("No user found", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const customerPasswordsMatch = yield customer.comparePasswords(currentPassword); // Check if passwords match before resetting password
+    const customerPasswordsMatch = yield user.comparePasswords(currentPassword); // Check if passwords match before resetting password
     if (!customerPasswordsMatch) {
         return next(new error_response_1.ErrorResponse("Current Password Invalid", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    customer.password = newPassword;
-    yield customer.save(); // Save new user after reset the password
+    user.password = newPassword;
+    yield user.save(); // Save new user after reset the password
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Customer Password Reset Successfully" });
 }));
 exports.fetchLoggedInUser = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -341,6 +340,8 @@ exports.editUserByID = (0, express_async_handler_1.default)((request, response, 
         return next(new error_response_1.ErrorResponse(`No user found with that ID`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     user = yield user_model_1.User.findByIdAndUpdate(id, request.body, { new: true, runValidators: true });
+    yield user.save();
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User updated" });
 }));
 exports.editUserShifts = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
@@ -363,6 +364,9 @@ exports.editUserShifts = (0, express_async_handler_1.default)((request, response
 }));
 exports.deleteUserByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
+    if (!(0, mongoose_1.isValidObjectId)(id)) {
+        return next(new error_response_1.ErrorResponse(`User ID is invalid. Please check your ID again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
+    }
     yield user_model_1.User.findByIdAndDelete(id);
     return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "User deleted succesfully" });
 }));

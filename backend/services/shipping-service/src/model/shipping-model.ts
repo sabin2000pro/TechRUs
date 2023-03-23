@@ -18,7 +18,7 @@ export const ShippingSchema = new mongoose.Schema<IShippingDocument>({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: [true, "Please specify the user that belongs to this shipping details"]
+        required: [true, "Please provide the User ID when creating your shipping details"]
     },
 
     address: { // User address

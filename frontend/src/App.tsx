@@ -21,6 +21,9 @@ import UsersList from './dashboard/admin/UsersList';
 import ShippingDetails from './components/shipping/ShippingDetails';
 import OrderSuccess from './components/order/OrderSuccess';
 import OrderConfirmation from './components/order/OrderConfirmation';
+import VerifyEmail from './components/authentication/VerifyEmail';
+import VerifyLogin from './components/authentication/VerifyLogin';
+import MyOrders from './components/order/MyOrders';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -60,34 +63,33 @@ const App: React.FC = () => {
            <Route path = '/product-details/:id' element = {<ProductDetails />} />
            <Route path = '/user-register' element = {<Register />} />
            <Route path = '/my-basket' element = {<BasketScreen />} />
-
-           
            <Route path = '/user-login' element = {<Login />} />
-         
-           
            <Route path = '/forgot-password' element = {<ForgotPassword />} />
            <Route path = '/reset-password/:resetToken' element = {<ResetPassword />} />
-
            <Route path = '/update-password/:id' element = {<UpdatePassword />} />
            <Route path = '/update-profile/:id' element = {<UpdateProfile />} />
-
            <Route path = '/my-profile' element = {<Profile />} />
+
+           <Route path = '/verify-email' element = {<VerifyEmail />} />
+           <Route path = '/verify-login' element = {<VerifyLogin />} />
+
            <Route path = '/admin-dashboard' element = {<Dashboard />} />
            <Route path = '/admin-dashboard/create-product' element = {<CreateProduct />} />
            <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />
            <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
- 
-          <Route path = '/shipping' element = {<ShippingDetails />} />
-          <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
-          <Route path = '/order-success' element = {<OrderSuccess />} />
+           <Route path = '/shipping' element = {<ShippingDetails />} />
+           <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
+           <Route path = '/order-success' element = {<OrderSuccess />} />
+
+           <Route path = '/my-orders' element = {<MyOrders />} />
+         
            
          </Routes>
 
-
         <Footer />
-     </>
 
+     </>
 
   )
 }
