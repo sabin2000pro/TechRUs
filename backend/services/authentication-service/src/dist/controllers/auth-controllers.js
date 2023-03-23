@@ -256,7 +256,7 @@ exports.forgotPassword = (0, express_async_handler_1.default)((request, response
     if (userHasResetToken) {
         return next(new error_response_1.ErrorResponse("User already has the password reset token", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const token = (0, generate_otp_code_1.generateCode)();
+    const token = (0, generate_otp_code_1.generateCode)(); // Returns the forgot password token
     if (token === undefined) { // If no token exists
         return next(new error_response_1.ErrorResponse("Reset Password Token is invalid", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }

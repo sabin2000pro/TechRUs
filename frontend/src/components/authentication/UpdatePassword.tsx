@@ -5,33 +5,14 @@ import { updatePassword } from '../../actions/auth-actions'
 
 const UpdatePassword: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState<string>("");
-<<<<<<< HEAD
-    const [newPassword, setNewPassword] = useState<string>(""); // Local state Variable to store the new password
-=======
     const [newPassword, setNewPassword] = useState<string>("");
     const [passwordUpdated, setPasswordUpdated] = useState<boolean>(false);
->>>>>>> 5cf8c4c86f03c03df536640384c52e14c20b2471
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {} = useSelector((state: any) => state.auth);
-    const [userPasswordUpdated, setUserPasswordUpdated] = useState<boolean>(false);
-
-    const onUpdatePasswordHandler = (event: any): void => {
-      try {
-
-      } 
-      
-      catch(error) {
-        
-          if(error) {
-              setUserPasswordUpdated(false);
-          }
-      }
-
-
-    }
 
     const onUpdatePasswordHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+
        try {
           event.preventDefault();
 
@@ -41,7 +22,9 @@ const UpdatePassword: React.FC = () => {
        }
        
         catch(error) {
-
+           if(error) {
+             
+           }
        }
 
 
@@ -52,7 +35,6 @@ const UpdatePassword: React.FC = () => {
     <>
       <h2 className = "heading-secondary">Update Password</h2>
 
-<<<<<<< HEAD
       <div className = "flex justify-center items-center h-screen login-container">
 
         <form method = "POST" onSubmit = {onUpdatePasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container login-form">
@@ -72,7 +54,6 @@ const UpdatePassword: React.FC = () => {
               <input value = {newPassword} onChange = {(event) => setNewPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "newpassword" type = "password" placeholder = "Enter your new password" />
           </div>
 
-
           <div className = "flex items-center justify-center login-btn-container">
 
           <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Login</button>
@@ -82,11 +63,6 @@ const UpdatePassword: React.FC = () => {
         </form>
 
 </div>
-=======
-       <form onSubmit = {onUpdatePasswordHandler} className = "update-password-form" method = "POST">
- 
-       </form>
->>>>>>> 5cf8c4c86f03c03df536640384c52e14c20b2471
     </>
 
   )

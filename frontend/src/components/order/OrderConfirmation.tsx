@@ -18,15 +18,23 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   console.log(`The shipping infomration : `, shippingInformation);
 
   const handleCreateOrder = (event) => {
+    
       try {
          event.preventDefault();
          const userId = user?._id;
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
+         
+         setOrderCreated((orderCreated) => !orderCreated)
+
       } 
       
       catch(error) {
+         if(error) {
+            console.log(error);
 
+            setOrderCreated(false)
+         }
       }
 
   }

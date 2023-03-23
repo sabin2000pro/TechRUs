@@ -85,9 +85,5 @@ exports.deleteSingleOrderByID = (0, express_async_handler_1.default)((request, r
         return next(new error_response_1.ErrorResponse(`Order with ID : ${id} - does not exist`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     yield order_model_1.Order.findByIdAndDelete(id);
-<<<<<<< HEAD
-    return response.status;
-=======
     return response.status(http_status_codes_1.StatusCodes.NO_CONTENT).json({ success: true, message: "Order deleted" });
->>>>>>> 5cf8c4c86f03c03df536640384c52e14c20b2471
 }));

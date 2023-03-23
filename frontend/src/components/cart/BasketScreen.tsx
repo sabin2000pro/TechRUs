@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import MetaData from '../../layout/MetaData'
 import { useNavigate } from 'react-router-dom'
@@ -6,6 +6,7 @@ import { removeProductFromBasket } from '../../actions/basket-actions'
 
 const BasketScreen: React.FC = () => {
   const dispatch = useDispatch();
+  const [productRemoved, setProductRemoved] = useState<boolean>(false)
   const {basketItems} = useSelector((state: any) => state.basket) // Pull out the basket items from state
 
   const navigate = useNavigate();
@@ -16,11 +17,12 @@ const BasketScreen: React.FC = () => {
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
 
-
   const onRemoveProductHandler = (id: string) => {
 
     try {
        dispatch(removeProductFromBasket(id) as any)
+
+       setProductRemoved((productRemoved) => !productRemoved)
     } 
     
     catch(error) {
@@ -34,10 +36,10 @@ const BasketScreen: React.FC = () => {
 
   }
 
-  const handleShippingNavigate = () => {
+  const handleShippingNavigate = (): void => {
 
     const orderItems = basketItems.map((item: any) => {
-      return {product: item.product, taxPrice, shippingPrice, totalPrice};
+       return {product: item.product, taxPrice, shippingPrice, totalPrice};
     });
 
     localStorage.setItem("orderItems", JSON.stringify(orderItems));

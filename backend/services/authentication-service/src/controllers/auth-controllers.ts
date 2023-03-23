@@ -325,7 +325,7 @@ export const forgotPassword = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse("User already has the password reset token", StatusCodes.BAD_REQUEST));
         }
     
-        const token = generateCode();
+        const token = generateCode(); // Returns the forgot password token
     
         if(token === undefined) { // If no token exists
             return next(new ErrorResponse("Reset Password Token is invalid", StatusCodes.BAD_REQUEST));

@@ -21,27 +21,27 @@ const ForgotPassword: React.FC = () => {
 
       <div className = "flex justify-center items-center h-screen forgot-container">
 
-<form method = "POST" onSubmit = {onForgotPasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 mt-4 forgot-form-container">
+    <form method = "POST" onSubmit = {onForgotPasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 mt-4 forgot-form-container">
 
-  <h1 className = "heading-primary h-login mt-4">Forgot Password</h1>
+        <h1 className = "heading-primary h-login mt-4">Forgot Password</h1>
 
-    <div className = "mb-4 login-container-inputs mt-5">
+          <div className = "mb-4 login-container-inputs mt-5">
 
-    <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
+          <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
 
-  <input onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id  ="email" type="text" placeholder="E-mail Address" />
+        <input onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id  ="email" type="text" placeholder="E-mail Address" />
 
-  </div>
+        </div>
 
-  <div className = "flex items-center justify-center login-btn-container">
+        <div className = "flex items-center justify-center login-btn-container">
 
-  <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Send</button>
+        <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Send</button>
 
-  </div>
+        </div>
 
-</form>
+      </form>
 
-</div>
+      </div>
 
     </>
 
