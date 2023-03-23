@@ -467,3 +467,9 @@ font-weight: bold;
   transition: all 0.3s;
   background-color: #5B90E0;
 }
+
+.order-container {
+  margin-left: 150px;
+  margin-top: 80px;
+  font-size: 24px;
+}
