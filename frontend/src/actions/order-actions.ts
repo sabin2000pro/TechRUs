@@ -1,9 +1,10 @@
+import { UPDATE_ORDER_STATUS_REQUEST, UPDATE_ORDER_STATUS_SUCCESS, UPDATE_ORDER_STATUS_FAIL } from './../constants/orders-constants';
 import { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, FETCH_ORDERS_REQUEST, FETCH_ORDERS_FAIL, FETCH_ORDERS_SUCCESS } from "../constants/orders-constants";
 import axios from 'axios';
 import { Dispatch } from "redux";
 
 export const fetchAllOrders = (keyword = '', page = 1) => async (dispatch: Dispatch): Promise<void> => {
-    
+
     try {
         dispatch({type: FETCH_ORDERS_REQUEST});
 
@@ -37,21 +38,37 @@ export const createNewOrder = (user: string, orderItems: any, shippingInformatio
     } 
     
     catch(error) {
+
         if(error) {
+            
             console.log(`Create Order Error : `, error);
+            dispatch({type: CREATE_ORDER_FAIL, payload: error.data.response.message});
+
         }
     }
 
 
 }
 
-export const editOrderStatus = () => async (dispatch: Dispatch): Promise<void> => {
-    try {
+export const editOrderStatus = (newOrderStatus: string) => async (dispatch: Dispatch): Promise<void> => {
 
+    try {
+       dispatch({type: UPDATE_ORDER_STATUS_REQUEST});
+
+       const {data} = await axios.put(`http://localhost:5403/api/v1/orders`, {newOrderStatus});
+       console.log(`Updated order status data : `, data);
+
+       dispatch({type: UPDATE_ORDER_STATUS_SUCCESS, payload: data.message});
     } 
     
     catch(error) {
 
+       if(error) {
+        dispatch({type: UPDATE_ORDER_STATUS_FAIL, payload: error.data.response.message});
+
+       }
+
+       
     }
 }
 
