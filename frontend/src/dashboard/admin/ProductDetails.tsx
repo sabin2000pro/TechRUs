@@ -52,9 +52,9 @@ const ProductDetails = () => {
 
         </div>
 
-<div className = "w-1/2 p-10 bg-white shadow-md rounded mt-12">
+   <div className = "w-1/2 p-10 bg-white shadow-md rounded mt-12 card-container">
 
-  <h2 className="text-xl font-medium mb-4">{product.name}</h2>
+  <h2 className="text-xxl font-medium mb-4 product-heading">{product.name}</h2>
 
   <p className="text-gray-600 text-sm mb-2">{product.description}</p>
 
@@ -62,30 +62,31 @@ const ProductDetails = () => {
 
     <div className = "flex items-center">
 
-      <button disabled = {quantity === 0} onClick = {() => setQuantity(quantity - 1)} className="bg-gray-200  py-1 px-2 rounded-l" type="button">
+      <button disabled = {quantity === 0} onClick = {() => setQuantity(quantity - 1)} className = "bg-gray-200  py-1 px-2 rounded-l" type = "button">
          <span>-</span>
       </button>
 
       <span className="bg-gray-200 text-gray-700 py-1 px-4">{quantity}</span>
 
-      <button onClick = {() => setQuantity(quantity + 1)} className="bg-gray-200 text-gray-700 py-1 px-2 rounded-r" type="button">
-
+      <button onClick = {() => setQuantity(quantity + 1)} className = "bg-gray-200 text-gray-700 py-1 px-2 rounded-r" type="button">
         <span>+</span>
-
       </button>
 
     </div>
 
-    <button disabled = {product.countInStock === 0} onClick = {addToBasketHandler} className=" px-4 rounded basket-btn" type="button">
-     Add To Basket
-    </button>
+    <div className = "flex flex-col justify-between btn-basket-container">
+        <button disabled = {product.countInStock === 0} onClick = {addToBasketHandler} className=" px-2 rounded basket-btn mt-12" type="button">
+        Add To Basket
+        </button>
+    </div>
 
 
   </div>
 
 
       <p className="text-lg font-medium mb-2">£ {product.price}</p>
-      <p className="text-gray-600 text-md"> {product.countInStock !== 0 ? 'In Stock' : "Out Of Stock"} </p>
+      {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
+      {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}
 
 
     </div>

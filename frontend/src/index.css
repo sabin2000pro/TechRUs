@@ -16,6 +16,13 @@ body {
   color: green;
 }
 
+.card-container {
+  margin-top: 170px;
+}
+
+.product-heading {
+  font-size: 21px;
+}
 
 /* Loader Spinning Component */
 
@@ -354,7 +361,6 @@ font-weight: bold;
   text-align: center;
   font-size: 24px;
   margin-top: 24px;
-  color: #042658;
   font-weight: bold;
 }
 
@@ -472,4 +478,8 @@ font-weight: bold;
   margin-left: 150px;
   margin-top: 80px;
   font-size: 24px;
+}
+
+.btn-basket-container {
+  bottom: 50px;
 }

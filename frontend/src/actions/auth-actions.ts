@@ -26,7 +26,7 @@ export const register = (username: string, email: string, password: string) => a
 
 } 
 
-export const logout = () => async (dispatch: Dispatch) => {
+export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
     try {
         dispatch({type: LOGOUT_USER_REQUEST})
@@ -160,7 +160,7 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
 
 }
 
-export const resetPassword = (currentPassword: string, newPassword: string, resetToken: string) => async (dispatch: Dispatch): Promise<void> => {
+export const resetPassword = (currentPassword: string, newPassword: string, resetToken: any) => async (dispatch: Dispatch): Promise<void> => {
     try {
       dispatch({type: RESET_PASSWORD_REQUEST});
 
@@ -199,7 +199,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
 }
 
-export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch): Promise<void> => {
+export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});

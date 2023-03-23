@@ -6,11 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const ProductSchema = new mongoose_1.default.Schema({
-    user: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "Please include the user ID that created this product"]
-    },
     name: {
         type: String,
         required: [true, "Please specify the name of this product"]
