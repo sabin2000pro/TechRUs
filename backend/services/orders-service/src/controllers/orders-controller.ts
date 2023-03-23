@@ -16,8 +16,6 @@ export const fetchAllOrders = asyncHandler(async (request: any, response: Respon
        const currentPage = parseInt(request.query.page) || 1;
        
        const searchKeyword = request.query.keyword;
-       const skipByPages = ordersPerPage * (currentPage - 1);
-
        const orders = await Order.find({...searchKeyword}); // Fetch all the orders
 
        if(!orders) {
@@ -48,15 +46,12 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
 )
 
 export const createNewOrder = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {user} = request.query;
-    const {orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice} = request.body;
+    const {user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice} = request.body;
     
     // Validate the request body before creating a new instance of order
     if(!orderItems || !shippingInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
         return next(new ErrorResponse(`Some order fields are missing. Please check your entries`, StatusCodes.BAD_REQUEST));
     }
-
-    request.body.user = user; // Add the logged in user ID to the body of the request from the query params
 
     const order = await Order.create({user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
     await order.save(); // Asynchronously save the order into the database
@@ -65,7 +60,7 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
 })
 
 export const updateOrderStatus = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {orderStatus} = request.body;
+    const {orderStatus} = request.body; // Extract the order status from the request body
     const id = request.params.id;
 
     let order = await Order.findById(id);

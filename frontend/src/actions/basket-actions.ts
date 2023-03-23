@@ -4,6 +4,7 @@ import axios from 'axios';
 export const addProductToBasket = (id: string, quantity: number) => async (dispatch: any, getState: any) => {
 
     try {
+      
         const {data} = await axios.get(`http://localhost:5404/api/v1/products/${id}`);
         dispatch({type: ADD_ITEM_TO_BASKET, payload: {product: data.product._id, price: data.product.price, quantity: Number(quantity), name: data.product.name, description: data.product.description, warranty: data.product.warranty, image: data.product.image}})
 
@@ -26,6 +27,8 @@ export const removeProductFromBasket = (id: string) => async (dispatch: any, get
         dispatch({type: REMOVE_ITEM_FROM_BASKET, payload: id});
 
         localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))
+
+
     } 
     
     catch(error) {

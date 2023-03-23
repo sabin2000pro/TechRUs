@@ -17,9 +17,10 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   console.log(`Order Items : `, orderItems)
   console.log(`The shipping infomration : `, shippingInformation);
 
-  const handleCreateOrder = (event) => {
-    
+  const handleCreateOrder = (event): void => {
+
       try {
+
          event.preventDefault();
          const userId = user?._id;
 
@@ -42,7 +43,18 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   return (
 
     <>
-      <h2 className = "heading-secondary">Confirm Your Order Below</h2>
+
+     {orderCreated && (
+       
+            <>
+              <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+                  <h2>Your order has been placed successfully</h2>
+               </div>
+            </>
+     )}
+
+
+    <h2 className = "heading-secondary">Confirm Your Order Below</h2>
 
       <form onSubmit = {handleCreateOrder} method = "POST">
 
@@ -62,7 +74,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
 
   </div>
-</div>
+
+
+  </div>
       </form>
 
     </>
