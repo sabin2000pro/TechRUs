@@ -5,10 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Coupon = exports.CouponSchema = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
-// Coupon Microservice Data Model
-// 1. Product: We need to know what product ID the coupon is applied to
-// 2. Description: We need a description of the coupon before being applied.
-// 3. Code:
 exports.CouponSchema = new mongoose_1.default.Schema({
     product: {
         type: mongoose_1.default.Schema.Types.ObjectId,

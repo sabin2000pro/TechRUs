@@ -18,6 +18,10 @@ const error_response_1 = require("../utils/error-response");
 const order_model_1 = require("../model/order-model");
 const http_status_codes_1 = require("http-status-codes");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
+// @description: Fetches all the orders from the orders database
+// @method: GET
+// @route: /api/v1/orders
+// @access: No Auth Token Required
 exports.fetchAllOrders = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const ordersPerPage = 3;
     const totalOrders = yield order_model_1.Order.countDocuments({});
@@ -75,4 +79,5 @@ exports.deleteSingleOrderByID = (0, express_async_handler_1.default)((request, r
         return next(new error_response_1.ErrorResponse(`Order with ID : ${id} - does not exist`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     yield order_model_1.Order.findByIdAndDelete(id);
+    return response.status;
 }));

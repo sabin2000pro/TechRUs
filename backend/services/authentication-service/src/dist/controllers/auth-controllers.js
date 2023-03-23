@@ -145,7 +145,7 @@ exports.verifyEmailAddress = (0, express_async_handler_1.default)((request, resp
         return next(new error_response_1.ErrorResponse(`The token you entered does not match the one in the database.`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     if (otpTokensMatch) { // If the OTP Tokens Match
-        user.isVerified = true; // Set theu ser is Verified field to true
+        user.isVerified = true; // Set the user is Verified field to true
         user.accountActive = true;
         yield user.save();
         yield verify_email_model_1.EmailVerification.findByIdAndDelete(token._id); // Find the token that belongs to the user and delete it
