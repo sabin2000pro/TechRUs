@@ -20,6 +20,10 @@ const UpdatePassword: React.FC = () => {
           dispatch(updatePassword(currentPassword, newPassword) as any);
           setPasswordUpdated((passwordUpdated) => !passwordUpdated);
 
+          setTimeout(() => {
+             navigate(`/my-profile`)
+          }, 2000)
+
        }
        
         catch(error) {

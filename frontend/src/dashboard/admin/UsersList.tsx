@@ -19,6 +19,8 @@ const UsersList = () => {
 
          try {
            dispatch(fetchAllUsers() as any);
+
+           setUsersFetched((usersFetched) => !usersFetched);
          }
          
          catch(error) {
@@ -50,7 +52,7 @@ const UsersList = () => {
 
                 {users && users.length === 0 && <h2 className = "heading-secondary">No Users Found</h2>}
        
-                  {users.map((user: any) => (
+                   {users.map((user: any) => (
 
               <div>
 
