@@ -10,7 +10,7 @@ const UpdatePassword: React.FC = () => {
     const [passwordUpdated, setPasswordUpdated] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {} = useSelector((state: any) => state.auth);
+    const {isAuthenticated, error} = useSelector((state: any) => state.auth);
 
     const onUpdatePasswordHandler = (event: React.FormEvent<HTMLFormElement>): void => {
 
@@ -26,11 +26,13 @@ const UpdatePassword: React.FC = () => {
 
        }
        
-        catch(error) {
-           if(error) {
-               setPasswordUpdated(false)
-               console.log(error)
-           }
+      catch(error) {
+
+          if(error) {
+            setPasswordUpdated(false);
+            console.log(`Update Password Error : `, error);
+          }
+
        }
 
 
@@ -40,9 +42,7 @@ const UpdatePassword: React.FC = () => {
 
     <>
 
-     <MetaData pageTitle = {`Update Password`} />
-     
-      <h2 className = "heading-secondary">Update Password</h2>
+     <MetaData pageTitle={`Update Password`} />
 
       <div className = "flex justify-center items-center h-screen login-container">
 
@@ -50,17 +50,15 @@ const UpdatePassword: React.FC = () => {
 
           <h1 className = "heading-primary h-login">Update Password</h1>
 
-            <div className = "mb-4 login-container-inputs">
-
-            <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
-
-          <input value = {currentPassword} onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "currentPassword" type = "text" placeholder = "Current Password" />
-
+        <div className = "mb-4 login-container-inputs">
+            <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Current Password</label>
+            <input onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type="text" placeholder="Current password" />
           </div>
 
           <div className = "mb-6 login-password-container">
-              <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Password</label>
-              <input value = {newPassword} onChange = {(event) => setNewPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "newpassword" type = "password" placeholder = "Enter your new password" />
+              <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">New Password</label>
+              <input onChange = {(event) => setNewPassword(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
+              
           </div>
 
           <div className = "flex items-center justify-center login-btn-container">
