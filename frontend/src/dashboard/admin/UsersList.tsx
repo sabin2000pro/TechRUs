@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchAllUsers } from '../../actions/auth-actions';
@@ -8,8 +8,10 @@ import MetaData from '../../layout/MetaData';
 const UsersList = () => {
     const dispatch = useDispatch();
     const {loading, users} = useSelector((state: any) => state.users);
+    const [usersFetched, setUsersFetched] = useState<boolean>(false);
 
     console.log(`Current Users : `, users)
+
 
     useEffect(() => {
 
@@ -23,6 +25,7 @@ const UsersList = () => {
             if(error) {
               console.log(`Error Occurred Fetching users : `, error);
             }
+
          }
 
        }

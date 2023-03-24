@@ -24,6 +24,8 @@ import OrderConfirmation from './components/order/OrderConfirmation';
 import VerifyEmail from './components/authentication/VerifyEmail';
 import VerifyLogin from './components/authentication/VerifyLogin';
 import MyOrders from './components/order/MyOrders';
+import CreateCoupon from './dashboard/admin/coupons/CreateCoupon';
+import EditCouponDetails from './dashboard/admin/coupons/EditCouponDetails';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -83,6 +85,8 @@ const App: React.FC = () => {
            <Route path = '/order-success' element = {<OrderSuccess />} />
 
            <Route path = '/my-orders' element = {<MyOrders />} />
+           <Route path = '/create-coupon/:productId' element = {<CreateCoupon />} />
+           <Route path = '/edit-coupon/:id' element = {<EditCouponDetails />} />
          
            
          </Routes>

@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import { Coupon } from "../model/coupon-model";
 import asyncHandler from 'express-async-handler';
 import {Response, NextFunction} from 'express';
@@ -5,7 +6,11 @@ import {Response, NextFunction} from 'express';
 export const fetchAllCoupons = asyncHandler(async (request, response: Response, next: NextFunction): Promise<any> => {
     const coupons = await Coupon.find();
     
-    
+    if(!coupons) {
+        
+    }
+
+    return response.status(StatusCodes.OK).json({success: true, coupons});
 })
 
 export const fetchCouponByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {

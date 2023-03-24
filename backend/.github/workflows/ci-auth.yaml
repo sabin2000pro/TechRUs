@@ -1,11 +1,18 @@
-name: Deploy Authentication Service
+name: Deploy Authentication Service Workflow
 
 on:
-
   push:
     branches:
       - "master"
 
 jobs:
+
   deploy:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch Authentication Service Code
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS dependencies
+        uses: actions/checkout@v3

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditCouponDetails = () => {
+const EditCouponDetails: React.FC = () => {
 
   return (
     <>
