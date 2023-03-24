@@ -42,7 +42,7 @@ const UpdatePassword: React.FC = () => {
 
     <>
 
-     <MetaData pageTitle={`Update Password`} />
+     <MetaData pageTitle={`Update User Password`} />
 
       <div className = "flex justify-center items-center h-screen login-container">
 
