@@ -25,23 +25,27 @@ const VerifyEmail: React.FC = () => {
 
        <div className = "flex justify-center items-center h-screen login-container">
 
-              <form method = "POST" onSubmit = {onEmailVerificationHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container login-form">
+              <form method = "POST" onSubmit = {onEmailVerificationHandler} className = "bg-white shadow-md rounded px-8 pt-8 pb-8 mb-4 auth-container login-form">
 
-                <h1 className = "heading-primary h-login">Verify Your E-mail Address</h1>
+                <h1 className = "heading-primary h-login">E-mail Verification</h1>
 
-                  <div className = "mb-4 login-container-inputs">
+                  <div className = "login-container-inputs">
 
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
+                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">One Time Passcode</label>
 
-                <input onChange = {(event) => setOTP(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id  ="username" type="text" placeholder="Username" />
-
-                </div>
-
-                <div className = "flex items-center justify-center login-btn-container">
-
-                <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Login</button>
+                <input onChange = {(event) => setOTP(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  mt-5 focus:outline-none focus:shadow-outline" id  ="otp" type = "text" placeholder="Enter your OTP" />
 
                 </div>
+
+            <div className = "flex items-center justify-center login-btn-container verify-container">
+
+            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline verify-btn" type="submit">Verify</button>
+
+            </div>
+
+            <div className = "resend-container">
+                 <span>Haven't received your code? - Resend Here  </span>
+              </div>
 
             </form>
 
