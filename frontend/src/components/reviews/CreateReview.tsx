@@ -81,14 +81,12 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                   </div>
 
 
-                  <div className="mb-4">
+              <div className="mb-4">
                     
-                    <label className="block text-gray-700 font-bold mb-2" htmlFor = {comment}>Comment</label>
+                <label className="block text-gray-700 font-bold mb-2" htmlFor = {comment}>Comment</label>
 
-                    <textarea
-
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="body"
+              <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="comment"
                       placeholder = "Review Comment"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
@@ -101,8 +99,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                     >
                       Rating
                     </label>
-
-
+                    
                     <select
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="rating"
@@ -118,6 +115,8 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
                       <option value={4}>4</option>
                       <option value={5}>5</option>
+
+
                 </select>
               </div>
             </div>
