@@ -183,7 +183,10 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
       dispatch({type: UPDATE_PASSWORD_REQUEST});
 
-      const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword});
+      const token = JSON.parse(sessionStorage.getItem("user") as any);
+      const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
+
+      const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword}, config);
       console.log(`Updated User Password Data : `, data);
 
       dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
@@ -192,6 +195,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
     catch(error) {
 
       if(error) {
+        console.log(`Update Password Error : `, error);
         dispatch({type: UPDATE_PASSWORD_FAIL, payload: error.data.response.message});
       }
 

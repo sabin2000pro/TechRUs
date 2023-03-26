@@ -12,9 +12,10 @@ const UpdatePassword: React.FC = () => {
     const dispatch = useDispatch();
     const {isAuthenticated, error} = useSelector((state: any) => state.auth);
 
-    const onUpdatePasswordHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+    const onUpdatePasswordHandler = (event: React.FormEvent<HTMLFormElement>): void => { // The method is invoked when the form is submitted
 
        try {
+
           event.preventDefault();
 
           dispatch(updatePassword(currentPassword, newPassword) as any);

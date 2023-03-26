@@ -12,7 +12,7 @@ authRouter.route('/me').get(verifyUserAuthentication, fetchLoggedInUser as any);
 authRouter.route('/logout').get(logoutUser as any);
 
 authRouter.route('/reset-password/:resetToken').put(resetPassword as any);
-authRouter.route('/update-password').put(updatePassword as any);
+authRouter.route('/update-password').put(verifyUserAuthentication, updatePassword as any);
 
 // ADMIN - USER ROUTES
 authRouter.route('/users').get(fetchAllUsers).delete(deleteAllUsers);

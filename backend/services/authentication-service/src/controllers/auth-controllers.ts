@@ -350,20 +350,21 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
             return next(new ErrorResponse("Please provide your new password", StatusCodes.BAD_REQUEST));
         }
     
-        const user = await User.findById(<any>request.user._id);
+        const user = await User.findById(<any>request.user._id).select("+password");
     
         if(!user) {
             return next(new ErrorResponse("No user found", StatusCodes.BAD_REQUEST))
         }
     
-        const currentPasswordMatch = user.comparePasswords(currentPassword);
+        const currentPasswordMatch = await user.comparePasswords(currentPassword); // Compare the current user's password against the one in the database
     
         if(!currentPasswordMatch) { // If passwords do not match
             return next(new ErrorResponse("Current user password is invalid.", StatusCodes.BAD_REQUEST))
         }
-    
+        
         user.password = request.body.newPassword
         await user.save(); // Save new user
+        
     
         return response.status(StatusCodes.OK).json({success: true, message: "User password updated"});
     } 

@@ -279,8 +279,8 @@ exports.updatePassword = (0, express_async_handler_1.default)((request, response
     if (!currentPasswordMatch) { // If passwords do not match
         return next(new error_response_1.ErrorResponse("Current user password is invalid.", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    user.password = request.body.newPassword;
     yield user.save(); // Save new user
+    user.password = request.body.newPassword;
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User password updated" });
 }));
 exports.resetPassword = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {

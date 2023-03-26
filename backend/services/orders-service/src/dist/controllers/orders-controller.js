@@ -27,7 +27,6 @@ exports.fetchAllOrders = (0, express_async_handler_1.default)((request, response
     const totalOrders = yield order_model_1.Order.countDocuments({});
     const currentPage = parseInt(request.query.page) || 1;
     const searchKeyword = request.query.keyword;
-    const skipByPages = ordersPerPage * (currentPage - 1);
     const orders = yield order_model_1.Order.find(Object.assign({}, searchKeyword)); // Fetch all the orders
     if (!orders) {
         return next(new error_response_1.ErrorResponse(`Could not find any orders in the database`, http_status_codes_1.StatusCodes.BAD_REQUEST));
@@ -46,19 +45,17 @@ exports.fetchSingleOrderByID = (0, express_async_handler_1.default)((request, re
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, order });
 }));
 exports.createNewOrder = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user } = request.query;
-    const { orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice } = request.body;
+    const { user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice } = request.body;
     // Validate the request body before creating a new instance of order
     if (!orderItems || !shippingInformation || !itemPrice || !taxPrice || !shippingPrice || !totalPrice) {
         return next(new error_response_1.ErrorResponse(`Some order fields are missing. Please check your entries`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    request.body.user = user; // Add the logged in user ID to the body of the request from the query params
     const order = yield order_model_1.Order.create({ user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice });
     yield order.save(); // Asynchronously save the order into the database
     return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, order });
 }));
 exports.updateOrderStatus = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { orderStatus } = request.body;
+    const { orderStatus } = request.body; // Extract the order status from the request body
     const id = request.params.id;
     let order = yield order_model_1.Order.findById(id);
     if (!(0, mongoose_1.isValidObjectId)(id)) {

@@ -60,19 +60,17 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
       <div className ="flex justify-between items-center mb-8 order-container">
 
-  <div>
+   <div>
+    
+      <h2 className ="text-lg font-semibold">Your Shipping Information</h2>
 
-    <h2 className ="text-lg font-semibold">Your Shipping Information</h2>
+        <p className ="text-black-600 mt-2">
+          User ID : {shippingInformation.user}
+        </p>
 
-    <p className ="text-black-600 mt-2">
-      User ID : {shippingInformation.user}
-    </p>
-
-    <p className = "text-black-600 mt-2">
-        Address: {shippingInformation.address}
-    </p>
-
-
+        <p className = "text-black-600 mt-2">
+            Address: {shippingInformation.address}
+        </p>
   </div>
 
 

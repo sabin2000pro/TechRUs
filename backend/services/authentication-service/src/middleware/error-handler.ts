@@ -26,7 +26,7 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
         }
     }
 
-    console.log(error);
+    console.log(`Authentication Error : `, err);
 
-    return response.status(error.statusCode).json({success: false, message: error.message, stack: error.stack});
+    return response.status(err.statusCode).json({success: false, message: err.message, stack: err.stack});
 }

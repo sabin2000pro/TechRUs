@@ -19,7 +19,7 @@ interface IUserSchemaDocument {
     createdAt: Date
 
     fetchAuthToken: () => any;
-    comparePasswords: (enteredPassword: string) => Promise<any>;
+    comparePasswords: (enteredPassword: string) => Promise<Boolean>;
 }
 
 export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Data Model
@@ -114,10 +114,9 @@ UserSchema.methods.fetchAuthToken = function() { // Function responsible for ret
     return jwt.sign({_id: this._id, email: this.email}, process.env.JWT_TOKEN, {expiresIn: process.env.JWT_EXPIRES_IN})
 }
 
-UserSchema.methods.comparePasswords = async function(enteredPassword: string) {
-   return bcrypt.compare(enteredPassword, this.password);
+UserSchema.methods.comparePasswords = async function(enteredPassword: string): Promise<Boolean> {
+   return await bcrypt.compare(enteredPassword, this.password);
 }
-
 
 const User = mongoose.model("User", UserSchema);
 export {User}
