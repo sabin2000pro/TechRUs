@@ -55,8 +55,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
               <>
               
                   <div onClick = {() => setModalClosed(true)} className = "fixed inset-0 transition-opacity">
-                     <div className="absolute inset-0 bg-black opacity-70"></div>
+                       <div className="absolute inset-0 bg-black opacity-70"></div>
                    </div>
+                   
               </>
             )}
 
@@ -85,12 +86,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                     
                 <label className="block text-gray-700 font-bold mb-2" htmlFor = {comment}>Comment</label>
 
-              <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="comment"
-                      placeholder = "Review Comment"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    />
+           <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "comment" placeholder = "Review Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
+
+
                   </div>
                   <div className="mb-4">
                     <label
@@ -99,7 +97,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                     >
                       Rating
                     </label>
-                    
+
                     <select
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="rating"
