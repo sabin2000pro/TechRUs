@@ -77,23 +77,19 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
         <label className="block text-gray-700 font-bold mb-2 review-label" htmlFor = "title">Title</label>
 
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "title" type = "text" placeholder = "Review Title" value={title} onChange={(e) => setTitle(e.target.value)}
-                    />
+            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "title" type = "text" placeholder = "Review Title" value={title} onChange={(e) => setTitle(e.target.value)} />
                   </div>
 
 
                   <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="body"
-                    >
-                     Comment
-                    </label>
+                    
+                    <label className="block text-gray-700 font-bold mb-2" htmlFor = {comment}>Comment</label>
+
                     <textarea
 
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="body"
-                      placeholder="Enter your review"
+                      placeholder = "Review Comment"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                     />
