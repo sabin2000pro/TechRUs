@@ -271,16 +271,16 @@ exports.updatePassword = (0, express_async_handler_1.default)((request, response
     if (!newPassword) {
         return next(new error_response_1.ErrorResponse("Please provide your new password", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const user = yield user_model_1.User.findById(request.user._id);
+    const user = yield user_model_1.User.findById(request.user._id).select("+password");
     if (!user) {
         return next(new error_response_1.ErrorResponse("No user found", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const currentPasswordMatch = user.comparePasswords(currentPassword);
+    const currentPasswordMatch = yield user.comparePasswords(currentPassword); // Compare the current user's password against the one in the database
     if (!currentPasswordMatch) { // If passwords do not match
         return next(new error_response_1.ErrorResponse("Current user password is invalid.", http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    yield user.save(); // Save new user
     user.password = request.body.newPassword;
+    yield user.save(); // Save new user
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "User password updated" });
 }));
 exports.resetPassword = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {

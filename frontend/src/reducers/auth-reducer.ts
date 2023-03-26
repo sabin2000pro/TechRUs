@@ -1,5 +1,5 @@
 import { FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS } from './../constants/auth-constants';
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOAD_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, LOGOUT_USER_FAIL, CLEAR_AUTH_ERRORS } from "../constants/auth-constants";
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOAD_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, LOGOUT_USER_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, CLEAR_AUTH_ERRORS } from "../constants/auth-constants";
 
 const initialAuthState = sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user") as any) : {}
 
@@ -55,6 +55,15 @@ export const authReducer = (state = {initialAuthState} as any, action: any) => {
 
         case FORGOT_PASSWORD_SUCCESS:
             return {...state, loading: false, message: action.payload}
+
+        case UPDATE_PASSWORD_REQUEST:
+            return {loading: true}
+
+        case UPDATE_PASSWORD_SUCCESS:
+            return {...state, loading: false, error: undefined, message: action.payload}
+
+        case UPDATE_PASSWORD_FAIL:
+            return {loading: false, error: action.payload}
 
         case CLEAR_AUTH_ERRORS:
             return {loading: false, error: null}

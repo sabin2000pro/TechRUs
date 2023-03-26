@@ -15,7 +15,7 @@ exports.authRouter.route('/forgot-password').post(auth_controllers_1.forgotPassw
 exports.authRouter.route('/me').get(verify_user_auth_1.verifyUserAuthentication, auth_controllers_1.fetchLoggedInUser); // Route to fetch the currently logged in user, takes in a middleware that verifies and decodes the user obejct
 exports.authRouter.route('/logout').get(auth_controllers_1.logoutUser);
 exports.authRouter.route('/reset-password/:resetToken').put(auth_controllers_1.resetPassword);
-exports.authRouter.route('/update-password').put(auth_controllers_1.updatePassword);
+exports.authRouter.route('/update-password').put(verify_user_auth_1.verifyUserAuthentication, auth_controllers_1.updatePassword);
 // ADMIN - USER ROUTES
 exports.authRouter.route('/users').get(auth_controllers_1.fetchAllUsers).delete(auth_controllers_1.deleteAllUsers);
 exports.authRouter.route('/users/:id').get(auth_controllers_1.fetchUserByID).put(auth_controllers_1.editUserByID).delete(auth_controllers_1.deleteUserByID);

@@ -183,7 +183,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
       dispatch({type: UPDATE_PASSWORD_REQUEST});
 
-      const token = JSON.parse(sessionStorage.getItem("user") as any);
+      const token = JSON.parse(sessionStorage.getItem("token") as any);
       const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
       const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword}, config);

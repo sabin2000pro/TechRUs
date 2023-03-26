@@ -93,7 +93,7 @@ exports.UserSchema.methods.fetchAuthToken = function () {
 };
 exports.UserSchema.methods.comparePasswords = function (enteredPassword) {
     return __awaiter(this, void 0, void 0, function* () {
-        return bcryptjs_1.default.compare(enteredPassword, this.password);
+        return yield bcryptjs_1.default.compare(enteredPassword, this.password);
     });
 };
 const User = mongoose_1.default.model("User", exports.UserSchema);

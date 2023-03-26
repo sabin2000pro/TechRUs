@@ -172,3 +172,4 @@
 >>>>>>> beb75716 (Working on the update password code)
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
 {"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}
+{"level":"info","message":"API Gateway server is listening on port 5410 in mode development","service":"api-gateway-service"}

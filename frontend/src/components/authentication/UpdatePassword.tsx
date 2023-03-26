@@ -18,12 +18,10 @@ const UpdatePassword: React.FC = () => {
 
           event.preventDefault();
 
+          console.log(`Current Password : `, currentPassword);
+
           dispatch(updatePassword(currentPassword, newPassword) as any);
           setPasswordUpdated((passwordUpdated) => !passwordUpdated);
-
-          setTimeout(() => {
-             navigate(`/my-profile`)
-          }, 2000)
 
        }
        
@@ -53,18 +51,18 @@ const UpdatePassword: React.FC = () => {
 
         <div className = "mb-4 login-container-inputs">
             <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Current Password</label>
-            <input onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type="text" placeholder="Current password" />
+            <input value = {currentPassword} onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type="text" placeholder="Current password" />
           </div>
 
           <div className = "mb-6 login-password-container">
               <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">New Password</label>
-              <input onChange = {(event) => setNewPassword(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
+              <input value = {newPassword} onChange = {(event) => setNewPassword(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
               
           </div>
 
           <div className = "flex items-center justify-center login-btn-container">
 
-          <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Login</button>
+          <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Update Password</button>
 
           </div>
 

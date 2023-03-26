@@ -20,7 +20,7 @@ const errorHandler = (err, request, response, next) => {
             error = new error_response_1.ErrorResponse(message, http_status_codes_1.StatusCodes.BAD_REQUEST);
         }
     }
-    console.log(error);
-    return response.status(error.statusCode).json({ success: false, message: error.message, stack: error.stack });
+    console.log(`Authentication Error : `, err);
+    return response.status(err.statusCode).json({ success: false, message: err.message, stack: err.stack });
 };
 exports.errorHandler = errorHandler;
