@@ -50,21 +50,22 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
           <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
+
             {!modalClosed && (
 
               <>
               
-                  <div onClick = {() => setModalClosed(true)} className = "fixed inset-0 transition-opacity">
+                  <div className = "fixed inset-0 transition-opacity">
                        <div className="absolute inset-0 bg-black opacity-70"></div>
                    </div>
-                   
+
               </>
+
             )}
 
             <span className = "hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
               &#8203;
             </span>
-
 
             <div className = "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
@@ -82,51 +83,35 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                   </div>
 
 
-              <div className="mb-4">
-                    
-                <label className="block text-gray-700 font-bold mb-2" htmlFor = {comment}>Comment</label>
-
-           <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "comment" placeholder = "Review Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
-
-
+                 <div className="mb-4">    
+                    <label className="block text-gray-700 font-bold mb-2" htmlFor = {comment}>Comment</label>
+                    <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "comment" placeholder = "Review Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
                   </div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="rating"
-                    >
-                      Rating
-                    </label>
-
-                    <select
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="rating"
-                      value={rating}
-                      onChange={(e) => setRating(parseInt(e.target.value))}
-                    >
-
-                      <option value={0}>Select a rating</option>
-                      <option value={1}>1</option>
-                      <option value={2}>2</option>
-                      <option value={3}>3</option>
 
 
-                      <option value={4}>4</option>
+            <div className="mb-4">
+
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="rating">Rating</label>
+
+              <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
+
+                  <option value={0}>Select a rating</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
                       <option value={5}>5</option>
-
-
                 </select>
               </div>
             </div>
 
 
             <div className = "px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse review-container">
-
                 <button className = "px-2 rounded bask-btn">Submit Rating</button>
             </div>
 
-
           </form>
+
         </div>
       </div>
     </div>
