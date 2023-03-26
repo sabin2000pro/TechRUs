@@ -16,28 +16,37 @@ const Login: React.FC = () => {
   const {loading, error, isAuthenticated, user} = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
 
-  const onLoginHandler = (event) => {
+  const onLoginHandler = (event: React.FormEvent): void => {
+      try {
+        event.preventDefault();
 
-    event.preventDefault();
+        dispatch(login(email, password) as any); // Dispatch login action with e-mail and password
+    
+        setFormSubmitted((formSubmitted) => !formSubmitted);
+        setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+      } 
+      
+      catch(error) {
+         if(error) {
+            setFormSubmitted(false);
+            setIsLoggedIn(false);
+         }
+      }
 
-    dispatch(login(email, password) as any); // Dispatch login action with e-mail and password
-
-    setFormSubmitted((formSubmitted) => !formSubmitted);
-    setIsLoggedIn((isLoggedIn) => !isLoggedIn);
 
   }
 
+  
   useEffect(() => {
-
       if(isAuthenticated) {
-        navigate('/products')
+         navigate(`/products`)
       }
 
       if(error) {
         console.log(error);
       }
 
-  }, [error, isAuthenticated, user])
+  }, [error, isAuthenticated, user, dispatch])
   
   return (
 
@@ -49,12 +58,22 @@ const Login: React.FC = () => {
      
           <>
 
-          {isLoggedIn && formSubmitted && (
+          {isLoggedIn && formSubmitted && isAuthenticated && (
 
             <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
               <h2>You are logged in</h2>
             </div>
 
+            )}
+
+            {error && (
+
+              <>
+
+            <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+              <h2>{error}</h2>
+            </div>
+              </>
             )}
 
           <div className = "flex justify-center items-center h-screen login-container">
@@ -90,12 +109,9 @@ const Login: React.FC = () => {
             </form>
 
          </div>
+
         </>
 
-
- 
-      
-  
     </>
 
   );

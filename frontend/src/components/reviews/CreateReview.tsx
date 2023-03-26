@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-const CreateReview = () => {
+interface IHandleCreateReviewProps {
+  handleCreateReview: () => void,
+  showReviewModal: boolean;
+}
+
+const CreateReview: React.FC<IHandleCreateReviewProps> = ({handleCreateReview, showReviewModal}: IHandleCreateReviewProps) => {
+  const dispatch = useDispatch();
+
   return (
+
     <>
-      <h2>Create Product Review Component</h2>
+      <button className = "px-2 rounded basket-btn" onClick = {handleCreateReview}>Create Review</button>
     </>
+
   )
 }
 
