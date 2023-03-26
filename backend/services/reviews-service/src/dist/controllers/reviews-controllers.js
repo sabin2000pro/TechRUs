@@ -37,14 +37,14 @@ exports.fetchReviewByID = (0, express_async_handler_1.default)((request, respons
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, review });
 }));
 exports.createReview = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { product, rating, comment } = request.body;
+    const { product, title, rating, comment } = request.body;
     if (!product) {
         return next(new error_response_1.ErrorResponse(`Product for creating a review not found`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    if (!rating || !comment) {
+    if (!rating || !comment || !title) {
         return next(new error_response_1.ErrorResponse(`No rating or comment found, please try again`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    const review = yield review_model_1.Review.create({ product, rating, comment });
+    const review = yield review_model_1.Review.create({ product, rating, title, comment });
     yield review.save();
     return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, review });
 }));
