@@ -5,6 +5,7 @@ interface IReviewDocument {
     product: mongoose.Schema.Types.ObjectId;
     rating: number;
     comment: string;
+    title: string;
     createdAt: Date
 }
 
@@ -14,6 +15,11 @@ const ReviewSchema = new mongoose.Schema<IReviewDocument>({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
       required: [true, "Please provide the product ID for this review"]
+    },
+
+    title: {
+      type: String,
+      required: [true, "Please give this rating a title"]
     },
 
     rating: { // Rating for the product

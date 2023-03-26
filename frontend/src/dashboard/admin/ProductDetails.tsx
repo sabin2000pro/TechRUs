@@ -12,11 +12,7 @@ const ProductDetails = () => {
     const {id} = useParams();
     const {loading, error, product} = useSelector((state: any) => state.singleProduct);
     const [quantity, setQuantity] = useState(0);
-    const [rating, setRating] = useState<number>(0);
-    const [comment, setComment] = useState<string>();
-  
     const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
-    const [reviewSubmitted, setReviewSubmitted] = useState<boolean>(false);
 
     useEffect(() => {
 
@@ -34,7 +30,7 @@ const ProductDetails = () => {
         } 
         
         catch(error) {
-          
+
             if(error) {
                 return console.error(error);
             }
@@ -42,23 +38,8 @@ const ProductDetails = () => {
 
     }
 
-    const handleCreateReview = (event): void => {
-      try {
-         event.preventDefault();
-
-         alert("Creating Product Review...");
-
-         console.log(`The product creating review for : `, product);
-
-         setShowReviewModal((showReviewModal) => !showReviewModal);
-         
-      } 
-      
-      catch(error) {
-
-      }
-
-
+    const handleCreateReviewModal = () => {
+        setShowReviewModal((reviewModal) => !reviewModal);
     }
 
     return (
@@ -114,7 +95,9 @@ const ProductDetails = () => {
       {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
       {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}
 
-      <CreateReview handleCreateReview = {handleCreateReview as any} showReviewModal = {showReviewModal} />
+      <button onClick = {handleCreateReviewModal} className = "px-2 rounded basket-btn">Create Review</button>
+
+      <CreateReview product = {product} showReviewModal = {showReviewModal} />
 
     </div>
 

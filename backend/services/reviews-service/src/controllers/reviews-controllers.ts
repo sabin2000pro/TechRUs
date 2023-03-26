@@ -33,17 +33,17 @@ export const fetchReviewByID = asyncHandler(async (request: any, response: Respo
 
 export const createReview = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
-    const {product, rating, comment} = request.body;
+    const {product, title, rating, comment} = request.body;
 
     if(!product) {
         return next(new ErrorResponse(`Product for creating a review not found`, StatusCodes.BAD_REQUEST));
     }
 
-    if(!rating || !comment) {
+    if(!rating || !comment || !title) {
       return next(new ErrorResponse(`No rating or comment found, please try again`, StatusCodes.BAD_REQUEST));
     }
 
-    const review = await Review.create({product, rating, comment});
+    const review = await Review.create({product, rating, title, comment});
     await review.save();
 
     return response.status(StatusCodes.CREATED).json({success: true, review});
@@ -65,7 +65,7 @@ export const editReviewByID = asyncHandler(async (request, response: Response, n
     }
 
     review = await Review.findByIdAndUpdate(id, reviewFieldsToUpdate, {new: true, runValidators: true});
-    
+
     review.rating = request.body.rating;
     review.comment = request.body.comment;
 

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteReviews = exports.deleteReviewByID = exports.editReviewByID = exports.createReview = exports.fetchReviewByID = exports.fetchAllReviews = void 0;
+exports.deleteReviews = exports.deleteReview = exports.editReviewByID = exports.createReview = exports.fetchReviewByID = exports.fetchAllReviews = void 0;
 const mongoose_1 = require("mongoose");
 const error_response_1 = require("../utils/error-response");
 const http_status_codes_1 = require("http-status-codes");
@@ -37,8 +37,7 @@ exports.fetchReviewByID = (0, express_async_handler_1.default)((request, respons
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, review });
 }));
 exports.createReview = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { product } = request.query; // Take the product ID to create a review for in the request query
-    const { rating, comment } = request.body;
+    const { product, rating, comment } = request.body;
     if (!product) {
         return next(new error_response_1.ErrorResponse(`Product for creating a review not found`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
@@ -65,8 +64,12 @@ exports.editReviewByID = (0, express_async_handler_1.default)((request, response
     yield review.save(); // Save the review after updating the fields
     return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Review Updated" });
 }));
-exports.deleteReviewByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Delete Review By ID" });
+exports.deleteReview = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    yield review_model_1.Review.findByIdAndDelete(id);
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, message: "Review Deleted" });
 }));
 exports.deleteReviews = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    yield review_model_1.Review.deleteMany();
+    return response.status(http_status_codes_1.StatusCodes.NO_CONTENT);
 }));

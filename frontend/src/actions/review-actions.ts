@@ -41,7 +41,7 @@ export const fetchReviewByID = (id: string) => async (dispatch: Dispatch): Promi
 
 }
 
-export const createReview = (product: string, rating: number, comment: string) => async (dispatch: Dispatch): Promise<void> => {
+export const createReview = (product: string, title: string, rating: number, comment: string) => async (dispatch: Dispatch): Promise<void> => {
     try {
       // Dispatch the create request
     } 
