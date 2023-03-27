@@ -118,7 +118,9 @@ export const verifyLoginMfa = (userId: string, mfaToken: string) => async (dispa
   } 
   
   catch(error) {
+
      if(error) {
+      console.log(`Verify Login Fail : `, error);
       dispatch({type: VERIFY_LOGIN_MFA_FAIL, payload: error.response.data.message})
      }
   }
