@@ -54,5 +54,9 @@ EmailVerificationSchema.pre('save', async function(next) {
 
 })
 
+EmailVerificationSchema.methods.compareVerificationTokens = async function(enteredToken: string): Promise<Boolean> { // Compare user entered OTP against the token stored in the database
+    return await bcrypt.compare(enteredToken, this.otpToken)
+}
+
 const EmailVerification = mongoose.model("EmailVerification", EmailVerificationSchema);
 export {EmailVerification};

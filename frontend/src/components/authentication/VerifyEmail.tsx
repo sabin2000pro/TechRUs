@@ -29,6 +29,8 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
 
        if(error) {
         console.error(error);
+
+        setEmailVerified(false);
        }
 
     }
@@ -60,7 +62,7 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
           <div className="bg-green-200 border border-green-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
             <h2>E-mail Verified</h2>
           </div>
-          
+
          </>
 
       )}
