@@ -517,5 +517,15 @@ font-weight: bold;
   text-align: center;
   margin-top: 50px;
   margin-left: 25px;
-  margin-bottom: -70px;
+  margin-bottom: -120px;
+}
+
+.verify-container button {
+  width: 250px;
+  margin-right: 25px;
+}
+
+.verify-container button:hover {
+  transition: all 0.35s;
+  background-color: #5B90E0;
 }

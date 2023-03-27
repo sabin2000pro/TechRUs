@@ -1,4 +1,4 @@
-import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, VERIFY_USER_EMAIL_FAIL } from './../constants/auth-constants';
+import { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, VERIFY_USER_EMAIL_REQUEST, VERIFY_USER_EMAIL_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, VERIFY_USER_EMAIL_FAIL, VERIFY_LOGIN_MFA_REQUEST } from './../constants/auth-constants';
 import {processConfigHeader} from '../headers'
 import { Dispatch } from 'redux';
 import axios from 'axios';
@@ -14,7 +14,7 @@ export const register = (username: string, email: string, password: string) => a
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
         
-        dispatch({type: REGISTER_USER_SUCCESS, payload: data});
+        dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
     } 
     
     catch(error) {
@@ -49,19 +49,18 @@ export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
 }
 
-export const verifyEmailAddress = (userId: string, userOTP: string) => async (dispatch: Dispatch): Promise<void> => {
+export const verifyEmailAddress = (userId: string, OTP: string) => async (dispatch: Dispatch): Promise<void> => {
 
 
     try {
 
-       dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
-
+       dispatch({type: VERIFY_USER_EMAIL_REQUEST});
        const config = processConfigHeader();
 
-       const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, userOTP}, config);
+       const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, OTP}, config);
        console.log("`E-mail Verification Data : ", data);
     
-       dispatch({type: VERIFY_USER_EMAIL_SUCCESS});
+       dispatch({type: VERIFY_USER_EMAIL_SUCCESS, payload: data.message});
 
     } 
     
@@ -106,12 +105,15 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
 
 export const verifyLoginMfa = (userId: string, mfaToken: string) => async (dispatch: Dispatch): Promise<void> => {
   try {
+    dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
+
 
   } 
   
   catch(error) {
 
   }
+
 }
 
 export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void> => { // Authentication action responsible for fetching the currently logged in user on the platform

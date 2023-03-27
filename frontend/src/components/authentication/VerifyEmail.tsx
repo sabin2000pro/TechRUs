@@ -40,7 +40,7 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
 
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">One Time Passcode</label>
 
-                <input onChange = {(event) => setOTP(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  mt-5 focus:outline-none focus:shadow-outline" id  ="otp" type = "text" placeholder="Enter your OTP" />
+                <input onChange = {(event) => setOTP(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id  ="otp" type = "text" placeholder="Enter your OTP" />
 
                 </div>
 
