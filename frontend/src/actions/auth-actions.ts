@@ -161,11 +161,14 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
 }
 
 export const resetPassword = (currentPassword: string, newPassword: string, resetToken: any) => async (dispatch: Dispatch): Promise<void> => {
+
     try {
       dispatch({type: RESET_PASSWORD_REQUEST});
 
       const {data} = await axios.put(`http://localhost:5400/api/v1/auth/reset-password/${resetToken}`, {currentPassword, newPassword});
       console.log(`Reset Password Data : `, data);
+
+      dispatch({type: RESET_PASSWORD_SUCCESS, payload: data.})
     } 
     
     catch(error) {
@@ -179,8 +182,8 @@ export const resetPassword = (currentPassword: string, newPassword: string, rese
 }
 
 
-// @description: Frontent action which corresponds to the auth reducer that updates the user password.
-// @parameters: 
+// @description: Frontend action which corresponds to the auth reducer that updates the user password.
+// @parameters: Current user password: currentPassword && newPassword: The new user's password.
 export const updatePassword = (currentPassword: string, newPassword: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
@@ -197,7 +200,6 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
     catch(error) {
 
       if(error) {
-        console.log(`Update Password Error : `, error);
         dispatch({type: UPDATE_PASSWORD_FAIL, payload: error.data.response.message});
       }
 
