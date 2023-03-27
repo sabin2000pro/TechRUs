@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createReview } from '../../actions/review-actions';
-import Loader from '../../layout/Loader';
 
 interface ICreateReviewProps {
   product: any
@@ -10,26 +9,34 @@ interface ICreateReviewProps {
 
 const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: ICreateReviewProps) => {
   const dispatch = useDispatch();
-
+  const {error} = useSelector((state: any) => state.review);
   const [title, setTitle] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
   const [reviewCreated, setReviewCreated] = useState<boolean>(false);
+  const [isValidData, setIsValidData] = useState<boolean>(false);
   const [modalClosed, setModalClosed] = useState<boolean>(false);
 
   const handleCreateReview = (event): void => {
     try {
+
        event.preventDefault();
 
-       console.log(`The product creating review for : `, product);
+       if(!product._id || !title.toString() || !rating.toString() || !comment.toString()) {
+          setIsValidData(false)
+       }
 
-       dispatch(createReview(product._id, title, rating, comment) as any);
-
-       setReviewCreated((reviewCreated) => !reviewCreated);
+       else {
+          dispatch(createReview(product._id, title, rating, comment) as any);
+          setIsValidData((validData) => !validData);
+          setReviewCreated((reviewCreated) => !reviewCreated);
 
        setTitle("")
        setRating(0);
        setComment("")
+       }
+
+       
     } 
     
     catch(error) {
@@ -67,6 +74,18 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
             )}
 
+            {error && (
+
+              <>
+              
+              <div className = "bg-red-400 border border-red-400 text-black-700 rounded">
+                  <h2 className = "heading-secondary mb-3">Review Submitted</h2>
+                </div>
+              </>
+
+
+            )}
+
             <span className = "hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
               &#8203;
             </span>
@@ -86,11 +105,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                   )}
 
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  
-                    <div className = "mb-4">
 
-  
-                    <h2 className = "heading-secondary mb-5">Review Product - {product.name} </h2>
+                    <div className = "mb-4">
+                     <h2 className = "heading-secondary mb-5">Review Product - {product.name} </h2>
 
         <label className="block text-gray-700 font-bold mb-2 review-label" htmlFor = "title">Title</label>
 
@@ -106,9 +123,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
             <div className="mb-4">
 
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="rating">Rating</label>
+               <label className="block text-gray-700 font-bold mb-2" htmlFor="rating">Rating</label>
 
-            <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
+               <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
 
                   <option value={0}>Select Rating</option>
                   <option value={1}>1</option>
@@ -131,6 +148,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
         </div>
       </div>
+
     </div>
   )}
 </>
