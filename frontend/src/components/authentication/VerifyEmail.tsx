@@ -13,6 +13,7 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
   const [emailVerified, setEmailVerified] = useState(false);
 
   const onEmailVerificationHandler = (event): void => {
+
     try {
        event.preventDefault();
 
@@ -20,10 +21,12 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
        const userId = user._id;
 
        dispatch(verifyEmailAddress(userId, OTP) as any);
+
+       setEmailVerified((emailVerified) => !emailVerified);
     } 
     
     catch(error) {
-      
+
        if(error) {
         console.error(error);
        }
@@ -38,6 +41,29 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
     <>
 
     <MetaData pageTitle = {`E-mail Verification`} />
+
+    {error && (
+
+      <>
+
+        <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>{error}</h2>
+        </div>
+
+        </>
+      )}
+
+
+      {emailVerified && (
+         
+         <>
+          <div className="bg-green-200 border border-green-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>E-mail Verified</h2>
+          </div>
+          
+         </>
+
+      )}
 
        <div className = "flex justify-center items-center h-screen login-container">
 
