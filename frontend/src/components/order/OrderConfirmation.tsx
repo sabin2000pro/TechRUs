@@ -49,7 +49,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
     <>
 
-     {orderCreated && (
+       {orderCreated && (
        
             <>
 

@@ -8,7 +8,7 @@ const ShippingDetails: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("user") as any);
-  const {error} = useSelector((state: any) => state.auth)
+  const {error} = useSelector((state: any) => state.shipping)
 
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -34,8 +34,9 @@ const ShippingDetails: React.FC = () => {
         event.preventDefault();
         dispatch(createNewShipping(user._id, address, city, country, postalCode, phoneNo) as any);
 
-        setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
-        navigate(`/order-confirm`);
+          setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
+          navigate(`/order-confirm`);
+  
     } 
     
     catch(error) {
@@ -56,9 +57,9 @@ const ShippingDetails: React.FC = () => {
 
         <>
           
-        <div className = "bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
-            <h2>{error.message}</h2>
-        </div>
+         <div className = "bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+             <h2>{error.message}</h2>
+         </div>
 
         </>
 
