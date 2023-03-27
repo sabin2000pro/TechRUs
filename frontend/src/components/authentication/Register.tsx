@@ -84,9 +84,9 @@ const Register: React.FC = () => { // Register Component
                  <span>Have an account ? - <Link className = "reset-link" to ='/user-login'>Login Here</Link>   </span>
                </div>
              
-               <div className = "flex items-center justify-center login-btn-container">
+               <div className = "flex items-center justify-center login-btn-container mb-6">
              
-               <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline" type="submit">Register</button>
+               <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline mb-6" type="submit">Register</button>
              
                </div>
              

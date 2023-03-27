@@ -19,6 +19,7 @@ const path_1 = __importDefault(require("path"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const http_status_codes_1 = require("http-status-codes");
 const mongoose_1 = require("mongoose");
+const email_transporter_1 = require("../utils/email-transporter");
 const sendLowStockEmail = (transporter, user, currStock) => {
     try {
         // Send the low stock e-mail to the inbox
@@ -29,6 +30,7 @@ const sendLowStockEmail = (transporter, user, currStock) => {
             html: `
         
        <p>Warning - The product you are creating is low in stock, more will be ordered from the inventory system</p>
+
        <h3>${currStock}</h3>
 
         `
@@ -71,6 +73,10 @@ exports.createNewProduct = (0, express_async_handler_1.default)((request, respon
         return next(new error_response_1.ErrorResponse(`Some entries are missing. Please check again when creating a product`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
     // 1. Check to see if the stock for the product is low and if it is true, send low stock e-mail to the inbox
+    const transporter = (0, email_transporter_1.createEmailTransporter)();
+    if (stockCount < 3) {
+        (0, exports.sendLowStockEmail)(transporter, request.user.email, stockCount);
+    }
     const product = yield products_model_1.Product.create({ name, description, warranty, price, stockCount, lowStockAlert });
     yield product.save();
     return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, product });

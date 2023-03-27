@@ -19,6 +19,7 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
         html: `
         
        <p>Warning - The product you are creating is low in stock, more will be ordered from the inventory system</p>
+
        <h3>${currStock}</h3>
 
         `
@@ -81,6 +82,12 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
        }
 
        // 1. Check to see if the stock for the product is low and if it is true, send low stock e-mail to the inbox
+
+       const transporter = createEmailTransporter();
+
+       if(stockCount < 3) {
+         sendLowStockEmail(transporter, request.user.email, stockCount);
+       }
 
        const product = await Product.create({name, description, warranty, price, stockCount, lowStockAlert});
        await product.save();
