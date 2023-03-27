@@ -15,9 +15,18 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
   const onEmailVerificationHandler = (event): void => {
     try {
        event.preventDefault();
+
+       const user = JSON.parse(sessionStorage.getItem("user") as any);
+       const userId = user._id;
+
+       dispatch(verifyEmailAddress(userId, OTP) as any);
     } 
     
     catch(error) {
+      
+       if(error) {
+        console.error(error);
+       }
 
     }
 
