@@ -13,6 +13,7 @@ export const register = (username: string, email: string, password: string) => a
         const config = processConfigHeader();
 
         const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
+        const user = sessionStorage.setItem("user", JSON.stringify(data.user));
         
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
     } 
