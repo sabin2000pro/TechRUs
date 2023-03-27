@@ -10,7 +10,7 @@ interface ICreateReviewProps {
 
 const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: ICreateReviewProps) => {
   const dispatch = useDispatch();
-  
+
   const [title, setTitle] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
@@ -47,10 +47,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
   return (
 
 
-<>
-
- 
-
+  <>
       {showReviewModal && (
 
         <div className = "fixed z-10 inset-0 overflow-y-auto">
@@ -88,11 +85,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                   </>
                   )}
 
-                                  
-
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-
-                  <div className = "mb-4">
+                  
+                    <div className = "mb-4">
 
   
                     <h2 className = "heading-secondary mb-5">Review Product - {product.name} </h2>
