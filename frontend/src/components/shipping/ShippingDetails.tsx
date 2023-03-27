@@ -34,8 +34,8 @@ const ShippingDetails: React.FC = () => {
         event.preventDefault();
         dispatch(createNewShipping(user._id, address, city, country, postalCode, phoneNo) as any);
 
-          setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
-          navigate(`/order-confirm`);
+        setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
+        navigate(`/order-confirm`);
   
     } 
     
@@ -86,17 +86,17 @@ const ShippingDetails: React.FC = () => {
               
             <div className = "mb-4 login-container-inputs email-container">
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "city">City</label>
-                  <input value = {city} onChange = {(event) => setCity(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" id = "city" type = "text" placeholder = "Enter City" />
+                  <input value = {city} onChange = {(event) => setCity(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-11" id = "city" type = "text" placeholder = "Enter City" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
                   <label className = "block text-sm font-bold mb-2 login-username-label" htmlFor = "country">Country</label>
-                  <input value = {country} onChange = {(event) => setCountry(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" id = "username" type = "text" placeholder = "Country" />
+                  <input value = {country} onChange = {(event) => setCountry(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-11" id = "username" type = "text" placeholder = "Country" />
             </div>
 
             <div className = "mb-4 login-container-inputs email-container">
                   <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Postal Code</label>
-                  <input value = {postalCode} onChange = {(event) => setPostalCode(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" id = "postalcode" type = "text" placeholder = "Postal Code" />
+                  <input value = {postalCode} onChange = {(event) => setPostalCode(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-11" id = "postalcode" type = "text" placeholder = "Postal Code" />
             </div>
 
              <div className = "mb-6 login-password-container">

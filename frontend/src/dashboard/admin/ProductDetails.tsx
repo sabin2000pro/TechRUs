@@ -7,16 +7,17 @@ import MetaData from '../../layout/MetaData';
 import { addProductToBasket } from '../../actions/basket-actions';
 import CreateReview from '../../components/reviews/CreateReview'
 
-const ProductDetails = () => {
+const ProductDetails: React.FC = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const {loading, error, product} = useSelector((state: any) => state.singleProduct);
     const [quantity, setQuantity] = useState(0);
     const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
+    const [addedToBasket, setAddedToBasket] = useState<boolean>(false);
 
     useEffect(() => {
 
-        const fetchSingleProductByID = async() => {
+        const fetchSingleProductByID = async () => {
              dispatch(fetchSingleProduct(id) as any);
         }
 
@@ -27,12 +28,14 @@ const ProductDetails = () => {
     const addToBasketHandler = () => {
         try {
             dispatch(addProductToBasket(product._id, quantity) as any);
+
+            setAddedToBasket((addedToBasket) => !addedToBasket);
         } 
         
         catch(error) {
 
             if(error) {
-                return console.error(error);
+                console.error(error);
             }
         }
 
@@ -51,7 +54,7 @@ const ProductDetails = () => {
 
             <>
 
-             <div className="flex flex-row justify-center items-start p-4">
+     <div className="flex flex-row justify-center items-start p-4">
 
            <div className = "product-details-container">
 

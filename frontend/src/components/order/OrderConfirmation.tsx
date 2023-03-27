@@ -17,9 +17,11 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   useEffect(() => {
      if(!isAuthenticated) {
         alert("You are not authorized to access this route")
+
+        navigate(`/user-login`)
      }
 
-  }, [])
+  }, [isAuthenticated])
 
   const handleCreateOrder = (event): void => { // Function that's responsible for creating a new order
 
@@ -37,8 +39,6 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
 
          if(error) {
-            console.log(error);
-
             setOrderCreated(false)
          }
       }
