@@ -31,9 +31,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
           setIsValidData((validData) => !validData);
           setReviewCreated((reviewCreated) => !reviewCreated);
 
-       setTitle("")
-       setRating(0);
-       setComment("")
+          setTitle("")
+          setRating(0);
+          setComment("")
        }
 
        
