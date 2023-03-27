@@ -44,24 +44,20 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
 <>
 
+   {reviewCreated && (
+
+      <>
+          <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+               <h2>Review Submitted</h2>
+          </div>
+      </>
+   )}
+
       {showReviewModal && (
 
         <div className = "fixed z-10 inset-0 overflow-y-auto">
 
           <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-
-
-            {!modalClosed && (
-
-              <>
-              
-                  <div className = "fixed inset-0 transition-opacity">
-                       <div className="absolute inset-0 bg-black opacity-70"></div>
-                   </div>
-
-              </>
-
-            )}
 
             <span className = "hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
               &#8203;
@@ -91,23 +87,25 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
             <div className="mb-4">
 
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="rating">Rating</label>
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="rating">Rating</label>
 
-              <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
+            <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
 
-                  <option value={0}>Select a rating</option>
+                  <option value={0}>Select Rating</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>
                   <option value={4}>4</option>
-                      <option value={5}>5</option>
+                  <option value={5}>5</option>
+
                 </select>
+
               </div>
             </div>
 
 
             <div className = "px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse review-container">
-                <button className = "px-2 rounded bask-btn">Submit Rating</button>
+                <button className = "px-2 rounded bask-btn">Submit Review</button>
             </div>
 
           </form>

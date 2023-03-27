@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 interface IEmailVerificationSchema {
     owner: mongoose.Schema.Types.ObjectId,

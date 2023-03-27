@@ -47,5 +47,10 @@ exports.EmailVerificationSchema.pre('save', function (next) {
         return next();
     });
 });
+exports.EmailVerificationSchema.methods.compareVerificationTokens = function (enteredToken) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield bcryptjs_1.default.compare(enteredToken, this.otpToken);
+    });
+};
 const EmailVerification = mongoose_1.default.model("EmailVerification", exports.EmailVerificationSchema);
 exports.EmailVerification = EmailVerification;
