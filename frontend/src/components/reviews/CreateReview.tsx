@@ -13,7 +13,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
   const [title, setTitle] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
-  const [reviewSubmitted, setReviewSubmitted] = useState<boolean>(false);
+  const [reviewCreated, setReviewCreated] = useState<boolean>(false);
   const [modalClosed, setModalClosed] = useState<boolean>(false);
 
   const handleCreateReview = (event): void => {
@@ -24,7 +24,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
        dispatch(createReview(product._id, title, rating, comment) as any);
 
-       setReviewSubmitted((reviewSubmitted) => !reviewSubmitted);
+       setReviewCreated((reviewCreated) => !reviewCreated);
     } 
     
     catch(error) {
@@ -32,7 +32,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
        if(error) {
         console.error(error);
 
-        setReviewSubmitted(false);
+        setReviewCreated(false)
        }
     }
 

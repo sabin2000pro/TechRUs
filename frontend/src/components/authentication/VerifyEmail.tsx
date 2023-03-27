@@ -1,19 +1,26 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { verifyEmailAddress } from '../../actions/auth-actions';
 import MetaData from '../../layout/MetaData';
+import { verifyEmailAddress } from '../../actions/auth-actions';
 
-const VerifyEmail: React.FC = () => {
+const VerifyEmail: React.FC = () => { // E-mail Verification component
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [OTP, setOTP] = useState<string>("");
-
   const {isAuthenticated, error, user} = useSelector((state: any) => state.auth);
   const [emailVerified, setEmailVerified] = useState(false);
 
   const onEmailVerificationHandler = (event): void => {
+    try {
+       event.preventDefault();
+    } 
+    
+    catch(error) {
+
+    }
+
 
   }
 
@@ -38,14 +45,12 @@ const VerifyEmail: React.FC = () => {
                 </div>
 
             <div className = "flex items-center justify-center login-btn-container verify-container">
-
-            <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline verify-btn" type="submit">Verify</button>
-
+                 <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline verify-btn" type="submit">Verify</button>
             </div>
 
             <div className = "resend-container">
-                 <span>Haven't received your code? - Resend Here  </span>
-              </div>
+                 <span>Haven't received your code -  Resend Here </span>
+            </div>
 
             </form>
 

@@ -17,11 +17,12 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   console.log(`Order Items : `, orderItems)
   console.log(`The shipping infomration : `, shippingInformation);
 
-  const handleCreateOrder = (event): void => {
+  const handleCreateOrder = (event): void => { // Function that's responsible for creating a new order
 
       try {
 
          event.preventDefault();
+         
          const userId = user?._id;
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
@@ -31,6 +32,8 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
       } 
       
       catch(error) {
+
+
          if(error) {
             console.log(error);
 

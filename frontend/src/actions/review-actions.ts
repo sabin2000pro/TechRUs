@@ -14,13 +14,13 @@ export const fetchAllReviews = (keyword = '') => async (dispatch: Dispatch): Pro
     } 
     
     catch(error: any) {
-        console.log(`Reviews Error : `, error);
         dispatch({type: FETCH_SINGLE_REVIEW_FAIL, payload: error.data.response.message});
     }
 
 }
 
 export const fetchReviewByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
+
     try {
        dispatch({type: FETCH_SINGLE_REVIEW_REQUEST});
 
@@ -43,7 +43,13 @@ export const fetchReviewByID = (id: string) => async (dispatch: Dispatch): Promi
 
 export const createReview = (product: string, title: string, rating: number, comment: string) => async (dispatch: Dispatch): Promise<void> => {
     try {
-      // Dispatch the create request
+        dispatch({type: CREATE_REVIEW_REQUEST});
+
+        const {data} = await axios.post(`http://localhost:5407/api/v1/reviews`);
+
+        console.log(`Review Data ; `, data);
+
+        dispatch({type: CREATE_REVIEW_SUCCESS, payload: data.review});
     } 
     
     catch(error) {
@@ -53,7 +59,7 @@ export const createReview = (product: string, title: string, rating: number, com
 
 }
 
-export const editReviewByID = () => async (dispatch: Dispatch): Promise<void> => {
+export const editReviewByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
     try {
 
     } 
@@ -63,7 +69,7 @@ export const editReviewByID = () => async (dispatch: Dispatch): Promise<void> =>
     }
 }
 
-export const deleteReviewByID = () => async (dispatch: Dispatch): Promise<void> => {
+export const deleteReviewByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
     try {
 
     } 
