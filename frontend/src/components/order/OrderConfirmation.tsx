@@ -16,7 +16,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
   useEffect(() => {
      if(!isAuthenticated) {
-        alert("You are not authorized ")
+        alert("You are not authorized to access this route")
      }
 
   }, [])
@@ -26,13 +26,11 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
       try {
 
          event.preventDefault();
-
          const userId = user?._id;
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
          
          setOrderCreated((orderCreated) => !orderCreated)
-
       } 
       
       catch(error) {
@@ -54,9 +52,11 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
      {orderCreated && (
        
             <>
+
               <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
                   <h2>Your order has been placed successfully</h2>
                </div>
+
             </>
      )}
 
@@ -67,7 +67,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
       <div className ="flex justify-between items-center mb-8 order-container">
 
-   <div>
+     <div>
     
       <h2 className ="text-lg font-semibold">Shipping Information</h2>
 
@@ -79,9 +79,6 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
             Address: {shippingInformation.address}
         </p>
         
-
-
-
   </div>
 
 
@@ -94,19 +91,19 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
        
        <div className = "w-1/2 bg-white shadow-md rounded mt-12 basket-card">
 
-<div className = "flex items-center justify-center mt-12">
-    <p className = "text-xl font-medium mb-4"> Product Name: {basketItem.name}</p>
-</div>
+          <div className = "flex items-center justify-center mt-12">
+              <p className = "text-xl font-medium mb-4"> Product Name: {basketItem.name}</p>
+          </div>
 
-<div className = "flex items-center justify-center">
-  <p className = "text-xl font-medium mb-4">Product Price: £{basketItem.price}</p>
-</div>
+          <div className = "flex items-center justify-center">
+            <p className = "text-xl font-medium mb-4">Product Price: £{basketItem.price}</p>
+          </div>
 
-<div className = "flex items-center justify-center">
-  <p className = "text-xl font-medium mb-4">Quantity: {basketItem.quantity}</p>
-</div>
+          <div className = "flex items-center justify-center">
+            <p className = "text-xl font-medium mb-4">Quantity: {basketItem.quantity}</p>
+          </div>
 
-<img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />
+          <img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />
 
 
 </div>
