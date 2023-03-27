@@ -12,17 +12,21 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const user = JSON.parse(sessionStorage.getItem("user") as any);
   const orderItems = JSON.parse(localStorage.getItem("orderItems") as any);
   const shippingInformation = JSON.parse(localStorage.getItem("shippingInformation") as any);
+  const basketItems = JSON.parse(localStorage.getItem("basketItems") as any);
 
-  console.log(`User : `, user);
-  console.log(`Order Items : `, orderItems)
-  console.log(`The shipping infomration : `, shippingInformation);
+  useEffect(() => {
+     if(!isAuthenticated) {
+        alert("You are not authorized ")
+     }
+
+  }, [])
 
   const handleCreateOrder = (event): void => { // Function that's responsible for creating a new order
 
       try {
 
          event.preventDefault();
-         
+
          const userId = user?._id;
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
@@ -65,7 +69,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
    <div>
     
-      <h2 className ="text-lg font-semibold">Your Shipping Information</h2>
+      <h2 className ="text-lg font-semibold">Shipping Information</h2>
 
         <p className ="text-black-600 mt-2">
           User ID : {shippingInformation.user}
@@ -74,10 +78,42 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
         <p className = "text-black-600 mt-2">
             Address: {shippingInformation.address}
         </p>
+        
+
+
+
   </div>
 
 
   </div>
+
+    {basketItems.map((basketItem: any) => (
+       
+
+       <>
+       
+       <div className = "w-1/2 bg-white shadow-md rounded mt-12 basket-card">
+
+<div className = "flex items-center justify-center mt-12">
+    <p className = "text-xl font-medium mb-4"> Product Name: {basketItem.name}</p>
+</div>
+
+<div className = "flex items-center justify-center">
+  <p className = "text-xl font-medium mb-4">Product Price: £{basketItem.price}</p>
+</div>
+
+<div className = "flex items-center justify-center">
+  <p className = "text-xl font-medium mb-4">Quantity: {basketItem.quantity}</p>
+</div>
+
+<img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />
+
+
+</div>
+       </>
+    ))}
+
+
       </form>
 
     </>
