@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createReview } from '../../actions/review-actions';
+import Loader from '../../layout/Loader';
 
 interface ICreateReviewProps {
   product: any
@@ -9,7 +10,7 @@ interface ICreateReviewProps {
 
 const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: ICreateReviewProps) => {
   const dispatch = useDispatch();
-
+  
   const [title, setTitle] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
@@ -25,6 +26,10 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
        dispatch(createReview(product._id, title, rating, comment) as any);
 
        setReviewCreated((reviewCreated) => !reviewCreated);
+
+       setTitle("")
+       setRating(0);
+       setComment("")
     } 
     
     catch(error) {
@@ -44,13 +49,13 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
 <>
 
-
+ 
 
       {showReviewModal && (
 
         <div className = "fixed z-10 inset-0 overflow-y-auto">
 
-          <div className ="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className ="flex items-center justify-center min-h-screen pt-2 px-2 pb-20 text-center sm:block sm:p-0">
 
 
             {!modalClosed && (
@@ -72,7 +77,18 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
             <div className = "inline-block align-bottom bg-white modal-container rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
               <form method = "POST" onSubmit = {handleCreateReview}>
-                
+
+              {reviewCreated && (
+
+                  <>
+
+                    <div className = "bg-green-400 border border-green-400 text-black-700 rounded">
+                        <h2 className = "heading-secondary mb-3">Review Submitted</h2>
+                    </div>
+                  </>
+                  )}
+
+                                  
 
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
