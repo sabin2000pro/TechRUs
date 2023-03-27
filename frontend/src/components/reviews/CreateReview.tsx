@@ -44,33 +44,41 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
 <>
 
-   {reviewCreated && (
 
-      <>
-          <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
-               <h2>Review Submitted</h2>
-          </div>
-      </>
-   )}
 
       {showReviewModal && (
 
         <div className = "fixed z-10 inset-0 overflow-y-auto">
 
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className ="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+
+            {!modalClosed && (
+
+              <>
+              
+                  <div className = "fixed inset-0 transition-opacity">
+                       <div className = "absolute inset-0 bg-black opacity-70"></div>
+                   </div>
+
+              </>
+
+            )}
 
             <span className = "hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
               &#8203;
             </span>
 
-            <div className = "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div className = "inline-block align-bottom bg-white modal-container rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
               <form method = "POST" onSubmit = {handleCreateReview}>
+                
 
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
                   <div className = "mb-4">
 
+  
                     <h2 className = "heading-secondary mb-5">Review Product - {product.name} </h2>
 
         <label className="block text-gray-700 font-bold mb-2 review-label" htmlFor = "title">Title</label>

@@ -45,7 +45,7 @@ export const createReview = (product: string, title: string, rating: number, com
     try {
         dispatch({type: CREATE_REVIEW_REQUEST});
 
-        const {data} = await axios.post(`http://localhost:5407/api/v1/reviews`);
+        const {data} = await axios.post(`http://localhost:5407/api/v1/reviews`, {product, title, rating, comment});
 
         console.log(`Review Data ; `, data);
 

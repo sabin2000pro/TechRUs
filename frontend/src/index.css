@@ -529,3 +529,7 @@ font-weight: bold;
   transition: all 0.35s;
   background-color: #5B90E0;
 }
+
+.modal-container {
+  transition: all 0.3s;
+}

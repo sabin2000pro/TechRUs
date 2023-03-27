@@ -35,10 +35,6 @@ export const createReview = asyncHandler(async (request: any, response: Response
 
     const {product, title, rating, comment} = request.body;
 
-    if(!product) {
-        return next(new ErrorResponse(`Product for creating a review not found`, StatusCodes.BAD_REQUEST));
-    }
-
     if(!rating || !comment || !title) {
       return next(new ErrorResponse(`No rating or comment found, please try again`, StatusCodes.BAD_REQUEST));
     }
