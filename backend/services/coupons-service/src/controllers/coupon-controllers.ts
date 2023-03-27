@@ -1,3 +1,4 @@
+import {ErrorResponse} from '../utils/error-response';
 import { StatusCodes } from 'http-status-codes';
 import { Coupon } from "../model/coupon-model";
 import asyncHandler from 'express-async-handler';
@@ -7,7 +8,7 @@ export const fetchAllCoupons = asyncHandler(async (request, response: Response, 
     const coupons = await Coupon.find();
     
     if(!coupons) {
-        
+        return next(new ErrorResponse(`No coupons found`, StatusCodes.BAD_REQUEST));
     }
 
     return response.status(StatusCodes.OK).json({success: true, coupons});
