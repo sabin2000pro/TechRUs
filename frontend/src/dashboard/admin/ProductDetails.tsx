@@ -11,9 +11,9 @@ const ProductDetails: React.FC = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const {loading, error, product} = useSelector((state: any) => state.singleProduct);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState<number>(0);
     const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
-    const [addedToBasket, setAddedToBasket] = useState<boolean>(false);
+    const [itemAddedToBasket, setItemAddedToBasket] = useState<boolean>(false);
 
     useEffect(() => {
 
@@ -29,7 +29,7 @@ const ProductDetails: React.FC = () => {
         try {
             dispatch(addProductToBasket(product._id, quantity) as any);
 
-            setAddedToBasket((addedToBasket) => !addedToBasket);
+            setItemAddedToBasket((addedToBasket) => !addedToBasket);
         } 
         
         catch(error) {
@@ -79,15 +79,18 @@ const ProductDetails: React.FC = () => {
       <span className="bg-gray-200 text-gray-700 py-1 px-4">{quantity}</span>
 
       <button onClick = {() => setQuantity(quantity + 1)} className = "bg-gray-200 text-gray-700 py-1 px-2 rounded-r" type="button">
-        <span>+</span>
+         <span>+</span>
       </button>
 
     </div>
 
     <div className = "flex flex-col justify-between btn-basket-container">
+
         <button disabled = {product.countInStock === 0} onClick = {addToBasketHandler} className=" px-2 rounded basket-btn mt-12" type="button">
-        Add To Basket
+            Add To Basket
         </button>
+
+
     </div>
 
 

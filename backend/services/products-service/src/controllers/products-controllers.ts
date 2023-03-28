@@ -38,14 +38,14 @@ export const sendLowStockEmail = (transporter: any, user: any, currStock: number
 
 export const fetchAllProducts = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
 
-        const resultsPerPage = 3; // How many products we want to display per page
+        const productsPerPage = 3; // How many products we want to display per page
         const searchKey = request.query.keyword;
         const page = parseInt(request.query.page) || 1; // Get the current page number
-        const skipBy = resultsPerPage * (page - 1);
+        const skipBy = productsPerPage * (page - 1);
 
         const keyword = request.query.keyword ? {name: {$regex: searchKey, $options: 'i'}} : {}; // Keyword used to search for a product
         const numberOfProducts = await Product.countDocuments({ ...keyword });
-        const products = await Product.find({ ...keyword }).limit(resultsPerPage).skip(skipBy);
+        const products = await Product.find({ ...keyword }).limit(productsPerPage).skip(skipBy);
 
         if(!products) {
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
@@ -55,7 +55,7 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
           return next(new ErrorResponse(`No products found on the server-side.`, StatusCodes.BAD_REQUEST));
         }
 
-        return response.status(StatusCodes.OK).json({success: true, products, numberOfProducts, page})
+        return response.status(StatusCodes.OK).json({success: true, products, productsPerPage, page})
     }
 
 )

@@ -23,6 +23,10 @@ const BasketScreen: React.FC = () => {
        dispatch(removeProductFromBasket(id) as any)
 
        setProductRemoved((productRemoved) => !productRemoved)
+
+       setTimeout(() => {
+          setProductRemoved(false) // Set the flag back to false to make it disappear after 2 seconds
+       }, 2000)
     } 
     
     catch(error) {
@@ -53,6 +57,15 @@ const BasketScreen: React.FC = () => {
     <>   
 
      <MetaData pageTitle = {`My Basket`} />
+
+     {productRemoved && (
+       <>
+             <div className="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+                  <h2>Product Removed</h2>
+               </div>
+
+       </>
+     )}
 
      {basketItems.length === 0 && <h2 className = "heading-secondary">Your Cart Is Empty</h2>}
 

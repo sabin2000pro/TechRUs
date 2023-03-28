@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export interface IProductsList {
-    products: any
+    displayedProducts: any
 }
 
-const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
+const ProductsList: React.FC<IProductsList> = ({displayedProducts}: IProductsList) => {
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   return (
 
     <>
-      <div className  = "flex justify-center">
+        <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">
 
               <div className="flex flex-row gap-6 product-card-container">
 
-        {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
+        {displayedProducts.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
  
-             {products.map((product: any) => (
+             {displayedProducts.map((product: any) => (
 
               <>
 
@@ -55,6 +56,26 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
    </div>
    
  </div>
+
+ {/* <div className="flex justify-center">
+
+  <ul className="pagination">
+
+    {Array.from({ length: totalPages }, (_, index) => (
+
+      <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+
+        <button className="page-link rounded px-2 basket-btn" onClick = {() => handlePageChange(index + 1)}>
+          {index + 1}
+        </button>
+
+
+      </li>
+    ))}
+  </ul>
+
+
+</div> */}
 
     </>
 

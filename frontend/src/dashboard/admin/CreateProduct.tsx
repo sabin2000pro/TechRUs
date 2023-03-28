@@ -62,12 +62,12 @@ const CreateProduct: React.FC = () => {
   
   <div className = "mb-4 login-container-inputs email-container">
         <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "description">Description</label>
-        <input value = {description} onChange = {(event) => setDescription(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "description" type = "text" placeholder="Enter product description" />
+        <input value = {description} onChange = {(event) => setDescription(event.target.value)} className = "shadow mb-12 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "description" type = "text" placeholder="Enter product description" />
   </div>
 
   <div className = "mb-6 login-password-container">
         <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">Warranty</label>
-        <input value = {warranty} onChange = {(event) => setWarranty(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "warranty" type = "text" placeholder = "Enter product warranty" />     
+        <input value = {warranty} onChange = {(event) => setWarranty(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id = "warranty" type = "text" placeholder = "Enter product warranty" />     
   </div>
 
 

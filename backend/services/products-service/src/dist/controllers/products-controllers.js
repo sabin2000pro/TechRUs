@@ -44,20 +44,20 @@ const sendLowStockEmail = (transporter, user, currStock) => {
 };
 exports.sendLowStockEmail = sendLowStockEmail;
 exports.fetchAllProducts = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const resultsPerPage = 3; // How many products we want to display per page
+    const productsPerPage = 3; // How many products we want to display per page
     const searchKey = request.query.keyword;
     const page = parseInt(request.query.page) || 1; // Get the current page number
-    const skipBy = resultsPerPage * (page - 1);
+    const skipBy = productsPerPage * (page - 1);
     const keyword = request.query.keyword ? { name: { $regex: searchKey, $options: 'i' } } : {}; // Keyword used to search for a product
     const numberOfProducts = yield products_model_1.Product.countDocuments(Object.assign({}, keyword));
-    const products = yield products_model_1.Product.find(Object.assign({}, keyword)).limit(resultsPerPage).skip(skipBy);
+    const products = yield products_model_1.Product.find(Object.assign({}, keyword)).limit(productsPerPage).skip(skipBy);
     if (!products) {
         return response.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, message: "No products found" });
     }
     if (numberOfProducts === 0) {
         return next(new error_response_1.ErrorResponse(`No products found on the server-side.`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, products, numberOfProducts, page });
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, products, productsPerPage, page });
 }));
 exports.fetchSingleProductByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;
