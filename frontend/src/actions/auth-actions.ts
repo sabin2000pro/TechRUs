@@ -218,6 +218,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
       const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
       const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword}, config);
+      console.log(`Updated Password :`, data);
       dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
     } 
     

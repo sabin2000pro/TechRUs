@@ -10,7 +10,7 @@ const UpdatePassword: React.FC = () => {
     const [passwordUpdated, setPasswordUpdated] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {isAuthenticated, error} = useSelector((state: any) => state.auth);
+    const {isAuthenticated, error, message} = useSelector((state: any) => state.auth);
 
     const onUpdatePasswordHandler = (event: React.FormEvent<HTMLFormElement>): void => { // The method is invoked when the form is submitted
 
@@ -39,10 +39,12 @@ const UpdatePassword: React.FC = () => {
     <>
 
       {passwordUpdated && (
+
          <>
            <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
-                <h2>Password Updated</h2>
+                <h2>{message}</h2>
            </div>
+
          </>
       )}
 
