@@ -52,15 +52,12 @@ export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
 export const verifyEmailAddress = (userId: string, OTP: string) => async (dispatch: Dispatch): Promise<void> => {
 
-
     try {
 
        dispatch({type: VERIFY_USER_EMAIL_REQUEST});
        const config = processConfigHeader();
 
        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, OTP}, config);
-       console.log("`E-mail Verification Data : ", data);
-    
        dispatch({type: VERIFY_USER_EMAIL_SUCCESS, payload: data.message});
 
     } 
@@ -295,6 +292,7 @@ export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise
 export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
 
   try {
+    
      dispatch({type: DELETE_SINGLE_USER_REQUEST});
 
      const {data} = await axios.delete(`http://localhost:5400/api/v1/auth/users/${id}`);
@@ -311,6 +309,5 @@ export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promis
     }
 
   }
-
 
 }
