@@ -1,4 +1,4 @@
-import { CREATE_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, EDIT_PRODUCT_REQUEST, EDIT_PRODUCT_FAIL, EDIT_PRODUCT_SUCCESS } from './../constants/products-constants';
+import { CREATE_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, EDIT_PRODUCT_REQUEST, EDIT_PRODUCT_FAIL, EDIT_PRODUCT_SUCCESS, DELETE_PRODUCTS_REQUEST, DELETE_PRODUCTS_SUCCESS, DELETE_SINGLE_PRODUCT_REQUEST, DELETE_SINGLE_PRODUCT_FAIL, DELETE_SINGLE_PRODUCT_SUCCESS, DELETE_PRODUCTS_FAIL } from './../constants/products-constants';
 
 import axios from 'axios';
 import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, FETCH_NEW_PRODUCTS_REQUEST, FETCH_SINGLE_PRODUCT_FAIL, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS } from '../constants/products-constants';
@@ -15,14 +15,13 @@ export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => as
 
       const {data} = await axios.get(`${PRODUCTS_ENDPOINT}?keyword=${keyword}&page=${page}&productsPerPage=${productsPerPage}`);
      
-      dispatch({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: {products: data.products, page: data.page, productsPerPage: data.productsPerPage}});
+      dispatch({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: data.products});
 
     } 
     
     catch(error) {
 
       if(error) {
-        console.log(`Fetch products error: `, error);
         dispatch({type: FETCH_ALL_PRODUCTS_FAIL, payload: error.data.response.message});
       }
 
@@ -95,29 +94,46 @@ export const editProductByID = (id: number, updatedData: any) => async (dispatch
 }
 
 
-
+// @description: 
 export const deleteProducts = () => async (dispatch: any) => {
 
   try {
+    
+     dispatch({type: DELETE_PRODUCTS_REQUEST});
 
+     const {data} = await axios.delete(`${PRODUCTS_ENDPOINT}`);
+     console.log(`Deleted Product Data : `, data);
+
+     dispatch({type: DELETE_PRODUCTS_SUCCESS, payload: data.message});
   } 
   
   catch(error) {
-     if(error) {
 
+     if(error) {
+        dispatch({type: DELETE_PRODUCTS_FAIL, payload: error.data.response.message});
      }
      
   }
 
 }
 
-export const deleteProductByID = (id: string) => async (dispatch: any) => {
+export const deleteProductByID = (id: string) => async (dispatch: any): Promise<void> => {
 
     try {
+       dispatch({type: DELETE_SINGLE_PRODUCT_REQUEST});
 
+       const {data} = await axios.delete(`${PRODUCTS_ENDPOINT}/${id}`);
+
+       console.log(`Delete Product data : `, data);
+
+       dispatch({type: DELETE_SINGLE_PRODUCT_SUCCESS, payload: data.message})
     } 
     
     catch(error) {
+
+      if(error) {
+        dispatch({type: DELETE_SINGLE_PRODUCT_FAIL, payload: error.data.response.message})
+      }
 
     }
 

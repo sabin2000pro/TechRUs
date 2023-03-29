@@ -7,6 +7,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [orderCreated, setOrderCreated] = useState<boolean>(false);
+  const {error} = useSelector((state: any) => state.orders);
 
   const {isAuthenticated} = useSelector((state: any) => state.auth);
   const user = JSON.parse(sessionStorage.getItem("user") as any);
@@ -15,6 +16,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const basketItems = JSON.parse(localStorage.getItem("basketItems") as any);
 
   useEffect(() => {
+
      if(!isAuthenticated) {
         alert("You are not authorized to access this route")
 
@@ -49,11 +51,21 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
     <>
 
+    {error && (
+
+      <>
+        <div className ="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+          <h2>{error.message}</h2>
+        </div>
+
+      </>
+    )}
+
        {orderCreated && (
        
             <>
 
-              <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+             <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
                   <h2>Your order has been placed successfully</h2>
                </div>
 
@@ -76,8 +88,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
         </p>
 
         <p className = "text-black-600 mt-2">
-            Address: {shippingInformation.address}
+          Address: {shippingInformation.address}
         </p>
+
         
   </div>
 

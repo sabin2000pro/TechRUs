@@ -8,8 +8,6 @@ export const fetchAllReviews = (keyword = '') => async (dispatch: Dispatch): Pro
         dispatch({type: FETCH_REVIEWS_REQUEST});
 
         const {data} = await axios.get(`http://localhost:5407/api/v1/reviews?keyword=${keyword}`);
-        console.log(`Reviews Data : `, data);
-
         dispatch({type: FETCH_REVIEWS_SUCCESS, payload: data.reviews});
     } 
     
@@ -47,8 +45,6 @@ export const createReview = (product: string, title: string, rating: number, com
 
         const {data} = await axios.post(`http://localhost:5407/api/v1/reviews`, {product, title, rating, comment});
 
-        console.log(`Review Data ; `, data);
-
         dispatch({type: CREATE_REVIEW_SUCCESS, payload: data.review});
     } 
     
@@ -72,6 +68,7 @@ export const editReviewByID = (id: string) => async (dispatch: Dispatch): Promis
 }
 
 export const deleteReviewByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
+
     try {
 
     } 

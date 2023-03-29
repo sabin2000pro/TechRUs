@@ -40,7 +40,6 @@ export const createNewOrder = (user: string, orderItems: any, shippingInformatio
     catch(error) {
 
         if(error) {
-
             console.log(`Create Order Error : `, error);
             dispatch({type: CREATE_ORDER_FAIL, payload: error.data.response.message});
 

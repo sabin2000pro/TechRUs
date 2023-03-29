@@ -18,8 +18,6 @@ const UpdatePassword: React.FC = () => {
 
           event.preventDefault();
 
-          console.log(`Current Password : `, currentPassword);
-
           dispatch(updatePassword(currentPassword, newPassword) as any);
           setPasswordUpdated((passwordUpdated) => !passwordUpdated);
 
@@ -29,7 +27,6 @@ const UpdatePassword: React.FC = () => {
 
           if(error) {
             setPasswordUpdated(false);
-            console.log(`Update Password Error : `, error);
           }
 
        }
@@ -41,6 +38,14 @@ const UpdatePassword: React.FC = () => {
 
     <>
 
+      {passwordUpdated && (
+         <>
+           <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+                <h2>Password Updated</h2>
+           </div>
+         </>
+      )}
+
      <MetaData pageTitle={`Update User Password`} />
 
       <div className = "flex justify-center items-center h-screen login-container">
@@ -51,13 +56,12 @@ const UpdatePassword: React.FC = () => {
 
         <div className = "mb-4 login-container-inputs">
             <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Current Password</label>
-            <input value = {currentPassword} onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type="text" placeholder="Current password" />
+            <input value = {currentPassword} onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-11 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type="text" placeholder="Current password" />
           </div>
 
-          <div className = "mb-6 login-password-container">
-              <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "password">New Password</label>
-              <input value = {newPassword} onChange = {(event) => setNewPassword(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />
-              
+          <div className = "mb-6 login-password-container mt-5">
+              <label className = "block text-sm font-bold mb-2 mt-5 login-password-label" htmlFor = "password">New Password</label>
+              <input value = {newPassword} onChange = {(event) => setNewPassword(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "password" type = "password" placeholder = "Enter your password" />    
           </div>
 
           <div className = "flex items-center justify-center login-btn-container">

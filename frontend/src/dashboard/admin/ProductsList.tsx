@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export interface IProductsList {
-    displayedProducts: any
+    products: any
 }
 
-const ProductsList: React.FC<IProductsList> = ({displayedProducts}: IProductsList) => {
+const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
   const [currentPage, setCurrentPage] = useState<number>(1)
 
   return (
@@ -17,9 +17,9 @@ const ProductsList: React.FC<IProductsList> = ({displayedProducts}: IProductsLis
 
               <div className="flex flex-row gap-6 product-card-container">
 
-        {displayedProducts.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
+        {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
  
-             {displayedProducts.map((product: any) => (
+             {products.map((product: any) => (
 
               <>
 
