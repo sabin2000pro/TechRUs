@@ -3,6 +3,10 @@ import { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, FETCH_OR
 import axios from 'axios';
 import { Dispatch } from "redux";
 
+// @description: Frontend action that communicates with the order reducer in order by dispatching a fetch all order actions that is responsible for displaying all the orders placed onto the frontend
+// @params: Search Keyword: keyword, Page Number: page = 1 - Default => 1
+// @returns: void
+
 export const fetchAllOrders = (keyword = '', page = 1) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
@@ -27,15 +31,14 @@ export const fetchAllOrders = (keyword = '', page = 1) => async (dispatch: Dispa
 export const createNewOrder = (user: string, orderItems: any, shippingInformation: any, itemPrice: number, taxPrice: number, shippingPrice: number, totalPrice: number) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
-        
+
        dispatch({type: CREATE_ORDER_REQUEST});
 
        const {data} = await axios.post(`http://localhost:5403/api/v1/orders`, {user, orderItems, shippingInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
        console.log(`Order Data : `, data);
 
        dispatch({type: CREATE_ORDER_SUCCESS, payload: data.order});
-
-       localStorage.setItem("order", JSON.stringify(data.order));
+       localStorage.setItem("order", JSON.stringify(data.order))
     } 
     
     catch(error) {
@@ -101,4 +104,5 @@ export const deleteOrderByID = () => async (dispatch: Dispatch): Promise<void> =
     catch(error) {
 
     }
+
 }

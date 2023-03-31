@@ -27,6 +27,7 @@ export const usersReducer = (state = initialUserState as any, action: any) => {
 }
 
 export const singleUserReducer = (state = singleUserState as any, action: any) => {
+    
     switch(action.type) {
     
         case FETCH_SINGLE_USER_REQUEST:
