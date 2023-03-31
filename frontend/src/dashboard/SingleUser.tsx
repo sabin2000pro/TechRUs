@@ -38,7 +38,7 @@ const SingleUser: React.FC = () => {
   return (
 
     <>
-      <h2 className = "heading-secondary">Single User</h2>
+      <h2 className = "heading-secondary">{user.username}</h2>
     </>
 
   )
