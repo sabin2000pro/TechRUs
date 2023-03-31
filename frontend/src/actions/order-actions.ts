@@ -7,7 +7,7 @@ import { Dispatch } from "redux";
 // @params: Search Keyword: keyword, Page Number: page = 1 - Default => 1
 // @returns: void
 
-export const fetchAllOrders = (keyword = '', page = 1) => async (dispatch: Dispatch): Promise<void> => {
+export const fetchAllOrders = () => async (dispatch: Dispatch): Promise<void> => {
 
     try {
         dispatch({type: FETCH_ORDERS_REQUEST});
@@ -98,7 +98,7 @@ export const deleteOrders = () => async (dispatch: Dispatch): Promise<void> => {
 
 export const deleteOrderByID = () => async (dispatch: Dispatch): Promise<void> => {
     try {
-
+        dispatch()
     } 
     
     catch(error) {
