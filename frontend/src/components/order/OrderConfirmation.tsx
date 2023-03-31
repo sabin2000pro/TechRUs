@@ -7,8 +7,8 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [orderCreated, setOrderCreated] = useState<boolean>(false);
-  const {error} = useSelector((state: any) => state.orders);
 
+  const {error} = useSelector((state: any) => state.orders);
   const {isAuthenticated} = useSelector((state: any) => state.auth);
 
   const user = JSON.parse(sessionStorage.getItem("user") as any);
@@ -36,7 +36,10 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
           
          setTimeout(() => {
             setOrderCreated((orderCreated) => !orderCreated)
+
+            navigate(`/order-success`)
          }, 2500)
+
       } 
       
       catch(error) {
