@@ -18,7 +18,7 @@ const ProductDetails: React.FC = () => {
     useEffect(() => {
 
         const fetchSingleProductByID = async () => {
-         dispatch(fetchSingleProduct(id as any) as any);
+           dispatch(fetchSingleProduct(id as any) as any);
         }
 
         fetchSingleProductByID(); // Invoke function that fetches the single product
@@ -125,19 +125,20 @@ const ProductDetails: React.FC = () => {
       {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
       {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}
 
-      <button onClick = {handleCreateReviewModal} className = "px-2 rounded basket-btn">Create Review</button>
+      <button disabled = {product.stockCount === 0} onClick = {handleCreateReviewModal} className = "px-2 rounded basket-btn">Create Review</button>
 
-      <CreateReview product = {product} showReviewModal = {showReviewModal} />
+         <CreateReview product = {product} showReviewModal = {showReviewModal} />
 
     </div>
 
-</div>
-            </>
+   </div>
+
+</>
+
     )}
 
     
-            
-
+    
         </>
     )
 }
