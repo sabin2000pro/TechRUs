@@ -6,6 +6,11 @@ export interface ISingleUser {
     error?: string
 }
 
+export interface IUsers {
+    loading?: boolean,
+    error?: string,
+    users: []
+}
 
 const initialUserState = { // initial users state is an array
     users: []
@@ -15,15 +20,15 @@ const singleUserState = {
     user: {}
 }
 
-export const usersReducer = (state = initialUserState as any, action: any) => {
+export const usersReducer = (state = initialUserState as IUsers, action: any): IUsers => {
 
     switch(action.type) {
         
         case FETCH_USERS_REQUEST: // When requesting all the users, we set the loading flag to true
-            return {loading: true}
+            return {loading: true, error: undefined, users: [] }
 
         case FETCH_USERS_SUCCESS: // When the users have been fetched we set the users to its payload
-            return {...state, loading: false, users: action.payload}
+            return {...state, loading: false, error: undefined, users: action.payload}
 
         case FETCH_USERS_FAIL:
             return {...state, loading: false, error: action.payload}
