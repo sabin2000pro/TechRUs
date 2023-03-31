@@ -13,11 +13,11 @@ export const EmailVerificationSchema = new mongoose.Schema<IEmailVerificationSch
 
     owner: {
        type: mongoose.Schema.Types.ObjectId,
-       ref: "Customer",
-       required: [true, "Please specify the owner of this OTP"]
+       ref: "user",
+       required: [true, "Please specify the user owner of this OTP"]
     },
 
-    otpToken: {
+    otpToken: { // The Reset OTP token
        type: String,
        required: [true, "Please specify the OTP for the e-mail verification"],
        default: ''
