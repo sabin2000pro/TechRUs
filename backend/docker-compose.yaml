@@ -36,10 +36,6 @@ services:
     container_name: techrus-auth-api
     image: sabin2000/techrus-authentication-service
 
-    networks:
-      - my-service-network
-      - auth-service
-
     build:
       context: ../backend/services/authentication-service
       dockerfile: Dockerfile
@@ -56,10 +52,7 @@ services:
   products-service:
     container_name: techrus-products-api
     image: sabin2000/techrus-products-service
-
-    networks:
-      - my-service-network
-
+    
     build:
       context: ../backend/services/products-service
       dockerfile: Dockerfile
