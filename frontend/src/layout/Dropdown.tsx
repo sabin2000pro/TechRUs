@@ -14,7 +14,9 @@ const Dropdown: React.FC = () => {
     const [isLoggedOut, setIsLoggedOut] = useState<boolean>(false);
 
     const onLogoutHandler = () => {
+
         try {
+
            dispatch(logout() as any);
            setIsLoggedOut((isLoggedOut) => !isLoggedOut);
 
@@ -24,11 +26,11 @@ const Dropdown: React.FC = () => {
         } 
         
         catch(error) {
-           if(error) {
-            console.error(`Error : `, error);
 
+           if(error) {
             setIsLoggedOut(false);
            }
+
         }
     }
 
@@ -38,7 +40,7 @@ const Dropdown: React.FC = () => {
 
       <div className = "dropdown-container">
 
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md dropdown-btn px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
+        <Menu.Button className = "inline-flex w-full justify-center gap-x-1.5 rounded-md dropdown-btn px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
            Account Settings
         </Menu.Button>
 

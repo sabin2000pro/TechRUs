@@ -40,7 +40,7 @@ const CreateProduct: React.FC = () => {
     catch(error) {
 
        if(error) {
-        return console.error(error);
+         setProductCreated(false);
        }
 
     }

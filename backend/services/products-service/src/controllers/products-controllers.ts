@@ -89,7 +89,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
        const product = await Product.create({name, description, warranty, price, stockCount, lowStockAlert});
        await product.save();
-       return response.status(StatusCodes.CREATED).json({success: true, product});
+       return response.status(StatusCodes.CREATED).json({success: true, product, message: "Product Created"});
     }
 
 )

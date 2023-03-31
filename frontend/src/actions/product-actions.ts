@@ -100,10 +100,8 @@ export const deleteProducts = () => async (dispatch: any) => {
   try {
     
      dispatch({type: DELETE_PRODUCTS_REQUEST});
-
      const {data} = await axios.delete(`${PRODUCTS_ENDPOINT}`);
-     console.log(`Deleted Product Data : `, data);
-
+     
      dispatch({type: DELETE_PRODUCTS_SUCCESS, payload: data.message});
   } 
   
