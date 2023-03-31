@@ -18,7 +18,7 @@ const ProductDetails: React.FC = () => {
     useEffect(() => {
 
         const fetchSingleProductByID = async () => {
-             dispatch(fetchSingleProduct(id) as any);
+             dispatch(fetchSingleProduct(id as any) as any);
         }
 
         fetchSingleProductByID();
