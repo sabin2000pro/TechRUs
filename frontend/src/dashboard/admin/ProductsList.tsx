@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import MetaData from '../../layout/MetaData';
 
 export interface IProductsList {
     products: any,
@@ -11,6 +12,8 @@ const ProductsList: React.FC<IProductsList> = ({products, numberOfProducts}: IPr
   return (
 
     <>
+
+     <MetaData pageTitle = {`Products`} />
         <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">

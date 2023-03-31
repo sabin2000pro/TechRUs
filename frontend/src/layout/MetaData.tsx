@@ -1,7 +1,11 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
-const MetaData = ({pageTitle}) => { // Used for dynamic page title
+interface IMetaDataProps {
+  pageTitle: string
+}
+
+const MetaData: React.FC<IMetaDataProps> = ({pageTitle}: IMetaDataProps) => { // Used for dynamic page title
 
   return (
 

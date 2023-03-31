@@ -27,7 +27,7 @@ export const productsReducer = (state = productsInitialState as IProductsState, 
 
     switch(action.type) {
         
-        case FETCH_ALL_PRODUCTS_REQUEST:
+        case FETCH_ALL_PRODUCTS_REQUEST: // When we are fetching the products from the products microservice
             return {loading: true, products: [], error: undefined, message: undefined}
         
         case FETCH_ALL_PRODUCTS_SUCCESS: // 2. When we have received all the products
