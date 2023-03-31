@@ -57,7 +57,7 @@ exports.fetchAllProducts = (0, express_async_handler_1.default)((request, respon
     if (numberOfProducts === 0) {
         return next(new error_response_1.ErrorResponse(`No products found on the server-side.`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, products, productsPerPage, page });
+    return response.status(http_status_codes_1.StatusCodes.OK).json({ success: true, products, productsPerPage, page, numberOfProducts });
 }));
 exports.fetchSingleProductByID = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = request.params.id;

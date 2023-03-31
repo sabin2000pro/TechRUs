@@ -68,8 +68,7 @@ export const editOrderStatus = (newOrderStatus: string, id: string) => async (di
     catch(error) {
 
        if(error) {
-        dispatch({type: UPDATE_ORDER_STATUS_FAIL, payload: error.data.response.message});
-
+           dispatch({type: UPDATE_ORDER_STATUS_FAIL, payload: error.data.response.message});
        }
 
        
