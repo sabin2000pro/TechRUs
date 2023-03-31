@@ -13,7 +13,17 @@ const SingleUser: React.FC = () => {
 
   useEffect(() => {
       const loadSingleUser = async () => {
+         try {
+           
+         } 
+         
+         catch(error: any) {
+          
+           if(error) {
+            return console.error(error);
+           }
 
+         }
       }
 
       loadSingleUser();
