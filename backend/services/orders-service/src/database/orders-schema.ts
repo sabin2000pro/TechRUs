@@ -1,9 +1,9 @@
 require('dotenv').config();
-import mongoose from 'mongoose';
+import mongoose, {Connection} from 'mongoose';
 
-const ORDERS_DB_URI = process.env.ORDERS_DB_URI || ""
+const ORDERS_DB_URI = process.env.ORDERS_DB_URI || "" as string;
 
-export const connectOrdersSchema = async (): Promise<any> => { // Create connection to the orders schema
+export const connectOrdersSchema = async (): Promise<Connection> => { // Create connection to the orders schema
 
     try {
 
