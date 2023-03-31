@@ -18,5 +18,5 @@ authRouter.route('/update-password').put(verifyUserAuthentication, updatePasswor
 
 // ADMIN - USER ROUTES
 authRouter.route('/users').get(fetchAllUsers).delete(deleteAllUsers);
-authRouter.route('/users/:id').get(fetchUserByID).put(editUserByID).delete(deleteUserByID);
-authRouter.route('/users/:id/update-shifts').put(editUserShifts);
+authRouter.route('/users/:id').get(fetchUserByID).put(editUserByID).delete(deleteUserByID as any);
+authRouter.route('/users/:id/update-shifts').put(editUserShifts as any);

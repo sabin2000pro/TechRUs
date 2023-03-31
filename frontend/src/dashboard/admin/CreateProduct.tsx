@@ -74,7 +74,6 @@ const CreateProduct: React.FC = () => {
         <input value = {warranty} onChange = {(event) => setWarranty(event.target.value)} className ="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id = "warranty" type = "text" placeholder = "Enter product warranty" />     
   </div>
 
-
   <div className = "mb-6 login-password-container">
         <label className = "block text-sm font-bold mb-2 login-password-label" htmlFor = "price">Price</label>
         <input value = {price} onChange = {(event) => setPrice(event.target.value as any)} className ="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id = "price" type = "number" placeholder = "Enter product price" />     
@@ -91,14 +90,11 @@ const CreateProduct: React.FC = () => {
   </div>
 
   <div className = "flex items-center justify-center login-btn-container">
-
-  <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline cp-button" type="submit">Create Product</button>
-
+       <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline cp-button" type="submit">Create Product</button>
   </div>
 
 
 </form>
-
 
 </div>
 

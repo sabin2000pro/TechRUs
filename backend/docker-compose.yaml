@@ -127,6 +127,7 @@ services:
 
   eventbus-service:
     container_name: eventbus-api
+    image: techrus/eventbus-service
 
     build:
       context: ../backend/services/event-bus-service
@@ -141,6 +142,7 @@ services:
     
   frontend-service:
     container_name: techrus-frontend-service
+    image: sabin2000/techrus-frontend-service
 
     build:  
       context: ../frontend

@@ -17,7 +17,7 @@ build-services:
 	- cd services/orders* && docker build -t sabin2000/techrus-orders-service . && npm run build:orders-service
 	- cd services/payments* && docker build -t sabin2000/techrus-payments-service . && npm run build
 
-	- docker login
+run-app:
 	- docker compose up --build
 
 create-networks:
