@@ -5,25 +5,23 @@ import { fetchAllUsers } from '../../actions/auth-actions';
 import Loader from '../../layout/Loader';
 import MetaData from '../../layout/MetaData';
 
-const UsersList = () => {
+const UsersList: React.FC = () => {
     const dispatch = useDispatch();
     const {loading, users} = useSelector((state: any) => state.users);
     const [usersFetched, setUsersFetched] = useState<boolean>(false);
-
-    console.log(`Current Users : `, users)
-
 
     useEffect(() => {
 
        const loadAllUsers = async () => {
 
          try {
+          
            dispatch(fetchAllUsers() as any);
-
            setUsersFetched((usersFetched) => !usersFetched);
          }
          
          catch(error) {
+
             if(error) {
               console.log(`Error Occurred Fetching users : `, error);
             }
