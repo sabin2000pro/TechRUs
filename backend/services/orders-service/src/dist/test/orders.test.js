@@ -70,6 +70,16 @@ describe("Create New Order Test Suite", () => {
     it("Update order status unit test", () => __awaiter(void 0, void 0, void 0, function* () {
         const updateOrderStatusPayload = { orderStatus: "" };
     }));
-    it("Create order with invalid data", () => __awaiter(void 0, void 0, void 0, function* () {
+    it("Create order with INVALID Body data", () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+        }
+        catch (error) {
+        }
+    }));
+    it("Delete Order Data Unit Test", () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+        }
+        catch (error) {
+        }
     }));
 });

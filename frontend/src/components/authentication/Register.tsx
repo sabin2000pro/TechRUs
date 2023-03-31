@@ -79,8 +79,8 @@ const Register: React.FC = () => { // Register Component
                
             
                <div className = "mb-4 login-container-inputs email-container">
-                     <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
-                     <input value = {email} onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-9 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
+                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
+                  <input value = {email} onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-9 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
                </div>
 
             

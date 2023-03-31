@@ -13,14 +13,15 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
     const [startShiftDate, setStartShiftDate] = useState<Date>(new Date(Date.now()));
     const [endShiftDate, setEndShiftDate] = useState<Date>(new Date(Date.now()));
     const [shiftsUpdated, setShiftsUpdated] = useState<boolean>(false);
-
     const dispatch = useDispatch();
+
     const {loading, error, user} = useSelector((state: any) => state.user) as any;
 
     const handleEditUserShift = (event) => {
       event.preventDefault();
 
       try {
+
          dispatch(updateUserShifts(user._id, startShiftDate, endShiftDate) as any);
       }
       
@@ -28,6 +29,7 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
 
          if(error) {
              console.error(error);
+             setShiftsUpdated(false);
          }
 
       }
