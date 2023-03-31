@@ -10,7 +10,7 @@ process-data-script:
 
 build-services:
 	- cd services/authentication* && docker build -t sabin2000/techrus-auth-service . && npm run build
-	- cd services/products* && && docker build -t sabin2000/techrus-products-service . && npm run build
+	- cd services/products* && docker build -t sabin2000/techrus-products-service . && npm run build
 	- cd services/reviews* && docker build -t sabin2000/techrus-reviews-service . && npm run build
 	- cd services/shipping-service* && docker-build -t sabin2000/techrus-shipping-service . && npm run build
 	- cd services/api-gateway* && docker build -t sabin2000/techrus-api-gateway-service . && npm run build:api-gateway
