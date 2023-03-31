@@ -9,10 +9,10 @@ process-data-script:
 	- cd services/shared && ts-node global-data-seeder.ts --import
 
 build-services:
-	- cd services/authentication* && npm run build
-	- cd services/products* && npm run build
-	- cd services/reviews* && npm run build
-	- cd services/shipping-service* && npm run build
+	- cd services/authentication* && docker build -t sabin2000/techrus-auth-service . && npm run build
+	- cd services/products* && && docker build -t sabin2000/techrus-products-service . && npm run build
+	- cd services/reviews* && docker build -t sabin2000/techrus-reviews-service . && npm run build
+	- cd services/shipping-service* && docker-build -t sabin2000/techrus-shipping-service . && npm run build
 	- cd services/api-gateway* && npm run build:api-gateway
 	- cd services/orders* && npm run build:orders-service
 	- cd services/payments* && npm run build

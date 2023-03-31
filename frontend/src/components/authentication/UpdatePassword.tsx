@@ -51,7 +51,7 @@ const UpdatePassword: React.FC = () => {
 
       <div className = "flex justify-center items-center h-screen login-container">
 
-        <form method = "POST" onSubmit = {onUpdatePasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container login-form">
+        <form method = "POST" onSubmit = {onUpdatePasswordHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container form">
 
           <h1 className = "heading-primary h-login">Update Password</h1>
 

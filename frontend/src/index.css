@@ -232,7 +232,7 @@ body {
   box-shadow: 0 0 12px rgba(0,0,0,0.3);
 }
 
-.login-form {
+.form {
   height: 40%;
 }
 
@@ -268,7 +268,7 @@ font-weight: bold;
   outline: none;
 }
 
-.login-form button {
+.form button {
   margin-top: 50px
 }
 

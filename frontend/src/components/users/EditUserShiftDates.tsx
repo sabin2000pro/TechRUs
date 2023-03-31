@@ -17,11 +17,10 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
 
     const {loading, error, user} = useSelector((state: any) => state.user) as any;
 
-    const handleEditUserShift = (event) => {
-      event.preventDefault();
-
+    const handleEditUserShift = (event: any): void => {
+    
       try {
-
+         event.preventDefault();
          dispatch(updateUserShifts(user._id, startShiftDate, endShiftDate) as any);
       }
       
@@ -46,8 +45,8 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
        {loading && <Loader />}
 
         <>
-            <form onSubmit = {handleEditUserShift} >
-                     
+            <form method = "PUT" onSubmit = {handleEditUserShift} >
+
             </form>
    
         </>
