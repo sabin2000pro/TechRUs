@@ -43,9 +43,11 @@ const UsersList: React.FC = () => {
     {error && (
 
        <>
+
          <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
               <h2>{error}</h2>
           </div>
+
 
        </>
     )}
@@ -58,7 +60,7 @@ const UsersList: React.FC = () => {
             
             <div className = "flex w-72 justify-center items-center p-4">
 
-                <div className = "flex flex-row gap-6 product-card-container">
+                <div className = "flex flex-row gap-6 product-card-container w-9">
 
                 {users && users.length === 0 && <h2 className = "heading-secondary">No Users Found</h2>}
        
@@ -72,11 +74,9 @@ const UsersList: React.FC = () => {
 
                         </div>
 
-                          <h2 className="text-lg font-medium mb-2 heading-secondary">{user.username}</h2>
+                          <h2 className="text-lg font-medium mb-2 heading-secondary">Username {user.username}</h2>
 
-                          <p className ="product-descriptions "> {user.email} </p>
-
-                          <Link to = {`/user-details/${user._id}`} className = "product-btn" type = "submit">View User</Link>
+                          <Link to = {`/user-details/${user._id}`} className = "view-btn" type = "submit">View User</Link>
 
                           </div>
 

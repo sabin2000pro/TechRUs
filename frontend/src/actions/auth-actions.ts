@@ -271,6 +271,7 @@ export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => 
 export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
+      
         dispatch({type: FETCH_SINGLE_USER_REQUEST});
         const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users/${id}`); // Send GET request to fetch the user
 

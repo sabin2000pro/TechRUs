@@ -300,7 +300,7 @@ font-weight: bold;
   height: 680px;
 }
 
-.product-btn {
+.product-btn, .view-btn {
   margin-top: 70px;
   margin-left: 50px;
   background-color: #042658;
