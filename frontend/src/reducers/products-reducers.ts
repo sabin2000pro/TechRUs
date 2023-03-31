@@ -1,10 +1,11 @@
 import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAIL, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS, FETCH_SINGLE_PRODUCT_FAIL, FETCH_ALL_PRODUCTS_FAIL} from "../constants/products-constants";
 
-interface IProductState {
+interface IProductsState {
     products: [],
     loading?: boolean,
     error?: string,
     message?: string;
+    numberOfProducts?: number;
 }
 
 interface SingleProductState {
@@ -22,7 +23,7 @@ const singleProductInitialState = {
     product: {}
 }
 
-export const productsReducer = (state = productsInitialState as IProductState, action: any): IProductState => {
+export const productsReducer = (state = productsInitialState as IProductsState, action: any): IProductsState => {
 
     switch(action.type) {
         
@@ -30,7 +31,7 @@ export const productsReducer = (state = productsInitialState as IProductState, a
             return {loading: true, products: [], error: undefined, message: undefined}
         
         case FETCH_ALL_PRODUCTS_SUCCESS: // 2. When we have received all the products
-            return {...state, loading: false, products: action.payload}
+            return {...state, loading: false, products: action.payload, numberOfProducts: action.payload.numberOfProducts}
 
         case FETCH_ALL_PRODUCTS_FAIL:
             return {loading: false, error: action.payload, products: [], message: undefined}

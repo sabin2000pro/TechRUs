@@ -55,7 +55,7 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
           return next(new ErrorResponse(`No products found on the server-side.`, StatusCodes.BAD_REQUEST));
         }
 
-        return response.status(StatusCodes.OK).json({success: true, products, productsPerPage, page})
+        return response.status(StatusCodes.OK).json({success: true, products, productsPerPage, page, numberOfProducts})
     }
 
 )

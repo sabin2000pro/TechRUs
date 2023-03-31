@@ -78,7 +78,7 @@ exports.createNewProduct = (0, express_async_handler_1.default)((request, respon
     }
     const product = yield products_model_1.Product.create({ name, description, warranty, price, stockCount, lowStockAlert });
     yield product.save();
-    return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, product });
+    return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, product, message: "Product Created" });
 }));
 exports.fetchNewProducts = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newProducts = yield products_model_1.Product.find({ isNew: true });
