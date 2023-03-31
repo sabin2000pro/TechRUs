@@ -4,15 +4,12 @@ import { useParams } from 'react-router-dom';
 import { fetchUserByID } from '../actions/auth-actions';
 import MetaData from '../layout/MetaData';
 
-export interface UserData {
-  id?: string
-}
 
 const SingleUser: React.FC = () => { // Single User Functional Component
   const dispatch = useDispatch();
   const {loading, user, error} = useSelector((state: any) => state.singleUser);
   const {id} = useParams<string>();
-  const [userLoaded, setUserLoaded] = useState<boolean>(false);
+  const [userLoaded, setUserLoaded] = useState<boolean | undefined>(false);
 
   console.log(`User ID to fetch : `, id);
 
@@ -21,6 +18,7 @@ const SingleUser: React.FC = () => { // Single User Functional Component
       const loadSingleUser = async () => { // Function that loads the user from the database. Returns a promise containing the user object
 
          try {
+
             dispatch(fetchUserByID(id as any) as any)
             setUserLoaded((userLoaded) => !userLoaded);
          } 
@@ -44,6 +42,7 @@ const SingleUser: React.FC = () => { // Single User Functional Component
 
       <MetaData pageTitle = {`User ${user._id}`} />
       <h2 className = "heading-secondary">{user.username}</h2>
+
     </>
 
   )
