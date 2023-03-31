@@ -95,7 +95,7 @@ const Profile = () => { // User personal profile page
                       </div>
                     </div>
 
-                 </div>
+            </div>
           
         </>
    
