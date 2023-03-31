@@ -1,4 +1,4 @@
-import { UPDATE_ORDER_STATUS_REQUEST, UPDATE_ORDER_STATUS_SUCCESS, UPDATE_ORDER_STATUS_FAIL, DELETE_ORDERS_REQUEST, DELETE_ORDERS_FAIL, DELETE_ORDERS_SUCCESS, DELETE_SINGLE_ORDER_REQUEST, DELETE_SINGLE_ORDER_SUCCESS } from './../constants/orders-constants';
+import { UPDATE_ORDER_STATUS_REQUEST, UPDATE_ORDER_STATUS_SUCCESS, UPDATE_ORDER_STATUS_FAIL, DELETE_ORDERS_REQUEST, DELETE_ORDERS_FAIL, DELETE_ORDERS_SUCCESS, DELETE_SINGLE_ORDER_REQUEST, DELETE_SINGLE_ORDER_SUCCESS, DELETE_SINGLE_ORDER_FAIL } from './../constants/orders-constants';
 import { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, FETCH_ORDERS_REQUEST, FETCH_ORDERS_FAIL, FETCH_ORDERS_SUCCESS } from "../constants/orders-constants";
 import axios from 'axios';
 import { Dispatch } from "redux";
@@ -12,7 +12,7 @@ export const fetchAllOrders = () => async (dispatch: Dispatch): Promise<void> =>
     try {
         dispatch({type: FETCH_ORDERS_REQUEST});
 
-        const {data} = await axios.get(`http://localhost:5403/api/v1/orders?keyword=${keyword}`);
+        const {data} = await axios.get(`http://localhost:5403/api/v1/orders`);
         console.log(`Orders Data : `, data);
 
         dispatch({type: FETCH_ORDERS_SUCCESS, payload: data.orders});
@@ -109,6 +109,10 @@ export const deleteOrderByID = (id: string) => async (dispatch: Dispatch): Promi
     
     catch(error) {
 
+       if(error) {
+
+         dispatch({type: DELETE_SINGLE_ORDER_FAIL, payload: error.data.response.message});
+       }
     }
 
 }
