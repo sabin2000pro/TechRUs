@@ -6,11 +6,6 @@ services:
     container_name: techrus-api-gateway-api
     image: sabin2000/techrus-api-gateway-service
 
-    networks:
-      - my-service-network
-      - auth-service
-      - orders-service
-
     build:
       context: ../backend/services/api-gateway
       dockerfile: Dockerfile
@@ -25,11 +20,6 @@ services:
   shipping-service:
     container_name: techrus-shipping-service
     image: sabin2000/techrus-shipping-service
-
-    networks:
-      - my-service-network
-      - auth-service
-      - orders-service
 
     build:
       context: ../backend/services/shipping-service
@@ -102,9 +92,6 @@ services:
     container_name: techrus-orders-api
     image: sabin2000/techrus-orders-service
 
-    networks:
-      - my-service-network
-      - orders-service
 
     build:
       context: ../backend/services/orders-service
@@ -120,9 +107,6 @@ services:
   reviews-service:
       container_name: techrus-reviews-api
 
-      networks:
-        - my-service-network
-
       build:
         context: ../backend/services/reviews-service
         dockerfile: Dockerfile
@@ -136,10 +120,7 @@ services:
 
   payments-service:
     container_name: techrus-payments-api
-
-    networks:
-      - my-service-network
-
+    image: sabin2000/techrus-payments-service
     build:
       context: ../backend/services/payments-service
       dockerfile: Dockerfile
@@ -181,17 +162,3 @@ services:
         
 volumes:
   mongodb_data_volume:
-
-networks:
-
-  my-service-network:
-    driver: bridge
-    external: true
-
-  auth-service:
-
-    driver: bridge
-    external: true
-  orders-service:
-    driver: bridge
-    external: true

@@ -19,7 +19,6 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
      if(!isAuthenticated) {
         alert("You are not authorized to access this route")
-
         navigate(`/user-login`)
      }
 
@@ -33,12 +32,10 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
          const userId = user?._id;
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
-         
          setOrderCreated((orderCreated) => !orderCreated)
       } 
       
       catch(error) {
-
 
          if(error) {
             setOrderCreated(false)
@@ -54,11 +51,13 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
     {error && (
 
       <>
+
         <div className ="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
           <h2>{error.message}</h2>
         </div>
 
       </>
+
     )}
 
        {orderCreated && (
@@ -94,12 +93,10 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
         
   </div>
 
-
   </div>
 
     {basketItems.map((basketItem: any) => (
        
-
        <>
        
        <div className = "w-1/2 bg-white shadow-md rounded mt-12 basket-card">
@@ -118,11 +115,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
           <img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />
 
-
-</div>
+    </div>
        </>
     ))}
-
 
       </form>
 

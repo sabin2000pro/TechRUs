@@ -8,6 +8,7 @@ const UpdatePassword: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
     const [passwordUpdated, setPasswordUpdated] = useState<boolean>(false);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {isAuthenticated, error, message} = useSelector((state: any) => state.auth);
@@ -17,7 +18,6 @@ const UpdatePassword: React.FC = () => {
        try {
 
           event.preventDefault();
-
           dispatch(updatePassword(currentPassword, newPassword) as any);
           setPasswordUpdated((passwordUpdated) => !passwordUpdated);
 
@@ -30,7 +30,6 @@ const UpdatePassword: React.FC = () => {
           }
 
        }
-
 
     }
 
@@ -74,7 +73,7 @@ const UpdatePassword: React.FC = () => {
 
         </form>
 
-</div>
+   </div>
     </>
 
   )

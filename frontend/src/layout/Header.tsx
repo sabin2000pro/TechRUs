@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Dropdown from './Dropdown';
 import { fetchProducts } from '../actions/product-actions';
 
-const Header = () => {
+const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const {loading, error, user} = useSelector((state: any) => state.auth);
   const {basketItems} = useSelector((state: any) => state.basket);
   const [keyword, setKeyword] = useState<string>("");
 
@@ -32,8 +31,6 @@ const Header = () => {
   return (
 
     <>
-
-
 
        <header className = "main-header">
 
