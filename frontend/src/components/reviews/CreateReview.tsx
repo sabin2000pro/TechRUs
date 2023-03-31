@@ -27,23 +27,23 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
        }
 
        else {
+
           dispatch(createReview(product._id, title, rating, comment) as any);
           setIsValidData((validData) => !validData);
-          setReviewCreated((reviewCreated) => !reviewCreated);
-
+  
           setTitle("")
           setRating(0);
           setComment("")
+
+          setReviewCreated((reviewCreated) => !reviewCreated);
        }
 
-       
     } 
     
     catch(error) {
 
        if(error) {
         console.error(error);
-
         setReviewCreated(false)
        }
     }
