@@ -53,12 +53,13 @@ export const createNewOrder = (user: string, orderItems: any, shippingInformatio
 
 }
 
-export const editOrderStatus = (newOrderStatus: string) => async (dispatch: Dispatch): Promise<void> => {
+export const editOrderStatus = (newOrderStatus: string, id: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
+
        dispatch({type: UPDATE_ORDER_STATUS_REQUEST});
 
-       const {data} = await axios.put(`http://localhost:5403/api/v1/orders`, {newOrderStatus});
+       const {data} = await axios.put(`http://localhost:5403/api/v1/orders/${id}/update-status`, {newOrderStatus});
        console.log(`Updated order status data : `, data);
 
        dispatch({type: UPDATE_ORDER_STATUS_SUCCESS, payload: data.message});
@@ -87,11 +88,11 @@ export const deleteOrders = () => async (dispatch: Dispatch): Promise<void> => {
     } 
     
     catch(error) {
+        
         if(error) {
             dispatch({type: DELETE_ORDERS_FAIL, payload: error.data.response.message});
-    
-           }
-    
+        }
+
     }
 
 }
