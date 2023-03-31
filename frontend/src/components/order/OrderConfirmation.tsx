@@ -10,6 +10,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const {error} = useSelector((state: any) => state.orders);
 
   const {isAuthenticated} = useSelector((state: any) => state.auth);
+
   const user = JSON.parse(sessionStorage.getItem("user") as any);
   const orderItems = JSON.parse(localStorage.getItem("orderItems") as any);
   const shippingInformation = JSON.parse(localStorage.getItem("shippingInformation") as any);
@@ -24,7 +25,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
   }, [isAuthenticated])
 
-  const handleCreateOrder = (event): void => { // Function that's responsible for creating a new order
+  const handleCreateOrder = (event: any): void => { // Function that's responsible for creating a new order
 
       try {
 
@@ -119,10 +120,11 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
           <img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />
 
     </div>
+
        </>
     ))}
 
-      </form>
+  </form>
 
     </>
 

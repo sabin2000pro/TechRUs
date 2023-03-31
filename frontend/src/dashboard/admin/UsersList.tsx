@@ -32,21 +32,25 @@ const UsersList: React.FC = () => {
 
        loadAllUsers();
 
-    }, [])
+    }, [dispatch])
 
   return (
+    
 
     <>
+     <MetaData pageTitle = {`Staff Users`} />
 
     {error && (
+
        <>
          <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
               <h2>{error}</h2>
           </div>
+
        </>
     )}
 
-     <MetaData pageTitle = {`Staff Users`} />
+    
 
        {loading ? <Loader /> : (
 
