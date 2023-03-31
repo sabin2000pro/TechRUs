@@ -18,6 +18,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
   const [modalClosed, setModalClosed] = useState<boolean>(false);
 
   const handleCreateReview = (event): void => {
+
     try {
 
        event.preventDefault();
@@ -61,11 +62,9 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
           <div className ="flex items-center justify-center min-h-screen pt-2 px-2 pb-20 text-center sm:block sm:p-0">
 
-
             {!modalClosed && (
 
               <>
-              
                   <div className = "fixed inset-0 transition-opacity">
                        <div className = "absolute inset-0 bg-black opacity-70"></div>
                    </div>

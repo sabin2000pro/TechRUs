@@ -30,12 +30,15 @@ const ProductDetails: React.FC = () => {
         try {
             dispatch(addProductToBasket(product._id, quantity) as any);
             setItemAddedToBasket((addedToBasket) => !addedToBasket);
+
+            setTimeout(() => {
+                setItemAddedToBasket(false);
+            }, 1500)
         } 
         
         catch(error) {
 
             if(error) {
-                console.error(error);
                 setItemAddedToBasket(false);
             }
 
