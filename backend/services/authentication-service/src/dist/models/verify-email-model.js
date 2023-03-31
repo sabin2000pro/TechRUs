@@ -18,8 +18,8 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 exports.EmailVerificationSchema = new mongoose_1.default.Schema({
     owner: {
         type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Customer",
-        required: [true, "Please specify the owner of this OTP"]
+        ref: "user",
+        required: [true, "Please specify the user owner of this OTP"]
     },
     otpToken: {
         type: String,

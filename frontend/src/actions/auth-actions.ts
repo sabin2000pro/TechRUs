@@ -263,7 +263,7 @@ export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => 
    } 
    
    catch(error) {
-    dispatch({type: FETCH_USERS_FAIL, payload: error.data.response.message});
+     dispatch({type: FETCH_USERS_FAIL, payload: error.data.response.message});
    }
 
 }

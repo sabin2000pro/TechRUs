@@ -32,6 +32,29 @@ const SingleUser: React.FC = () => { // Single User Functional Component
 
   }, [dispatch])
 
+  const onHandleUpdateShifts = (event: any): void => {
+    try {
+
+    } 
+    
+    catch(error) {
+
+    }
+
+  }
+
+  const onHandleEditUser = (): void => {
+    try {
+
+    } 
+    
+    catch(error) {
+      
+    }
+
+
+  }
+ 
   return (
 
     <>
@@ -48,11 +71,11 @@ const SingleUser: React.FC = () => { // Single User Functional Component
 
                     <div className = "mb-4">
 
-                      <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
+                      <label className="block text-gray-700 font-bold mb-2" htmlFor = "username">
                         Username
                       </label>
 
-              <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" value = {user?.username} disabled />
+                <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" value = {user?.username} disabled />
 
                </div>
 
@@ -67,23 +90,23 @@ const SingleUser: React.FC = () => { // Single User Functional Component
                         </div>
 
                         <div className = "mb-4">
-                           <label className = "block text-gray-700 font-bold mb-4">Start Shift Date: </label>
+                           <label className = "block text-gray-700 font-bold mb-4">Start Shift Date</label>
                            <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "startShiftDate" type = "text" value = {user?.startShiftDate} disabled/>
                         </div>
 
                         <div className = "mb-4">
-                            <label className = "block text-gray-700 font-bold mb-4">End Shift Date: </label>
+                            <label className = "block text-gray-700 font-bold mb-4">End Shift Date</label>
                             <input className = "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "endShiftDate" type = "text" value = {user?.endShiftDate} disabled/>
                         </div>
 
                         <div className="flex flex-row justify-center profile-btns">
 
-                          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4">
+                          <button onClick = {onHandleUpdateShifts} className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4">
                             Update Shifts
                           </button>
 
-                          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Update Password
+                          <button onClick = {onHandleEditUser} className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Edit User
                           </button>
 
                         </div>

@@ -23,12 +23,12 @@ const ProductDetails: React.FC = () => {
 
         fetchSingleProductByID();
 
-    }, [])
+    }, [dispatch])
 
     const addToBasketHandler = () => {
+
         try {
             dispatch(addProductToBasket(product._id, quantity) as any);
-
             setItemAddedToBasket((addedToBasket) => !addedToBasket);
         } 
         
@@ -50,11 +50,23 @@ const ProductDetails: React.FC = () => {
 
         <MetaData pageTitle = {`Product Details`} />
 
+         {itemAddedToBasket && (
+
+            <>
+
+               <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+                  <h2>Added To Basket</h2>
+               </div>
+               
+            </>
+            
+         )}
+
         {loading ? <Loader /> : product && (
 
             <>
 
-     <div className="flex flex-row justify-center items-start p-4">
+        <div className = "flex flex-row justify-center items-start p-4">
 
            <div className = "product-details-container">
 
@@ -79,7 +91,7 @@ const ProductDetails: React.FC = () => {
       <span className="bg-gray-200 text-gray-700 py-1 px-4">{quantity}</span>
 
       <button onClick = {() => setQuantity(quantity + 1)} className = "bg-gray-200 text-gray-700 py-1 px-2 rounded-r" type="button">
-         <span>+</span>
+         {product.countInStock !== 0 && <span>+</span>}
       </button>
 
     </div>
