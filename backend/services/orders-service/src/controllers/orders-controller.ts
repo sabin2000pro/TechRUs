@@ -56,7 +56,7 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
     const order = await Order.create({user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
     await order.save(); // Asynchronously save the order into the database
 
-    return response.status(StatusCodes.CREATED).json({success: true, order});
+    return response.status(StatusCodes.CREATED).json({success: true, order, message: "We have received your order"});
 })
 
 export const updateOrderStatus = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {

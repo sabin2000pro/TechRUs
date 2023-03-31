@@ -8,7 +8,6 @@ const initialOrdersState = {
 const singleOrderState = {
     order: {}
 }
-
 interface ISingleOrder {
     loading?: boolean;
     error?: string;
@@ -32,7 +31,7 @@ export const orderReducer = (state = initialOrdersState as any, action: any): an
             return {loading: true, error: undefined, order: {}}
 
         case CREATE_ORDER_SUCCESS:
-            return {...state, loading: false, error: undefined, order: action.payload}
+            return {...state, loading: false, error: undefined, order: action.payload, message: action.payload.message}
 
         case UPDATE_ORDER_STATUS_REQUEST:
             return {loading: true, error: undefined, order: {}}
