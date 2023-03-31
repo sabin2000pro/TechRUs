@@ -23,6 +23,7 @@ export const couponReducer = (state = defaultCouponsState as any, action: any) =
 }
 
 export const singleCouponReducer = (state = defaultSingleCouponState, action: any) => {
+    
     switch(action.type) {
         
         default:

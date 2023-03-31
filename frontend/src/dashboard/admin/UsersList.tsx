@@ -23,7 +23,8 @@ const UsersList: React.FC = () => {
          catch(error) {
 
             if(error) {
-              console.log(`Error Occurred Fetching users : `, error);
+               console.log(`Error Occurred Fetching users : `, error);
+               setUsersFetched((usersFetched) => !usersFetched)
             }
 
          }

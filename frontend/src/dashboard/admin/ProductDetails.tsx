@@ -10,7 +10,7 @@ import CreateReview from '../../components/reviews/CreateReview'
 const ProductDetails: React.FC = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
-    const {loading, error, product} = useSelector((state: any) => state.singleProduct);
+    const {loading, error, product, numberOfProducts} = useSelector((state: any) => state.singleProduct);
     const [quantity, setQuantity] = useState<number>(0);
     const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
     const [itemAddedToBasket, setItemAddedToBasket] = useState<boolean>(false);

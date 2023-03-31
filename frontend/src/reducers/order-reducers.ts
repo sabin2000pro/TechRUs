@@ -47,6 +47,8 @@ export const orderReducer = (state = initialOrdersState as any, action: any): an
     }
 }
 
+// Reducer for handling a Single Customer Order
+
 export const singleOrderReducer = (state = singleOrderState as ISingleOrder, action: any): ISingleOrder => {
 
     switch(action.type) {
