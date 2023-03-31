@@ -5,6 +5,7 @@ import Dropdown from './Dropdown';
 import { fetchProducts } from '../actions/product-actions';
 
 const Header: React.FC = () => {
+  
   const dispatch = useDispatch();
   const {basketItems} = useSelector((state: any) => state.basket);
   const [keyword, setKeyword] = useState<string>("");
@@ -17,13 +18,12 @@ const Header: React.FC = () => {
     currentBasketCount =  basketItems.reduce((acc, item) => acc + Number(item.quantity), 0);
   }
 
-  const handleSearch = (event) => { // When a search event occurs
+  const handleSearch = (event): void => { // When a search event occurs
     setKeyword(event.target.value);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event): void => {
     event.preventDefault();
-
     dispatch(fetchProducts(keyword) as any);
   }
 
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
 
           <div className = "header-container flex justify-between items-center">
 
-        <Link to = '/products'> 
+        <Link to = '/'> 
            <img className = "logo-img" src = '/images/techrus.png' />
         </Link>
 

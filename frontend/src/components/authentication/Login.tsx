@@ -17,6 +17,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const onLoginHandler = (event: React.FormEvent): void => {
+
       try {
         event.preventDefault();
 
@@ -27,6 +28,7 @@ const Login: React.FC = () => {
       } 
       
       catch(error) {
+
          if(error) {
             setFormSubmitted(false);
             setIsLoggedIn(false);
@@ -38,15 +40,12 @@ const Login: React.FC = () => {
 
   
   useEffect(() => {
+
       if(isAuthenticated) {
-         navigate(`/products`)
+         navigate(`/`)
       }
 
-      if(error) {
-        console.log(error);
-      }
-
-  }, [error, isAuthenticated, user, dispatch])
+  }, [isAuthenticated, user, dispatch])
   
   return (
 
@@ -69,10 +68,10 @@ const Login: React.FC = () => {
             {error && (
 
               <>
+                <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+                  <h2>{error}</h2>
+                </div>
 
-            <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
-              <h2>{error}</h2>
-            </div>
               </>
             )}
 

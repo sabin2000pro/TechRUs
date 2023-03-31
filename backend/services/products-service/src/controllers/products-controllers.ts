@@ -81,8 +81,6 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
            return next(new ErrorResponse(`Some entries are missing. Please check again when creating a product`, StatusCodes.BAD_REQUEST));
        }
 
-       // 1. Check to see if the stock for the product is low and if it is true, send low stock e-mail to the inbox
-
        const transporter = createEmailTransporter();
 
        if(stockCount < 3) {
@@ -91,7 +89,6 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
 
        const product = await Product.create({name, description, warranty, price, stockCount, lowStockAlert});
        await product.save();
-
        return response.status(StatusCodes.CREATED).json({success: true, product});
     }
 

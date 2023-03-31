@@ -72,7 +72,6 @@ exports.createNewProduct = (0, express_async_handler_1.default)((request, respon
     if (!name || !description || !warranty || !price || !stockCount || !lowStockAlert) {
         return next(new error_response_1.ErrorResponse(`Some entries are missing. Please check again when creating a product`, http_status_codes_1.StatusCodes.BAD_REQUEST));
     }
-    // 1. Check to see if the stock for the product is low and if it is true, send low stock e-mail to the inbox
     const transporter = (0, email_transporter_1.createEmailTransporter)();
     if (stockCount < 3) {
         (0, exports.sendLowStockEmail)(transporter, request.user.email, stockCount);

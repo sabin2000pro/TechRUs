@@ -61,7 +61,7 @@ const App: React.FC = () => {
 
         <Routes>
 
-           <Route path = '/products' element = {<Home />} />
+           <Route path = '/' element = {<Home />} />
            <Route path = '/product-details/:id' element = {<ProductDetails />} />
            <Route path = '/user-register' element = {<Register />} />
            <Route path = '/my-basket' element = {<BasketScreen />} />

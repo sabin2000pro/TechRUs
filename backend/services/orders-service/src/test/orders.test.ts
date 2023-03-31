@@ -76,8 +76,24 @@ describe("Create New Order Test Suite", () => {
        const updateOrderStatusPayload = {orderStatus: ""}
     })
 
-    it("Create order with invalid data", async () => {
+    it("Create order with INVALID Body data", async () => {
+       try {
 
+       } 
+       
+       catch(error) {
+
+       }
+    })
+
+    it("Delete Order Data Unit Test", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
     })
 
 })

@@ -5,9 +5,9 @@ import { fetchProducts } from '../actions/product-actions';
 import Loader from '../layout/Loader';
 import ProductsList from '../dashboard/admin/ProductsList';
 
-const Home = () => {
+const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const {loading, error, products} = useSelector((state: any) => state.products)
+  const {loading, products} = useSelector((state: any) => state.products)
 
   useEffect(() => {
 
@@ -28,7 +28,7 @@ const Home = () => {
     }
 
     fetchAllProducts();
-  }, [])
+  }, [dispatch])
 
   return (
 
@@ -43,15 +43,12 @@ const Home = () => {
         </div> : (
 
           <>    
-
             <ProductsList products = {products}  />
- 
           </>
 
         )}
 
    </>
-
 
   )
 }

@@ -9,13 +9,13 @@ import Loader from '../../layout/Loader'
 const Register: React.FC = () => { // Register Component
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [registerSuccess, setOnRegisterSuccess] = useState<boolean>(false)
+  const [registerSuccess, setOnRegisterSuccess] = useState<boolean>(false);
 
-  const onRegisterHandler = (event) => {
+  const onRegisterHandler = (event: React.FormEvent<HTMLFormElement>): void => {
 
      try {
 
@@ -28,13 +28,13 @@ const Register: React.FC = () => { // Register Component
             setOnRegisterSuccess((registerSuccess) => !registerSuccess);
             navigate(`/verify-email`)
          }, 1200);
+
      } 
      
      catch(error) {
 
         if(error) {
            setOnRegisterSuccess(false);
-           console.log(error);
         }
 
      }
@@ -67,8 +67,8 @@ const Register: React.FC = () => { // Register Component
                      <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
                </div>
                
-             
-                 <div className = "mb-4 login-container-inputs email-container">
+            
+               <div className = "mb-4 login-container-inputs email-container">
                      <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
                      <input value = {email} onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-9 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder="Username" />
                </div>
@@ -85,9 +85,7 @@ const Register: React.FC = () => { // Register Component
                </div>
              
                <div className = "flex items-center justify-center login-btn-container mb-6">
-             
-               <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline mb-6" type="submit">Register</button>
-             
+                    <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline mb-6" type="submit">Register</button>
                </div>
              
              
@@ -96,7 +94,6 @@ const Register: React.FC = () => { // Register Component
              
         </div>
       
-
      </>
 
 

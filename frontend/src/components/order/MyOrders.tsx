@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react'
 
-const MyOrders = () => {
+const MyOrders: React.FC = () => {
   return (
 
     <>
-      <h2>My Orders Page</h2>
+
+      <h2 className = "heading-secondary">My Orders Page</h2>
     </>
+    
 
   )
 }
