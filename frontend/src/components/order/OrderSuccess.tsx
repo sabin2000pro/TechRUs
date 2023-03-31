@@ -28,7 +28,6 @@ const OrderSuccess: React.FC = () => {
   return (
 
     <>
-    
         {user && !loading && (
 
             <>

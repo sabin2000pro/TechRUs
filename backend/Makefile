@@ -29,6 +29,10 @@ create-networks:
 	- docker network create payments-service
 	- docker network create coupons-service
 	- docker network create reviews-service
+
+run-tests:
+	- cd services/authentication-service && npm run auth:test
+	- cd services/shipping-service && npm run shipping:test
 	
 stop-services:
 	- docker-compose -f docker-compose.yaml -f docker-compose.yaml down --remove-orphans

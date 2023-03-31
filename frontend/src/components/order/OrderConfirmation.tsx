@@ -32,7 +32,10 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
          const userId = user?._id;
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
-         setOrderCreated((orderCreated) => !orderCreated)
+          
+         setTimeout(() => {
+            setOrderCreated((orderCreated) => !orderCreated)
+         }, 2500)
       } 
       
       catch(error) {
