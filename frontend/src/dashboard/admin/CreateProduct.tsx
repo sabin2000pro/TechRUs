@@ -33,8 +33,8 @@ const CreateProduct: React.FC = () => {
         setProductCreated((productCreated) => !productCreated);
         
         setTimeout(() => {
-            navigate("/products");
-        }, 1500)
+            navigate("/");
+        }, 1200)
     }
     
     catch(error) {
