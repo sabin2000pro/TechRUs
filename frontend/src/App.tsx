@@ -89,7 +89,7 @@ const App: React.FC = () => {
            <Route path = '/create-coupon/:productId' element = {<CreateCoupon />} />
            <Route path = '/edit-coupon/:id' element = {<EditCouponDetails />} />
            <Route path = '/user-details/:id' element = {<SingleUser />} />
-           
+         
          </Routes>
 
         <Footer />

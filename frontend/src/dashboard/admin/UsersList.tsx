@@ -7,7 +7,7 @@ import MetaData from '../../layout/MetaData';
 
 const UsersList: React.FC = () => {
     const dispatch = useDispatch();
-    const {loading, users} = useSelector((state: any) => state.users);
+    const {loading, users, error} = useSelector((state: any) => state.users);
     const [usersFetched, setUsersFetched] = useState<boolean>(false);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const UsersList: React.FC = () => {
        const loadAllUsers = async () => {
 
          try {
-          
+
            dispatch(fetchAllUsers() as any);
            setUsersFetched((usersFetched) => !usersFetched);
          }
@@ -31,11 +31,18 @@ const UsersList: React.FC = () => {
        }
 
        loadAllUsers();
+
     }, [])
 
   return (
 
     <>
+
+    {error && (
+       <>
+      
+       </>
+    )}
 
      <MetaData pageTitle = {`Staff Users`} />
 
@@ -43,10 +50,10 @@ const UsersList: React.FC = () => {
 
         <>
 
-    <div className  = "flex justify-center">
+          <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">
-              <div className = "flex flex-row gap-6 product-card-container">
+                <div className = "flex flex-row gap-6 product-card-container">
 
                 {users && users.length === 0 && <h2 className = "heading-secondary">No Users Found</h2>}
        

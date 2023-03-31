@@ -9,7 +9,7 @@ import Loader from '../../layout/Loader'
 const Register: React.FC = () => { // Register Component
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+  const {loading, error} = useSelector((state: any) => state.auth);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -47,6 +47,16 @@ const Register: React.FC = () => { // Register Component
     <>
 
         <MetaData pageTitle = {`Register`} />
+
+        {error && (
+
+            <>
+            <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+               <h2>{error}</h2>
+            </div>
+
+               </>
+         )}
 
             {registerSuccess && (
 
