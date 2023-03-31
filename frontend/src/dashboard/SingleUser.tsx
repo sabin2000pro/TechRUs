@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { fetchUserByID } from '../actions/auth-actions';
+import MetaData from '../layout/MetaData';
 
-const SingleUser: React.FC = () => {
+export interface UserData {
+  id?: string
+}
+
+const SingleUser: React.FC = () => { // Single User Functional Component
   const dispatch = useDispatch();
   const {loading, user, error} = useSelector((state: any) => state.singleUser);
   const {id} = useParams<string>();
@@ -13,13 +18,11 @@ const SingleUser: React.FC = () => {
 
   useEffect(() => {
 
-      const loadSingleUser = async () => {
+      const loadSingleUser = async () => { // Function that loads the user from the database. Returns a promise containing the user object
+
          try {
             dispatch(fetchUserByID(id as any) as any)
-
             setUserLoaded((userLoaded) => !userLoaded);
-
-            console.log(`Loaded User Details : `, user);
          } 
          
          catch(error: any) {
@@ -38,6 +41,8 @@ const SingleUser: React.FC = () => {
   return (
 
     <>
+
+      <MetaData pageTitle = {`User ${user._id}`} />
       <h2 className = "heading-secondary">{user.username}</h2>
     </>
 
