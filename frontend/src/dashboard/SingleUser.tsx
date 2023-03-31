@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { fetchUserByID } from '../actions/auth-actions';
 import MetaData from '../layout/MetaData';
+import { useNavigate } from 'react-router-dom';
 
 const SingleUser: React.FC = () => { // Single User Functional Component
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {loading, user, error} = useSelector((state: any) => state.singleUser);
   const {id} = useParams<string>();
   const [userLoaded, setUserLoaded] = useState<boolean | undefined>(false);
@@ -22,7 +25,7 @@ const SingleUser: React.FC = () => { // Single User Functional Component
          catch(error: any) {
 
            if(error) {
-              return console.error(error);
+              setUserLoaded(false);
            }
 
          }
@@ -32,13 +35,16 @@ const SingleUser: React.FC = () => { // Single User Functional Component
 
   }, [dispatch])
 
-  const onHandleUpdateShifts = (event: any): void => {
-    try {
+  const onHandleUpdateShifts = (): void => {
 
+    try {
+       
     } 
     
     catch(error) {
-
+       if(error) {
+        console.error(error);
+       }
     }
 
   }
@@ -105,9 +111,9 @@ const SingleUser: React.FC = () => { // Single User Functional Component
                             Update Shifts
                           </button>
 
-                          <button onClick = {onHandleEditUser} className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Edit User
-                          </button>
+               <button onClick = {onHandleEditUser} className = "bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      Edit User
+              </button>
 
                         </div>
                         

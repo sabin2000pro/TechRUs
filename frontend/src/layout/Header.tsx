@@ -26,7 +26,6 @@ const Header: React.FC = () => {
     dispatch(fetchProducts(keyword) as any);
   }
 
-
   return (
 
     <>
@@ -68,7 +67,7 @@ const Header: React.FC = () => {
 
 
  </header>
- 
+
     </>
 
 

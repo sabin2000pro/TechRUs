@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Menu} from '@headlessui/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../actions/auth-actions'
 
@@ -8,13 +8,28 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Dropdown = () => {
+const Dropdown: React.FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [isLoggedOut, setIsLoggedOut] = useState<boolean>(false);
 
     const onLogoutHandler = () => {
-       dispatch(logout() as any);
+        try {
+           dispatch(logout() as any);
+           setIsLoggedOut((isLoggedOut) => !isLoggedOut);
 
-       
+           setTimeout(() => {
+             navigate(`/user-login`)
+           }, 1300)
+        } 
+        
+        catch(error) {
+           if(error) {
+            console.error(`Error : `, error);
+
+            setIsLoggedOut(false);
+           }
+        }
     }
 
   return (
@@ -39,7 +54,7 @@ const Dropdown = () => {
 
           <Link to = '/my-profile' className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
                My Profile
-                </Link>
+             </Link>
 
               )}
 
