@@ -50,8 +50,6 @@ const UsersList: React.FC = () => {
        </>
     )}
 
-    
-
        {loading ? <Loader /> : (
 
         <>
@@ -59,13 +57,14 @@ const UsersList: React.FC = () => {
           <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">
+
                 <div className = "flex flex-row gap-6 product-card-container">
 
                 {users && users.length === 0 && <h2 className = "heading-secondary">No Users Found</h2>}
        
-                   {users.map((user: any) => (
+                    {users.map((user: any) => (
 
-              <div>
+                <div>
 
                    <div className="bg-white shadow-md rounded px-12 py-6 product-card">
  
@@ -81,22 +80,18 @@ const UsersList: React.FC = () => {
 
                           </div>
 
-         
                     </div>
 
               
               ))}
 
            </div>
-     
-   </div>
- 
- 
-   </div>
-   
 
+   </div>
  
-        </>
+</div>
+   
+      </>
        )}
 
       

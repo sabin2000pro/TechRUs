@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewProduct } from '../../actions/product-actions';
 import { useNavigate } from 'react-router-dom';
+import MetaData from '../../layout/MetaData';
 
 const CreateProduct: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,10 @@ const CreateProduct: React.FC = () => {
   const [stockCount, setStockCount] = useState<number>(0);
   const [lowStockAlert, setLowStockAlert] = useState(0);
 
+  const [productCreated, setProductCreated] = useState<boolean>(false);
   const {loading, error, user} = useSelector((state: any) => state.auth);
 
-  const handleProductCreate = async (event) => {
+  const handleProductCreate = async (event: any) => {
 
     try {
       
@@ -23,12 +25,12 @@ const CreateProduct: React.FC = () => {
 
         dispatch(createNewProduct(name, description, warranty, price, stockCount, lowStockAlert) as any)
 
-        alert("Product Created")
-
         setName("");
         setDescription("");
         setWarranty("");
         setPrice(0);
+
+        setProductCreated((productCreated) => !productCreated);
         
         setTimeout(() => {
             navigate("/products");
@@ -48,6 +50,8 @@ const CreateProduct: React.FC = () => {
   return (
 
     <>
+
+    <MetaData pageTitle = {`Inventory System`} />
 
 <div className = "flex justify-center items-center h-screen login-container">
 

@@ -57,26 +57,6 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
    
  </div>
 
- {/* <div className="flex justify-center">
-
-  <ul className="pagination">
-
-    {Array.from({ length: totalPages }, (_, index) => (
-
-      <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-
-        <button className="page-link rounded px-2 basket-btn" onClick = {() => handlePageChange(index + 1)}>
-          {index + 1}
-        </button>
-
-
-      </li>
-    ))}
-  </ul>
-
-
-</div> */}
-
     </>
 
   )

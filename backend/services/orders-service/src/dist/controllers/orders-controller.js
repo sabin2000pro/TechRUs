@@ -52,7 +52,7 @@ exports.createNewOrder = (0, express_async_handler_1.default)((request, response
     }
     const order = yield order_model_1.Order.create({ user, orderItems, shippingInformation, orderStatus, paymentInformation, itemPrice, taxPrice, shippingPrice, totalPrice });
     yield order.save(); // Asynchronously save the order into the database
-    return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, order });
+    return response.status(http_status_codes_1.StatusCodes.CREATED).json({ success: true, order, message: "We have received your order" });
 }));
 exports.updateOrderStatus = (0, express_async_handler_1.default)((request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { orderStatus } = request.body; // Extract the order status from the request body
