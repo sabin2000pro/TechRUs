@@ -18,14 +18,14 @@ const ProductDetails: React.FC = () => {
     useEffect(() => {
 
         const fetchSingleProductByID = async () => {
-             dispatch(fetchSingleProduct(id as any) as any);
+         dispatch(fetchSingleProduct(id as any) as any);
         }
 
-        fetchSingleProductByID();
+        fetchSingleProductByID(); // Invoke function that fetches the single product
 
     }, [dispatch])
 
-    const addToBasketHandler = () => {
+    const addToBasketHandler = (): void => { // Function that adds a product to basket
 
         try {
             dispatch(addProductToBasket(product._id, quantity) as any);
