@@ -34,8 +34,7 @@ export const PaymentSchema = new mongoose.Schema<IPaymentDocument>({
 
     paymentMethod: { // The payment method used for the order
         type: String,
-        enum: ['stripe'],
-        required: true
+        enum: ['stripe']
       },
 
       stripePaymentId: { // The Stripe Payment ID generated from the payment
