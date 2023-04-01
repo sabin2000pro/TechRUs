@@ -3,7 +3,7 @@ import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, LOAD_USER_SUCCESS, LOAD_U
 
 const initialAuthState = sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user") as any) : {}
 
-export const authReducer = (state = {initialAuthState} as any, action: any) => {
+export const authReducer = (state = {initialAuthState} as any, action: any): any => {
 
     switch(action.type) {
 
