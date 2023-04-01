@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import MetaData from '../../layout/MetaData';
 
 const Dashboard: React.FC = () => {
+
   const dispatch = useDispatch();
   const [productsLoaded, setProductsLoaded] = useState<boolean>(false);
   const {} = useSelector((state: any) => state.products);
@@ -9,9 +11,10 @@ const Dashboard: React.FC = () => {
   return (
     
     <>
+    
+      <MetaData pageTitle = {`Store Dashboard`} />
+      <h2 className = "heading-primary">Store Inventory Dashboard</h2>
 
-  
-      <h2>Store Inventory Dashboard</h2>
     </>
 
   )

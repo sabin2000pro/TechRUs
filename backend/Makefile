@@ -12,7 +12,7 @@ build-services:
 	- cd services/authentication* && docker build -t sabin2000/techrus-authentication-service . && npm run build
 	- cd services/products* && docker build -t sabin2000/techrus-products-service . && npm run build
 	- cd services/reviews* && docker build -t sabin2000/techrus-reviews-service . && npm run build
-	- cd services/shipping-service* && docker-build -t sabin2000/techrus-shipping-service . && npm run build
+	- cd services/shipping-service* && docker build -t sabin2000/techrus-shipping-service . && npm run build
 	- cd services/api-gateway* && docker build -t sabin2000/techrus-api-gateway-service . && npm run build:api-gateway
 	- cd services/orders* && docker build -t sabin2000/techrus-orders-service . && npm run build:orders-service
 	- cd services/payments* && docker build -t sabin2000/techrus-payments-service . && npm run build

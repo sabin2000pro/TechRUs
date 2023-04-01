@@ -13,7 +13,6 @@ interface IEditShiftDatesProps {
 const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component that allows the store manager to edit the staff users start / end shift dates
     const [startShiftDate, setStartShiftDate] = useState<Date>(new Date(Date.now()));
     const [endShiftDate, setEndShiftDate] = useState<Date>(new Date(Date.now()));
-    
     const [shiftsUpdated, setShiftsUpdated] = useState<boolean>(false);
     const dispatch = useDispatch();
 
@@ -21,6 +20,7 @@ const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component 
 
     const handleEditUserShift = (event: any): void => {
     
+
       try {
          event.preventDefault();
 
