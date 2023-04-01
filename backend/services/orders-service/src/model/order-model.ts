@@ -33,6 +33,30 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
             required: true
         },
 
+        itemPrice: { // Items price being ordered
+            type: Number,
+            required: [true, 'Please ensure the order has the price of the item being ordered'],
+            default: 0.0
+        },
+    
+        taxPrice: { // The tax price incurred as part of the order
+            type: Number,
+            required: [true, "Please ensure that this order has the tax price of the item being ordered"],
+            default: 0.0
+        },
+    
+        shippingPrice: { // Shipping price of the order
+            type: Number,
+            required: [true, "Please ensure that this order has the shipping price of the item being ordered"],
+            default: 0.00
+        },
+    
+        totalPrice: { // Total price for the order
+            type: Number,
+            required: [true, "Please ensure that this order contains the total price for the order"],
+            default: 0.00
+        },
+
         price: { // Price of the product
             type: Number,
             required: true
@@ -40,7 +64,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
         product: { // Product ID that is being ordered
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Product",
+            ref: "product",
             required: true
         }
 
@@ -79,30 +103,6 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         type: String,
         enum: ['received', 'pending', 'completed', 'processing', 'canceled', 'refunded'],
         default: 'received' // By default, when an order is placed, it is received
-    },
-
-    itemPrice: { // Items price being ordered
-        type: Number,
-        required: [true, 'Please ensure the order has the price of the item being ordered'],
-        default: 0.0
-    },
-
-    taxPrice: { // The tax price incurred as part of the order
-        type: Number,
-        required: [true, "Please ensure that this order has the tax price of the item being ordered"],
-        default: 0.0
-    },
-
-    shippingPrice: { // Shipping price of the order
-        type: Number,
-        required: [true, "Please ensure that this order has the shipping price of the item being ordered"],
-        default: 0.00
-    },
-
-    totalPrice: { // Total price for the order
-        type: Number,
-        required: [true, "Please ensure that this order contains the total price for the order"],
-        default: 0.00
     },
 
     createdAt: {

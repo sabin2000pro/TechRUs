@@ -23,6 +23,8 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
          const userId = user?._id;
 
          console.log(`Inside create order - current user : `, userId);
+         console.log(`Order Items : `, orderItems);
+         console.log(`Shipping Info : `, shippingInformation);
 
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
           
