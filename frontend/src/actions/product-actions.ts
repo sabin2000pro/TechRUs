@@ -21,6 +21,7 @@ export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => as
     catch(error) {
 
       if(error) {
+        console.log(`Fetch Products : `, error);
         dispatch({type: FETCH_ALL_PRODUCTS_FAIL, payload: error.data.response.message});
       }
 

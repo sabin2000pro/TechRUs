@@ -8,19 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startCouponsServer = void 0;
+require('dotenv').config();
 const app_1 = require("./app");
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config({ path: "/Users/sabin2000/Documents/TechRUs/backend/services/coupons/config.env" });
-const port = process.env.PORT || 5402;
+const COUPONS_SERVICE_PORT = process.env.COUPONS_SERVICE_PORT || 5402;
 // Start of authentication server
 const startCouponsServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    return app_1.app.listen(port, () => {
-        console.log(`Coupons Service Server is listening for requests on port ${port} in mode: ${process.env.NODE_ENV}`);
+    return app_1.app.listen(COUPONS_SERVICE_PORT, () => {
+        console.log(`Coupons Service Server is listening for requests on port ${COUPONS_SERVICE_PORT} in mode: ${process.env.NODE_ENV}`);
     });
 });
 exports.startCouponsServer = startCouponsServer;

@@ -7,14 +7,16 @@ import ProductsList from '../dashboard/admin/ProductsList';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const {loading, products, numberOfProducts} = useSelector((state: any) => state.products)
+  const {loading, products} = useSelector((state: any) => state.products)
 
   useEffect(() => {
 
     const fetchAllProducts = async () => {
 
         try {
+          
           dispatch(fetchProducts() as any)
+          console.log(`Fetched Products : `, products);
 
         } 
         
@@ -43,7 +45,7 @@ const Home: React.FC = () => {
         </div> : (
 
           <>    
-            <ProductsList products = {products} numberOfProducts = {numberOfProducts}  />
+            <ProductsList products = {products}  />
           </>
 
         )}

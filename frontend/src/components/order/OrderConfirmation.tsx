@@ -32,6 +32,8 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
          event.preventDefault();
          const userId = user?._id;
 
+         console.log(`Inside create order - current user : `, userId);
+
          dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
           
          setTimeout(() => {
@@ -81,20 +83,24 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
     <h2 className = "heading-secondary">Confirm Your Order Below</h2>
 
+     <div className = "place-order-container">
+        <button className = "basket-btn">Place Order</button>
+     </div>
+
       <form onSubmit = {handleCreateOrder} method = "POST">
 
-           <div className ="flex justify-between items-center mb-8 order-container">
+        <div className ="flex justify-between items-center mb-8 order-container">
 
      <div className = "confirm-container">
     
-      <h2 className ="text-lg font-semibold">Shipping Information</h2>
+      <h2 className ="heading-secondary">Your Shipping Information</h2>
 
-        <p className ="text-black-600 mt-2">
-          User ID : {shippingInformation.user}
+        <p className = "text-black-600 mt-2">
+          <h4>Address: {shippingInformation.address}</h4>
         </p>
 
         <p className = "text-black-600 mt-2">
-          Address: {shippingInformation.address}
+          Postal Code: {shippingInformation.postalCode}
         </p>
 
         
@@ -113,11 +119,11 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
           </div>
 
           <div className = "flex items-center justify-center">
-            <p className = "text-xl font-medium mb-4">Product Price: £{basketItem.price}</p>
+              <p className = "text-xl font-medium mb-4">Product Price £{basketItem.price}</p>
           </div>
 
           <div className = "flex items-center justify-center">
-            <p className = "text-xl font-medium mb-4">Quantity: {basketItem.quantity}</p>
+              <p className = "text-xl font-medium mb-4">Quantity {basketItem.quantity}</p>
           </div>
 
           <img className = "product-img-basket ml-5" src = {basketItem.image} alt = "Basket Image Product" />

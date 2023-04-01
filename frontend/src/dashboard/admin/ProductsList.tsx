@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import MetaData from '../../layout/MetaData';
 
 export interface IProductsList {
-    products: any,
-    numberOfProducts: number
+    products: any
 }
 
-const ProductsList: React.FC<IProductsList> = ({products, numberOfProducts}: IProductsList) => {
+const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
 
   return (
 
@@ -19,8 +18,6 @@ const ProductsList: React.FC<IProductsList> = ({products, numberOfProducts}: IPr
             <div className = "flex w-72 justify-center items-center p-4">
 
               <div className="flex flex-row gap-6 product-card-container">
-
-                {numberOfProducts > 0 && <h2 className = "heading-secondary">{numberOfProducts}</h2>}
 
         {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
  

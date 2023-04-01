@@ -399,7 +399,7 @@ font-weight: bold;
 .basket-card {
   margin-left: 300px;
   margin-top: 170px;
-  height: 150%;
+  height: 200px;
 }
 
 .basket-btn:hover {
@@ -411,6 +411,7 @@ font-weight: bold;
   width: 200px;
   height: auto;
   margin-top: -200px;
+  background-color: red;
 }
 
 .checkout-card {
@@ -534,4 +535,16 @@ font-weight: bold;
 
 .modal-container {
   transition: all 0.3s;
+}
+
+.place-order-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.confirm-container {
+  margin-left: 1500px;
+  margin-bottom: -280px;
 }

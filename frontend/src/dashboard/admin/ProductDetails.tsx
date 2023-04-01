@@ -84,7 +84,7 @@ const ProductDetails: React.FC = () => {
 
            <div className = "product-details-container">
 
-        <img className = "product-img" src = {product.image} alt = "Airpods Image" />
+        <img className = "product-img" src = {product.image} alt = "Product Image" />
 
         </div>
 
@@ -99,7 +99,7 @@ const ProductDetails: React.FC = () => {
         <div className = "flex items-center">
 
       <button disabled = {quantity === 0} onClick = {() => setQuantity(quantity - 1)} className = "bg-gray-200  py-1 px-2 rounded-l" type = "button">
-         <span>-</span>
+          <span>-</span>
       </button>
 
       <span className="bg-gray-200 text-gray-700 py-1 px-4">{quantity}</span>
