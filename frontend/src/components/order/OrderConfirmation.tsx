@@ -18,8 +18,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
       try {
 
          event.preventDefault();
-         console.log(`Order Items : `, orderItems);
-         console.log(`Shipping Info : `, shippingInformation);
+
 
         dispatch(createNewOrder(orderItems, shippingInformation) as any);  
                
@@ -27,6 +26,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
             setOrderCreated((orderCreated) => !orderCreated)
             navigate(`/order-success`)
          }, 2500)
+
+         localStorage.clear();
+         sessionStorage.clear();
 
       } 
       
