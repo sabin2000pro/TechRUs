@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUser } from '../../actions/auth-actions'
 import { useNavigate } from 'react-router-dom'
 
-const Profile = () => { // User personal profile page
+const Profile: React.FC = () => { // User personal profile page
     const dispatch = useDispatch();
     const {user} = useSelector((state: any) => state.auth);
     const navigate = useNavigate();
+    const [userFetched, setUserFetched] = useState<boolean>(false);
 
     useEffect(() => {
 

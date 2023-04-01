@@ -10,8 +10,7 @@ export const fetchAllShippingDetails = (keyword = '', page = 1) => async (dispat
      dispatch({type: FETCH_SHIPPING_INFO_REQUEST});
 
      const {data} = await axios.get(`http://localhost:5411/api/v1/shipping?keyword=${keyword}`);
-     console.log(`Shipping Details :`, data);
-
+     
      dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   

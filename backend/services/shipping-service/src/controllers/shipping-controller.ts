@@ -14,6 +14,10 @@ export const fetchShippingDetails = asyncHandler(async (request: any, response: 
         return next(new ErrorResponse("No shipping details found.", StatusCodes.BAD_REQUEST));
     }
 
+    response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
     return response.status(StatusCodes.OK).json({success: true, shipping});
 })
 
@@ -41,6 +45,10 @@ export const createNewShipping = async (request: any, response: Response, next: 
 
     const shipping = await Shipping.create({user, address, city, country, postalCode, phoneNo});
     await shipping.save(); // Save the shipping resource to the database
+
+    response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
     return response.status(StatusCodes.CREATED).json({success: true, shipping});
 }
@@ -94,6 +102,7 @@ export const editShippingDetails = async (request: any, response: Response, next
    shipping.country = request.body.country;
    shipping.postalCode = request.body.postalCode;
    shipping.phoneNo = request.body.phoneNo;
+
    return response.status(StatusCodes.OK).json({success: true, message: "Shipping Details Updated"})
 
 }

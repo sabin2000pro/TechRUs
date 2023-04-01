@@ -8,7 +8,7 @@ export const startShippingServer = async () => {
 
      try {
         return app.listen(SHIPPING_SERVICE_PORT, () => {
-            console.log(`Orders Service Service Server is listening for requests on port ${SHIPPING_SERVICE_PORT} in mode: ${process.env.SHIPPING_SERVICE_PORT}`);
+            console.log(`The Shipping Service Server is listening for requests on port ${SHIPPING_SERVICE_PORT} in mode: ${process.env.SHIPPING_SERVICE_PORT}`);
          });
      }
      

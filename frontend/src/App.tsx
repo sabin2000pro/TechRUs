@@ -28,9 +28,11 @@ import CreateCoupon from './dashboard/admin/coupons/CreateCoupon';
 import EditCouponDetails from './dashboard/admin/coupons/EditCouponDetails';
 import SingleUser from './dashboard/SingleUser';
 import EditUserShiftDates from './components/users/EditUserShiftDates';
+import Orders from './dashboard/orders/Orders';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
+   const [keyFetched, setKeyFetched] = useState<boolean>(false);
 
    // WILL BE USED FOR THE PAYMENTS SERVICE (WE NEED THE API KEY)
    useEffect(() => {
@@ -43,6 +45,7 @@ const App: React.FC = () => {
          }
          
          catch(error) {
+
             if(error) {
                return console.error(error);
             }
@@ -82,6 +85,7 @@ const App: React.FC = () => {
            <Route path = '/admin-dashboard/edit-product/:id' element = {<EditProduct /> } />
            <Route path = '/admin-dasboard/upload-product-photo' element = {<UploadProductPhoto />} />
            <Route path = '/admin-dashboard/users' element = {<UsersList />} />
+           <Route path = '/admin-dashboard/orders' element = {<Orders />} />
            <Route path = '/shipping' element = {<ShippingDetails />} />
            <Route path = '/order-confirm' element = {<OrderConfirmation /> } />
            <Route path = '/order-success' element = {<OrderSuccess />} />
