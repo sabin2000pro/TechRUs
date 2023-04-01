@@ -28,13 +28,13 @@ export const fetchAllOrders = () => async (dispatch: Dispatch): Promise<void> =>
 
 }
 
-export const createNewOrder = (user: string, orderItems: any, shippingInformation: any, itemPrice: number, taxPrice: number, shippingPrice: number, totalPrice: number) => async (dispatch: Dispatch): Promise<void> => {
+export const createNewOrder = (orderItems: any, shippingInformation: any) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
        dispatch({type: CREATE_ORDER_REQUEST});
 
-       const {data} = await axios.post(`http://localhost:5403/api/v1/orders`, {user, orderItems, shippingInformation, itemPrice, taxPrice, shippingPrice, totalPrice});
+       const {data} = await axios.post(`http://localhost:5403/api/v1/orders`, {orderItems, shippingInformation});
        console.log(`Order Data : `, data);
 
        dispatch({type: CREATE_ORDER_SUCCESS, payload: data.order});

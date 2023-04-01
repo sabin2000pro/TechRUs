@@ -16,6 +16,7 @@ const BasketScreen: React.FC = () => {
   const taxPrice = basketSubtotal * applicableTax;
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
   const totalPrice = basketSubtotal + taxPrice + shippingPrice;
+  const itemPrice = basketItems.price;
 
   const onRemoveProductHandler = (id: string): void => {
 
@@ -43,10 +44,10 @@ const BasketScreen: React.FC = () => {
   const handleShippingNavigate = (): void => {
 
     const orderItems = basketItems.map((item: any) => {
-       return {product: item.product, taxPrice, shippingPrice, totalPrice};
+       return {product: item.product, taxPrice, shippingPrice, totalPrice, itemPrice};
     });
 
-    localStorage.setItem("orderItems", JSON.stringify(orderItems));
+    sessionStorage.setItem("orderItems", JSON.stringify(orderItems));
 
     navigate('/shipping')
 
@@ -58,7 +59,8 @@ const BasketScreen: React.FC = () => {
 
      <MetaData pageTitle = {`My Basket`} />
 
-     {productRemoved && (
+        {productRemoved && (
+          
        <>
              <div className="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
                   <h2>Product Removed</h2>

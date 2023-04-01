@@ -9,9 +9,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const [orderCreated, setOrderCreated] = useState<boolean>(false);
 
   const {error} = useSelector((state: any) => state.orders);
-
-  const user = JSON.parse(sessionStorage.getItem("user") as any);
-  const orderItems = JSON.parse(localStorage.getItem("orderItems") as any);
+  const orderItems = JSON.parse(sessionStorage.getItem("orderItems") as any);
   const shippingInformation = JSON.parse(localStorage.getItem("shippingInformation") as any);
   const basketItems = JSON.parse(localStorage.getItem("basketItems") as any);
 
@@ -23,8 +21,8 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
          console.log(`Order Items : `, orderItems);
          console.log(`Shipping Info : `, shippingInformation);
 
-         dispatch(createNewOrder(shippingInformation.user, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
-          
+        dispatch(createNewOrder(orderItems, shippingInformation) as any);  
+               
          setTimeout(() => {
             setOrderCreated((orderCreated) => !orderCreated)
             navigate(`/order-success`)
