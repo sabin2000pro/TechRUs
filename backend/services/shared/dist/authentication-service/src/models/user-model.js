@@ -132,7 +132,10 @@ exports.UserSchema.methods.fetchAuthToken = function () {
 exports.UserSchema.methods.comparePasswords = function (enteredPassword) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, bcryptjs_1.default.compare(enteredPassword, this.password)];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, bcryptjs_1.default.compare(enteredPassword, this.password)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
         });
     });
 };

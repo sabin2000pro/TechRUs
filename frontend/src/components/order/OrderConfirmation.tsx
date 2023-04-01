@@ -20,13 +20,10 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
       try {
 
          event.preventDefault();
-         const userId = user?._id;
-
-         console.log(`Inside create order - current user : `, userId);
          console.log(`Order Items : `, orderItems);
          console.log(`Shipping Info : `, shippingInformation);
 
-         dispatch(createNewOrder(userId, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
+         dispatch(createNewOrder(shippingInformation.user, orderItems, shippingInformation, orderItems.itemPrice, orderItems.taxPrice, orderItems.shippingPrice, orderItems.totalPrice) as any);
           
          setTimeout(() => {
             setOrderCreated((orderCreated) => !orderCreated)

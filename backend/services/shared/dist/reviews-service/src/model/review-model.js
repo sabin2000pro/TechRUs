@@ -12,6 +12,10 @@ var ReviewSchema = new mongoose_1.default.Schema({
         ref: "Product",
         required: [true, "Please provide the product ID for this review"]
     },
+    title: {
+        type: String,
+        required: [true, "Please give this rating a title"]
+    },
     rating: {
         type: Number,
         required: [true, "Please specify a valid rating for this review"]

@@ -15,12 +15,6 @@ export interface IOrderDocument {
 
 export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
-    user: { // The user which the order relats to
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "Please include the User ID that belongs to this order"]
-    },
-
     orderItems: [{ // Array of all the order items being ordered
         
         name: { // Name of the product being ordered
@@ -30,7 +24,8 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
 
         quantity: { // Quantity of the product being ordered
             type: Number,
-            required: true
+            required: [true, "Please specify the product quantity"],
+            default: 0
         },
 
         itemPrice: { // Items price being ordered
@@ -55,11 +50,6 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
             type: Number,
             required: [true, "Please ensure that this order contains the total price for the order"],
             default: 0.00
-        },
-
-        price: { // Price of the product
-            type: Number,
-            required: true
         },
 
         product: { // Product ID that is being ordered

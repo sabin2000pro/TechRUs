@@ -46,14 +46,14 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
 )
 
 export const createNewOrder = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    const {user, orderItems, shippingInformation} = request.body;
+    const {orderItems, shippingInformation} = request.body;
     
     // Validate the request body before creating a new instance of order
     if(!orderItems || !shippingInformation) {
         return next(new ErrorResponse(`Some order fields are missing. Please check your entries`, StatusCodes.BAD_REQUEST));
     }
 
-    const order = await Order.create({user, orderItems, shippingInformation});
+    const order = await Order.create({orderItems, shippingInformation});
     await order.save(); // Asynchronously save the order into the database
 
     return response.status(StatusCodes.CREATED).json({success: true, order, message: "We have received your order"});
