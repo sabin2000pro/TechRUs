@@ -83,9 +83,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
       <form onSubmit = {handleCreateOrder} method = "POST">
 
-      <div className ="flex justify-between items-center mb-8 order-container">
+           <div className ="flex justify-between items-center mb-8 order-container">
 
-     <div>
+     <div className = "confirm-container">
     
       <h2 className ="text-lg font-semibold">Shipping Information</h2>
 
