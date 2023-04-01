@@ -38,7 +38,6 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
           
          setTimeout(() => {
             setOrderCreated((orderCreated) => !orderCreated)
-
             navigate(`/order-success`)
          }, 2500)
 
@@ -60,11 +59,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
     {error && (
 
       <>
-
-        <div className ="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
-          <h2>{error.message}</h2>
-        </div>
-
+          <div className ="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+            <h2>{error.message}</h2>
+          </div>
       </>
 
     )}
@@ -74,21 +71,22 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
             <>
 
              <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
-                  <h2>Your order has been placed successfully</h2>
-               </div>
+                <h2>Your order has been placed successfully</h2>
+              </div>
 
             </>
      )}
 
 
-    <h2 className = "heading-secondary">Confirm Your Order Below</h2>
+<form onSubmit = {handleCreateOrder} method = "POST">
+
+    <h2 className = "heading-secondary">Confirm Your Order</h2>
 
      <div className = "place-order-container">
         <button className = "basket-btn">Place Order</button>
      </div>
 
-      <form onSubmit = {handleCreateOrder} method = "POST">
-
+      
         <div className ="flex justify-between items-center mb-8 order-container">
 
      <div className = "confirm-container">
@@ -100,7 +98,15 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
         </p>
 
         <p className = "text-black-600 mt-2">
-          Postal Code: {shippingInformation.postalCode}
+          <h4>Postal Code: {shippingInformation.postalCode}</h4>
+        </p>
+
+        <p className = "text-black-600 mt-2">
+          <h4>City : {shippingInformation.city}</h4>
+        </p>
+
+        <p className = "text-black-600 mt-2">
+           <h4>Country: {shippingInformation.country}</h4>
         </p>
 
         
