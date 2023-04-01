@@ -30,13 +30,13 @@ export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => as
     }
 }
 
-export const fetchSingleProduct = (productId: string) => async (dispatch: Dispatch): Promise<void> => {
+export const fetchSingleProduct = (id: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
        dispatch({type: FETCH_SINGLE_PRODUCT_REQUEST});
 
-       const {data} = await axios.get(`${PRODUCTS_ENDPOINT}/${productId}`);
+       const {data} = await axios.get(`${PRODUCTS_ENDPOINT}/${id}`);
        dispatch({type: FETCH_SINGLE_PRODUCT_SUCCESS, payload: data.product});
 
     } 

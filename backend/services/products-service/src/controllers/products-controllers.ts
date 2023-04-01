@@ -71,6 +71,10 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
            return next(new ErrorResponse(`Product with that ID cannot be found`, StatusCodes.BAD_REQUEST));
         }
 
+        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
         return response.status(StatusCodes.OK).json({success: true, product});
     }
     
