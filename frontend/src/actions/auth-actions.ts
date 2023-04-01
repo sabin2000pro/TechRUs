@@ -12,7 +12,7 @@ export const register = (username: string, email: string, password: string) => a
         dispatch({type: REGISTER_USER_REQUEST})
         const config = processConfigHeader();
 
-        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/register`, {username, email, password}, config);
+        const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/register`, {username, email, password}, config);
         const user = sessionStorage.setItem("user", JSON.stringify(data.user));
         
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
@@ -34,7 +34,7 @@ export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
         const config = processConfigHeader();
 
-        await axios.get(`http://localhost:5400/api/v1/auth/logout`, config);
+        await axios.get(`http://207.154.209.57/api/v1/auth/logout`, config);
         dispatch({type: LOGOUT_USER_SUCCESS});
         sessionStorage.clear();       // Clear session storage
     } 
