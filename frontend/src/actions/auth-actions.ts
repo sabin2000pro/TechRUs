@@ -57,7 +57,7 @@ export const verifyEmailAddress = (userId: string, OTP: string) => async (dispat
        dispatch({type: VERIFY_USER_EMAIL_REQUEST});
        const config = processConfigHeader();
 
-       const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-email`, {userId, OTP}, config);
+       const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/verify-email`, {userId, OTP}, config);
        dispatch({type: VERIFY_USER_EMAIL_SUCCESS, payload: data.message});
 
     } 
@@ -84,7 +84,7 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
         
         const config = processConfigHeader();
 
-        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/login`, {email, password}, config);
+        const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/login`, {email, password}, config);
         dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
 
         sessionStorage.setItem("token", JSON.stringify(data.token));
@@ -107,7 +107,7 @@ export const verifyLoginMfa = (userId: string, mfaToken: string) => async (dispa
   try {
     dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
     
-    const {data} = await axios.post(`http://localhost:5400/api/v1/auth/verify-login`, {userId, mfaToken});
+    const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/verify-login`, {userId, mfaToken});
     console.log(`Login MFA Data :`, data);
 
     dispatch({type: VERIFY_LOGIN_MFA_SUCCESS, payload: data.message});
