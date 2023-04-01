@@ -71,6 +71,12 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
     }],
 
     shippingInformation: { // Shipping Information Object will be part of the order
+        
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+            required: [true, "Please provide the ID that this shipping info belongs to"]
+        },
 
         address: {
             type: String,
