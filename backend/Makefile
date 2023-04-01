@@ -16,6 +16,7 @@ build-services:
 	- cd services/api-gateway* && docker build -t sabin2000/techrus-api-gateway-service . && npm run build:api-gateway
 	- cd services/orders* && docker build -t sabin2000/techrus-orders-service . && npm run build:orders-service
 	- cd services/payments* && docker build -t sabin2000/techrus-payments-service . && npm run build
+	- cd services/coupons* && docker build -t sabin2000/techrus-coupons-service . && npm run build
 
 run-app:
 	- docker-compose up --build

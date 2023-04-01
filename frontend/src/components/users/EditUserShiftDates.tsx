@@ -7,12 +7,8 @@ import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 
-interface IEditShiftDatesProps {
-    startShiftDate: Date;
-    endShiftDate: Date
-}
 
-const EditUserShiftDates: React.FC<IEditShiftDatesProps> = () => { // Component that allows the store manager to edit the staff users start / end shift dates
+const EditUserShiftDates: React.FC = () => { // Component that allows the store manager to edit the staff users start / end shift dates
     const [startShiftDate, setStartShiftDate] = useState<Date>(new Date(Date.now()));
     const [endShiftDate, setEndShiftDate] = useState<Date>(new Date(Date.now()));
     const [shiftsUpdated, setShiftsUpdated] = useState<boolean>(false);
