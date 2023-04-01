@@ -129,11 +129,11 @@ export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void>
     try {
 
         dispatch({type: LOAD_USER_REQUEST})
-        
+
         const token = JSON.parse(sessionStorage.getItem("token") as any);
 
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
-        const {data} = await axios.get(`http://localhost:5400/api/v1/auth/me`, config);
+        const {data} = await axios.get(`http://207.154.209.57/api/v1/auth/me`, config);
 
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user});
     } 
@@ -157,11 +157,9 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
         dispatch({type: FORGOT_PASSWORD_REQUEST});
 
         const config = processConfigHeader();
-        const {data} = await axios.post(`http://localhost:5400/api/v1/auth/forgot-password`, {email}, config);
+        const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/forgot-password`, {email}, config);
         const message = data.message;
 
-        console.log(`Forgot Password Data : `, data);
-        console.log(`Forgot password message : `, message);
 
         dispatch({type: FORGOT_PASSWORD_SUCCESS, payload: message});
     }     
@@ -215,7 +213,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
       const token = JSON.parse(sessionStorage.getItem("token") as any);
       const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
-      const {data} = await axios.put(`http://localhost:5400/api/v1/auth/update-password`, {currentPassword, newPassword}, config);
+      const {data} = await axios.put(`http://207.154.209.57/api/v1/auth/update-password`, {currentPassword, newPassword}, config);
       console.log(`Updated Password :`, data);
       dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
     } 
