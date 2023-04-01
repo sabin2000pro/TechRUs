@@ -5,12 +5,11 @@ import axios from 'axios';
 let PRODUCTS_ENDPOINT = `http://localhost:5404/api/v1/products`;
 
 //@ description: Redux action which fetches all of the products from the backend in JSON format
-export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => async (dispatch: any) => {
+export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => async (dispatch: any): Promise<void> => {
 
     try {
 
       dispatch({type: FETCH_ALL_PRODUCTS_REQUEST});
-
       const {data} = await axios.get(`${PRODUCTS_ENDPOINT}?keyword=${keyword}&page=${page}&productsPerPage=${productsPerPage}`);
 
       console.log(`Products Data : `, data);
@@ -68,7 +67,7 @@ export const createNewProduct = (name: string, description: string, warranty: st
 
 }
 
-export const editProductByID = (id: number, updatedData: any) => async (dispatch: any) => {
+export const editProductByID = (id: number, updatedData: any) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
@@ -92,7 +91,7 @@ export const editProductByID = (id: number, updatedData: any) => async (dispatch
 
 
 // @description: 
-export const deleteProducts = () => async (dispatch: any) => {
+export const deleteProducts = () => async (dispatch: Dispatch): Promise<void> => {
 
   try {
     
