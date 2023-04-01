@@ -21,7 +21,7 @@ const Dropdown: React.FC = () => {
            setIsLoggedOut((isLoggedOut) => !isLoggedOut);
 
            setTimeout(() => {
-             navigate(`/user-login`)
+            navigate(`/user-login`);
            }, 1300)
         } 
         

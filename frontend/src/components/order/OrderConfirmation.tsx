@@ -9,21 +9,11 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
   const [orderCreated, setOrderCreated] = useState<boolean>(false);
 
   const {error} = useSelector((state: any) => state.orders);
-  const {isAuthenticated} = useSelector((state: any) => state.auth);
 
   const user = JSON.parse(sessionStorage.getItem("user") as any);
   const orderItems = JSON.parse(localStorage.getItem("orderItems") as any);
   const shippingInformation = JSON.parse(localStorage.getItem("shippingInformation") as any);
   const basketItems = JSON.parse(localStorage.getItem("basketItems") as any);
-
-  useEffect(() => {
-
-     if(!isAuthenticated) {
-        alert("You are not authorized to access this route")
-        navigate(`/user-login`)
-     }
-
-  }, [isAuthenticated])
 
   const handleCreateOrder = (event: any): void => { // Function that's responsible for creating a new order
 
@@ -109,7 +99,6 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
            <h4>Country: {shippingInformation.country}</h4>
         </p>
 
-        
   </div>
 
   </div>

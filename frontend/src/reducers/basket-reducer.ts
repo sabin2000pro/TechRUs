@@ -13,8 +13,8 @@ export const basketReducer = (state = {basketItems}, action: any) => {
 
         case ADD_ITEM_TO_BASKET: // Reducer for adding an item to the cart
 
-            const currItem = action.payload
-            const currCartItemExists = state.basketItems.find((cartItem: any) => cartItem.product === currItem.product)
+            const currItem = action.payload // Extract the basket item from the payload
+            const currCartItemExists = state.basketItems.find((cartItem: any) => cartItem.product === currItem.product) // If the cart item already exists usin the find() method then we return the item
 
             if(currCartItemExists) {
                 return {...state, basketItems: state.basketItems.map((item: any) => item.product === currCartItemExists.product ? currItem : item)}
@@ -24,7 +24,7 @@ export const basketReducer = (state = {basketItems}, action: any) => {
                 return {...state, basketItems: [...state.basketItems, currItem]}
             }
 
-        case REMOVE_ITEM_FROM_BASKET:
+        case REMOVE_ITEM_FROM_BASKET: // 2. Remove an item from basket action constant
             return {...state, basketItems: state.basketItems.filter((currentItemToRemove: any) => currentItemToRemove.product !== action.payload)}
 
         case CLEAR_BASKET_ITEMS: // Reset the cart items, set the array to empty
