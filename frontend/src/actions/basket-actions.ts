@@ -1,13 +1,13 @@
-import { ADD_ITEM_TO_BASKET, REMOVE_ITEM_FROM_BASKET, CLEAR_BASKET_ITEMS} from "../constants/basket-constants";
+import { ADD_ITEM_TO_BASKET, REMOVE_ITEM_FROM_BASKET} from "../constants/basket-constants";
 import axios from 'axios';
+import { Dispatch } from "redux";
 
-export const addProductToBasket = (id: string, quantity: number) => async (dispatch: any, getState: any) => {
+// @description: Method which adds a product chosen by the user to their basket given the product ID and quantity chosen
+export const addProductToBasket = (id: string, quantity: number) => async (dispatch: Dispatch, getState: any): Promise<void> => {
 
     try {
-      
-        const {data} = await axios.get(`http://localhost:5404/api/v1/products/${id}`);
+        const {data} = await axios.get(`http://207.154.209.57/api/v1/products/${id}`);
         dispatch({type: ADD_ITEM_TO_BASKET, payload: {product: data.product._id, price: data.product.price, quantity: Number(quantity), name: data.product.name, description: data.product.description, warranty: data.product.warranty, image: data.product.image}})
-
         localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))
     } 
     
@@ -20,7 +20,7 @@ export const addProductToBasket = (id: string, quantity: number) => async (dispa
     }
 }
 
-export const removeProductFromBasket = (id: string) => async (dispatch: any, getState: any) => {
+export const removeProductFromBasket = (id: string) => async (dispatch: any, getState: any): Promise<void> => {
     
     try {
         dispatch({type: REMOVE_ITEM_FROM_BASKET, payload: id});

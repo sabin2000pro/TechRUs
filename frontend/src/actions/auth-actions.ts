@@ -129,6 +129,7 @@ export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void>
     try {
 
         dispatch({type: LOAD_USER_REQUEST})
+        
         const token = JSON.parse(sessionStorage.getItem("token") as any);
 
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};

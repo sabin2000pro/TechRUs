@@ -18,7 +18,7 @@ if(process.env.PRODUCTS_DEV_MODE === 'development') {
 }
 
 app.use(cors({
-    origin: ['http://207.154.209.57', 'http://localhost:3000'],
+    origin: "*",
     methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
 }))
 
