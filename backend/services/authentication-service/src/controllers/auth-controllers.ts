@@ -118,6 +118,10 @@ export const registerUser = asyncHandler(async (request: any, response: any, nex
         
         await userOTPVerificationCode.save(); // Save the User OTP token to the database after creating a new instance of OTP
 
+        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
         return sendTokenResponse(request, user, StatusCodes.CREATED, response); // Send back the response to the user
     } 
 
@@ -186,6 +190,10 @@ export const verifyEmailAddress = asyncHandler(async (request: Request, response
 
         const jwtToken = user.fetchAuthToken();
         request.session = {token: jwtToken} as any || undefined;  // Get the authentication JWT token
+
+        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
         return response.status(StatusCodes.CREATED).json({message: "E-mail Address verified"});
     } 
@@ -399,6 +407,10 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
     
         user.password = newPassword;    
         await user.save(); // Save new user after reset the password
+
+        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     
         return response.status(StatusCodes.OK).json({success: true, message: "Customer Password Reset Successfully"});
     } 
