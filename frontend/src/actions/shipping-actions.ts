@@ -98,7 +98,6 @@ export const fetchShippingDetailsByID = (id: string) => async (dispatch: Dispatc
 
     const {data} = await axios.get(`http://207.154.209.57/api/v1/shipping/${id}`);
 
-
     dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping});
   } 
   
@@ -118,7 +117,7 @@ export const deleteShippingDetailsByID = (id: string) => async (dispatch: Dispat
 
      dispatch({type: DELETE_SHIPPING_DETAILS_REQUEST});
 
-     const {data} = await axios.delete(`http://localhost:5411/api/v1/shipping/${id}`);
+     const {data} = await axios.delete(`http://207.154.209.57/api/v1/shipping/${id}`);
 
      console.log(`Deleted Shipping Details data : `, data);
 
