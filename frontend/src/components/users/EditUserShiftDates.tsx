@@ -19,7 +19,6 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
       try {
 
          event.preventDefault();
-
          dispatch(updateUserShifts(user._id, startShiftDate, endShiftDate as any) as any);
          setShiftsUpdated((shiftsUpdated) => !shiftsUpdated)
 
