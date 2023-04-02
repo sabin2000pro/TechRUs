@@ -2,6 +2,7 @@ import { UPDATE_ORDER_STATUS_REQUEST, UPDATE_ORDER_STATUS_SUCCESS, UPDATE_ORDER_
 import { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, FETCH_ORDERS_REQUEST, FETCH_ORDERS_FAIL, FETCH_ORDERS_SUCCESS } from "../constants/orders-constants";
 import axios from 'axios';
 import { Dispatch } from "redux";
+import { ORDERS_URI } from './uri-helper';
 
 // @description: Frontend action that communicates with the order reducer in order by dispatching a fetch all order actions that is responsible for displaying all the orders placed onto the frontend
 // @params: Search Keyword: keyword, Page Number: page = 1 - Default => 1
@@ -13,7 +14,7 @@ export const fetchAllOrders = () => async (dispatch: Dispatch): Promise<void> =>
 
         dispatch({type: FETCH_ORDERS_REQUEST});
 
-        const {data} = await axios.get(`http://207.154.209.57/api/v1/orders`);
+        const {data} = await axios.get(ORDERS_URI);
 
         dispatch({type: FETCH_ORDERS_SUCCESS, payload: data.orders});
     }
@@ -33,7 +34,7 @@ export const createNewOrder = (orderItems: any, shippingInformation: any) => asy
     try {
 
        dispatch({type: CREATE_ORDER_REQUEST});
-       const {data} = await axios.post(`http://207.154.209.57/api/v1/orders`, {orderItems, shippingInformation});
+       const {data} = await axios.post(ORDERS_URI, {orderItems, shippingInformation});
 
        dispatch({type: CREATE_ORDER_SUCCESS, payload: data.order});
        localStorage.setItem("order", JSON.stringify(data.order))
