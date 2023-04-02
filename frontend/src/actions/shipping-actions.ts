@@ -77,9 +77,7 @@ export const editShippingStatus = (id: string, currentStatus: string, newStatus:
 
      dispatch({type: EDTI_SHIPPING_STATUS_REQUEST});
      
-     const {data} = await axios.put(`http://localhost:5411/api/v1/shipping/${id}/update-status`, {currentStatus, newStatus})
-    
-     console.log(`Edited  Shipping Data: `, data);
+     const {data} = await axios.put(`http://207.154.209.57/api/v1/shipping/${id}/update-status`, {currentStatus, newStatus})
      dispatch({type: EDIT_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   
@@ -87,10 +85,9 @@ export const editShippingStatus = (id: string, currentStatus: string, newStatus:
 
     if(error) {
       dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
-  }
+   }
 
   }
-
 
 }
 
