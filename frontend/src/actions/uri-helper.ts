@@ -6,3 +6,6 @@ export const AUTH_URI_LOGOUT = 'https://techrus.dev/api/v1/auth/logout'
 export const AUTH_URI_ME = 'https://techrus.dev/api/v1/auth/me'
 export const AUTH_URI_FORGOT_PASSWORD = 'https://techrus.dev/api/v1/auth/forgot-password'
 export const AUTH_URI_UPDATE_PASSWORD = 'https://techrus.dev/api/v1/auth/update-password'
+
+// URIs for the Products Microservice
+export const PRODUCTS_URI_FETCH_PRODUCTS = 'https://techrus.dev/api/v1/products';
