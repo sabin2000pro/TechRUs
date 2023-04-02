@@ -96,9 +96,9 @@ export const fetchShippingDetailsByID = (id: string) => async (dispatch: Dispatc
   try {
     dispatch({type: FETCH_SHIPPING_INFO_REQUEST});
 
-    const {data} = await axios.get(`http://localhost:5411/api/v1/shipping/${id}`);
+    const {data} = await axios.get(`http://207.154.209.57/api/v1/shipping/${id}`);
 
-    console.log(`Shipping Details : `, data);
+
     dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping});
   } 
   
