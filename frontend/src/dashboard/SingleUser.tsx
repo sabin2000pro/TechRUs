@@ -38,7 +38,7 @@ const SingleUser: React.FC = () => { // Single User Functional Component
   const onHandleUpdateShifts = (): void => {
 
     try {
-       navigate(`/`)
+       navigate(`/update-shifts/${user._id}`)
     } 
     
     catch(error) {
