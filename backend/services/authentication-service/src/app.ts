@@ -16,22 +16,13 @@ const app: Application = express();
 app.use(express.json());
 
 if(process.env.AUTH_DEV_MODE === 'development') {
-
     app.use(morgan('dev'));
-
-    app.use(cors({
-        origin: '*',
-        methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
-    }))
-
 }
 
-if(process.env.AUTH_DEV_MODE === 'production') {
-    app.use(cors({
-        origin: 'https://techrus.dev',
-        methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
-    }))
-}
+app.use(cors({
+    origin: 'https://techrus.dev',
+    methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
+}))
 
 
 app.use(cookieSession({
