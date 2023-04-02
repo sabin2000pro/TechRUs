@@ -4,6 +4,8 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
+import { AUTH_URI_REGISTER, AUTH_URI_LOGIN } from './uri-helper';
+
 
 export const register = (username: string, email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
@@ -12,7 +14,7 @@ export const register = (username: string, email: string, password: string) => a
         dispatch({type: REGISTER_USER_REQUEST})
         const config = processConfigHeader();
 
-        const {data} = await axios.post(`https://techrus.dev/api/v1/auth/register`, {username, email, password}, config);
+        const {data} = await axios.post(AUTH_URI_REGISTER, {username, email, password}, config);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
@@ -34,7 +36,7 @@ export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
         const config = processConfigHeader();
 
-        await axios.get(`http://207.154.209.57/api/v1/auth/logout`, config);
+        await axios.get(`https://techrus.dev/api/v1/auth/logout`, config);
         dispatch({type: LOGOUT_USER_SUCCESS});
         sessionStorage.clear();       // Clear session storage
     } 
