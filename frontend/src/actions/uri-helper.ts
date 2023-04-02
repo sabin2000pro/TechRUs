@@ -9,7 +9,8 @@ export const AUTH_URI_UPDATE_PASSWORD = 'https://techrus.dev/api/v1/auth/update-
 export const AUTH_USERS_LIST = 'https://techrus.dev/api/v1/auth/users'
 export const AUTH_URI_RESET_PASSWORD = 'https://techrus.dev/api/v1/reset-password'
 
-
 export const PRODUCTS_URI_FETCH_PRODUCTS = 'https://techrus.dev/api/v1/products';
 export const ORDERS_URI = 'https://techrus.dev/api/v1/orders'
 export const SHIPPING_URI = 'https://techrus.dev/api/v1/shipping'
+export const REVIEWS_URI = 'https://techrus.dev/api/v1/reviews'
+export const PAYMENTS_URI = 'https://techrus.dev/api/v1/payments'
