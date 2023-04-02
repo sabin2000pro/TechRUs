@@ -6,13 +6,14 @@ export interface IProductsList {
     products: any
 }
 
-const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
+const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => { // Products List Functional component renders the products from the backend
 
   return (
 
     <>
 
      <MetaData pageTitle = {`Products`} />
+
         <div className  = "flex justify-center">
             
             <div className = "flex w-72 justify-center items-center p-4">
@@ -21,11 +22,11 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
 
         {products.length === 0 && <h2 className = "heading-secondary">No Products Found</h2>}
  
-             {products.map((product: any) => (
+            {products.map((product: any) => (
 
               <>
 
-          <div className = "bg-white shadow-md rounded px-12 py-6 product-card">
+          <div key = {product._id} className = "bg-white shadow-md rounded px-12 py-6 product-card">
  
             <div className ="relative w-72 m-4 product-badge-container">
                 
@@ -49,12 +50,10 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => {
                   </div>
               
               </>
-           ))}
 
-     
-   </div>
- 
- 
+           ))}
+       </div>
+
    </div>
    
  </div>
