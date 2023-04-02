@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
-import { AUTH_URI_REGISTER, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME } from './uri-helper';
+import { AUTH_URI_REGISTER, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST } from './uri-helper';
 
 // @description: This function is responsible for registering a new user on the techrus.dev platform. It takes the username, email and password of the user as RouteParameters
 // @access: Public - No Authorization Required
@@ -160,7 +160,7 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
         dispatch({type: FORGOT_PASSWORD_REQUEST});
 
         const config = processConfigHeader();
-        const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/forgot-password`, {email}, config);
+        const {data} = await axios.post(AUTH_URI_FORGOT_PASSWORD, {email}, config);
         const message = data.message;
 
         dispatch({type: FORGOT_PASSWORD_SUCCESS, payload: message});
@@ -171,7 +171,6 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
       if(error) {
 
         if(error) {
-            console.log(`Forgot Password Error : `, error);
             dispatch({type: FORGOT_PASSWORD_FAIL, payload: error.data.response.message});
           }
       }
@@ -232,9 +231,10 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
+
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});
 
-       const {data} = await axios.put(`http://localhost:5400/api/v1/auth/users/${id}/update-shifts`, {newStartShiftDate, newEndShiftDate});
+       const {data} = await axios.put(`${AUTH_USERS_LIST}/${id}/update-shifts`, {newStartShiftDate, newEndShiftDate});
        console.log(`Updated staff user shifts : `, data);
 
        dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data});
@@ -243,6 +243,7 @@ export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShif
     catch(error) {
 
       if(error) {
+
         console.error(`Updating User Shifts Error : `, error);
         dispatch({type: EDIT_USER_SHIFTS_FAIL, payload: error.data.response.message});
       }
@@ -257,7 +258,7 @@ export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => 
    try {
     
      dispatch({type: FETCH_USERS_REQUEST});
-     const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users`);
+     const {data} = await axios.get(AUTH_USERS_LIST);
 
      dispatch({type: FETCH_USERS_SUCCESS, payload: data.users});
    } 
