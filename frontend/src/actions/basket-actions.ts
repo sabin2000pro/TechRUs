@@ -4,10 +4,12 @@ import { Dispatch } from "redux";
 import { PRODUCTS_URI_FETCH_PRODUCTS } from "./uri-helper";
 
 // @description: Method which adds a product chosen by the user to their basket given the product ID and quantity chosen
+
 export const addProductToBasket = (id: string, quantity: number) => async (dispatch: Dispatch, getState: any): Promise<void> => {
 
     try {
         const {data} = await axios.get(`${PRODUCTS_URI_FETCH_PRODUCTS}/${id}`);
+        console.log(`Add to basket handler : `, data);
         dispatch({type: ADD_ITEM_TO_BASKET, payload: {product: data.product._id, price: data.product.price, quantity: Number(quantity), name: data.product.name, description: data.product.description, warranty: data.product.warranty, image: data.product.image}})
         localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))
     } 
