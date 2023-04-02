@@ -7,8 +7,7 @@ import cors from 'cors';
 
 const app = express();
 
-connectShippingSchema();
-
+connectShippingSchema(); // Invoke the connection to the shipping schema
 app.use(express.json());
 
 if(process.env.REVIEWS_NODE_ENV === 'development') {
@@ -16,7 +15,7 @@ if(process.env.REVIEWS_NODE_ENV === 'development') {
 }
 
 app.use(cors({
-    origin: "*",
+    origin: "https://techrus.dev",
     methods: ['GET', "POST", 'PUT', "DELETE", 'PATCH']
 }))
 

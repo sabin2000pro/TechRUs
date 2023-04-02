@@ -41,7 +41,6 @@ app.use(helmet());
 app.use(mongoSanitize());
 
 app.use('/api/v1/auth', authRouter);
-
 app.use(errorHandler);
 
 export {app};
