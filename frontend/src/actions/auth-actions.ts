@@ -4,8 +4,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
-import { AUTH_URI_REGISTER, AUTH_URI_LOGIN } from './uri-helper';
-
+import { AUTH_URI_REGISTER, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT } from './uri-helper';
 
 export const register = (username: string, email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
@@ -36,7 +35,7 @@ export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
         const config = processConfigHeader();
 
-        await axios.get(`https://techrus.dev/api/v1/auth/logout`, config);
+        await axios.get(AUTH_URI_LOGOUT, config);
         dispatch({type: LOGOUT_USER_SUCCESS});
         sessionStorage.clear();       // Clear session storage
     } 
@@ -59,7 +58,7 @@ export const verifyEmailAddress = (userId: string, OTP: string) => async (dispat
        dispatch({type: VERIFY_USER_EMAIL_REQUEST});
        const config = processConfigHeader();
 
-       const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/verify-email`, {userId, OTP}, config);
+       const {data} = await axios.post(AUTH_URI_VERIFY_EMAIL, {userId, OTP}, config);
        dispatch({type: VERIFY_USER_EMAIL_SUCCESS, payload: data.message});
 
     } 
