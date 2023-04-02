@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
-import { AUTH_URI_REGISTER, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST } from './uri-helper';
+import { AUTH_URI_REGISTER_PROD, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST } from './uri-helper';
 
 // @description: This function is responsible for registering a new user on the techrus.dev platform. It takes the username, email and password of the user as RouteParameters
 // @access: Public - No Authorization Required
@@ -17,7 +17,7 @@ export const register = (username: string, email: string, password: string) => a
         dispatch({type: REGISTER_USER_REQUEST})
         const config = processConfigHeader();
 
-        const {data} = await axios.post(AUTH_URI_REGISTER, {username, email, password}, config);
+        const {data} = await axios.post(AUTH_URI_REGISTER_PROD, {username, email, password}, config);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
@@ -26,7 +26,6 @@ export const register = (username: string, email: string, password: string) => a
     catch(error) {
 
         if(error) {
-          console.log(`Register Error : `, error);
             dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
         }
     }

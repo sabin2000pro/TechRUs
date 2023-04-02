@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 3000",
+    "dev": "DEV_MODE=development vite --host 0.0.0.0 --port 3000",
+    "prod": "DEV_MODE=production vite --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -27,14 +28,17 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "types": "^0.1.1"
   },
   "devDependencies": {
+    "@types/node": "^18.15.11",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
     "cypress": "^12.5.1",
+    "node": "^19.8.1",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
     "tailwindcss": "^3.2.7",

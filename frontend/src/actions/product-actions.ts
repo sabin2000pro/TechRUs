@@ -10,6 +10,7 @@ export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => as
     try {
 
       dispatch({type: FETCH_ALL_PRODUCTS_REQUEST});
+
       const {data} = await axios.get(`${PRODUCTS_URI_FETCH_PRODUCTS}?keyword=${keyword}&page=${page}&productsPerPage=${productsPerPage}`);    
       dispatch({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: data.products});
 

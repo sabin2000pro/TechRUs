@@ -9,9 +9,10 @@ import "react-datepicker/dist/react-datepicker.css";
 const EditUserShiftDates: React.FC = () => { // Component that allows the store manager to edit the staff users start / end shift dates
     const [startShiftDate, setStartShiftDate] = useState<Date>(new Date(Date.now()));
     const [endShiftDate, setEndShiftDate] = useState<Date>(new Date(Date.now()));
-    const [shiftsUpdated, setShiftsUpdated] = useState<boolean>(false);
-    const dispatch = useDispatch();
 
+    const [shiftsUpdated, setShiftsUpdated] = useState<boolean>(false);
+
+    const dispatch = useDispatch();
     const {loading, error, user} = useSelector((state: any) => state.singleUser) as any;
 
     const handleEditUserShift = (event: any): void => {
@@ -19,6 +20,11 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
       try {
 
          event.preventDefault();
+
+         if(new Date(startShiftDate) > new Date(endShiftDate)) {
+            alert("Start date cannot be later than the end date")
+         }
+
          dispatch(updateUserShifts(user._id, startShiftDate, endShiftDate as any) as any);
          setShiftsUpdated((shiftsUpdated) => !shiftsUpdated)
 
@@ -55,7 +61,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
         <>
 
-          <div className="bg-green-200 border border-green-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+         <div className="bg-green-200 border border-green-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
               <h2>Shifts Updated</h2>
          </div>
 
@@ -90,7 +96,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
               </div>
 
-            </form>
+        </form>
 
             </div>
    

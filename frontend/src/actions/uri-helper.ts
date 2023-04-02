@@ -1,4 +1,7 @@
-export const AUTH_URI_REGISTER = 'https://techrus.dev/api/v1/auth/register'
+
+export const AUTH_URI_REGISTER_DEV = "http://localhost:3000/api/v1/auth/register"; // DEVELOPMENT MODE URI FOR THE AUTH SERVICE
+export const AUTH_URI_REGISTER_PROD = "https://techrus.dev/api/v1/auth/register"; // PRODUCTION MODE URI FOR THE PRODUCTION SERVICE techrus.dev
+
 export const AUTH_URI_VERIFY_EMAIL = 'https://techrus.dev/api/v1/auth/verify-email'
 export const AUTH_URI_LOGIN = 'https://techrus.dev/api/v1/auth/login'
 export const AUTH_URI_VERIFY_LOGIN = 'https://techrus.dev/api/v1/auth/verify-login'

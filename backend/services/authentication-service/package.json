@@ -9,12 +9,13 @@
     "dev": "nodemon dist/index.js",
     "start:auth-service:dev": "NODE_env=development npm run dev",
     "auth:test": "jest tests/auth.test.ts --bail",
-    "start:auth-service:prod": "NODE_ENV=production node api-gateway-server.js"
+    "start:auth-service:prod": "NODE_ENV=production node dist/index.js"
   },
   
   "keywords": [],
   "author": "",
   "license": "ISC",
+
   "dependencies": {
     "@types/cookie-session": "^2.0.44",
     "@types/hpp": "^0.2.2",
