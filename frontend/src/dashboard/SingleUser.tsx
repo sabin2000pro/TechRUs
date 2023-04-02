@@ -42,20 +42,27 @@ const SingleUser: React.FC = () => { // Single User Functional Component
     } 
     
     catch(error) {
+
        if(error) {
         console.error(error);
        }
+
     }
 
   }
 
   const onHandleEditUser = (): void => {
-    try {
 
+    try {
+      navigate(`/update-user/${user._id}`)
     } 
     
     catch(error) {
-      
+
+        if(error) {
+          return console.error(error);
+        }
+
     }
 
 
