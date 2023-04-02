@@ -26,6 +26,7 @@ export const register = (username: string, email: string, password: string) => a
     catch(error) {
 
         if(error) {
+          console.log(`Register Error : `, error);
             dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
         }
     }
