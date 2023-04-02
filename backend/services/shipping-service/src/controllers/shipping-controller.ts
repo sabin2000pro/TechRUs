@@ -46,7 +46,7 @@ export const createNewShipping = async (request: any, response: Response, next: 
     const shipping = await Shipping.create({user, address, city, country, postalCode, phoneNo});
     await shipping.save(); // Save the shipping resource to the database
 
-    response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+    response.setHeader('Access-Control-Allow-Origin', 'https://techrus.dev');
     response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
