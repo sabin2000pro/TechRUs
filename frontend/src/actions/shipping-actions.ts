@@ -2,14 +2,14 @@ import { Dispatch } from 'redux';
 import { EDIT_SHIPPING_INFO_REQUEST, EDTI_SHIPPING_STATUS_REQUEST, EDIT_SHIPPING_INFO_SUCCESS, FETCH_SHIPPING_INFO_REQUEST, FETCH_SHIPPING_INFO_FAIL, FETCH_SHIPPING_INFO_SUCCESS, DELETE_SHIPPING_DETAILS_REQUEST, DELETE_SHIPPING_DETAILS_SUCCESS, DELETE_SHIPPING_DETAILS_FAIL } from './../constants/shipping-constants';
 import { SAVE_SHIPPING_INFO_REQUEST, SAVE_SHIPPING_INFO_SUCCESS, SAVE_SHIPPING_INFO_FAIL } from "../constants/shipping-constants";
 import axios from 'axios';
-
+import { SHIPPING_URI } from './uri-helper';
 
 export const fetchAllShippingDetails = () => async (dispatch: Dispatch): Promise<void> => {
 
   try {
      dispatch({type: FETCH_SHIPPING_INFO_REQUEST});
 
-     const {data} = await axios.get(`http://207.154.209.57/api/v1/shipping`);
+     const {data} = await axios.get(SHIPPING_URI);
 
      dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
@@ -35,7 +35,7 @@ export const createNewShipping = (user: any, address: string, city: string, coun
 
         dispatch({type: SAVE_SHIPPING_INFO_REQUEST});
 
-        const {data} = await axios.post(`http://207.154.209.57/api/v1/shipping`, {user, address, city, country, postalCode, phoneNo})
+        const {data} = await axios.post(SHIPPING_URI, {user, address, city, country, postalCode, phoneNo})
 
         dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping});
         localStorage.setItem("shippingInformation", JSON.stringify(data.shipping));
@@ -58,7 +58,7 @@ export const editShippingDetails = (id: string, address: string, city: string, c
     try {
        dispatch({type: EDIT_SHIPPING_INFO_REQUEST});
 
-       const {data} = await axios.put(`http://207.154.209.57/api/v1/shipping/${id}`, {address, city, country, postalCode, phoneNo})
+       const {data} = await axios.put(`${SHIPPING_URI}/api/v1/shipping/${id}`, {address, city, country, postalCode, phoneNo})
        dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping})
     } 
     
@@ -77,7 +77,7 @@ export const editShippingStatus = (id: string, currentStatus: string, newStatus:
 
      dispatch({type: EDTI_SHIPPING_STATUS_REQUEST});
      
-     const {data} = await axios.put(`http://207.154.209.57/api/v1/shipping/${id}/update-status`, {currentStatus, newStatus})
+     const {data} = await axios.put(`${SHIPPING_URI}/${id}/update-status`, {currentStatus, newStatus})
      dispatch({type: EDIT_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   
