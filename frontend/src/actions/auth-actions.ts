@@ -12,7 +12,7 @@ export const register = (username: string, email: string, password: string) => a
         dispatch({type: REGISTER_USER_REQUEST})
         const config = processConfigHeader();
 
-        const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/register`, {username, email, password}, config);
+        const {data} = await axios.post(`https://techrus.dev/api/v1/auth/register`, {username, email, password}, config);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});

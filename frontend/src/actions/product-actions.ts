@@ -3,7 +3,7 @@ import { CREATE_PRODUCT_FAIL, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, ED
 import { FETCH_ALL_PRODUCTS_REQUEST, FETCH_ALL_PRODUCTS_SUCCESS, FETCH_ALL_PRODUCTS_FAIL, FETCH_NEW_PRODUCTS_REQUEST, FETCH_SINGLE_PRODUCT_FAIL, FETCH_SINGLE_PRODUCT_REQUEST, FETCH_SINGLE_PRODUCT_SUCCESS } from '../constants/products-constants';
 import axios from 'axios';
 
-let PRODUCTS_ENDPOINT = `http://207.154.209.57/api/v1/products`;
+let PRODUCTS_ENDPOINT = `https://techrus.dev/api/v1/products`;
 
 //@ description: Redux action which fetches all of the products from the backend in JSON format
 export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => async (dispatch: any): Promise<void> => {
