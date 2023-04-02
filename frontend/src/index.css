@@ -548,3 +548,11 @@ font-weight: bold;
   margin-left: 1500px;
   margin-bottom: -280px;
 }
+
+.date-picker {
+  height: 45px;
+  border: 3px solid #042658;
+  width: 280px;
+  text-align: center;
+  padding: 2px 4px;
+}

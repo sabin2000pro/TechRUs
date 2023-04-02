@@ -16,12 +16,13 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
     const handleEditUserShift = (event: any): void => {
     
-
       try {
+
          event.preventDefault();
 
          dispatch(updateUserShifts(user._id, startShiftDate, endShiftDate as any) as any);
          setShiftsUpdated((shiftsUpdated) => !shiftsUpdated)
+
       }
       
       catch(error) {
@@ -42,7 +43,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
       <>  
         <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
-               <h2>{error}</h2>
+              <h2>{error}</h2>
          </div>
       </>
 
@@ -51,23 +52,37 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
        <MetaData pageTitle = {`Edit Staff User Shifts`} />
 
+       {shiftsUpdated && (
+
+        <>
+
+          <div className="bg-green-200 border border-green-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+              <h2>Shifts Updated</h2>
+         </div>
+
+        </>
+
+
+       )}
+
        {loading && <Loader />}
 
         <>
+
         <div className = "flex justify-center items-center h-screen login-container">
 
             <form method = "PUT" onSubmit = {handleEditUserShift} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container form">
 
-              <h1 className = "heading-primary h-login">Edit Shifts</h1>
+              <h1 className = "heading-primary h-login">Edit Shifts - {user._id}</h1>
 
             <div className = "mb-4 login-container-inputs">
-                <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Start Shift Date</label>
-                <DatePicker selected = {startShiftDate} onChange = {(event) => setStartShiftDate(event.target.value)} />
+                <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Start Shift Date</label>
+                <DatePicker value = {startShiftDate} className = "mb-9 date-picker" selected = {startShiftDate} onChange = {(currDate) => setStartShiftDate(currDate)} />
               </div>
 
               <div className = "mb-6 login-password-container mt-5">
                   <label className = "block text-sm font-bold mb-2 mt-5 login-password-label" htmlFor = "password">End Shift Date</label>
-                  <DatePicker selected = {endShiftDate} onChange = {(event) => setEndShiftDate(event.target.value)} />
+                  <DatePicker timeIntervals={15} dateFormat="yyyy/MM/dd HH:mm:ss" showTimeSelect className = "date-picker" value = {endShiftDate} selected = {endShiftDate} onChange = {(currDate) => setEndShiftDate(currDate)} />
               </div>
 
               <div className = "flex items-center justify-center login-btn-container">
