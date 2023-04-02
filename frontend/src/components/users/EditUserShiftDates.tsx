@@ -4,9 +4,7 @@ import MetaData from '../../layout/MetaData';
 import { updateUserShifts } from '../../actions/auth-actions';
 import Loader from '../../layout/Loader';
 import DatePicker from 'react-datepicker';
-import { useParams } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
-
 
 const EditUserShiftDates: React.FC = () => { // Component that allows the store manager to edit the staff users start / end shift dates
     const [startShiftDate, setStartShiftDate] = useState<Date>(new Date(Date.now()));
@@ -44,8 +42,12 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
      {error && (
 
       <>  
-       
+        <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+               <h2>{error}</h2>
+         </div>
       </>
+
+
      )}
 
        <MetaData pageTitle = {`Edit Staff User Shifts`} />

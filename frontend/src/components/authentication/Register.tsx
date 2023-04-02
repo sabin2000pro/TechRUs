@@ -51,6 +51,7 @@ const Register: React.FC = () => { // Register Component
         {error && (
 
             <>
+            
             <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
                <h2>{error}</h2>
             </div>
