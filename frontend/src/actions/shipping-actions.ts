@@ -117,7 +117,7 @@ export const deleteShippingDetailsByID = (id: string) => async (dispatch: Dispat
 
      dispatch({type: DELETE_SHIPPING_DETAILS_REQUEST});
 
-     const {data} = await axios.delete(`http://207.154.209.57/api/v1/shipping/${id}`);
+     const {data} = await axios.delete(`${SHIPPING_URI}/${id}`);
 
      console.log(`Deleted Shipping Details data : `, data);
 
