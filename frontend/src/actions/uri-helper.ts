@@ -3,3 +3,6 @@ export const AUTH_URI_VERIFY_EMAIL = 'https://techrus.dev/api/v1/auth/verify-ema
 export const AUTH_URI_LOGIN = 'https://techrus.dev/api/v1/auth/login'
 export const AUTH_URI_VERIFY_LOGIN = 'https://techrus.dev/api/v1/auth/verify-login'
 export const AUTH_URI_LOGOUT = 'https://techrus.dev/api/v1/auth/logout'
+export const AUTH_URI_ME = 'https://techrus.dev/api/v1/auth/me'
+export const AUTH_URI_FORGOT_PASSWORD = 'https://techrus.dev/api/v1/auth/forgot-password'
+export const AUTH_URI_UPDATE_PASSWORD = 'https://techrus.dev/api/v1/auth/update-password'
