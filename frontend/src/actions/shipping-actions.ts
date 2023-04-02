@@ -35,7 +35,7 @@ export const createNewShipping = (user: any, address: string, city: string, coun
 
         dispatch({type: SAVE_SHIPPING_INFO_REQUEST});
 
-        const {data} = await axios.post(`http://localhost:5411/api/v1/shipping`, {user, address, city, country, postalCode, phoneNo})
+        const {data} = await axios.post(`http://207.154.209.57/api/v1/shipping`, {user, address, city, country, postalCode, phoneNo})
 
         dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping});
         localStorage.setItem("shippingInformation", JSON.stringify(data.shipping));
@@ -58,7 +58,7 @@ export const editShippingDetails = (id: string, address: string, city: string, c
     try {
        dispatch({type: EDIT_SHIPPING_INFO_REQUEST});
 
-       const {data} = await axios.put(`http://localhost:5411/api/v1/shipping/${id}`, {address, city, country, postalCode, phoneNo})
+       const {data} = await axios.put(`http://207.154.209.57/api/v1/shipping/${id}`, {address, city, country, postalCode, phoneNo})
        dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping})
     } 
     
