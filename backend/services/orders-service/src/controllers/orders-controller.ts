@@ -11,9 +11,7 @@ import asyncHandler from 'express-async-handler';
 // @access: No Auth Token Required
 
 export const fetchAllOrders = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-       const ordersPerPage = 3;
        const totalOrders = await Order.countDocuments({});
-       const currentPage = parseInt(request.query.page) || 1;
        
        const searchKeyword = request.query.keyword;
        const orders = await Order.find({...searchKeyword}); // Fetch all the orders

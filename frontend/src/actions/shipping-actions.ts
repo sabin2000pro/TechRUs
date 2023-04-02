@@ -4,13 +4,13 @@ import { SAVE_SHIPPING_INFO_REQUEST, SAVE_SHIPPING_INFO_SUCCESS, SAVE_SHIPPING_I
 import axios from 'axios';
 
 
-export const fetchAllShippingDetails = (keyword = '', page = 1) => async (dispatch: Dispatch): Promise<void> => {
+export const fetchAllShippingDetails = () => async (dispatch: Dispatch): Promise<void> => {
 
   try {
      dispatch({type: FETCH_SHIPPING_INFO_REQUEST});
 
-     const {data} = await axios.get(`http://localhost:5411/api/v1/shipping?keyword=${keyword}`);
-     
+     const {data} = await axios.get(`http://207.154.209.57/api/v1/shipping`);
+
      dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   
