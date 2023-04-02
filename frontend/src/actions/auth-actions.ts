@@ -134,7 +134,6 @@ export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void>
     try {
 
         dispatch({type: LOAD_USER_REQUEST})
-
         const token = JSON.parse(sessionStorage.getItem("token") as any);
 
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
@@ -213,11 +212,10 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
       dispatch({type: UPDATE_PASSWORD_REQUEST});
 
-      const token = JSON.parse(sessionStorage.getItem("token") as any);
+      const token = JSON.parse(sessionStorage.getItem("token") as any); // Parse the token stored in session storage
       const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
-      const {data} = await axios.put(`http://207.154.209.57/api/v1/auth/update-password`, {currentPassword, newPassword}, config);
-      console.log(`Updated Password :`, data);
+      const {data} = await axios.put(AUTH_URI_UPDATE_PASSWORD, {currentPassword, newPassword}, config);
       dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
     } 
     
