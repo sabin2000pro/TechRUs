@@ -29,6 +29,7 @@ import EditCouponDetails from './dashboard/admin/coupons/EditCouponDetails';
 import SingleUser from './dashboard/SingleUser';
 import EditUserShiftDates from './components/users/EditUserShiftDates';
 import Orders from './dashboard/orders/Orders';
+import PaymentScreen from './components/PaymentScreen';
 
 const App: React.FC = () => {
    const [stripeApiKey, setStripeApiKey] = useState("");
@@ -95,6 +96,7 @@ const App: React.FC = () => {
            <Route path = '/edit-coupon/:id' element = {<EditCouponDetails />} />
            <Route path = '/user-details/:id' element = {<SingleUser />} />
            <Route path = '/update-shifts/:id' element = {<EditUserShiftDates />} />
+           <Route path = '/pay' element = {<PaymentScreen />} />
          
          </Routes>
 

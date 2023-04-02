@@ -18,17 +18,14 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
       try {
 
          event.preventDefault();
-
-
-        dispatch(createNewOrder(orderItems, shippingInformation) as any);  
+         dispatch(createNewOrder(orderItems, shippingInformation) as any); // Invoke create new order method
                
          setTimeout(() => {
             setOrderCreated((orderCreated) => !orderCreated)
             navigate(`/order-success`)
          }, 2500)
 
-         localStorage.clear();
-         sessionStorage.clear();
+      
 
       } 
       

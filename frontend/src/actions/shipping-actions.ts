@@ -37,6 +37,10 @@ export const createNewShipping = (user: any, address: string, city: string, coun
 
         const {data} = await axios.post(SHIPPING_URI, {user, address, city, country, postalCode, phoneNo})
 
+        if (!data.shipping) {
+          throw new Error('Shipping information is null or undefined');
+      }
+
         dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping});
         localStorage.setItem("shippingInformation", JSON.stringify(data.shipping));
 

@@ -15,6 +15,7 @@ const OrderSuccess: React.FC = () => {
          }
          
          catch(error) {
+            
             if(error) {
                 return console.error(error);
             }
