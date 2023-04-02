@@ -19,9 +19,8 @@ if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
-
 app.use(cors({
-    origin: ['http://207.154.209.57', 'http://localhost:3000'],
+    origin: '*',
     methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
 }))
 

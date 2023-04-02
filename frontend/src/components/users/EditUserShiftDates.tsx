@@ -32,7 +32,6 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
       }
 
-
     }
 
   return (
