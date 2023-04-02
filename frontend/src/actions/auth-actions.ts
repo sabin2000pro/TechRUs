@@ -274,7 +274,7 @@ export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise
     try {
 
         dispatch({type: FETCH_SINGLE_USER_REQUEST});
-        const {data} = await axios.get(`http://localhost:5400/api/v1/auth/users/${id}`); // Send GET request to fetch the user
+        const {data} = await axios.get(`${AUTH_USERS_LIST}/${id}`); // Send GET request to fetch the user
         dispatch({type: FETCH_SINGLE_USER_SUCCESS, payload: data.user})
     } 
     
@@ -292,8 +292,7 @@ export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promis
   try {
     
      dispatch({type: DELETE_SINGLE_USER_REQUEST});
-
-     const {data} = await axios.delete(`http://localhost:5400/api/v1/auth/users/${id}`);
+     const {data} = await axios.delete(`${AUTH_USERS_LIST}/${id}`);
      console.log(`Delete User Data : `, data);
 
      dispatch({type: DELETE_SINGLE_USER_SUCCESS, payload: data.message});
