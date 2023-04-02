@@ -408,7 +408,7 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
         user.password = newPassword;    
         await user.save(); // Save new user after reset the password
 
-        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Origin', 'https://techrus.dev');
         response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
         response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     
@@ -420,10 +420,10 @@ export const resetPassword = asyncHandler(async (request: any, response: Respons
 export const fetchLoggedInUser = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
         const user = request.user; // Store the user in the user object
 
-        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Origin', 'https://techrus.dev');
         response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
         response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-        
+
         return response.status(StatusCodes.OK).json({success: true, user});
     } 
 )

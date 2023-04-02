@@ -71,7 +71,7 @@ export const fetchSingleProductByID = asyncHandler(async (request: any, response
            return next(new ErrorResponse(`Product with that ID cannot be found`, StatusCodes.BAD_REQUEST));
         }
 
-        response.setHeader('Access-Control-Allow-Origin', 'http://207.154.209.57');
+        response.setHeader('Access-Control-Allow-Origin', 'https://techrus.dev');
         response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
         response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
@@ -96,6 +96,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
        const product = await Product.create({name, description, warranty, price, stockCount, lowStockAlert});
        await product.save();
        return response.status(StatusCodes.CREATED).json({success: true, product, message: "Product Created"});
+       
     }
 
 )
