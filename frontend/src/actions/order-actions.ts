@@ -10,10 +10,10 @@ import { Dispatch } from "redux";
 export const fetchAllOrders = () => async (dispatch: Dispatch): Promise<void> => {
 
     try {
+
         dispatch({type: FETCH_ORDERS_REQUEST});
 
-        const {data} = await axios.get(`http://localhost:5403/api/v1/orders`);
-        console.log(`Orders Data : `, data);
+        const {data} = await axios.get(`http://207.154.209.57/api/v1/orders`);
 
         dispatch({type: FETCH_ORDERS_SUCCESS, payload: data.orders});
     }
@@ -33,9 +33,7 @@ export const createNewOrder = (orderItems: any, shippingInformation: any) => asy
     try {
 
        dispatch({type: CREATE_ORDER_REQUEST});
-
-       const {data} = await axios.post(`http://localhost:5403/api/v1/orders`, {orderItems, shippingInformation});
-       console.log(`Order Data : `, data);
+       const {data} = await axios.post(`http://207.154.209.57/api/v1/orders`, {orderItems, shippingInformation});
 
        dispatch({type: CREATE_ORDER_SUCCESS, payload: data.order});
        localStorage.setItem("order", JSON.stringify(data.order))
@@ -44,12 +42,9 @@ export const createNewOrder = (orderItems: any, shippingInformation: any) => asy
     catch(error) {
 
         if(error) {
-            console.log(`Create Order Error : `, error);
             dispatch({type: CREATE_ORDER_FAIL, payload: error.data.response.message});
-
         }
     }
-
 
 }
 
@@ -59,7 +54,7 @@ export const editOrderStatus = (newOrderStatus: string, id: string) => async (di
 
        dispatch({type: UPDATE_ORDER_STATUS_REQUEST});
 
-       const {data} = await axios.put(`http://localhost:5403/api/v1/orders/${id}/update-status`, {newOrderStatus});
+       const {data} = await axios.put(`http://207.154.209.57/api/v1/orders/${id}/update-status`, {newOrderStatus});
        console.log(`Updated order status data : `, data);
 
        dispatch({type: UPDATE_ORDER_STATUS_SUCCESS, payload: data.message});
@@ -81,7 +76,7 @@ export const deleteOrders = () => async (dispatch: Dispatch): Promise<void> => {
     try {
        dispatch({type: DELETE_ORDERS_REQUEST});
 
-       const {data} = await axios.delete(`http://localhost:5403/api/v1/orders`);
+       const {data} = await axios.delete(`http://207.154.209.57/api/v1/orders`);
 
        dispatch({type: DELETE_ORDERS_SUCCESS, payload: data.message})
     } 
@@ -97,12 +92,11 @@ export const deleteOrders = () => async (dispatch: Dispatch): Promise<void> => {
 }
 
 export const deleteOrderByID = (id: string) => async (dispatch: Dispatch): Promise<void> => {
+
     try {
         dispatch({type: DELETE_SINGLE_ORDER_REQUEST});
 
-        const {data} = await axios.delete(`http://localhost:5403/api/v1/orders/${id}`);
-
-        console.log(`Deleted Order data : `, data);
+        const {data} = await axios.delete(`http://207.154.209.57/api/v1/orders/${id}`);
 
         dispatch({type: DELETE_SINGLE_ORDER_SUCCESS, payload: data.message});
     } 
@@ -110,9 +104,9 @@ export const deleteOrderByID = (id: string) => async (dispatch: Dispatch): Promi
     catch(error) {
 
        if(error) {
-
          dispatch({type: DELETE_SINGLE_ORDER_FAIL, payload: error.data.response.message});
        }
+       
     }
 
 }
