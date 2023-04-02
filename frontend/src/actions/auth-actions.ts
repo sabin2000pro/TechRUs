@@ -6,6 +6,10 @@ import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
 import { AUTH_URI_REGISTER, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT } from './uri-helper';
 
+// @description: This function is responsible for registering a new user on the techrus.dev platform. It takes the username, email and password of the user as RouteParameters
+// @access: Public - No Authorization Required
+// @returns: void - No value is returned from this function
+
 export const register = (username: string, email: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
@@ -27,6 +31,10 @@ export const register = (username: string, email: string, password: string) => a
     }
 
 } 
+
+// @description: This function is responsible for logging out a user on the techrus.dev platform. It does not take in any parameters
+// @access: Public - No Authorization Required
+// @returns: void - No value is returned from this function
 
 export const logout = () => async (dispatch: Dispatch): Promise<void> => {
 
@@ -82,10 +90,9 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
     try {
 
         dispatch({type: LOGIN_USER_REQUEST});
-        
         const config = processConfigHeader();
 
-        const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/login`, {email, password}, config);
+        const {data} = await axios.post(AUTH_URI_LOGIN, {email, password}, config);
         dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
 
         sessionStorage.setItem("token", JSON.stringify(data.token));
@@ -104,12 +111,10 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
 
 export const verifyLoginMfa = (userId: string, mfaToken: string) => async (dispatch: Dispatch): Promise<void> => {
 
-
   try {
+
     dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
-    
-    const {data} = await axios.post(`http://207.154.209.57/api/v1/auth/verify-login`, {userId, mfaToken});
-    console.log(`Login MFA Data :`, data);
+    const {data} = await axios.post(AUTH_URI_VERIFY_LOGIN, {userId, mfaToken});
 
     dispatch({type: VERIFY_LOGIN_MFA_SUCCESS, payload: data.message});
 
@@ -118,7 +123,6 @@ export const verifyLoginMfa = (userId: string, mfaToken: string) => async (dispa
   catch(error) {
 
      if(error) {
-      console.log(`Verify Login Fail : `, error);
       dispatch({type: VERIFY_LOGIN_MFA_FAIL, payload: error.response.data.message})
      }
   }
