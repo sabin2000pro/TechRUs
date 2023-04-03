@@ -22,11 +22,9 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
                
          setTimeout(() => {
             setOrderCreated((orderCreated) => !orderCreated)
-            navigate(`/order-success`)
+            navigate(`/payment`)
          }, 2500)
-
-      
-
+    
       } 
       
       catch(error) {
@@ -45,9 +43,12 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
     {error && (
 
       <>
+
           <div className ="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
             <h2>{error.message}</h2>
           </div>
+
+
       </>
 
     )}

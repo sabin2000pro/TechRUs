@@ -32,8 +32,8 @@ const ShippingDetails: React.FC = () => {
     try {
 
         event.preventDefault();
+
         dispatch(createNewShipping(user._id, address, city, country, postalCode, phoneNo) as any);
-        
         setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
 
         const shippingDetails = {user: user._id, address, city, country, postalCode, phoneNo};
