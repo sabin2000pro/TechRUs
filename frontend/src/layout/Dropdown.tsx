@@ -30,7 +30,7 @@ const Dropdown: React.FC = () => {
         catch(error) {
 
            if(error) {
-            setIsLoggedOut(false);
+             setIsLoggedOut(false);
            }
 
         }
@@ -39,6 +39,18 @@ const Dropdown: React.FC = () => {
   return (
 
     <Menu as = "div" className = "relative inline-block text-left">
+
+       {isLoggedOut && (
+
+        <>
+
+          <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
+              <h2>You have logged out</h2>
+          </div>
+
+        </>
+
+       )}
 
       <div className = "dropdown-container">
 
