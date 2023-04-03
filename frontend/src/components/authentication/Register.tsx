@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import MetaData from '../../layout/MetaData'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,7 +9,7 @@ import Loader from '../../layout/Loader'
 const Register: React.FC = () => { // Register Component
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {loading, error} = useSelector((state: any) => state.auth);
+  const {error} = useSelector((state: any) => state.auth);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
