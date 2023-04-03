@@ -9,7 +9,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
   const {error, isAuthenticated, user} = useSelector((state: any) => state.auth);
@@ -103,7 +103,7 @@ const Login: React.FC = () => {
 
         </>
 
-    </boolean>
+    </>
 
   );
 };
