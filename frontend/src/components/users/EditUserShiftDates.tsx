@@ -95,7 +95,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
             <form method = "PUT" onSubmit = {handleEditUserShift} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container form">
 
-              <h2 className = "heading-secondary">Edit Shifts</h2>
+              <h2 className = "heading-secondary mb-4">Edit Shifts</h2>
 
             <div className = "mb-4 login-container-inputs">
                 <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Start Shift</label>
