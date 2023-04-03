@@ -25,9 +25,19 @@ const Login: React.FC = () => {
         setFormSubmitted((formSubmitted) => !formSubmitted);
         setIsLoggedIn((isLoggedIn) => !isLoggedIn);
 
-        setTimeout(() => {
+        if(isLoggedIn === true) {
+
+          setTimeout(() => {
             navigate(`/verify-login`)
         }, 1500)
+        
+
+        }
+
+        else {
+          return;
+        }
+
       } 
       
       catch(error) {
