@@ -10,8 +10,15 @@ const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
   const {loading, error} = useSelector((state: any) => state.auth);
 
-  const onForgotPasswordHandler = (event) => {
-     
+  const onForgotPasswordHandler = (event: any): void => {
+      try {
+         event.preventDefault();
+      } 
+      
+      catch(error) {
+
+      }
+
   }
 
   return (
