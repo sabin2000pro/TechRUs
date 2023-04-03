@@ -21,19 +21,18 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
        const userId = user._id;
 
        dispatch(verifyEmailAddress(userId, OTP) as any);
-
        setEmailVerified((emailVerified) => !emailVerified);
 
        setTimeout(() => {
           navigate(`/user-login`)
        }, 1200)
+
     } 
     
     catch(error) {
 
        if(error) {
         console.error(error);
-
         setEmailVerified(false);
        }
 
