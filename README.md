@@ -1,4 +1,4 @@
-# TechRUs
+# TechRUs - https://techrus.dev
 
 ## Project Proposal
 
