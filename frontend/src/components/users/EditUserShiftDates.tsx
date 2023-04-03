@@ -60,7 +60,6 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
          </div>
       </>
 
-
      )}
 
        <MetaData pageTitle = {`Edit Staff User Shifts`} />
