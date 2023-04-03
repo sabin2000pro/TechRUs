@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { register } from '../../actions/auth-actions'
-import Loader from '../../layout/Loader'
 
 const Register: React.FC = () => { // Register Component
   const navigate = useNavigate();
