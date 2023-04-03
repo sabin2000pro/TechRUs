@@ -7,7 +7,7 @@ import MetaData from '../../layout/MetaData';
 const VerifyLogin: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [mfaToken, setMfaToken] = useState<string>("");
+  const [multiFactorToken, setMultiFactorToken] = useState<string>("");
   const {error} = useSelector((state: any) => state.auth)
   const [verifyLoginSubmitted, setVerifyLoginSubmitted] = useState<boolean>(false);
 
@@ -19,11 +19,11 @@ const VerifyLogin: React.FC = () => {
       const user = JSON.parse(sessionStorage.getItem("user") as any);
       const userId = user._id;
 
-      if(mfaToken.toString() === "") {
+      if(multiFactorToken.toString() === "") {
          setVerifyLoginSubmitted(false);
       }
 
-      dispatch(verifyLoginMfa(userId, mfaToken) as any)
+      dispatch(verifyLoginMfa(userId, multiFactorToken) as any)
       setVerifyLoginSubmitted((verifyLoginSubmitted) => !verifyLoginSubmitted);
 
       setTimeout(() => {
@@ -76,7 +76,7 @@ const VerifyLogin: React.FC = () => {
                 <div className = "login-container-inputs">
                      <h2 className = "heading-secondary mb-6">Login Verification</h2>
                     <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "token">Token</label>
-                    <input value = {mfaToken} onChange = {(event) => setMfaToken(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id = "token" type = "text" placeholder = "Enter MFA Token" />
+                    <input value = {multiFactorToken} onChange = {(event) => setMultiFactorToken(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id = "token" type = "text" placeholder = "Enter MFA Token" />
                     </div>
 
             <div className = "flex items-center justify-center login-btn-container verify-container">
