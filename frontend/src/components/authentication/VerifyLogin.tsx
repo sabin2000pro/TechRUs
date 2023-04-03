@@ -8,7 +8,7 @@ const VerifyLogin: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [mfaToken, setMfaToken] = useState<string>("");
-  const {error, loading} = useSelector((state: any) => state.auth)
+  const {error} = useSelector((state: any) => state.auth)
   const [verifyLoginSubmitted, setVerifyLoginSubmitted] = useState<boolean>(false);
 
   const onLoginVerificationHandler = (event): void => {
@@ -20,14 +20,18 @@ const VerifyLogin: React.FC = () => {
       const userId = user._id;
 
       dispatch(verifyLoginMfa(userId, mfaToken) as any)
-
       setVerifyLoginSubmitted((verifyLoginSubmitted) => !verifyLoginSubmitted);
+
+      setTimeout(() => {
+         navigate(`/`)
+      }, 1500)
+
+
     } 
     
     catch(error) {
 
        if(error) {
-          console.error(error);
           setVerifyLoginSubmitted(false)
        }
 
@@ -40,6 +44,16 @@ const VerifyLogin: React.FC = () => {
     <>
 
       <MetaData pageTitle = {`Verify Login`} />
+
+      {verifyLoginSubmitted && (
+         <>
+
+          <div className="bg-green-200 border border-green-400 text-black-700 px-4 py-3 rounded my-4 success-banner">
+              <h2>Account Verified</h2>
+          </div>
+
+         </>
+      )}
 
       {error && (
 
