@@ -18,8 +18,8 @@ const Login: React.FC = () => {
   const onLoginHandler = (event: React.FormEvent): void => {
 
       try {
-        event.preventDefault();
 
+        event.preventDefault();
         dispatch(login(email, password) as any); // Dispatch login action with e-mail and password
     
         setFormSubmitted((formSubmitted) => !formSubmitted);
@@ -41,7 +41,6 @@ const Login: React.FC = () => {
 
   }
 
-  
   useEffect(() => {
 
       if(isAuthenticated) {
@@ -54,16 +53,14 @@ const Login: React.FC = () => {
 
     <>
 
-    
     <MetaData pageTitle = {`Login`} />
-    
-     
+  
           <>
 
-          {isLoggedIn && formSubmitted && isAuthenticated && (
+          {isLoggedIn && formSubmitted && (
 
             <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
-              <h2>You are logged in</h2>
+                <h2>You are logged in</h2>
             </div>
 
             )}

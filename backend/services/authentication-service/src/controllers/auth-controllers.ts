@@ -267,7 +267,7 @@ export const loginUser = asyncHandler(async (request: any, response: Response, n
         const loginMfa = await TwoFactorVerification.create({owner: user, mfaToken: userMfaToken});
         await loginMfa.save();
 
-        return response.status(StatusCodes.OK).json({success: true, user, token});
+        return response.status(StatusCodes.OK).json({success: true, user, token, message: "You are logged in"});
     } 
 )
 
