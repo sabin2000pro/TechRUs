@@ -93,6 +93,8 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
         const config = processConfigHeader();
 
         const {data} = await axios.post(AUTH_URI_LOGIN, {email, password}, config);
+        console.log(`Login Data : `, data);
+        
         dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
 
         sessionStorage.setItem("token", JSON.stringify(data.token));
