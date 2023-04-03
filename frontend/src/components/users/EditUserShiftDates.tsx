@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import MetaData from '../../layout/MetaData';
 import { updateUserShifts } from '../../actions/auth-actions';
-import Loader from '../../layout/Loader';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -82,7 +81,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
         <>
 
          <div className="bg-green-200 border border-green-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
-              <h2>Shifts Updated</h2>
+            <h2>Shifts Updated</h2>
          </div>
 
         </>
