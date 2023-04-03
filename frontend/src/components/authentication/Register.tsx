@@ -19,8 +19,8 @@ const Register: React.FC = () => { // Register Component
      try {
 
          event.preventDefault(); // Prevent form re-submission
+         
          dispatch(register(username, email, password) as any);
-
          setOnRegisterSuccess((registerSuccess) => !registerSuccess);
 
          setTimeout(() => {
