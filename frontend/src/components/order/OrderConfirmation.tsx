@@ -10,7 +10,7 @@ const OrderConfirmation: React.FC = () => { // Order Confirmation Page here will
 
   const {error} = useSelector((state: any) => state.orders);
   const orderItems = JSON.parse(sessionStorage.getItem("orderItems") as any);
-  const shippingInformation = JSON.parse(localStorage.getItem("shippingInformation") as any);
+  const shippingInformation = JSON.parse(localStorage.getItem("shippingInfo") as any);
   const basketItems = JSON.parse(localStorage.getItem("basketItems") as any);
 
   const handleCreateOrder = (event: any): void => { // Function that's responsible for creating a new order
