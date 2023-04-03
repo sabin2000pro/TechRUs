@@ -11,8 +11,7 @@ export const fetchAllReviews = asyncHandler(async (request: any, response: Respo
     if(!reviews) {
       return next(new ErrorResponse(`No reviews found`, StatusCodes.BAD_REQUEST));
     }
-
-
+    
     return response.status(StatusCodes.OK).json({success: true, reviews});
 })
 
@@ -41,6 +40,8 @@ export const createReview = asyncHandler(async (request: any, response: Response
 
     const review = await Review.create({product, rating, title, comment});
     await review.save();
+
+    console.log(`Created Review : `, review);
 
     return response.status(StatusCodes.CREATED).json({success: true, review});
 
