@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const EditUserShiftDates: React.FC = () => { // Component that allows the store manager to edit the staff users start / end shift dates
     const [startShiftDate, setStartShiftDate] = useState<Date>(new Date(Date.now()));
     const [endShiftDate, setEndShiftDate] = useState<Date>(new Date(Date.now()));
-
+    const [isValidDate, setIsValidDate] = useState<boolean>(false);
     const [shiftsUpdated, setShiftsUpdated] = useState<boolean>(false);
 
     const dispatch = useDispatch();
@@ -20,6 +20,14 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
       try {
 
          event.preventDefault();
+
+         if(isNaN(startShiftDate.getDate())) {
+            setIsValidDate(false);
+         }  
+
+         if(isNaN(endShiftDate.getDate())) {
+           setIsValidDate(false);
+         }
 
          if(new Date(startShiftDate) > new Date(endShiftDate)) {
             alert("Start date cannot be later than the end date")
