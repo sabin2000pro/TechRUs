@@ -19,7 +19,9 @@ build-services:
 	- cd services/coupons* && docker build -t sabin2000/techrus-coupons-service . && npm run build
 
 run-app:
-	- docker-compose up --build
+	- cd services/authentication-service && npm run auth:test
+	- cd services/shipping-service && npm run shipping:test
+	- docker-compose up --build -d
 
 create-networks:
 	- docker network create products-service
@@ -30,10 +32,6 @@ create-networks:
 	- docker network create payments-service
 	- docker network create coupons-service
 	- docker network create reviews-service
-
-run-tests:
-	- cd services/authentication-service && npm run auth:test
-	- cd services/shipping-service && npm run shipping:test
 	
 stop-services:
 	- docker-compose -f docker-compose.yaml -f docker-compose.yaml down --remove-orphans

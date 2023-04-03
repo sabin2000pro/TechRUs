@@ -21,6 +21,10 @@ const UpdatePassword: React.FC = () => {
           dispatch(updatePassword(currentPassword, newPassword) as any);
           setPasswordUpdated((passwordUpdated) => !passwordUpdated);
 
+          setTimeout(() => {
+            navigate(`/`)
+          }, 1500)
+
        }
        
       catch(error) {
@@ -36,6 +40,14 @@ const UpdatePassword: React.FC = () => {
   return (
 
     <>
+
+    {error && (
+      <>
+           <div className="bg-red-200 border border-red-400 text-black-700 px-4 py-3 rounded my-4 success-banner">
+                <h2>{error}</h2>
+           </div>
+      </>
+    )}
 
       {passwordUpdated && (
 
