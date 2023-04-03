@@ -102,7 +102,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
             <div className = "mb-4 login-container-inputs">
                 <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Start Shift Date</label>
-                <DatePicker value = {startShiftDate} className = "mb-9 date-picker" selected = {startShiftDate} onChange = {(currDate) => setStartShiftDate(currDate)} />
+                <DatePicker timeIntervals = {15} dateFormat = "yyyy/MM/dd HH:mm:ss" showTimeSelect value = {startShiftDate} className = "mb-9 date-picker" selected = {startShiftDate} onChange = {(currDate) => setStartShiftDate(currDate)} />
               </div>
 
               <div className = "mb-6 login-password-container mt-5">
