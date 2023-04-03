@@ -94,7 +94,7 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
 
         const {data} = await axios.post(AUTH_URI_LOGIN, {email, password}, config);
         console.log(`Login Data : `, data);
-        
+
         dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
 
         sessionStorage.setItem("token", JSON.stringify(data.token));
@@ -111,12 +111,14 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
 
 } 
 
-export const verifyLoginMfa = (userId: string, mfaToken: string) => async (dispatch: Dispatch): Promise<void> => {
+export const verifyLoginMfa = (userId: string, multiFactorToken: string) => async (dispatch: Dispatch): Promise<void> => {
 
   try {
 
     dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
-    const {data} = await axios.post(AUTH_URI_VERIFY_LOGIN, {userId, mfaToken});
+    const {data} = await axios.post(AUTH_URI_VERIFY_LOGIN, {userId, multiFactorToken});
+
+    console.log(`Verified Account Data : `, data);
 
     dispatch({type: VERIFY_LOGIN_MFA_SUCCESS, payload: data.message});
 
