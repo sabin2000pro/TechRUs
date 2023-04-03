@@ -19,7 +19,7 @@ const Register: React.FC = () => { // Register Component
      try {
 
          event.preventDefault(); // Prevent form re-submission
-         
+
          dispatch(register(username, email, password) as any);
          setOnRegisterSuccess((registerSuccess) => !registerSuccess);
 
@@ -66,7 +66,7 @@ const Register: React.FC = () => { // Register Component
                
                )}
 
-             <div className = "flex justify-center items-center h-screen login-container">
+             <div className = "flex justify-center items-center h-screen login-container mt-8">
 
              <form method = "POST" onSubmit = {onRegisterHandler} className = "bg-white shadow-md rounded px-10 pt-8 pb-8 mb-4 auth-container">
              
@@ -74,7 +74,7 @@ const Register: React.FC = () => { // Register Component
 
                <div className = "mb-4 login-container-inputs username-container">
                      <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Username</label>
-                     <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Enter yoru username" />
+                     <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Enter your username" />
                </div>
                
                <div className = "mb-4 login-container-inputs email-container">
