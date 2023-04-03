@@ -22,6 +22,8 @@ const Dropdown: React.FC = () => {
 
            setTimeout(() => {
             navigate(`/user-login`);
+            window.location.reload(); // REload page to remove account settings after logged out
+
            }, 1300)
         } 
         
