@@ -20,6 +20,8 @@ const BasketScreen: React.FC = () => {
   const onRemoveProductHandler = (id: string): void => {
 
     try {
+
+
        dispatch(removeProductFromBasket(id) as any)
 
        setProductRemoved((productRemoved) => !productRemoved)
@@ -51,7 +53,9 @@ const BasketScreen: React.FC = () => {
 
     sessionStorage.setItem("orderItems", JSON.stringify(orderItems));
 
-    navigate('/shipping')
+    setTimeout(() => {
+      navigate('/shipping')
+    }, 1200)
 
   }
     

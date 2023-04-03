@@ -40,6 +40,8 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
           setTimeout(() => {
             window.location.reload();
           }, 1200)
+
+          
        }
 
     } 
