@@ -75,13 +75,13 @@ const Register: React.FC = () => { // Register Component
 
                <div className = "mb-4 login-container-inputs username-container">
                      <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "username">Username</label>
-                     <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Enter yoru username" />
+                     <input value = {username} onChange = {(event) => setUsername(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "username" type = "text" placeholder = "Enter yoru username" />
                </div>
                
             
                <div className = "mb-4 login-container-inputs email-container">
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">E-mail</label>
-                  <input value = {email} onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-9 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "email" type = "text" placeholder = "Enter your e-mail address" />
+                  <input value = {email} onChange = {(event) => setEmail(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 mb-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id = "email" type = "text" placeholder = "Enter your e-mail address" />
                </div>
 
             
