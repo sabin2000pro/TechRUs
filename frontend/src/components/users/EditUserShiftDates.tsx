@@ -31,6 +31,7 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
          if(new Date(startShiftDate) > new Date(endShiftDate)) {
             alert("Start date cannot be later than the end date")
+            setIsValidDate(false);
          }
 
          dispatch(updateUserShifts(user._id, startShiftDate, endShiftDate as any) as any);
@@ -52,6 +53,16 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
     <>
 
+    {isValidDate && (
+
+      <>
+        <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
+              <h2>Invalid Date</h2>
+         </div>
+      </>
+
+    )}
+
      {error && (
 
       <>  
@@ -59,6 +70,8 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
               <h2>{error}</h2>
          </div>
       </>
+
+
 
      )}
 
