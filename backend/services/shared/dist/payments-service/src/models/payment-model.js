@@ -23,8 +23,7 @@ exports.PaymentSchema = new mongoose_1.default.Schema({
     },
     paymentMethod: {
         type: String,
-        enum: ['stripe'],
-        required: true
+        enum: ['stripe']
     },
     stripePaymentId: {
         type: String,

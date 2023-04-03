@@ -13,7 +13,8 @@ exports.OrderSchema = new mongoose_1.default.Schema({
             },
             quantity: {
                 type: Number,
-                required: true
+                required: [true, "Please specify the product quantity"],
+                default: 0
             },
             itemPrice: {
                 type: Number,
@@ -34,10 +35,6 @@ exports.OrderSchema = new mongoose_1.default.Schema({
                 type: Number,
                 required: [true, "Please ensure that this order contains the total price for the order"],
                 default: 0.00
-            },
-            price: {
-                type: Number,
-                required: true
             },
             product: {
                 type: mongoose_1.default.Schema.Types.ObjectId,

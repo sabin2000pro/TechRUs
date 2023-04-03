@@ -98,6 +98,7 @@ export const UserSchema = new mongoose.Schema<IUserSchemaDocument>({ // User Dat
 
 //@ description: Pre-middleware function which hashes the user password before saving it to the database
 UserSchema.pre('save', async function(next) {
+    
     if(!this.isModified("password")) {
         return next();
     }

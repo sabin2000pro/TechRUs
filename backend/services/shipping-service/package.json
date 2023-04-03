@@ -9,7 +9,6 @@
     "start:shipping-service:dev": "NODE_env=development npm run dev",
     "shipping:test": "jest tests/shipping.test.ts --bail"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",

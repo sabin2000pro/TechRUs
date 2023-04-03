@@ -45,6 +45,7 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
 
     it("Register API with invalid e-mail address", async () => {
+
         const validRegisterData = [{username: "user092", email: "nfj", password: "123mini123"}]
 
         for(const body of validRegisterData) {
@@ -59,21 +60,24 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 describe("Login API Unit Tests", () => {
 
     it("Login with valid details", async () => {
-       const loginPayload = [{email: "mike99@gmail.com", password: "123mini123"}]
+
+       const loginPayload = [{email: "staffmember123@gmail.com", password: "staff123"}]
 
        for(const body of loginPayload) {
          const loginResponse = await request(app).post(`/api/v1/auth/login`).send(body);
+         console.log(`Login Response : `, loginResponse);
+         
          return expect(loginResponse.statusCode).toBe(StatusCodes.OK)
        }
 
     })
 
     it("Login with invalid password", async () => {
-        const loginPayload = [{email: "mike99@gmail.com", password: "bb00"}]
+        const loginPayload = [{email: "staffmember123@gmail.com", password: "staff1232388"}]
 
         for(const body of loginPayload) {
           const loginResponse = await request(app).post(`/api/v1/auth/login`).send(body);
-          return expect(loginResponse.statusCode).toBe(StatusCodes.OK)
+          return expect(loginResponse.statusCode).toBe(StatusCodes.BAD_REQUEST)
         }
 
 
@@ -88,6 +92,8 @@ describe("Login API Unit Tests", () => {
 
 
     })
+
+
 })
 
 describe("Forgot Password API - Unit Tests", () => {

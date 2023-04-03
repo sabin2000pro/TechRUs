@@ -100,7 +100,7 @@
 
   "include": [
     "src/index.ts",
-    "src/test"
+    "src/tests"
   ]
 
   

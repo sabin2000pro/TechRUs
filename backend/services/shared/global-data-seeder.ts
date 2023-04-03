@@ -1,4 +1,5 @@
 require('dotenv').config();
+import bcrypt from 'bcryptjs'
 import { connectShippingSchema } from './../shipping-service/src/schema/shipping-schema';
 import { connectReviewSchema } from './../reviews-service/src/database/reviews-schema';
 import { connectCouponsSchema } from './../coupons-service/src/database/coupons-schema';
@@ -23,6 +24,13 @@ import shipping from '../shipping-service/src/data/shipping.json';
 import reviews from '../reviews-service/src/data/reviews.json';
 
 // Import the load schemas functions
+
+const hashUserPassword = async (password: string) => {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    return hashedPassword;
+}
 
 const connectServiceSchemas = () => {
     connectAuthDatabase();
@@ -49,7 +57,12 @@ const importServiceData = async () => {
      await Coupon.deleteMany();
      await Review.deleteMany();
 
-     await User.insertMany(users);     
+     const hashedUsers = await Promise.all(users.map(async (user) => {
+        const hashedPassword = await hashUserPassword(user.password);
+        return { ...user, password: hashedPassword };
+      }));
+
+     await User.insertMany(hashedUsers);     
      await Product.insertMany(products);
      await Order.insertMany(orders)
      await Payment.insertMany(payments);
