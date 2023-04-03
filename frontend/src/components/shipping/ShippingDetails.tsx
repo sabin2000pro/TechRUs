@@ -33,10 +33,12 @@ const ShippingDetails: React.FC = () => {
 
         event.preventDefault();
         dispatch(createNewShipping(user._id, address, city, country, postalCode, phoneNo) as any);
-
-        console.log(`Shipping Details : `, address);
-
+        
         setShippingDetailsSubmitted((shippingDetailsSubmitted) => !shippingDetailsSubmitted)
+
+        const shippingDetails = {user: user._id, address, city, country, postalCode, phoneNo};
+        localStorage.setItem("shippingInfo", JSON.stringify(shippingDetails));
+
         navigate(`/order-confirm`);
   
     } 

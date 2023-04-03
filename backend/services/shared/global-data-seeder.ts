@@ -25,10 +25,9 @@ import reviews from '../reviews-service/src/data/reviews.json';
 
 // Import the load schemas functions
 
-const hashUserPassword = async (password: string) => {
+const hashUserPassword = async (password: string) => { // Function to hash the user password, takes in the user password as a parameter
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
+    const hashedPassword = await bcrypt.hash(password, saltRounds); // Hash the user password
     return hashedPassword;
 }
 
@@ -57,7 +56,7 @@ const importServiceData = async () => {
      await Coupon.deleteMany();
      await Review.deleteMany();
 
-     const hashedUsers = await Promise.all(users.map(async (user) => {
+     const hashedUsers = await Promise.all(users.map ( async (user) => {
         const hashedPassword = await hashUserPassword(user.password);
         return { ...user, password: hashedPassword };
       }));

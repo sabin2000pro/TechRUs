@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40,6 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var shipping_schema_1 = require("./../shipping-service/src/schema/shipping-schema");
 var reviews_schema_1 = require("./../reviews-service/src/database/reviews-schema");
 var coupons_schema_1 = require("./../coupons-service/src/database/coupons-schema");
@@ -62,6 +74,19 @@ var coupons_json_1 = __importDefault(require("../coupons-service/src/data/coupon
 var shipping_json_1 = __importDefault(require("../shipping-service/src/data/shipping.json"));
 var reviews_json_1 = __importDefault(require("../reviews-service/src/data/reviews.json"));
 // Import the load schemas functions
+var hashUserPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
+    var saltRounds, hashedPassword;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                saltRounds = 10;
+                return [4 /*yield*/, bcryptjs_1.default.hash(password, saltRounds)];
+            case 1:
+                hashedPassword = _a.sent();
+                return [2 /*return*/, hashedPassword];
+        }
+    });
+}); };
 var connectServiceSchemas = function () {
     (0, auth_schema_1.connectAuthDatabase)();
     (0, products_db_1.connectProductsSchema)();
@@ -74,11 +99,11 @@ var connectServiceSchemas = function () {
 connectServiceSchemas();
 // Functions to import and remove data
 var importServiceData = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var error_1;
+    var hashedUsers, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 13, , 14]);
+                _a.trys.push([0, 14, , 15]);
                 // First delete the existing data before importing any data
                 return [4 /*yield*/, user_model_1.User.deleteMany()];
             case 1:
@@ -96,37 +121,50 @@ var importServiceData = function () { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, review_model_1.Review.deleteMany()];
             case 5:
                 _a.sent();
-                return [4 /*yield*/, user_model_1.User.insertMany(users_json_1.default)];
+                return [4 /*yield*/, Promise.all(users_json_1.default.map(function (user) { return __awaiter(void 0, void 0, void 0, function () {
+                        var hashedPassword;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, hashUserPassword(user.password)];
+                                case 1:
+                                    hashedPassword = _a.sent();
+                                    return [2 /*return*/, __assign(__assign({}, user), { password: hashedPassword })];
+                            }
+                        });
+                    }); }))];
             case 6:
-                _a.sent();
-                return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
+                hashedUsers = _a.sent();
+                return [4 /*yield*/, user_model_1.User.insertMany(hashedUsers)];
             case 7:
                 _a.sent();
-                return [4 /*yield*/, order_model_1.Order.insertMany(orders_json_1.default)];
+                return [4 /*yield*/, products_model_1.Product.insertMany(products_json_1.default)];
             case 8:
                 _a.sent();
-                return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
+                return [4 /*yield*/, order_model_1.Order.insertMany(orders_json_1.default)];
             case 9:
                 _a.sent();
-                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
+                return [4 /*yield*/, payment_model_1.Payment.insertMany(payments_json_1.default)];
             case 10:
                 _a.sent();
-                return [4 /*yield*/, coupon_model_1.Coupon.insertMany(coupons_json_1.default)];
+                return [4 /*yield*/, shipping_model_1.Shipping.insertMany(shipping_json_1.default)];
             case 11:
                 _a.sent();
-                return [4 /*yield*/, review_model_1.Review.insertMany(reviews_json_1.default)];
+                return [4 /*yield*/, coupon_model_1.Coupon.insertMany(coupons_json_1.default)];
             case 12:
+                _a.sent();
+                return [4 /*yield*/, review_model_1.Review.insertMany(reviews_json_1.default)];
+            case 13:
                 _a.sent();
                 console.log("All data inserted to each service schema successfully");
                 return [2 /*return*/, process.exit(1)];
-            case 13:
+            case 14:
                 error_1 = _a.sent();
                 if (error_1) {
                     console.error(error_1);
                     process.exit(1);
                 }
-                return [3 /*break*/, 14];
-            case 14: return [2 /*return*/];
+                return [3 /*break*/, 15];
+            case 15: return [2 /*return*/];
         }
     });
 }); };
