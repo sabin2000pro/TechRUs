@@ -33,6 +33,7 @@ const ProductDetails: React.FC = () => {
 
             if(quantity === 0) {
                 alert("Cannot add to basket - quantity is 0")
+                setIsQuantityValid(false);
             }
 
             dispatch(addProductToBasket(product._id, quantity) as any);
@@ -41,6 +42,7 @@ const ProductDetails: React.FC = () => {
             setTimeout(() => {
                 setItemAddedToBasket(false);
             }, 1500)
+
         } 
         
         catch(error) {
@@ -127,13 +129,11 @@ const ProductDetails: React.FC = () => {
 
   </div>
 
-
       <p className="text-lg font-medium mb-2">Price: £{product.price}</p>
       {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
       {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}
 
-      <button disabled = {product.stockCount === 0} onClick = {handleCreateReviewModal} className = "px-2 rounded basket-btn">Create Review</button>
-
+         <button disabled = {product.stockCount === 0} onClick = {handleCreateReviewModal} className = "px-2 rounded basket-btn">Create Review</button>
          <CreateReview product = {product} showReviewModal = {showReviewModal} />
 
     </div>
