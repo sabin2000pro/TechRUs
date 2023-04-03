@@ -374,7 +374,7 @@ export const updatePassword = asyncHandler(async (request: any, response: Respon
         user.password = request.body.newPassword
         await user.save(); // Save new user
         
-        return response.status(StatusCodes.OK).json({success: true, message: "User password updated"});
+        return response.status(StatusCodes.OK).json({success: true, message: "Password Updated"});
     } 
     
 )

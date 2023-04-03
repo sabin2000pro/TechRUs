@@ -7,10 +7,11 @@ const VerifyLogin: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [mfaToken, setMfaToken] = useState<string>("");
-  const {} = useSelector((state: any) => state.auth)
+  const {error, loading} = useSelector((state: any) => state.auth)
   const [verifyLoginSubmitted, setVerifyLoginSubmitted] = useState<boolean>(false);
 
   const onLoginVerificationHandler = (event): void => {
+
     try {
       event.preventDefault();
 
@@ -18,6 +19,8 @@ const VerifyLogin: React.FC = () => {
       const userId = user._id;
 
       dispatch(verifyLoginMfa(userId, mfaToken) as any)
+
+      setVerifyLoginSubmitted((verifyLoginSubmitted) => !verifyLoginSubmitted);
     } 
     
     catch(error) {
