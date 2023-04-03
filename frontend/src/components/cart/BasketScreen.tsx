@@ -45,10 +45,11 @@ const BasketScreen: React.FC = () => {
   const handleShippingNavigate = (): void => {
 
     const orderItems = basketItems.map((item: any) => { // Loop through the basket items that are going to be part of an order
-      const itemPrice = parseInt(item.price);
-      const name = item.name;
 
-       return {product: item.product, name, taxPrice, shippingPrice, totalPrice, itemPrice};
+      const itemPrice = parseInt(item.price); // Convert the product price to an integer
+      const name = item.name;
+      
+      return {product: item.product, name, taxPrice, shippingPrice, totalPrice, itemPrice};
     });
 
     sessionStorage.setItem("orderItems", JSON.stringify(orderItems));
