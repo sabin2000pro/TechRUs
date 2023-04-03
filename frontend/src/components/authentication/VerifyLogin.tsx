@@ -19,6 +19,10 @@ const VerifyLogin: React.FC = () => {
       const user = JSON.parse(sessionStorage.getItem("user") as any);
       const userId = user._id;
 
+      if(mfaToken.toString() === "") {
+         setVerifyLoginSubmitted(false);
+      }
+
       dispatch(verifyLoginMfa(userId, mfaToken) as any)
       setVerifyLoginSubmitted((verifyLoginSubmitted) => !verifyLoginSubmitted);
 
