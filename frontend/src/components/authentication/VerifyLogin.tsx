@@ -72,7 +72,7 @@ const VerifyLogin: React.FC = () => {
                 <div className = "login-container-inputs">
                      <h2 className = "heading-secondary mb-6">Login Verification</h2>
                     <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "token">Token</label>
-                    <input onChange = {(event) => setMfaToken(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id = "token" type = "text" placeholder = "Enter MFA Token" />
+                    <input value = {mfaToken} onChange = {(event) => setMfaToken(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id = "token" type = "text" placeholder = "Enter MFA Token" />
                     </div>
 
             <div className = "flex items-center justify-center login-btn-container verify-container">
