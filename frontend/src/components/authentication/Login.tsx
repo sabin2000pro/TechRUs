@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Loader from '../../layout/Loader';
 import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import MetaData from '../../layout/MetaData';
@@ -13,7 +12,7 @@ const Login: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
-  const {loading, error, isAuthenticated, user} = useSelector((state: any) => state.auth);
+  const {error, isAuthenticated, user} = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
 
   const onLoginHandler = (event: React.FormEvent): void => {
@@ -25,6 +24,10 @@ const Login: React.FC = () => {
     
         setFormSubmitted((formSubmitted) => !formSubmitted);
         setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+
+        setTimeout(() => {
+            navigate(`/verify-login`)
+        }, 1500)
       } 
       
       catch(error) {

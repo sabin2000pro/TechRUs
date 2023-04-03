@@ -26,7 +26,8 @@ const VerifyLogin: React.FC = () => {
     catch(error) {
 
        if(error) {
-        console.error(error);
+          console.error(error);
+          setVerifyLoginSubmitted(false)
        }
 
     }
@@ -36,7 +37,7 @@ const VerifyLogin: React.FC = () => {
   return (
 
     <>
-      <h2 className = "heading-secondary">Login Verification Page</h2>
+      <h2 className = "heading-secondary">Login Verification</h2>
 
       <div className = "flex justify-center items-center h-screen login-container">
 
