@@ -57,14 +57,6 @@ const Login: React.FC = () => {
   
           <>
 
-          {isLoggedIn && formSubmitted && (
-
-            <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
-                <h2>You are logged in</h2>
-            </div>
-
-            )}
-
             {error && (
 
               <>

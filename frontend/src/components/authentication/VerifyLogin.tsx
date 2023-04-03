@@ -43,8 +43,6 @@ const VerifyLogin: React.FC = () => {
 
               <form method = "POST" onSubmit = {onLoginVerificationHandler} className = "bg-white shadow-md rounded px-8 pt-8 pb-8 mb-4 auth-container login-form">
 
-                <h1 className = "heading-primary h-login">E-mail Verification</h1>
-
                   <div className = "login-container-inputs">
 
                   <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email"></label>
