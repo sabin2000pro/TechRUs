@@ -232,22 +232,21 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 
 }
 
-export const updateUserShifts = (id: string, newStartShiftDate: Date, newEndShiftDate: Date) => async (dispatch: Dispatch): Promise<void> => {
+export const updateUserShifts = (id: string, startShiftDate: Date, endShiftDate: Date) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
 
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});
 
-       const {data} = await axios.put(`${AUTH_USERS_LIST}/${id}/update-shifts`, {newStartShiftDate, newEndShiftDate});
+       const {data} = await axios.put(`${AUTH_USERS_LIST}/${id}/update-shifts`, {startShiftDate, endShiftDate});
        console.log(`Updated staff user shifts : `, data);
 
-       dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data});
+      //  dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data});
     } 
     
     catch(error) {
 
       if(error) {
-
         console.error(`Updating User Shifts Error : `, error);
         dispatch({type: EDIT_USER_SHIFTS_FAIL, payload: error.data.response.message});
       }
