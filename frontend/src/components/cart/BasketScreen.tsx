@@ -21,7 +21,6 @@ const BasketScreen: React.FC = () => {
 
     try {
 
-
        dispatch(removeProductFromBasket(id) as any)
 
        setProductRemoved((productRemoved) => !productRemoved)
@@ -48,7 +47,7 @@ const BasketScreen: React.FC = () => {
 
       const itemPrice = parseInt(item.price); // Convert the product price to an integer
       const name = item.name;
-      
+
       return {product: item.product, name, taxPrice, shippingPrice, totalPrice, itemPrice};
     });
 
@@ -102,12 +101,10 @@ const BasketScreen: React.FC = () => {
         <button onClick = {() => onRemoveProductHandler(basketItem.product)} className=" px-4 rounded basket-btn mb-5" type="button">Remove</button>
      </div>
        
-       </div>
+</div>
 
 
-         </>
-
-         
+    </>
        ))}
 
           {basketItems.length > 0 ? (
@@ -115,6 +112,7 @@ const BasketScreen: React.FC = () => {
              <>
 
          <div className = "flex justify-center bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
+
              <h2 className="heading-secondary order-heading">Order Summary</h2>
 
     <hr/>

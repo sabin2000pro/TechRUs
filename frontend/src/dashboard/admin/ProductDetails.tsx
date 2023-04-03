@@ -14,6 +14,7 @@ const ProductDetails: React.FC = () => {
     const [quantity, setQuantity] = useState<number>(0);
     const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
     const [itemAddedToBasket, setItemAddedToBasket] = useState<boolean>(false);
+    const [isQuantityValid, setIsQuantityValid] = useState<boolean>(false);
 
     useEffect(() => {
 
@@ -29,7 +30,11 @@ const ProductDetails: React.FC = () => {
     const addToBasketHandler = (): void => { // Function that adds a product to basket
 
         try {
-            
+
+            if(quantity === 0) {
+                alert("Cannot add to basket - quantity is 0")
+            }
+
             dispatch(addProductToBasket(product._id, quantity) as any);
             setItemAddedToBasket((addedToBasket) => !addedToBasket);
 
