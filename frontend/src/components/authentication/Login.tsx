@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const {error, isAuthenticated, user} = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
 
-  const onLoginHandler = (event: React.FormEvent): void => {
+  const onLoginHandler = (event: React.FormEvent): void => { // Login handler method that is invoked when the login button is clicked
 
       try {
 
@@ -30,7 +30,7 @@ const Login: React.FC = () => {
           setTimeout(() => {
             navigate(`/verify-login`)
         }, 1500)
-        
+
 
         }
 
@@ -66,8 +66,6 @@ const Login: React.FC = () => {
     <MetaData pageTitle = {`Login`} />
   
           <>
-
-        
             {error && (
 
               <>
