@@ -29,6 +29,7 @@ const ProductDetails: React.FC = () => {
     const addToBasketHandler = (): void => { // Function that adds a product to basket
 
         try {
+            
             dispatch(addProductToBasket(product._id, quantity) as any);
             setItemAddedToBasket((addedToBasket) => !addedToBasket);
 

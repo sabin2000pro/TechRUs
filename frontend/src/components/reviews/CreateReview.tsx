@@ -35,8 +35,11 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
           setTitle("")
           setRating(0);
           setComment("")
-
           setReviewCreated((reviewCreated) => !reviewCreated);
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 1200)
        }
 
     } 

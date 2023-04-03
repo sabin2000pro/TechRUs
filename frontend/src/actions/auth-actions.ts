@@ -240,7 +240,6 @@ export const updateUserShifts = (id: string, startShiftDate: Date, endShiftDate:
 
        const {data} = await axios.put(`${AUTH_USERS_LIST}/${id}/update-shifts`, {startShiftDate, endShiftDate});
        console.log(`Updated staff user shifts : `, data);
-
        dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data.message});
     } 
     
