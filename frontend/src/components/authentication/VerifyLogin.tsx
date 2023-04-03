@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { verifyLoginMfa } from '../../actions/auth-actions';
+import MetaData from '../../layout/MetaData';
 
 const VerifyLogin: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,22 +39,29 @@ const VerifyLogin: React.FC = () => {
 
     <>
 
+      <MetaData pageTitle = {`Verify Login`} />
+
+      {error && (
+
+         <>
+            <div className="bg-red-200 border border-red-400 text-black-700 px-4 py-3 rounded my-4 success-banner">
+                  <h2>{error}</h2>
+              </div>
+         </>
+      )}
+
       <div className = "flex justify-center items-center h-screen login-container">
 
               <form method = "POST" onSubmit = {onLoginVerificationHandler} className = "bg-white shadow-md rounded px-8 pt-8 pb-8 mb-4 auth-container login-form">
 
-                  <div className = "login-container-inputs">
-
+                <div className = "login-container-inputs">
                      <h2 className = "heading-secondary">Login Verification</h2>
-
-                  <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "token">Token</label>
-
-                <input onChange = {(event) => setMfaToken(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id  ="otp" type = "text" placeholder="Enter your OTP" />
-
-                </div>
+                     <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "token">Token</label>
+                     <input onChange = {(event) => setMfaToken(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mt-5 mb-12 focus:outline-none focus:shadow-outline" id  ="otp" type = "text" placeholder="Enter your OTP" />
+                    </div>
 
             <div className = "flex items-center justify-center login-btn-container verify-container">
-                 <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline verify-btn" type="submit">Verify</button>
+                <button className = "text-white font-bold py-2 px-4 rounded flex justify-center focus:outline-none focus:shadow-outline verify-btn" type="submit">Verify</button>
             </div>
 
             <div className = "resend-container">
@@ -62,7 +70,8 @@ const VerifyLogin: React.FC = () => {
 
             </form>
 
-         </div>
+      </div>
+
     </>
 
     
