@@ -90,8 +90,6 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
        )}
 
-       {loading && <Loader />}
-
         <>
 
         <div className = "flex justify-center items-center h-screen login-container">
