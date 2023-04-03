@@ -8,11 +8,9 @@ import { login } from '../../actions/auth-actions';
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
-  const {error, isAuthenticated, user} = useSelector((state: any) => state.auth);
+  const {error, isAuthenticated} = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
 
   const onLoginHandler = (event: React.FormEvent): void => { // Login handler method that is invoked when the login button is clicked
@@ -21,9 +19,6 @@ const Login: React.FC = () => {
 
         event.preventDefault();
         dispatch(login(email, password) as any); // Dispatch login action with e-mail and password
-    
-        setFormSubmitted((formSubmitted) => !formSubmitted);
-        setIsLoggedIn((isLoggedIn) => !isLoggedIn);
 
         setTimeout(() => {
           navigate(`/verify-login`)
@@ -32,23 +27,11 @@ const Login: React.FC = () => {
       } 
       
       catch(error) {
-
-         if(error) {
-            setFormSubmitted(false);
-            setIsLoggedIn(false);
-         }
+          console.error(error);
       }
 
 
   }
-
-  useEffect(() => {
-
-      if(isAuthenticated) {
-         navigate(`/`)
-      }
-
-  }, [isAuthenticated, user, dispatch])
   
   return (
 
@@ -57,14 +40,16 @@ const Login: React.FC = () => {
     <MetaData pageTitle = {`Login`} />
   
           <>
+
             {error && (
 
               <>
+
                 <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
                   <h2>{error}</h2>
                 </div>
-
               </>
+
             )}
 
           <div className = "flex justify-center items-center h-screen login-container">
