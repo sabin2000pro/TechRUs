@@ -24,7 +24,6 @@ app.use(cors({
     methods: ["POST", 'GET', "DELETE", "PUT", "PATCH"]
 }))
 
-
 app.use(cookieSession({
     keys: ["key1", 'key2']
 }))

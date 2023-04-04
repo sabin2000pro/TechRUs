@@ -463,7 +463,7 @@ export const fetchUserByID = asyncHandler(async(request: any, response: Response
 })
 
 export const editUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
-    const id = request.params.id;
+    const id = request.params.id; // Get the user ID from the request parameter
     let user = await User.findById(id);
 
     if(!user) {
