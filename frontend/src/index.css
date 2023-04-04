@@ -8,10 +8,6 @@
   box-sizing: border-box;
 }
 
-body {
-  overflow: hidden;
-}
-
 .stock-text {
   color: green;
 }
@@ -555,4 +551,27 @@ font-weight: bold;
   width: 280px;
   text-align: center;
   padding: 2px 4px;
+}
+
+.sub-header-container {
+ background-color: #013782c9;
+ height: 95px;
+ color: white;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+
+.paragraph {
+  margin-left: 150px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.metamask-btn {
+  margin-right: 80px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color:#013782;
+  padding: 6px 8px;
 }

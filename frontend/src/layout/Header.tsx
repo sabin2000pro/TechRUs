@@ -34,6 +34,8 @@ const Header: React.FC = () => {
 
           <div className = "header-container flex justify-between items-center">
 
+           
+
         <Link to = '/'> 
            <img className = "logo-img" src = '/images/techrus.png' />
         </Link>
@@ -67,6 +69,12 @@ const Header: React.FC = () => {
 
 
  </header>
+
+
+ <div className = "sub-header-container">
+      <p className = "paragraph">Wishlist</p>
+      <button className = "metamask-btn">Connect Wallet</button>
+   </div>
 
     </>
 
