@@ -21,10 +21,11 @@ const Dropdown: React.FC = () => {
            setIsLoggedOut((isLoggedOut) => !isLoggedOut);
 
            setTimeout(() => {
+            
             navigate(`/user-login`);
             window.location.reload(); // REload page to remove account settings after logged out
 
-           }, 1300)
+           }, 800)
         } 
         
         catch(error) {
