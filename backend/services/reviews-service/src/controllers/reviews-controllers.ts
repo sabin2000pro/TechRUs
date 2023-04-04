@@ -11,7 +11,7 @@ export const fetchAllReviews = asyncHandler(async (request: any, response: Respo
     if(!reviews) {
       return next(new ErrorResponse(`No reviews found`, StatusCodes.BAD_REQUEST));
     }
-    
+
     return response.status(StatusCodes.OK).json({success: true, reviews});
 })
 
@@ -62,7 +62,6 @@ export const editReviewByID = asyncHandler(async (request, response: Response, n
     }
 
     review = await Review.findByIdAndUpdate(id, reviewFieldsToUpdate, {new: true, runValidators: true});
-
     review.rating = request.body.rating;
     review.comment = request.body.comment;
 

@@ -28,8 +28,9 @@ const VerifyLogin: React.FC = () => {
 
       setTimeout(() => {
          navigate(`/`)
-      }, 1500)
 
+         window.location.reload();
+      }, 1200)
 
     } 
     
