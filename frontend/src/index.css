@@ -172,7 +172,7 @@ body {
   text-align: center;
   padding: 24px;
   right: 0;
-  height: 5.8%;
+  height: 6.1%;
 }
 
 .basket-count {
@@ -417,6 +417,7 @@ font-weight: bold;
   padding: 12px 20px;
   margin-left: 1600px;
   margin-top: -200px;
+  margin-right: 100px;
 }
 
 .checkout-btn {

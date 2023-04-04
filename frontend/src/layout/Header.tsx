@@ -72,7 +72,7 @@ const Header: React.FC = () => {
 
 
  <div className = "sub-header-container">
-      <p className = "paragraph">Wishlist</p>
+         <p className = "paragraph">Wishlist  </p>
       <button className = "metamask-btn">Connect Wallet</button>
    </div>
 

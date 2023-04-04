@@ -111,9 +111,9 @@ const BasketScreen: React.FC = () => {
 
              <>
 
-         <div className = "flex justify-center bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
+    <div className = "flex justify-center bg-white w-1/2 shadow-md rounded ml-12 checkout-card">
 
-             <h2 className="heading-secondary order-heading">Order Summary</h2>
+          <h2 className="heading-secondary order-heading">Order Summary</h2>
 
     <hr/>
 
