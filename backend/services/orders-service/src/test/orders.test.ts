@@ -42,6 +42,7 @@ describe("Create New Order Test Suite", () => {
 
         for(const orderData of orderBodyPayload) {
             const response = await request(app).post(`/api/v1/orders`).send(orderData);
+            console.log(`Create Order Response : `, orderData);
             expect(response.statusCode).toBe(StatusCodes.CREATED);
         }
 
@@ -51,7 +52,6 @@ describe("Create New Order Test Suite", () => {
 
         try {
             const response = await request(app).get(`/api/v1/orders`).send();
-            console.log(`Orders Response : `, response.body.orders);
         } 
         
         catch(error) {
@@ -77,10 +77,12 @@ describe("Create New Order Test Suite", () => {
     })
 
     it("Edit order status unit test", async () => {
-       const updateOrderStatusPayload = {orderStatus: ""}
+       const updateOrderStatusPayload = {orderStatus: "delivered"}
+
     })
 
     it("Create order with INVALID Body data", async () => {
+
        try {
 
        } 
