@@ -52,8 +52,8 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
     }
 
     const order = await Order.create({orderItems, shippingInformation});
+    
     await order.save(); // Asynchronously save the order into the database
-
     return response.status(StatusCodes.CREATED).json({success: true, order, message: "We have received your order"});
 })
 
