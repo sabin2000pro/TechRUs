@@ -52,6 +52,8 @@ describe("Create New Order Test Suite", () => {
 
         try {
             const response = await request(app).get(`/api/v1/orders`).send();
+            expect(response.statusCode).toBe(200);
+            expect(response.body.orders.length).toBeGreaterThan(0);
         } 
         
         catch(error) {
@@ -75,7 +77,7 @@ describe("Create New Order Test Suite", () => {
             if(error) {
                 throw new Error(error);
             }
-            
+
         }
 
     })
