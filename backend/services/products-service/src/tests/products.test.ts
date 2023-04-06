@@ -20,12 +20,15 @@ describe("Fetch All Products Test Suite", () => {
 describe("Fetch Product By ID Test Suite ", () => {
 
     it("Fetch Single Product By ID - Unit Test", async () => {
+        
         try {
+            const productResponse = await request(app).get(`/api/v1/products/642a9d2201d0c6b3bc8155a2`);
+            console.log(`Product Response : `, productResponse);
 
         } 
         
         catch(error) {
-            
+
             if(error) {
                 throw new Error(error);
             }
