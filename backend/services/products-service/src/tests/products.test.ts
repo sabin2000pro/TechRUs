@@ -19,10 +19,25 @@ describe("Fetch All Products Test Suite", () => {
 
 describe("Fetch Product By ID Test Suite ", () => {
 
+    it("Fetch Single Product By ID - Unit Test", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+            
+            if(error) {
+                throw new Error(error);
+            }
+
+        }
+
+
+    })
 })
 
 describe("Create New Product - Unit Test Suite", () => {
-    
+
     it("Create New Product - Valid Data", async () => {
 
     })
