@@ -19,7 +19,7 @@ export const OrderSchema = new mongoose.Schema<IOrderDocument>({
         
         name: { // Name of the product being ordered
             type: String,
-            required: true
+            required: [true, "Please provide the product name as part of the order items"]
         },
 
         quantity: { // Quantity of the product being ordered
