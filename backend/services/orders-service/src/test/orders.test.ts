@@ -129,12 +129,18 @@ describe("Create New Order Test Suite", () => {
 
     it("Delete Single Order Data - Unit Test", async () => {
         try {
-            const deleteResponseSingleOrder = await request(app).delete(`/api/v1/orders/5d713995b721c3bb38c1f9c2`)
+            const deleteResponseSingleOrder = await request(app).delete(`/api/v1/orders/5d713995b721c3bb38c1f9c2`);
+            expect(deleteResponseSingleOrder).toBe(StatusCodes.NO_CONTENT);
         } 
         
         catch(error) {
+            
+            if(error) {
+                throw new Error(error);
+            }
 
         }
+
     })
 
 })
