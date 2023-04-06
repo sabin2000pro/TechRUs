@@ -13,7 +13,7 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
     it("Register API with valid data", async () => { // Test 1: Register User Account with valid credentials
 
-        const validRegisterData = [{username: "roran22", email: "roran22@gmail.com", password: "123mini123"}]
+        const validRegisterData = [{username: "trojan00", email: "trojan00@gmail.com", password: "123mini123"}]
 
         for(const body of validRegisterData) {
 
@@ -164,7 +164,7 @@ describe("Forgot Password API - Unit Tests", () => {
 
     it("Forgot Password - Valid E-mail Address", async () => {
 
-       const forgotPasswordPayload = {email: "roran22@gmail.com@gmail.com"}
+       const forgotPasswordPayload = {email: "trojan00@gmail.com"}
            const response = await request(app).post(`/api/v1/auth/forgot-password`).send(forgotPasswordPayload);
            console.log(`forgot password payload : `, response.body);
            expect(response.statusCode).toBe(StatusCodes.OK)
