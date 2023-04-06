@@ -114,6 +114,28 @@ describe("Create New Product - Unit Test Suite", () => {
         }
 
     })
+
+    it("Edit Product By ID - Valid Body Data Unit Test", async () => {
+        try {
+
+            const editProductBodyData = {
+                name: "New Edited Product"
+            }
+
+            const editProductRequest = await request(app).put(`/api/v1/products/642a9d2201d0c6b3bc8155a1`).send(editProductBodyData);
+            console.log(`Edited Product data : `, editProductRequest)
+        } 
+        
+        catch(error) {    
+            if(error) {
+                console.log(`Edit Product Error : `, error);
+                throw new Error(error);
+                
+            }
+        }
+
+
+    })
 })
 
 // Close the connection to the server after all tests are ran
