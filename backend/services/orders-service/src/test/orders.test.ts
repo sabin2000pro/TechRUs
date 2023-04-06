@@ -84,7 +84,7 @@ describe("Create New Order Test Suite", () => {
     it("Edit order status unit test", async () => {
        try {
         const updateOrderStatusPayload = {orderStatus: "completed"}
-        const orderResponse = await request(app).put(`/api/v1/orders/642eb72267f4ba28cdd5c40d/update-status`).send(updateOrderStatusPayload);
+        const orderResponse = await request(app).put(`/api/v1/orders/5d713995b721c3bb38c1f9c0/update-status`).send(updateOrderStatusPayload);
  
         expect(orderResponse.statusCode).toBe(StatusCodes.OK)
        } 
@@ -110,12 +110,17 @@ describe("Create New Order Test Suite", () => {
     })
 
     it("Delete All Order Data Unit Test", async () => {
+
         try {
             const deleteResponse = await request(app).delete(`/api/v1/orders`);
             expect(deleteResponse.statusCode).toBe(StatusCodes.NO_CONTENT);
         } 
         
         catch(error) {
+
+            if(error) {
+                throw new Error(error);
+            }
 
         }
 
@@ -124,7 +129,7 @@ describe("Create New Order Test Suite", () => {
 
     it("Delete Single Order Data - Unit Test", async () => {
         try {
-
+            const deleteResponseSingleOrder = await request(app).delete(`/api/v1/orders/5d713995b721c3bb38c1f9c2`)
         } 
         
         catch(error) {
