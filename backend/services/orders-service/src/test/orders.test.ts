@@ -103,3 +103,8 @@ describe("Create New Order Test Suite", () => {
     })
 
 })
+
+afterAll(() => {
+    mongoose.connection.close();
+    process.exit(1);
+})
