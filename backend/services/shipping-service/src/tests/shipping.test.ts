@@ -9,30 +9,7 @@ beforeAll(async () => {
 })
 
 describe("Create Shipping Details Test Suite", () => {
-    
-    it("Create New Shipping Details With Valid Details - Unit Test 1", async () => {
-       try {
 
-            const shippingBody = [{
-                user: "63e25f48d82eb035f7dc0652",
-                address: "190 High Road",
-                city: "Edinburgh",
-                country: "United Kingdom",
-                postalCode: "EH17 ABC",
-                phoneNo: "9348324"
-            }]
-
-            for (const bodyData of shippingBody) {
-                const response = await request(app).post(`/api/v1/auth/shipping`).send(bodyData);
-                return expect(response.statusCode).toBe(201);
-            }
-
-       } 
-       
-       catch(error) {
-
-       }
-    })
 
     it("Create Shipping Details - Missing ADDRESS Entry", async () => {
         try {

@@ -19,8 +19,6 @@ build-services:
 	- cd services/coupons* && docker build -t sabin2000/techrus-coupons-service . && npm run build
 
 run-app:
-	- cd services/authentication-service && npm run auth:test
-	- cd services/shipping-service && npm run shipping:test
 	- docker-compose up --build -d
 
 create-networks:

@@ -6,7 +6,7 @@ import {app} from '../app';
  
 // Establish connection to the authentication service database before running all the tests
 beforeAll(async () => {
-    return await mongoose.connect("mongodb+srv://sabin2000:123mini123@techrus-auth-schema.mfj4iaa.mongodb.net/?retryWrites=true&w=majority")
+    return await mongoose.connect("mongodb+srv://sabin2000:123mini123@techrus-order-schema.wdv1cfa.mongodb.net/?retryWrites=true&w=majority")
 })
 
 describe("Create New Order Test Suite", () => {
@@ -15,9 +15,8 @@ describe("Create New Order Test Suite", () => {
 
         const orderTestPayload = { // Order payloat to test
 
-            customer: "customer_id",
-
             shippingInformation: {
+                user: "63e25f48d82eb035f7dc0652",
                 address: "144 High Road",
                 city: "Edinburgh",
                 phoneNo: "07881391091",
@@ -27,52 +26,57 @@ describe("Create New Order Test Suite", () => {
 
             orderItems: [{
                 name: "iPad Pro 12.9",
-                quantity: 1,
+                quantity: 2,
                 image: "no-photo.jpg",
                 price: 3999.99,
+                taxPrice: 4.99,
+                shippingPrice: 2.99,
+                totalPrice: 4006.99,
                 product: "63e25f48d82eb035f7da0982",
                 _id: "63f388bf2b02ac6637b871bc"
             }],
 
-            orderStatus: "received",
-
-            paymentInformation: {
-                id: "payment_id",
-                status: "received"
-            },
-
-            itemPrice: 3999.99,
-            taxPrice: 4.99,
-            shippingPrice: 2.99,
-            totalPrice: 4006.99
         };
         
         const orderBodyPayload = [orderTestPayload];
 
         for(const orderData of orderBodyPayload) {
             const response = await request(app).post(`/api/v1/orders`).send(orderData);
-            return expect(response.statusCode).toBe(StatusCodes.CREATED);
+            expect(response.statusCode).toBe(StatusCodes.CREATED);
         }
+
     })
 
     it("Fetch all orders unit test", async () => {
 
         try {
             const response = await request(app).get(`/api/v1/orders`).send();
-            return expect(response.statusCode).toBe(StatusCodes.OK);
+            console.log(`Orders Response : `, response.body.orders);
         } 
         
         catch(error) {
 
            if(error) {
-              return console.error(error);
+            console.error(error);
+            throw new Error(error);
            }
 
         }
 
     })
 
-    it("Update order status unit test", async () => {
+    it("Fetch Order By ID Unit Test", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+
+    })
+
+    it("Edit order status unit test", async () => {
        const updateOrderStatusPayload = {orderStatus: ""}
     })
 

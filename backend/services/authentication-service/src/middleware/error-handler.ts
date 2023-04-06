@@ -25,8 +25,6 @@ export const errorHandler = (err, request: any, response: any, next: NextFunctio
             error = new ErrorResponse(message, StatusCodes.BAD_REQUEST);
         }
     }
-
-    console.log(`Authentication Error : `, err);
-
+    
     return response.status(err.statusCode).json({success: false, message: err.message, stack: err.stack});
 }

@@ -13,11 +13,13 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
     it("Register API with valid data", async () => { // Test 1: Register User Account with valid credentials
 
-        const validRegisterData = [{username: "testuser09", email: "testusre09@gmail.com", password: "123mini123"}]
+        const validRegisterData = [{username: "james983", email: "james838@gmail.com", password: "123mini123"}]
 
         for(const body of validRegisterData) {
             const response = await request(app).post(`/api/v1/auth/register`).send(body);
-            return expect(response.statusCode).toBe(StatusCodes.CREATED);
+            expect(response.body).toHaveProperty("token");
+            expect(response.body).toHaveProperty("user");
+            expect(response.statusCode).toBe(StatusCodes.CREATED);
         }
 
     })
@@ -46,11 +48,12 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
     it("Register API with invalid e-mail address", async () => {
 
-        const validRegisterData = [{username: "user092", email: "nfj", password: "123mini123"}]
+        const validRegisterData = [{username: "user092", email: "nfioij", password: "123mini123"}]
 
         for(const body of validRegisterData) {
             const response = await request(app).post(`/api/v1/auth/register`).send(body);
-            return expect(response.statusCode).toBe(StatusCodes.BAD_REQUEST);
+            expect(response.statusCode).toBe(StatusCodes.BAD_REQUEST);
+
         }
 
     })
@@ -64,15 +67,14 @@ describe("Login API Unit Tests", () => {
        const loginPayload = [{email: "staffmember123@gmail.com", password: "staff123"}]
 
        for(const body of loginPayload) {
-         const loginResponse = await request(app).post(`/api/v1/auth/login`).send(body);
-         console.log(`Login Response : `, loginResponse);
-         
+         const loginResponse = await request(app).post(`/api/v1/auth/login`).send(body);         
          return expect(loginResponse.statusCode).toBe(StatusCodes.OK)
        }
 
     })
 
     it("Login with invalid password", async () => {
+
         const loginPayload = [{email: "staffmember123@gmail.com", password: "staff1232388"}]
 
         for(const body of loginPayload) {
@@ -80,15 +82,76 @@ describe("Login API Unit Tests", () => {
           return expect(loginResponse.statusCode).toBe(StatusCodes.BAD_REQUEST)
         }
 
-
     })
 
-    it("Login with missing password", async () => {
+    it("Login with missing password", async () => { // Unit test that tests the login with a missing password
+
+       try {
+
+        const loginPayload = [{
+            email: "staffmember123@gmail.com",
+        }]
+
+        for(const loginBody of loginPayload) {
+           const loginResponse = await request(app).post(`/api/v1/auth/login`).send(loginBody);
+            expect(loginResponse.statusCode).toBe(StatusCodes.BAD_REQUEST);
+        }
+
+       } 
+       
+       catch(error) {
+
+            if(error) {
+              throw new Error(error);
+            }
+       }
+
 
     })
 
     it("Login with missing e-mail address", async () => {
+
+        try {
+
+            const loginPayload = [{
+                password: "oiefjweiofj",
+            }]
+
+            for(const loginBody of loginPayload) {
+                const loginResponse = await request(app).post(`/api/v1/auth/login`).send(loginBody);
+                return expect(loginResponse.statusCode).toBe(StatusCodes.BAD_REQUEST)
+            }
+        } 
         
+        catch(error) {
+           if(error) {
+             throw new Error(error);
+           }
+        }
+
+    })
+    
+    it("Login with invalid (not found) e-mail address", async () => {
+
+        try {
+
+            const loginData = [{
+                email: "notfoundemail@gmail.com",
+                password: "notfdoundpassword"
+            }]
+
+            for (const loginBody of loginData) {
+
+            }
+
+
+        } 
+        
+        catch(error) {
+           if(error) {
+            throw new Error(error);
+           }
+        }
 
 
     })
@@ -97,24 +160,160 @@ describe("Login API Unit Tests", () => {
 })
 
 describe("Forgot Password API - Unit Tests", () => {
+
     it("Forgot Password - Valid E-mail Address", async () => {
 
-
-       const forgotPasswordPayload = [{email: "testuser09@gmail.com"}]
+       const forgotPasswordPayload = [{email: "staffmember123@gmail.com"}]
 
        for(const body of forgotPasswordPayload) {
            const response = await request(app).post(`/api/v1/auth/forgot-password`).send(body);
-           return expect(response.statusCode).toBe(StatusCodes.OK)
+           expect(response.statusCode).toBe(StatusCodes.OK)
        }
 
 
     })
 
-    it("Forgot Password - Invalid E-mail Address", async () => {
+    it("Forgot Password - Invalid (Not Found) E-mail Address", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
 
     })
 
     it("Forgot Password - Missing E-mail Address", async () => {
+    
+    })
+
+
+})
+
+describe("Update User Password API - Unit Test Suite", () => {
+
+})
+
+describe("Verify User E-mail Address Unit Test Suite", () => {
+
+    it("Verify E-mail Address - Valid User ID and OTP", async () => {
+       try {
+
+       } 
+       
+       catch(error) {
+
+       }
+    })
+
+    it("Verify E-mail Address - Invalid (Not FOund) user ID", async () => {
+        try {
+
+        }
+        
+        catch(error) {
+
+        }
+    })
+
+    it("Verify User E-mail Address - Missing OTP", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+    })
+
+})
+
+describe("Users Test Suite", () => {
+
+    it("Fetch All Users Unit Test", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+    })
+
+    it("Fetch Single User By ID test ", async () => {
+
+        try {
+            const userResponse = await request(app).get(`/api/v1/auth/users/63e25f48d82eb035f7dc0653`)
+            expect(userResponse.body.user.username).toBe("staffmember1234")
+            expect(userResponse.statusCode).toBe(StatusCodes.OK);
+        } 
+        
+        catch(error) {
+            if(error) {
+                console.error(error);
+                throw new Error(error);
+            }
+        }
+
+    })
+
+    it("Edit User Shifts - Valid Data", async () => {
+
+        try {
+
+            const userShiftData = {
+                startShiftDate: "2015-03-25T12:00:00Z",
+                endShiftDate: "2015-03-25T18:00:00Z"
+            }
+
+            const userResponse = await request(app).put(`/api/v1/auth/users/63e25f48d82eb035f7dc0653/update-shifts`).send(userShiftData);
+            expect(userResponse.statusCode).toBe(StatusCodes.OK);
+            expect(userResponse.body).toHaveProperty("success", true);
+        } 
+        
+        catch(error) {
+
+            if(error) {
+                throw new Error(error);
+            }
+
+        }
+
+    })
+
+    it("Edit User Shifts - Start Shift Date Invalid Format", async () => {
+
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+    })
+
+    it("Edit User Shifts - Missing End Shift Date", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+    })
+
+    it("Fetch Single Missing User ID", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+    })
+
+    it("Delete All Users - Unit Test", async () => {
 
     })
 

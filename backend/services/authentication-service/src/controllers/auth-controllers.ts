@@ -443,7 +443,7 @@ export const fetchAllUsers = asyncHandler(async(request: any, response: Response
         return next(new ErrorResponse(`No users found`, StatusCodes.BAD_REQUEST));
     }
 
-     return response.status(StatusCodes.OK).json({success: true, users, totalUsers});
+    return response.status(StatusCodes.OK).json({success: true, users, totalUsers});
 
 })
 
@@ -478,6 +478,7 @@ export const editUserByID = asyncHandler(async(request: any, response: Response,
 
 export const editUserShifts = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {
     const id = request.params.id;
+    
     const {startShiftDate, endShiftDate} = request.body;
     const fieldsToUpdate = {startShiftDate, endShiftDate};
 
