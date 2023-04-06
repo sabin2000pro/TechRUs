@@ -6,7 +6,7 @@
     "ext": "ts",
 
     "ignore": [
-        "src/test/"
+        "src/tests/"
     ],
     
     "exec": "npx ts-node-dev ./src/index.ts"

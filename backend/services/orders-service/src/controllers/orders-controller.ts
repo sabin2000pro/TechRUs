@@ -78,7 +78,7 @@ export const updateOrderStatus = asyncHandler(async (request: any, response: Res
     order = await Order.findByIdAndUpdate(id, orderStatus, {new: true, runValidators: true});
     order.orderStatus = orderStatus;
 
-    await order.save();
+    await order.save(); // Save the resource to the database
     return response.status(StatusCodes.OK).json({success: true, message: "Order Updated", order});
 })
 

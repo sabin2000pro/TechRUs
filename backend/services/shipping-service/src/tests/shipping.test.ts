@@ -1,5 +1,4 @@
 require('dotenv').config();
-import { StatusCodes } from 'http-status-codes';
 import request from "supertest"
 import mongoose from "mongoose"
 import {app} from '../app'
@@ -25,7 +24,7 @@ describe("Create Shipping Details Test Suite", () => {
 
             for (const bodyData of shippingBody) {
                 const response = await request(app).post(`/api/v1/auth/shipping`).send(bodyData);
-                return expect(response.statusCode).toBe(StatusCodes.CREATED);
+                return expect(response.statusCode).toBe(201);
             }
 
        } 
