@@ -13,10 +13,10 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
     it("Register API with valid data", async () => { // Test 1: Register User Account with valid credentials
 
-        const validRegisterData = [{username: "staffacount09", email: "staffacount09@gmail.com", password: "123mini123"}]
+        const validRegisterData = [{username: "newstaffaccount33", email: "newstaffaccount33@gmail.com", password: "123mini123"}]
 
         for(const body of validRegisterData) {
-            
+
             const response = await request(app).post(`/api/v1/auth/register`).send(body);
             expect(response.body).toHaveProperty("token");
             expect(response.body).toHaveProperty("user");
@@ -164,14 +164,9 @@ describe("Forgot Password API - Unit Tests", () => {
 
     it("Forgot Password - Valid E-mail Address", async () => {
 
-       const forgotPasswordPayload = [{email: "staffmember123@gmail.com"}]
-
-       for(const body of forgotPasswordPayload) {
-           const response = await request(app).post(`/api/v1/auth/forgot-password`).send(body);
+       const forgotPasswordPayload = {email: "staffmember123@gmail.com"}
+           const response = await request(app).post(`/api/v1/auth/forgot-password`).send(forgotPasswordPayload);
            expect(response.statusCode).toBe(StatusCodes.OK)
-       }
-
-
     })
 
     it("Forgot Password - Invalid (Not Found) E-mail Address", async () => {
