@@ -103,7 +103,7 @@ describe("Create New Product - Unit Test Suite", () => {
     it("Create New Product - Invalid Data", async () => {
 
         try {
-
+    
         }
         
         catch(error) {
@@ -118,13 +118,30 @@ describe("Create New Product - Unit Test Suite", () => {
     it("Create Product - Missing Name And Description - Unit Test", async () => {
         try {
 
+            const productPayload = [{
+                warranty: '2 Years',
+                image: '/images/series-8.jpg',
+                price: 899.99,
+                stockCount: 2,
+                lowStockAlert: 1,
+                isNew: true,
+            }]
+
+            for(const data of productPayload) {
+                const productResponse = await request(app).post(`/api/v1/products`).send(data);
+                expect(productResponse.statusCode).toBe(StatusCodes.BAD_REQUEST);
+            }
         } 
         
         catch(error) {
+            
+            if(error) {
+                throw new Error(error);
+            }
 
         }
 
-        
+
     })
 
     it("Edit Product By ID - Valid Body Data Unit Test", async () => {
