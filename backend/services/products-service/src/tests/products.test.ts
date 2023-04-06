@@ -14,8 +14,15 @@ describe("Fetch All Products Test Suite", () => {
     it("Fetch All Products - Unit Test 1", async () => {
         try {
             const allProductsResponse = await request(app).get(`/api/v1/products`);
-            console.log(`All Products Response : `, allProductsResponse);
+            const currentProduct = allProductsResponse.body.products[0];
+            console.log(`Current product : `, currentProduct);
             
+            expect(currentProduct).toHaveProperty("_id");
+            expect(currentProduct).toHaveProperty("description");
+            expect(currentProduct).toHaveProperty("stockCount");
+            expect(currentProduct.stockCount).toBeGreaterThan(0)
+            expect(allProductsResponse.body.products.length).toBeGreaterThan(0); // Check to see if we have products available
+            expect(allProductsResponse.statusCode).toBe(StatusCodes.OK);
         } 
         
         catch(error) {
@@ -60,22 +67,57 @@ describe("Fetch Product By ID Test Suite ", () => {
 describe("Create New Product - Unit Test Suite", () => {
 
     it("Create New Product - Valid Data", async () => {
+
         try {
+
+            const productBodyData = [{
+                name: 'Apple Watch Series 8',
+                description: 'The latest and most advanced Apple Apple Watch. Perfect for your workouts',
+                warranty: '2 Years',
+                image: '/images/series-8.jpg',
+                price: 899.99,
+                stockCount: 2,
+                lowStockAlert: 1,
+                isNew: true,
+            }]
+
+            for(const productData of productBodyData) {
+                const productResponse = await request(app).post(`/api/v1/products`).send(productData);
+                expect(productResponse.statusCode).toBe(StatusCodes.CREATED);
+                expect(productResponse.body.product).toHaveProperty("name");
+            }
+
 
         } 
         
         catch(error) {
 
+            if(error) {
+                throw new Error(error);
+            }
+
         }
+
     })
 
     it("Create New Product - Invalid Data", async () => {
+
         try {
 
         }
         
         catch(error) {
-
+            if(error) {
+                console.log(`Create New Product Error Invalid Data Error : `, error);
+                throw new Error(error);
+            }
         }
+
     })
 })
+
+// Close the connection to the server after all tests are ran
+afterAll(done => {
+    mongoose.connection.close();
+    done()
+});
