@@ -166,7 +166,7 @@ describe("Forgot Password API - Unit Tests", () => {
 
        const forgotPasswordPayload = {email: "roran22@gmail.com@gmail.com"}
            const response = await request(app).post(`/api/v1/auth/forgot-password`).send(forgotPasswordPayload);
-           console.log(`forgot password payload : `, response);
+           console.log(`forgot password payload : `, response.body);
            expect(response.statusCode).toBe(StatusCodes.OK)
     })
 
