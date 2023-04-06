@@ -13,9 +13,10 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
     it("Register API with valid data", async () => { // Test 1: Register User Account with valid credentials
 
-        const validRegisterData = [{username: "james983", email: "james838@gmail.com", password: "123mini123"}]
+        const validRegisterData = [{username: "staffacount09", email: "staffacount09@gmail.com", password: "123mini123"}]
 
         for(const body of validRegisterData) {
+            
             const response = await request(app).post(`/api/v1/auth/register`).send(body);
             expect(response.body).toHaveProperty("token");
             expect(response.body).toHaveProperty("user");

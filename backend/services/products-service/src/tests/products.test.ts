@@ -117,7 +117,7 @@ describe("Create New Product - Unit Test Suite", () => {
                 const productResponse = await request(app).post(`/api/v1/products`).send(bodyData);
                 expect(productResponse.statusCode).toBe(StatusCodes.BAD_REQUEST);
             }
-            
+
         }     
         
         catch(error) {
