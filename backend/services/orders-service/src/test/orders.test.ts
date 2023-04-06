@@ -77,10 +77,20 @@ describe("Create New Order Test Suite", () => {
     })
 
     it("Edit order status unit test", async () => {
-       const updateOrderStatusPayload = {orderStatus: "completed"}
-       const orderResponse = await request(app).put(`/api/v1/orders/5d713995b721c3bb38c1f9c0/update-status`).send(updateOrderStatusPayload);
+       try {
+        const updateOrderStatusPayload = {orderStatus: "completed"}
+        const orderResponse = await request(app).put(`/api/v1/orders/5d713995b721c3bb38c1f9c0/update-status`).send(updateOrderStatusPayload);
+ 
+        expect(orderResponse.statusCode).toBe(StatusCodes.OK)
+       } 
+       
+       catch(error) {
 
-       expect(orderResponse.statusCode).toBe(StatusCodes.OK)
+            if(error) {
+              throw new Error(error);
+            }
+            
+       }
     })
 
     it("Create order with INVALID Body data", async () => {
