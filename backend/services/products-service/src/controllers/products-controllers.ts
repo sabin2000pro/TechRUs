@@ -47,11 +47,11 @@ export const fetchAllProducts = asyncHandler(async (request: any, response: Resp
         const numberOfProducts = await Product.countDocuments({ ...keyword });
         const products = await Product.find({ ...keyword }).limit(productsPerPage).skip(skipBy);
 
-        if(!products) {
+        if(!products) { // pre Condition 1
             return response.status(StatusCodes.BAD_REQUEST).json({success: false, message: "No products found"})
         }
 
-        if(numberOfProducts === 0) {
+        if(numberOfProducts === 0) { // pre Conditoon 2
           return next(new ErrorResponse(`No products found on the server-side.`, StatusCodes.BAD_REQUEST));
         }
         
@@ -84,7 +84,7 @@ export const createNewProduct = asyncHandler(async (request: any, response: Resp
        if(!name || !description || !warranty || !price || !stockCount || !lowStockAlert) {
            return next(new ErrorResponse(`Some entries are missing. Please check again when creating a product`, StatusCodes.BAD_REQUEST));
        }
-       
+
        const product = await Product.create({name, description, warranty, price, stockCount, lowStockAlert});
        await product.save();
        return response.status(StatusCodes.CREATED).json({success: true, product, message: "Product Created"});
