@@ -100,18 +100,21 @@ describe("Create New Product - Unit Test Suite", () => {
 
     })
 
-    it("Create New Product - Invalid Data", async () => {
-
+    it("Create Product - Missing Stock Count Unit Test", async () => {
         try {
-    
-        }
+            const productPayload = [{
+                
+            }]
+        }     
         
         catch(error) {
+
             if(error) {
-                console.log(`Create New Product Error Invalid Data Error : `, error);
                 throw new Error(error);
             }
+
         }
+
 
     })
 
@@ -134,7 +137,7 @@ describe("Create New Product - Unit Test Suite", () => {
         } 
         
         catch(error) {
-            
+
             if(error) {
                 throw new Error(error);
             }
