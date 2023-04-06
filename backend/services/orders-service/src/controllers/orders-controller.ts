@@ -52,9 +52,16 @@ export const createNewOrder = asyncHandler(async (request: any, response: Respon
     }
 
     const order = await Order.create({orderItems, shippingInformation});
-    
-    await order.save(); // Asynchronously save the order into the database
-    return response.status(StatusCodes.CREATED).json({success: true, order, message: "We have received your order"});
+
+    if(order?.orderStatus === 'completed' || order?.orderStatus === 'canceled' || order?.orderStatus === 'refunded') { // Before updating the order status, make sure it has not alreayd been delivered
+        return next(new ErrorResponse(`One or more orders have been either completed, canceled or refunded. Cannot modify the order status`, StatusCodes.BAD_REQUEST));
+    }
+
+    else {
+        await order.save(); // Asynchronously save the order into the database
+        return response.status(StatusCodes.CREATED).json({success: true, order, message: "We have received your order"});
+    }
+
 })
 
 export const updateOrderStatus = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
