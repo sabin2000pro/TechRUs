@@ -103,8 +103,21 @@ describe("Create New Product - Unit Test Suite", () => {
     it("Create Product - Missing Stock Count Unit Test", async () => {
         try {
             const productPayload = [{
-                
+                name: 'Test Product',
+                description: 'The test product and most advanced test product. Perfect for your tests',
+                warranty: '99 Years',
+                image: '/images/test.jpg',
+                price: 9.99,
+            
+                lowStockAlert: 1,
+                isNew: true,
             }]
+
+            for (const bodyData of productPayload) {
+                const productResponse = await request(app).post(`/api/v1/products`).send(bodyData);
+                expect(productResponse.statusCode).toBe(StatusCodes.BAD_REQUEST);
+            }
+            
         }     
         
         catch(error) {
