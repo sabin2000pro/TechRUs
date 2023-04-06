@@ -45,3 +45,8 @@ describe("Create Shipping Details Test Suite", () => {
 
 
 })
+
+afterAll((done) => {
+    mongoose.connection.close();
+    done();
+} )
