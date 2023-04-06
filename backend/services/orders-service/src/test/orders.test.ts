@@ -67,11 +67,15 @@ describe("Create New Order Test Suite", () => {
 
     it("Fetch Order By ID Unit Test", async () => {
         try {
-
+            const orderResponse = await request(app).get(`/api/v1/orders/5d713995b721c3bb38c1f9c2`)
+            console.log(`Order Response Single : `, orderResponse.body);
         } 
         
         catch(error) {
-
+            if(error) {
+                throw new Error(error);
+            }
+            
         }
 
     })
@@ -89,7 +93,7 @@ describe("Create New Order Test Suite", () => {
             if(error) {
               throw new Error(error);
             }
-            
+
        }
     })
 
