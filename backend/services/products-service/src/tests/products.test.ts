@@ -115,31 +115,42 @@ describe("Create New Product - Unit Test Suite", () => {
 
     })
 
+    it("Create Product - Missing Name And Description - Unit Test", async () => {
+        try {
+
+        } 
+        
+        catch(error) {
+
+        }
+
+        
+    })
+
     it("Edit Product By ID - Valid Body Data Unit Test", async () => {
         try {
 
             const editProductBodyData = {
-                name: "New Edited Product"
+                name: "iPhone X"
             }
 
-            const editProductRequest = await request(app).put(`/api/v1/products/642a9d2201d0c6b3bc8155a1`).send(editProductBodyData);
-            console.log(`Edited Product data : `, editProductRequest)
+            const editProductResponse = await request(app).put(`/api/v1/products/642a9d2201d0c6b3bc8155a1`).send(editProductBodyData);
+            expect(editProductResponse.statusCode).toBe(StatusCodes.OK);
+            expect(editProductResponse.body.product).toHaveProperty("name");
         } 
         
         catch(error) {    
+
             if(error) {
-                console.log(`Edit Product Error : `, error);
                 throw new Error(error);
-                
             }
         }
-
 
     })
 })
 
 // Close the connection to the server after all tests are ran
 afterAll(done => {
-    mongoose.connection.close();
+    mongoose.connection.close(); // Close the mongodb connection
     done()
 });
