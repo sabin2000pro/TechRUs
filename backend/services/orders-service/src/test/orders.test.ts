@@ -77,7 +77,10 @@ describe("Create New Order Test Suite", () => {
     })
 
     it("Edit order status unit test", async () => {
-       const updateOrderStatusPayload = {orderStatus: "delivered"}
+       const updateOrderStatusPayload = {orderStatus: "completed"}
+       const orderResponse = await request(app).put(`/api/v1/orders/5d713995b721c3bb38c1f9c2/update-status`).send(updateOrderStatusPayload);
+
+       console.log(`Order Response : `, orderResponse.body);
 
     })
 

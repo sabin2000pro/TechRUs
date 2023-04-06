@@ -13,7 +13,7 @@ describe("Create Shipping Details Test Suite", () => {
 
     it("Create Shipping Details - Missing ADDRESS Entry", async () => {
         try {
-
+            
         } 
         
         catch(error) {
