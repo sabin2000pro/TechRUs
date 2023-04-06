@@ -109,7 +109,20 @@ describe("Create New Order Test Suite", () => {
        }
     })
 
-    it("Delete Order Data Unit Test", async () => {
+    it("Delete All Order Data Unit Test", async () => {
+        try {
+            const deleteResponse = await request(app).delete(`/api/v1/orders`);
+            expect(deleteResponse.statusCode).toBe(StatusCodes.NO_CONTENT);
+        } 
+        
+        catch(error) {
+
+        }
+
+
+    })
+
+    it("Delete Single Order Data - Unit Test", async () => {
         try {
 
         } 
