@@ -12,7 +12,20 @@ beforeAll(async () => {
 describe("Fetch All Products Test Suite", () => {
 
     it("Fetch All Products - Unit Test 1", async () => {
+        try {
+            const allProductsResponse = await request(app).get(`/api/v1/products`);
+            console.log(`All Products Response : `, allProductsResponse);
+            
+        } 
+        
+        catch(error) {
 
+            if(error) {
+                throw new Error(error);
+            }
+
+
+        }
     })
 
 })
