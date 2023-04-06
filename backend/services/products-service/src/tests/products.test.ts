@@ -6,5 +6,24 @@ import {app} from '../app';
  
 // Establish connection to the authentication service database before running all the tests
 beforeAll(async () => {
-    return await mongoose.connect("mongodb+srv://sabin2000:123mini123@techrus-auth-schema.mfj4iaa.mongodb.net/?retryWrites=true&w=majority")
+    return await mongoose.connect("mongodb+srv://sabin2000:123mini123@techrus-products-db.fy1yivg.mongodb.net/?retryWrites=true&w=majority")
+})
+
+describe("Fetch All Products Test Suite", () => {
+
+    it("Fetch All Products - Unit Test 1", async () => {
+
+    })
+
+})
+
+describe("Fetch Product By ID Test Suite ", () => {
+
+})
+
+describe("Create New Product - Unit Test Suite", () => {
+    
+    it("Create New Product - Valid Data", async () => {
+
+    })
 })
