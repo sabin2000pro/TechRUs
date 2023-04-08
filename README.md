@@ -44,6 +44,21 @@ Create Product Interface Description: The create product component has several f
 
 Create Product Interface Description: The create product component has several functions that it provides for a new product to be created successfully without any errors being thrown, such as receiving data inputs for creating a new product in the body of the create product form. Another service provided by this component is storing the products in an array that can be accessed and manipulated globally within the frontend of the application. Every time a product is created, it is written to the array as state which keeps track of all the data for that product along with a unique ID. Therefore, the provides interface for this component is to allow the store manager to create a new product by inputting its data into a form. Also, before storing the data regarding the newly created product in the global state array called products, the component also provides a service that validates the current stock count of the product and other input fields such as name, description, and price. Furthermore, the requires interface for this component is to send a low stock e-mail to the inbox of the manager if the current product has low stock and if a product is out of stock. If the stock count variable is set to 0, a separate e-mail is sent to the inbox of the manager saying that more stock is going to be ordered. Figure 1.1 below is a diagram that represents the above interface descriptions for the create product component.
 
+The create product component is to be developed solely using the JavaScript programming language, which utilises the Express JS framework for the backend and React JS as the frontend library which is going to be launched as a standalone microservice using Docker, also known as the frontend service. Moreover, these technologies are responsible for developing the create product component and rendering the data to the users through the frontend interface on the products page by interacting with the products backend service. Also, the most important safety conditions that must be met before the store manager is able to create a new product is that the name, description, price, and stock count input data is validated properly on the server-side, otherwise the server will throw an error back to the client and the component should validate the data being entered to prevent any errors and inconsistencies in the database. Below are all the pre and post condition assertions that the create product component must meet for the operations to succeed.
+
+Pre-Condition 1:  The request body contains the required fields for creating a new product. Such as the name, description, price, stock count and is new property AND stock count >= 0
+
+Post-Condition 1: New product created AND data written to the products database.
+
+Post-Condition 2: Product details along with a success message are both returned with a 201 created resource status code.
+
+Post-Condition 3: Stock count < 3 then low stock e-mail is sent to the manager inbox using an e-mail transporter using event broker.
+
+Post-Condition 4: If any of the input fields are missing, an error message is returned in the response with a status code of 400 Bad Request.
+
+The time condition for this create product component is that a new product must be created in less than 10 milliseconds without any timeouts coming from any upstream server. Finally, the next component description within this report is used to describe the concept of the product details component and its interface which renders new product promotions to the users on the platform.
+
+
 
 ## Products - User Interface
 
