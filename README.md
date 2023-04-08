@@ -114,3 +114,16 @@ The figure below shows the frontend user interface that allows customers to veri
 
 <img width = "560" alt="image" src="https://user-images.githubusercontent.com/29733613/230736208-66d4589a-1bff-4790-acbf-fdbb1170bc24.png">
 
+## Figure 1.4 - Login User Interface
+
+The figure below shows the frontend user interface for the login page which is a requirement for this project. Customers must authenticate with their e-mail address and password. If they provide a wrong password that does not match the one stored in the database, then the customer is going to be displayed with an error message that’s processed as middleware within the authentication schema.
+
+<img width="489" alt="image" src="https://user-images.githubusercontent.com/29733613/230736241-c99a5ae2-7a7d-4d11-8069-731b01cab5b0.png">
+
+## Figure 1.5 - Product Details UI Component
+
+The figure below shows the frontend user interface for a single product which is developed using a reusable component called Single Product from a previous project. This component allows customers to choose the quantity of this product they would like, also create one or more reviews as well as add it to their basket.
+
+
+<img width = "570" alt="image" src="https://user-images.githubusercontent.com/29733613/230736260-5413957c-ee25-4ced-a843-97c08693a85c.png">
+
