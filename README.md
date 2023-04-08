@@ -1,6 +1,6 @@
 # TechRUs - https://techrus.dev
 
-## Project Proposal
+# Project Proposal
 
 TechRUs is an enterprise e-commerce platform which is built with the purpose of selling electronic products to customers such as TVs, PS5 Video Games, External storage drives, tablets and so much more. TechRUs is a platform that is developed with a focus on the MVC, Microservices and client/server architecture. Generally, most applications are developed using the monolithic architectural style. However as the size of the codebase grows in size over time, then these types of applications become very hard to manage by developers working as part of a team. Making them without a doubt very difficult to understand. Another problem with monolithic style applications is inevitably scalability. 
 
@@ -93,11 +93,11 @@ Furthermore, once users add one or more products to their cart, they can proceed
 ## Figure 1.1.2 – Microservice Architecture Design
 
 
-<img width="489" alt="image" src="https://user-images.githubusercontent.com/29733613/230736133-7fabbb35-3f8d-476e-ba41-27e7e1a14edf.png">
+<img width = "560" alt="image" src="https://user-images.githubusercontent.com/29733613/230736133-7fabbb35-3f8d-476e-ba41-27e7e1a14edf.png">
 
 
 ## Products - User Interface
 
 The figure below shows the available products that are available to leave reviews and create orders for after adding one or more products to basket. This page is developed using two reusable components, one being the search bar that allows users to search for a product and the products that can be viewed in the middle of the page.
 
-<img width="550" alt="image" src="https://user-images.githubusercontent.com/29733613/230411959-6f0d1b97-f193-4210-85b5-b72071ade1eb.png">
+<img width = "550" alt="image" src="https://user-images.githubusercontent.com/29733613/230411959-6f0d1b97-f193-4210-85b5-b72071ade1eb.png">
