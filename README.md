@@ -92,7 +92,7 @@ The microservices architecture solves the issue of scalability in this regard wh
 ## Figure 1.1.2 – Microservice Architecture Design
 
 
-<img width = "560" alt="image" src="https://user-images.githubusercontent.com/29733613/230736133-7fabbb35-3f8d-476e-ba41-27e7e1a14edf.png">
+<img width = "600" alt="image" src="https://user-images.githubusercontent.com/29733613/230736133-7fabbb35-3f8d-476e-ba41-27e7e1a14edf.png">
 
 
 ## Products - User Interface
