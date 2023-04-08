@@ -101,3 +101,8 @@ Furthermore, once users add one or more products to their cart, they can proceed
 The figure below shows the available products that are available to leave reviews and create orders for after adding one or more products to basket. This page is developed using two reusable components, one being the search bar that allows users to search for a product and the products that can be viewed in the middle of the page.
 
 <img width = "550" alt="image" src="https://user-images.githubusercontent.com/29733613/230411959-6f0d1b97-f193-4210-85b5-b72071ade1eb.png">
+
+## Figure 1.2 – Register Account User Interface
+
+
+<img width = "560" alt="image" src="https://user-images.githubusercontent.com/29733613/230736182-6d3ed240-ffeb-4916-95a2-0ea0efbf7f2e.png">
