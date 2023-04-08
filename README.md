@@ -104,5 +104,13 @@ The figure below shows the available products that are available to leave review
 
 ## Figure 1.2 – Register Account User Interface
 
+The figure below shows the Register user interface which allows customers to create their own account before verifying their e-mail address and logging in. It is important that customers are authenticated into the system before placing one or more orders for a product.
 
 <img width = "560" alt="image" src="https://user-images.githubusercontent.com/29733613/230736182-6d3ed240-ffeb-4916-95a2-0ea0efbf7f2e.png">
+
+## Figure 1.3 - Verify E-mail Address User Interface
+
+The figure below shows the frontend user interface that allows customers to verify their e-mail address using a unique one-time passcode which is sent to their e-mail address to use for verification. The interface is developed using a reusable component called Email Verification that has been reused from a current group project.
+
+<img width = "560" alt="image" src="https://user-images.githubusercontent.com/29733613/230736208-66d4589a-1bff-4790-acbf-fdbb1170bc24.png">
+
