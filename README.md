@@ -152,4 +152,10 @@ The diagram below shows how a user’s start and end shift dates can be altered 
 
 <img width = "580" alt="image" src="https://user-images.githubusercontent.com/29733613/230736386-a0c5c2ed-f7ca-49d1-b20a-4c13c2a6d84c.png">
 
+## Figure 2.0 - Create Review UI Component
+
+The diagram below shows the user interface that allows users to submit a review for a product after they have placed an order and paid for the specific product. Submitting the create review form will send a POST request to the reviews microservice API, whereby the server responds with a 201 created status code if the client request was successful.
+
+
+<img width = "580" alt="image" src="https://user-images.githubusercontent.com/29733613/230736420-0fe50eeb-3c09-486d-9720-be920c8befa7.png">
 
