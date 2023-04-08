@@ -132,3 +132,9 @@ The diagram below shows the frontend user interface which shows one or more prod
 
 <img width = "570" alt="image" src="https://user-images.githubusercontent.com/29733613/230736292-1569462d-74f6-4eac-8860-0fd81b1fab21.png">
 
+## Figure 1.7 - Order Confirmation UI Component
+
+The figure below shows the order confirmation page where users can place an order for the products they have chosen to purchase after adding them to cart. The frontend sends a POST request to the orders microservice which creates a new order resource on the server-side before saving it to the orders database.
+
+
+<img width = "580" alt="image" src="https://user-images.githubusercontent.com/29733613/230736342-c2d4b5b0-7794-4188-b310-c46acffe7d38.png">
