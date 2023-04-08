@@ -124,6 +124,11 @@ The figure below shows the frontend user interface for the login page which is a
 
 The figure below shows the frontend user interface for a single product which is developed using a reusable component called Single Product from a previous project. This component allows customers to choose the quantity of this product they would like, also create one or more reviews as well as add it to their basket.
 
-
 <img width = "570" alt="image" src="https://user-images.githubusercontent.com/29733613/230736260-5413957c-ee25-4ced-a843-97c08693a85c.png">
+
+## Figure 1.6 - Basket Screen UI Component
+
+The diagram below shows the frontend user interface which shows one or more products in the customer’s cart. They also could remove the product if they added the product by accident or if customers are no longer happy with their choice. After adding the product(s) to basket, customers must then proceed to the checkout page where they must fill out their shipping information.
+
+<img width = "570" alt="image" src="https://user-images.githubusercontent.com/29733613/230736292-1569462d-74f6-4eac-8860-0fd81b1fab21.png">
 
