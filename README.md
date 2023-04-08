@@ -136,5 +136,20 @@ The diagram below shows the frontend user interface which shows one or more prod
 
 The figure below shows the order confirmation page where users can place an order for the products they have chosen to purchase after adding them to cart. The frontend sends a POST request to the orders microservice which creates a new order resource on the server-side before saving it to the orders database.
 
-
 <img width = "580" alt="image" src="https://user-images.githubusercontent.com/29733613/230736342-c2d4b5b0-7794-4188-b310-c46acffe7d38.png">
+
+## Figure 1.8 - Logged In User Profile Component UI
+
+The figure below shows the profile of the currently logged in user. They can view their username, e-mail address, start and end shift times. Moreover, users can update their password if they want to create a stronger one which is recommended for security reasons, or even update their profile that includes changing the username or e-mail address.
+
+
+<img width = "590" alt="image" src="https://user-images.githubusercontent.com/29733613/230736363-cc23871a-8675-463b-8d58-cc83cb5342d1.png">
+
+## Figure 1.9 - Edit User & Start Shift Dates
+
+The diagram below shows how a user’s start and end shift dates can be altered using an in-built react library called date picker. Once the store manager (admin) has chosen the shift dates, a PUT request is sent to the authentication microservice that updates the user’s shifts given the user ID that’s currently logged in.
+
+
+<img width = "580" alt="image" src="https://user-images.githubusercontent.com/29733613/230736386-a0c5c2ed-f7ca-49d1-b20a-4c13c2a6d84c.png">
+
+
