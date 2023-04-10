@@ -11,7 +11,7 @@ const BasketScreen: React.FC = () => {
 
   const navigate = useNavigate();
   const applicableTax = 0.2; // 20% VAT tax
-  const basketSubtotal = basketItems.reduce((acc, item) => acc + Number(item.price * item.quantity), 0)
+  const basketSubtotal = basketItems.reduce((acc: any, item: any) => acc + Number(item.price * item.quantity), 0)
 
   const taxPrice = basketSubtotal * applicableTax;
   const shippingPrice = basketSubtotal < 1000 ? 1.99 : 2.99;
