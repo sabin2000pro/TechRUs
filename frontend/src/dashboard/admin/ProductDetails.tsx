@@ -64,6 +64,16 @@ const ProductDetails: React.FC = () => {
 
         <MetaData pageTitle = {`Product Details`} />
 
+        {!isQuantityValid && (
+        <>
+
+        <div className="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded my-4 success-banner">
+             <h2>Quantity must be more than 0</h2>
+        </div>
+
+               </>
+        )}
+
          {error && (
 
              <>
@@ -130,6 +140,7 @@ const ProductDetails: React.FC = () => {
   </div>
 
       <p className="text-lg font-medium mb-2">Price: £{product.price}</p>
+      
       {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
       {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}
 

@@ -11,7 +11,6 @@ const UpdateProfile: React.FC = () => {
 
     <MetaData pageTitle = {`Update Profile`} />
 
-
       <h2 className = "heading-secondary">Update Profile</h2>
 
     </>

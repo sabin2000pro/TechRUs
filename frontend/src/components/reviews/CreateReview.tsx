@@ -17,7 +17,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
   const [isValidData, setIsValidData] = useState<boolean>(false);
   const [modalClosed, setModalClosed] = useState<boolean>(false);
 
-  const handleCreateReview = (event): void => {
+  const handleCreateReview = (event: any): void => {
 
     try {
 
@@ -41,7 +41,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
             window.location.reload();
           }, 1200)
 
-          
+
        }
 
     } 
@@ -59,8 +59,8 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
   return (
 
-
   <>
+
       {showReviewModal && (
 
         <div className = "fixed z-10 inset-0 overflow-y-auto">
@@ -70,6 +70,7 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
             {!modalClosed && (
 
               <>
+
                   <div className = "fixed inset-0 transition-opacity">
                        <div className = "absolute inset-0 bg-black opacity-70"></div>
                    </div>
@@ -84,7 +85,8 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
               
               <div className = "bg-red-400 border border-red-400 text-black-700 rounded">
                   <h2 className = "heading-secondary mb-3">Review Submitted</h2>
-                </div>
+              </div>
+
               </>
 
 
@@ -105,6 +107,8 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
                     <div className = "bg-green-400 border border-green-400 text-black-700 rounded">
                         <h2 className = "heading-secondary mb-3">Review Submitted</h2>
                     </div>
+
+
                   </>
                   )}
 
@@ -131,18 +135,17 @@ const CreateReview: React.FC<ICreateReviewProps> = ({product, showReviewModal}: 
 
                <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
 
-                  <option value={0}>Select Rating</option>
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
+                  <option value = {0}>Select Rating</option>
+                  <option value = {1}>1</option>
+                  <option value = {2}>2</option>
+                  <option value = {3}>3</option>
+                  <option value = {4}>4</option>
+                  <option value = {5}>5</option>
 
                 </select>
 
               </div>
             </div>
-
 
             <div className = "px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse review-container">
                 <button className = "px-2 rounded bask-btn">Submit Review</button>

@@ -30,7 +30,7 @@ describe("Register Unit Tests", () => { // Unit Test Suite 1
 
         for(const body of validRegisterData) {
             const response = await request(app).post(`/api/v1/auth/register`).send(body);
-            return expect(response.statusCode).toBe(StatusCodes.BAD_REQUEST);
+            expect(response.statusCode).toBe(StatusCodes.BAD_REQUEST);
         }
 
     })
@@ -171,7 +171,7 @@ describe("Forgot Password API - Unit Tests", () => {
     })
 
     it("Forgot Password - Invalid (Not Found) E-mail Address", async () => {
-        
+
         try {
 
         } 

@@ -12,7 +12,7 @@ const VerifyEmail: React.FC = () => { // E-mail Verification component
   const {isAuthenticated, error, user} = useSelector((state: any) => state.auth);
   const [emailVerified, setEmailVerified] = useState(false);
 
-  const onEmailVerificationHandler = (event): void => {
+  const onEmailVerificationHandler = (event: any): void => {
 
     try {
        event.preventDefault();
