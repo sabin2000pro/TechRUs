@@ -8,6 +8,8 @@ import { login } from '../../actions/auth-actions';
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [currentError, setCurrentError] = useState<string>();
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const {error} = useSelector((state: any) => state.auth);
@@ -19,15 +21,20 @@ const Login: React.FC = () => {
 
         event.preventDefault();
         dispatch(login(email, password) as any); // Dispatch login action with e-mail and password
+        setIsFormValid((isFormValid) => !isFormValid);
 
-        setTimeout(() => {
-          navigate(`/verify-login`)
-      }, 1500)
+        if(isFormValid) {
+          setTimeout(() => {
+            navigate(`/verify-login`)
+         }, 1500)
 
+        }
+        
       } 
       
-      catch(error) {
-          console.error(error);
+      catch(error: any) {
+          setCurrentError(error.message);
+          setIsFormValid(false);
       }
 
 
@@ -49,7 +56,7 @@ const Login: React.FC = () => {
                   <h2>{error}</h2>
                 </div>
 
-                
+        
               </>
 
             )}
