@@ -14,14 +14,14 @@ const Header: React.FC = () => {
   const token = JSON.parse(sessionStorage.getItem("token") as any);
 
   if(basketItems.length > 0) {
-    currentBasketCount =  basketItems.reduce((acc, item) => acc + parseInt(item.quantity), 0);
+    currentBasketCount =  basketItems.reduce((acc: any, item: any) => acc + parseInt(item.quantity), 0);
   }
 
-  const handleSearch = (event): void => { // When a search event occurs
+  const handleSearch = (event: any): void => { // When a search event occurs
     setKeyword(event.target.value); // Set the saerch keyword to the target value
   }
 
-  const handleSubmit = (event): void => {
+  const handleSubmit = (event: any): void => {
     event.preventDefault();
     dispatch(fetchProducts(keyword) as any);
   }
