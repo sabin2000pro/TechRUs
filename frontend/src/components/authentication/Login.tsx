@@ -10,7 +10,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
 
   const dispatch = useDispatch();
-  const {error, isAuthenticated} = useSelector((state: any) => state.auth);
+  const {error} = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
 
   const onLoginHandler = (event: React.FormEvent): void => { // Login handler method that is invoked when the login button is clicked
@@ -48,6 +48,8 @@ const Login: React.FC = () => {
                 <div className="bg-red-200 border border-red-400 text-white-700 px-4 py-3 rounded my-4 success-banner">
                   <h2>{error}</h2>
                 </div>
+
+
               </>
 
             )}
