@@ -4,7 +4,7 @@ interface IAlertProps {
     message: string
 }
 
-const Alert = ({message}) => {
+const Alert: React.FC<IAlertProps> = ({message}: IAlertProps) => {
 
   return (
 
