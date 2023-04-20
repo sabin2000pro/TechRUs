@@ -28,7 +28,7 @@ export const fetchReviewByID = (id: string) => async (dispatch: Dispatch): Promi
 
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
          console.log(`Single Review Error : `)
@@ -48,8 +48,7 @@ export const createReview = (product: string, title: string, rating: number, com
         dispatch({type: CREATE_REVIEW_SUCCESS, payload: data.review});
     } 
     
-    catch(error) {
-        console.log(`Create Review Error : `)
+    catch(error: any) {
         dispatch({type: FETCH_SINGLE_REVIEW_FAIL, payload: error.data.response.message});
     }
 

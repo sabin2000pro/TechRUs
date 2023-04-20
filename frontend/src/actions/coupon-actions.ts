@@ -12,7 +12,7 @@ export const fetchAllCoupons = () => async (dispatch: Dispatch): Promise<void> =
     }
 }
 
-export const fetchCouponByID = (id: string) => async (dispatch) => {
+export const fetchCouponByID = (id: string) => async (dispatch: Dispatch) => {
     try {
 
     } 
@@ -24,7 +24,7 @@ export const fetchCouponByID = (id: string) => async (dispatch) => {
 
 }
 
-export const createNewCoupon = (id: string) => async (dispatch) => {
+export const createNewCoupon = (id: string) => async (dispatch: Dispatch) => {
     try {
 
     } 
@@ -36,7 +36,7 @@ export const createNewCoupon = (id: string) => async (dispatch) => {
     
 }
 
-export const editCouponByID = (id: string) => async (dispatch) => {
+export const editCouponByID = (id: string) => async (dispatch: Dispatch) => {
     try {
 
     } 

@@ -14,7 +14,7 @@ export const fetchAllShippingDetails = () => async (dispatch: Dispatch): Promise
      dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   
-  catch(error) {
+  catch(error: any) {
 
     if(error) {
       dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
@@ -46,7 +46,7 @@ export const createNewShipping = (user: any, address: string, city: string, coun
 
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
 
@@ -66,7 +66,7 @@ export const editShippingDetails = (id: string, address: string, city: string, c
        dispatch({type: SAVE_SHIPPING_INFO_SUCCESS, payload: data.shipping})
     } 
     
-    catch(error) {
+    catch(error: any) {
         
         if(error) {
             dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
@@ -85,7 +85,7 @@ export const editShippingStatus = (id: string, currentStatus: string, newStatus:
      dispatch({type: EDIT_SHIPPING_INFO_SUCCESS, payload: data.shipping})
   } 
   
-  catch(error) {
+  catch(error: any) {
 
     if(error) {
       dispatch({type: SAVE_SHIPPING_INFO_FAIL, payload: error.response.data.message})
@@ -105,7 +105,7 @@ export const fetchShippingDetailsByID = (id: string) => async (dispatch: Dispatc
     dispatch({type: FETCH_SHIPPING_INFO_SUCCESS, payload: data.shipping});
   } 
   
-  catch(error) {
+  catch(error: any) {
 
      if(error) {
       dispatch({type: FETCH_SHIPPING_INFO_FAIL, payload: error.response.data.message})
@@ -128,7 +128,7 @@ export const deleteShippingDetailsByID = (id: string) => async (dispatch: Dispat
      dispatch({type: DELETE_SHIPPING_DETAILS_SUCCESS, payload: data.message});
   } 
   
-  catch(error) {
+  catch(error: any) {
 
      if(error) {  
       dispatch({type: DELETE_SHIPPING_DETAILS_FAIL, payload: error.response.data.message});
