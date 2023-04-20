@@ -500,7 +500,7 @@ export const editUserShifts = asyncHandler(async(request: any, response: Respons
     user = await User.findByIdAndUpdate(id, fieldsToUpdate, {new: true, runValidators: true});
     await user.save();
 
-    return response.status(StatusCodes.OK).json({success: true, message: "Shifts updated successfully"});
+    return response.status(StatusCodes.OK).json({success: true, message: "Shifts updated successfully", user});
 })
 
 export const deleteUserByID = asyncHandler(async(request: any, response: Response, next: NextFunction): Promise<any> => {

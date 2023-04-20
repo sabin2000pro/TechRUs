@@ -117,9 +117,7 @@ export const verifyLoginMfa = (userId: string, multiFactorToken: string) => asyn
 
     dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
     const {data} = await axios.post(AUTH_URI_VERIFY_LOGIN, {userId, multiFactorToken});
-
-    console.log(`Verified Account Data : `, data);
-
+    
     dispatch({type: VERIFY_LOGIN_MFA_SUCCESS, payload: data.message});
 
   } 
