@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
@@ -29,7 +29,7 @@ const Login: React.FC = () => {
          }, 1500)
 
         }
-        
+
       } 
       
       catch(error: any) {
@@ -56,7 +56,6 @@ const Login: React.FC = () => {
                   <h2>{error}</h2>
                 </div>
 
-        
               </>
 
             )}
