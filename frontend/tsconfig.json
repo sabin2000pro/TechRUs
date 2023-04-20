@@ -5,12 +5,12 @@
     "esModuleInterop": true,
     "target": "esnext",
     "module": "commonjs",
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "resolveJsonModule": false,
+    "isolatedModules": false,
     "noEmit": true
   },
   "include": ["src"]

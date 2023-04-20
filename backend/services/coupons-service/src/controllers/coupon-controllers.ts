@@ -21,7 +21,7 @@ export const fetchCouponByID = asyncHandler(async (request: any, response: Respo
 })
 
 export const createNewCoupon = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
-    
+    const {product} = request.query;
 })
 
 export const editCouponByID = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
