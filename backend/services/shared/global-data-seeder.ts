@@ -57,8 +57,10 @@ const importServiceData = async () => {
      await Review.deleteMany();
 
      const hashedUsers = await Promise.all(users.map ( async (user) => {
+
         const hashedPassword = await hashUserPassword(user.password);
         return { ...user, password: hashedPassword };
+        
       }));
 
      await User.insertMany(hashedUsers);     

@@ -11,7 +11,7 @@ const VerifyLogin: React.FC = () => {
   const {error} = useSelector((state: any) => state.auth)
   const [verifyLoginSubmitted, setVerifyLoginSubmitted] = useState<boolean>(false);
 
-  const onLoginVerificationHandler = (event): void => {
+  const onLoginVerificationHandler = (event: any): void => {
 
     try {
       event.preventDefault();

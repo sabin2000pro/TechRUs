@@ -14,7 +14,7 @@ const ResetPassword: React.FC = () => {
     const [passwordReset, setPasswordReset] = useState<boolean>(false); // True or false when the password has been reset successfully
     const user = JSON.parse(sessionStorage.getItem("user") as any);
 
-    const onResetPasswordHandler = (event): void => {
+    const onResetPasswordHandler = (event: any): void => {
 
       try {
         event.preventDefault();

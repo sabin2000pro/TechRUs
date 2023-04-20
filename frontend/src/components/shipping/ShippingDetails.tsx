@@ -27,7 +27,7 @@ const ShippingDetails: React.FC = () => {
 
   }, [dispatch])
 
-  const handleShippingSubmit = (event): void => {
+  const handleShippingSubmit = (event: any): void => {
 
     try {
 
