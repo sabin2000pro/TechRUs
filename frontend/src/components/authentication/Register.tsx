@@ -23,8 +23,11 @@ const Register: React.FC = () => { // Register Component
          dispatch(register(username, email, password) as any);
          setOnRegisterSuccess((registerSuccess) => !registerSuccess);
 
+         console.log(`Register Success ? : `, registerSuccess);
+
          setTimeout(() => {
             setOnRegisterSuccess((registerSuccess) => !registerSuccess);
+            console.log(`Now Register success ? : `, registerSuccess);
             navigate(`/verify-email`)
          }, 1200);
 
