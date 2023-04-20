@@ -103,9 +103,10 @@ const BasketScreen: React.FC = () => {
        
 </div>
 
-
     </>
+
        ))}
+
 
           {basketItems.length > 0 ? (
 

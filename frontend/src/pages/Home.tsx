@@ -16,8 +16,6 @@ const Home: React.FC = () => {
         try {
           
           dispatch(fetchProducts() as any)
-          console.log(`Fetched Products : `, products);
-
         } 
         
         catch(error) {
