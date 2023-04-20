@@ -101,12 +101,12 @@ const EditUserShiftDates: React.FC = () => { // Component that allows the store 
 
             <div className = "mb-4 login-container-inputs">
                 <label className = " block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Start Shift</label>
-                <DatePicker timeIntervals = {15} dateFormat = "yyyy/MM/dd HH:mm:ss" showTimeSelect value = {startShiftDate} className = "mb-9 date-picker" selected = {startShiftDate} onChange = {(date: Date) => setStartShiftDate(date)} />
+                <DatePicker timeIntervals = {15} dateFormat = "yyyy/MM/dd HH:mm:ss" showTimeSelect value = {startShiftDate as any} className = "mb-9 date-picker" selected = {startShiftDate} onChange = {(date: Date) => setStartShiftDate(date)} />
               </div>
 
               <div className = "mb-6 login-password-container mt-5">
                   <label className = "block text-sm font-bold mb-2 mt-5 login-password-label" htmlFor = "password">End Shift</label>
-                  <DatePicker timeIntervals={15} dateFormat="yyyy/MM/dd HH:mm:ss" showTimeSelect className = "date-picker" value = {endShiftDate} selected = {endShiftDate} onChange = {(date: Date) => setEndShiftDate(date)} />
+                  <DatePicker timeIntervals={15} dateFormat="yyyy/MM/dd HH:mm:ss" showTimeSelect className = "date-picker" value = {endShiftDate as any} selected = {endShiftDate} onChange = {(date: Date) => setEndShiftDate(date)} />
               </div>
 
               <div className = "flex items-center justify-center login-btn-container">

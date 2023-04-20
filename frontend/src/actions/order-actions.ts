@@ -19,7 +19,7 @@ export const fetchAllOrders = () => async (dispatch: Dispatch): Promise<void> =>
         dispatch({type: FETCH_ORDERS_SUCCESS, payload: data.orders});
     }
     
-    catch(error) {
+    catch(error: any) {
 
        if(error) {
          dispatch({type: FETCH_ORDERS_FAIL, payload: error.data.response.message});
@@ -40,7 +40,7 @@ export const createNewOrder = (orderItems: any, shippingInformation: any) => asy
        localStorage.setItem("order", JSON.stringify(data.order))
     } 
     
-    catch(error) {
+    catch(error: any) {
 
         if(error) {
             dispatch({type: CREATE_ORDER_FAIL, payload: error.data.response.message});
@@ -61,7 +61,7 @@ export const editOrderStatus = (newOrderStatus: string, id: string) => async (di
        dispatch({type: UPDATE_ORDER_STATUS_SUCCESS, payload: data.message});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
        if(error) {
            dispatch({type: UPDATE_ORDER_STATUS_FAIL, payload: error.data.response.message});
@@ -82,7 +82,7 @@ export const deleteOrders = () => async (dispatch: Dispatch): Promise<void> => {
        dispatch({type: DELETE_ORDERS_SUCCESS, payload: data.message})
     } 
     
-    catch(error) {
+    catch(error: any) {
         
         if(error) {
             dispatch({type: DELETE_ORDERS_FAIL, payload: error.data.response.message});
@@ -102,7 +102,7 @@ export const deleteOrderByID = (id: string) => async (dispatch: Dispatch): Promi
         dispatch({type: DELETE_SINGLE_ORDER_SUCCESS, payload: data.message});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
        if(error) {
          dispatch({type: DELETE_SINGLE_ORDER_FAIL, payload: error.data.response.message});
