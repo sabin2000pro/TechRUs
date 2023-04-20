@@ -1,7 +1,10 @@
 module.exports = {
     roots: ['<rootDir>/src'],
+
     transform: {
       '^.+\\.tsx?$': 'ts-jest',
+      '^.+\\.jsx?$': 'babel-jest',
+      '^.+\\.(js|jsx|ts|tsx)$': "vite-jest"
     },
 
     "testEnvironment": "jsdom",

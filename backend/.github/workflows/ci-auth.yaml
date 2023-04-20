@@ -1,6 +1,7 @@
 name: Deploy Authentication Service Workflow
 
 on:
+
   push:
     branches:
       - "master"

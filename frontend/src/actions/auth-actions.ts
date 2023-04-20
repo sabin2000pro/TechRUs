@@ -23,7 +23,7 @@ export const register = (username: string, email: string, password: string) => a
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
         if(error) {
             dispatch({type: REGISTER_USER_FAIL, payload: error.data.response.message});
@@ -48,7 +48,7 @@ export const logout = () => async (dispatch: Dispatch): Promise<void> => {
         sessionStorage.clear();       // Clear session storage
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
          dispatch({type: LOGOUT_USER_FAIL, payload: error.data.response.message});
@@ -71,7 +71,7 @@ export const verifyEmailAddress = (userId: string, OTP: string) => async (dispat
 
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
          dispatch({type: VERIFY_USER_EMAIL_FAIL, payload: error.data.response.message});
@@ -101,7 +101,7 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
         sessionStorage.setItem("user", JSON.stringify(data.user));
     } 
     
-    catch(error) {
+    catch(error: any) {
         
       if(error) {
         dispatch({type: LOGIN_USER_FAIL, payload: error.response.data.message});
@@ -124,7 +124,7 @@ export const verifyLoginMfa = (userId: string, multiFactorToken: string) => asyn
 
   } 
   
-  catch(error) {
+  catch(error: any) {
 
      if(error) {
       dispatch({type: VERIFY_LOGIN_MFA_FAIL, payload: error.response.data.message})
@@ -146,7 +146,7 @@ export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void>
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
         dispatch({type: LOAD_USER_FAIL, payload: error.data.response.message});
@@ -170,7 +170,7 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
         dispatch({type: FORGOT_PASSWORD_SUCCESS, payload: message});
     }     
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
 
@@ -195,7 +195,7 @@ export const resetPassword = (currentPassword: string, newPassword: string, rese
       dispatch({type: RESET_PASSWORD_SUCCESS, payload: data.message});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
      if(error) {
         console.log(`Reset Password Error : `, error);
@@ -222,7 +222,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
       dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
         dispatch({type: UPDATE_PASSWORD_FAIL, payload: error.data.response.message});
@@ -243,7 +243,7 @@ export const updateUserShifts = (id: string, startShiftDate: Date, endShiftDate:
        dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data.message});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
         console.error(`Updating User Shifts Error : `, error);
@@ -265,7 +265,7 @@ export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => 
      dispatch({type: FETCH_USERS_SUCCESS, payload: data.users});
    } 
    
-   catch(error) {
+   catch(error: any) {
      dispatch({type: FETCH_USERS_FAIL, payload: error.data.response.message});
    }
 
@@ -280,7 +280,7 @@ export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise
         dispatch({type: FETCH_SINGLE_USER_SUCCESS, payload: data.user})
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
          dispatch({type: FETCH_SINGLE_USER_FAIL, payload: error.data.response.message});
@@ -301,7 +301,7 @@ export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promis
 
   }
   
-  catch(error) {
+  catch(error: any) {
 
     if(error) {
        dispatch({type: DELETE_SINGLE_USER_FAIL, payload: error.data.response.message});

@@ -46,7 +46,6 @@ export const fetchSingleOrderByID = asyncHandler(async (request: any, response: 
 export const createNewOrder = asyncHandler(async (request: any, response: Response, next: NextFunction): Promise<any> => {
     const {orderItems, shippingInformation} = request.body;
     
-    // Validate the request body before creating a new instance of order
     if(!orderItems || !shippingInformation) {
         return next(new ErrorResponse(`Some order fields are missing. Please check your entries`, StatusCodes.BAD_REQUEST));
     }

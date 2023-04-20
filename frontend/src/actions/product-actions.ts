@@ -16,7 +16,7 @@ export const fetchProducts = (keyword = '', page = 1, productsPerPage = 3) => as
 
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
         dispatch({type: FETCH_ALL_PRODUCTS_FAIL, payload: error.data.response.message});
@@ -37,7 +37,7 @@ export const fetchSingleProduct = (id: string) => async (dispatch: Dispatch): Pr
 
     } 
     
-    catch(error) {
+    catch(error: any) {
       if(error) {
 
         dispatch({type: FETCH_SINGLE_PRODUCT_FAIL, payload: error.data.response.message});
@@ -55,7 +55,7 @@ export const createNewProduct = (name: string, description: string, warranty: st
        dispatch({type: CREATE_PRODUCT_SUCCESS, payload: data.product});
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
         dispatch({type: CREATE_PRODUCT_FAIL, payload: error.data.response.message});
@@ -77,7 +77,7 @@ export const editProductByID = (id: number, updatedData: any) => async (dispatch
         dispatch({type: EDIT_PRODUCT_SUCCESS, payload: data})
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
          dispatch({type: EDIT_PRODUCT_FAIL, payload: error.data.response.message})
@@ -99,7 +99,7 @@ export const deleteProducts = () => async (dispatch: Dispatch): Promise<void> =>
      dispatch({type: DELETE_PRODUCTS_SUCCESS, payload: data.message});
   } 
   
-  catch(error) {
+  catch(error: any) {
 
      if(error) {
         dispatch({type: DELETE_PRODUCTS_FAIL, payload: error.data.response.message});
@@ -121,7 +121,7 @@ export const deleteProductByID = (id: string) => async (dispatch: any): Promise<
        dispatch({type: DELETE_SINGLE_PRODUCT_SUCCESS, payload: data.message})
     } 
     
-    catch(error) {
+    catch(error: any) {
 
       if(error) {
         dispatch({type: DELETE_SINGLE_PRODUCT_FAIL, payload: error.data.response.message})

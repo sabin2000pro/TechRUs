@@ -5,7 +5,6 @@ import windicss from 'vite-plugin-windicss'
 export default defineConfig({
   
   plugins: [
-
     react(),
 
     windicss({

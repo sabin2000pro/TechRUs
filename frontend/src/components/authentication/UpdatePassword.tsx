@@ -52,8 +52,9 @@ const UpdatePassword: React.FC = () => {
       {passwordUpdated && (
 
          <>
+
            <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner">
-                <h2>{message}</h2>
+               <h2>{message}</h2>
            </div>
 
          </>
@@ -69,7 +70,7 @@ const UpdatePassword: React.FC = () => {
 
         <div className = "mb-4 login-container-inputs">
             <label className ="block text-sm font-bold mb-2 login-username-label" htmlFor = "email">Current Password</label>
-            <input value = {currentPassword} onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-11 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type="text" placeholder="Current password" />
+            <input value = {currentPassword} onChange = {(event) => setCurrentPassword(event.target.value)} className = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-11 leading-tight focus:outline-none focus:shadow-outline" id = "currentpassword" type = "password" placeholder="Current password" />
           </div>
 
           <div className = "mb-6 login-password-container mt-5">

@@ -576,3 +576,7 @@ font-weight: bold;
   background-color:#013782;
   padding: 6px 8px;
 }
+
+.register-banner {
+  background-color: green;
+}

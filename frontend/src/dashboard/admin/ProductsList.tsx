@@ -35,10 +35,10 @@ const ProductsList: React.FC<IProductsList> = ({products}: IProductsList) => { /
                 </div>
 
                   <h2 className="text-lg font-medium mb-2 heading-secondary">{product.name}</h2>
+
                      <img className = "product-img mt-5" src = {product.image} />
-
-
-                  <p className ="product-descriptions ">£{product.price} </p>
+                     
+                        <p className ="product-descriptions ">£{product.price} </p>
 
                   {product.stockCount >= 3 && <p className = "product-descriptions">In Stock</p>}
                   {product.stockCount <= 2 && <p className = "product-descriptions text-orange-700">Low Stock</p>}

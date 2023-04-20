@@ -60,7 +60,7 @@ const Register: React.FC = () => { // Register Component
 
             {registerSuccess && (
 
-               <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner mr-7">
+               <div className="bg-green-200 border border-green-400 text-green-700 px-4 py-3 rounded my-4 success-banner register-banner">
                   <h2>Registered Successfully</h2>
                </div>
                
