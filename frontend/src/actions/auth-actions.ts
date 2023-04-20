@@ -117,7 +117,7 @@ export const verifyLoginMfa = (userId: string, multiFactorToken: string) => asyn
 
     dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
     const {data} = await axios.post(AUTH_URI_VERIFY_LOGIN, {userId, multiFactorToken});
-    
+
     dispatch({type: VERIFY_LOGIN_MFA_SUCCESS, payload: data.message});
 
   } 
@@ -233,6 +233,12 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
 export const updateUserShifts = (id: string, startShiftDate: Date, endShiftDate: Date) => async (dispatch: Dispatch): Promise<void> => {
 
     try {
+
+      const currentDate = Date.now();
+
+      if(startShiftDate > endShiftDate) {
+        throw new Error(`Start shift date cannot be in the future of the ending shift`)
+      }
 
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});
 
