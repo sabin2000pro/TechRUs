@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
-import { AUTH_URI_REGISTER_PROD, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST, AUTH_URI_REGISTER_DEV, AUTH_URI_VERIFY_EMAIL_DEV, AUTH_URI_LOGIN_DEV, AUTH_URI_CURRENT_USER_DEV, AUTH_URI_FORGOT_PASSWORD_DEV } from './uri-helper';
+import { AUTH_URI_REGISTER_PROD, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST, AUTH_URI_REGISTER_DEV, AUTH_URI_VERIFY_EMAIL_DEV, AUTH_URI_LOGIN_DEV, AUTH_URI_CURRENT_USER_DEV, AUTH_URI_FORGOT_PASSWORD_DEV, AUTH_URI_RESET_PASSWORD_DEV, AUTH_URI_UPDATE_PASSWORD_DEV, AUTH_URI_USERS_LIST_DEV } from './uri-helper';
 
 // @description: This function is responsible for registering a new user on the techrus.dev platform. It takes the username, email and password of the user as RouteParameters
 // @access: Public - No Authorization Required
@@ -188,7 +188,7 @@ export const resetPassword = (currentPassword: string, newPassword: string, rese
     try {
       dispatch({type: RESET_PASSWORD_REQUEST});
 
-      const {data} = await axios.put(`${AUTH_URI_RESET_PASSWORD}/${resetToken}`, {currentPassword, newPassword});
+      const {data} = await axios.put(`${AUTH_URI_RESET_PASSWORD_DEV}/${resetToken}`, {currentPassword, newPassword});
     
       dispatch({type: RESET_PASSWORD_SUCCESS, payload: data.message});
     } 
@@ -196,7 +196,6 @@ export const resetPassword = (currentPassword: string, newPassword: string, rese
     catch(error: any) {
 
      if(error) {
-        console.log(`Reset Password Error : `, error);
         dispatch({type: RESET_PASSWORD_FAIL, payload: error.data.response.message});
      }
 
@@ -216,7 +215,7 @@ export const updatePassword = (currentPassword: string, newPassword: string) => 
       const token = JSON.parse(sessionStorage.getItem("token") as any); // Parse the token stored in session storage
       const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
 
-      const {data} = await axios.put(AUTH_URI_UPDATE_PASSWORD, {currentPassword, newPassword}, config);
+      const {data} = await axios.put(AUTH_URI_UPDATE_PASSWORD_DEV, {currentPassword, newPassword}, config);
       dispatch({type: UPDATE_PASSWORD_SUCCESS, payload: data.message})
     } 
     
@@ -234,16 +233,13 @@ export const updateUserShifts = (id: string, startShiftDate: Date, endShiftDate:
 
     try {
 
-      const currentDate = Date.now();
-
       if(startShiftDate > endShiftDate) {
         throw new Error(`Start shift date cannot be in the future of the ending shift`)
       }
 
        dispatch({type: EDIT_USER_SHIFTS_REQUEST});
 
-       const {data} = await axios.put(`${AUTH_USERS_LIST}/${id}/update-shifts`, {startShiftDate, endShiftDate});
-       console.log(`Updated staff user shifts : `, data);
+       const {data} = await axios.put(`${AUTH_URI_USERS_LIST_DEV}/${id}/update-shifts`, {startShiftDate, endShiftDate});
        dispatch({type: EDIT_USER_SHIFTS_SUCCESS, payload: data.message});
     } 
     
