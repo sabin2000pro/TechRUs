@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
-import { AUTH_URI_REGISTER_PROD, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST, AUTH_URI_REGISTER_DEV, AUTH_URI_VERIFY_EMAIL_DEV, AUTH_URI_LOGIN_DEV, AUTH_URI_CURRENT_USER_DEV, AUTH_URI_FORGOT_PASSWORD_DEV, AUTH_URI_RESET_PASSWORD_DEV, AUTH_URI_UPDATE_PASSWORD_DEV, AUTH_URI_USERS_LIST_DEV } from './uri-helper';
+import { AUTH_URI_LOGOUT, AUTH_URI_REGISTER_DEV, AUTH_URI_VERIFY_EMAIL_DEV, AUTH_URI_LOGIN_DEV, AUTH_URI_CURRENT_USER_DEV, AUTH_URI_FORGOT_PASSWORD_DEV, AUTH_URI_RESET_PASSWORD_DEV, AUTH_URI_UPDATE_PASSWORD_DEV, AUTH_URI_USERS_LIST_DEV } from './uri-helper';
 
 // @description: This function is responsible for registering a new user on the techrus.dev platform. It takes the username, email and password of the user as RouteParameters
 // @access: Public - No Authorization Required
@@ -246,7 +246,6 @@ export const updateUserShifts = (id: string, startShiftDate: Date, endShiftDate:
     catch(error: any) {
 
       if(error) {
-        console.error(`Updating User Shifts Error : `, error);
         dispatch({type: EDIT_USER_SHIFTS_FAIL, payload: error.data.response.message});
       }
 
@@ -260,7 +259,7 @@ export const fetchAllUsers = () => async (dispatch: Dispatch): Promise<void> => 
    try {
     
      dispatch({type: FETCH_USERS_REQUEST});
-     const {data} = await axios.get(AUTH_USERS_LIST);
+     const {data} = await axios.get(AUTH_URI_USERS_LIST_DEV);
 
      dispatch({type: FETCH_USERS_SUCCESS, payload: data.users});
    } 
@@ -276,7 +275,7 @@ export const fetchUserByID = (id: string) => async (dispatch: Dispatch): Promise
     try {
 
         dispatch({type: FETCH_SINGLE_USER_REQUEST});
-        const {data} = await axios.get(`${AUTH_USERS_LIST}/${id}`); // Send GET request to fetch the user
+        const {data} = await axios.get(`${AUTH_URI_USERS_LIST_DEV}/${id}`); // Send GET request to fetch the user
         dispatch({type: FETCH_SINGLE_USER_SUCCESS, payload: data.user})
     } 
     
@@ -294,8 +293,7 @@ export const deleteUserByID = (id: string) => async (dispatch: Dispatch): Promis
   try {
     
      dispatch({type: DELETE_SINGLE_USER_REQUEST});
-     const {data} = await axios.delete(`${AUTH_USERS_LIST}/${id}`);
-     console.log(`Delete User Data : `, data);
+     const {data} = await axios.delete(`${AUTH_URI_USERS_LIST_DEV}/${id}`);
 
      dispatch({type: DELETE_SINGLE_USER_SUCCESS, payload: data.message});
 
