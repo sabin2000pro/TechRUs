@@ -13,6 +13,7 @@ import {errorHandler} from './middleware/error-handler'
 import {authRouter} from './routes/auth-routes'
 
 const app: Application = express();
+
 app.use(express.json());
 
 if(process.env.AUTH_DEV_MODE === 'development') {
