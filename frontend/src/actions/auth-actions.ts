@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOAD_USER_FAIL } from '../constants/auth-constants';
 import { EDIT_USER_SHIFTS_SUCCESS, EDIT_USER_SHIFTS_REQUEST, EDIT_USER_SHIFTS_FAIL, FETCH_USERS_REQUEST, FETCH_USERS_FAIL, FETCH_SINGLE_USER_SUCCESS, FETCH_USERS_SUCCESS, FETCH_SINGLE_USER_FAIL, FETCH_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_REQUEST, DELETE_SINGLE_USER_FAIL, DELETE_SINGLE_USER_SUCCESS } from './../constants/user-constants';
-import { AUTH_URI_REGISTER_PROD, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST, AUTH_URI_REGISTER_DEV, AUTH_URI_VERIFY_EMAIL_DEV } from './uri-helper';
+import { AUTH_URI_REGISTER_PROD, AUTH_URI_LOGIN, AUTH_URI_VERIFY_EMAIL, AUTH_URI_VERIFY_LOGIN, AUTH_URI_LOGOUT, AUTH_URI_RESET_PASSWORD, AUTH_URI_FORGOT_PASSWORD, AUTH_URI_UPDATE_PASSWORD, AUTH_URI_ME, AUTH_USERS_LIST, AUTH_URI_REGISTER_DEV, AUTH_URI_VERIFY_EMAIL_DEV, AUTH_URI_LOGIN_DEV, AUTH_URI_CURRENT_USER_DEV, AUTH_URI_FORGOT_PASSWORD_DEV } from './uri-helper';
 
 // @description: This function is responsible for registering a new user on the techrus.dev platform. It takes the username, email and password of the user as RouteParameters
 // @access: Public - No Authorization Required
@@ -92,7 +92,7 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
         dispatch({type: LOGIN_USER_REQUEST});
         const config = processConfigHeader();
 
-        const {data} = await axios.post(AUTH_URI_LOGIN, {email, password}, config);
+        const {data} = await axios.post(AUTH_URI_LOGIN_DEV, {email, password}, config);
         console.log(`Login Data : `, data);
 
         dispatch({type: LOGIN_USER_SUCCESS, payload: data.user}); // When the user has logged in successfully, store the user data in the payload
@@ -116,7 +116,7 @@ export const verifyLoginMfa = (userId: string, multiFactorToken: string) => asyn
   try {
 
     dispatch({type: VERIFY_LOGIN_MFA_REQUEST});
-    const {data} = await axios.post(AUTH_URI_VERIFY_LOGIN, {userId, multiFactorToken});
+    const {data} = await axios.post(AUTH_URI_VERIFY_EMAIL_DEV, {userId, multiFactorToken});
 
     dispatch({type: VERIFY_LOGIN_MFA_SUCCESS, payload: data.message});
 
@@ -139,7 +139,7 @@ export const fetchLoggedInUser = () => async (dispatch: Dispatch): Promise<void>
         const token = JSON.parse(sessionStorage.getItem("token") as any);
 
         const config = {headers: {'Content-Type': 'application/json', Authorization: `Bearer ${token}`}};
-        const {data} = await axios.get(AUTH_URI_ME, config);
+        const {data} = await axios.get(AUTH_URI_CURRENT_USER_DEV, config);
 
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user});
     } 
@@ -162,7 +162,7 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
         dispatch({type: FORGOT_PASSWORD_REQUEST});
 
         const config = processConfigHeader();
-        const {data} = await axios.post(AUTH_URI_FORGOT_PASSWORD, {email}, config);
+        const {data} = await axios.post(AUTH_URI_FORGOT_PASSWORD_DEV, {email}, config);
         const message = data.message;
 
         dispatch({type: FORGOT_PASSWORD_SUCCESS, payload: message});
@@ -184,12 +184,12 @@ export const forgotPassword = (email: string) => async (dispatch: Dispatch): Pro
 
 export const resetPassword = (currentPassword: string, newPassword: string, resetToken: any) => async (dispatch: Dispatch): Promise<void> => {
 
+
     try {
       dispatch({type: RESET_PASSWORD_REQUEST});
 
       const {data} = await axios.put(`${AUTH_URI_RESET_PASSWORD}/${resetToken}`, {currentPassword, newPassword});
-      console.log(`Reset Password Data : `, data);
-
+    
       dispatch({type: RESET_PASSWORD_SUCCESS, payload: data.message});
     } 
     
